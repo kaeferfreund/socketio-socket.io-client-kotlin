@@ -1,305 +1,4430 @@
 {
   "upstream_sha": "aaf2af36ec8ad05910f357a788e0e358bad32738",
   "scope": "Assertion mappings for applicable runtime declarations of the pinned upstream client packages, with explicit reviewed boundaries; not exhaustive behavioral equivalence.",
-  "remaining_unmapped_ids": [
-    "JS-001",
-    "JS-002",
-    "JS-003",
-    "JS-004",
-    "JS-005",
-    "JS-006",
-    "JS-007",
-    "JS-008",
-    "JS-009",
-    "JS-010",
-    "JS-011",
-    "JS-012",
-    "JS-013",
-    "JS-014",
-    "JS-015",
-    "JS-016",
-    "JS-017",
-    "JS-018",
-    "JS-019",
-    "JS-020",
-    "JS-021",
-    "JS-022",
-    "JS-023",
-    "JS-024",
-    "JS-025",
-    "JS-026",
-    "JS-027",
-    "JS-028",
-    "JS-029",
-    "JS-030",
-    "JS-031",
-    "JS-032",
-    "JS-033",
-    "JS-034",
-    "JS-035",
-    "JS-036",
-    "JS-037",
-    "JS-038",
-    "JS-039",
-    "JS-040",
-    "JS-041",
-    "JS-042",
-    "JS-043",
-    "JS-044",
-    "JS-045",
-    "JS-046",
-    "JS-047",
-    "JS-048",
-    "JS-049",
-    "JS-050",
-    "JS-051",
-    "JS-052",
-    "JS-053",
-    "JS-054",
-    "JS-055",
-    "JS-056",
-    "JS-057",
-    "JS-058",
-    "JS-059",
-    "JS-060",
-    "JS-061",
-    "JS-062",
-    "JS-063",
-    "JS-064",
-    "JS-065",
-    "JS-066",
-    "JS-067",
-    "JS-068",
-    "JS-069",
-    "JS-070",
-    "JS-071",
-    "JS-072",
-    "JS-073",
-    "JS-074",
-    "JS-075",
-    "JS-076",
-    "JS-077",
-    "JS-078",
-    "JS-079",
-    "JS-080",
-    "JS-081",
-    "JS-082",
-    "JS-083",
-    "JS-084",
-    "JS-085",
-    "JS-086",
-    "JS-087",
-    "JS-088",
-    "JS-089",
-    "JS-090",
-    "JS-091",
-    "JS-092",
-    "JS-093",
-    "JS-094",
-    "JS-095",
-    "JS-096",
-    "JS-097",
-    "JS-098",
-    "JS-099",
-    "JS-100",
-    "JS-101",
-    "JS-102",
-    "JS-103",
-    "JS-104",
-    "JS-105",
-    "JS-106",
-    "JS-107",
-    "JS-122",
-    "JS-123",
-    "JS-124",
-    "JS-125",
-    "JS-126",
-    "JS-127",
-    "JS-128",
-    "JS-129",
-    "JS-130",
-    "JS-131",
-    "JS-132",
-    "JS-133",
-    "JS-134",
-    "JS-135",
-    "JS-136",
-    "JS-137",
-    "JS-138",
-    "JS-139",
-    "JS-140",
-    "JS-141",
-    "JS-142",
-    "JS-143",
-    "JS-144",
-    "JS-145",
-    "JS-146",
-    "JS-147",
-    "JS-148",
-    "JS-149",
-    "JS-150",
-    "JS-151",
-    "JS-152",
-    "JS-153",
-    "JS-154",
-    "JS-155",
-    "JS-156",
-    "JS-157",
-    "JS-158",
-    "JS-159",
-    "JS-160",
-    "JS-161",
-    "JS-162",
-    "JS-163",
-    "JS-164",
-    "JS-165",
-    "JS-166",
-    "JS-167",
-    "JS-168",
-    "JS-169",
-    "JS-170",
-    "JS-171",
-    "JS-172",
-    "JS-173",
-    "JS-174",
-    "JS-175",
-    "JS-176",
-    "JS-177",
-    "JS-178",
-    "JS-179",
-    "JS-180",
-    "JS-181",
-    "JS-182",
-    "JS-183",
-    "JS-184",
-    "JS-185",
-    "JS-186",
-    "JS-187",
-    "JS-188",
-    "JS-189",
-    "JS-190",
-    "JS-191",
-    "JS-192",
-    "JS-193",
-    "JS-194",
-    "JS-195",
-    "JS-196",
-    "JS-197",
-    "JS-198",
-    "JS-199",
-    "JS-200",
-    "JS-201",
-    "JS-202",
-    "JS-203",
-    "JS-204",
-    "JS-205",
-    "JS-206",
-    "JS-207",
-    "JS-208",
-    "JS-209",
-    "JS-210",
-    "JS-211",
-    "JS-212",
-    "JS-213",
-    "JS-214",
-    "JS-215",
-    "JS-216",
-    "JS-217",
-    "JS-218",
-    "JS-219",
-    "JS-220",
-    "JS-221",
-    "JS-222",
-    "JS-223",
-    "JS-224",
-    "JS-225",
-    "JS-226",
-    "JS-227",
-    "JS-228",
-    "JS-229",
-    "JS-230",
-    "JS-231",
-    "JS-232",
-    "JS-233",
-    "JS-234",
-    "JS-235",
-    "JS-236",
-    "JS-237",
-    "JS-238",
-    "JS-239",
-    "JS-240",
-    "JS-241",
-    "JS-242",
-    "JS-243",
-    "JS-244",
-    "JS-245",
-    "JS-246",
-    "JS-247",
-    "JS-248",
-    "JS-249",
-    "JS-250",
-    "JS-251",
-    "JS-252",
-    "JS-253",
-    "JS-254",
-    "JS-255",
-    "JS-256",
-    "JS-257",
-    "JS-258",
-    "JS-259",
-    "JS-260",
-    "JS-261",
-    "JS-262",
-    "JS-263",
-    "JS-264",
-    "JS-265",
-    "JS-266",
-    "JS-267",
-    "JS-268",
-    "JS-269",
-    "JS-270",
-    "JS-271",
-    "JS-272",
-    "JS-273",
-    "JS-274",
-    "JS-275",
-    "JS-276",
-    "JS-277",
-    "JS-278",
-    "JS-279",
-    "JS-280",
-    "JS-281",
-    "JS-282",
-    "JS-283",
-    "JS-284",
-    "JS-285",
-    "JS-286",
-    "JS-287",
-    "JS-288",
-    "JS-289",
-    "JS-290",
-    "JS-291",
-    "JS-292",
-    "JS-293",
-    "JS-294",
-    "JS-295",
-    "JS-296",
-    "JS-297",
-    "JS-298",
-    "JS-299",
-    "JS-300",
-    "JS-301",
-    "JS-302",
-    "JS-303",
-    "JS-304",
-    "JS-305",
-    "JS-306",
-    "JS-307",
-    "JS-308",
-    "JS-309",
-    "JS-310",
-    "JS-311"
+  "remaining_unmapped_ids": [],
+  "contracts": [
+    {
+      "id": "JS-001",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-001"
+      ],
+      "assertions": "Recovery on the default namespace: `recovered` starts false; a `hi` round trip establishes the offset; the transport is closed (server-side kill replaces the test's direct `engine.close()`); after the automatic reconnect `socket.id` is unchanged and `recovered` is true.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/RecoveryE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.RecoveryE2ETest.recoversTheSessionAfterATransportClose"
+        }
+      ]
+    },
+    {
+      "id": "JS-002",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-002"
+      ],
+      "assertions": "Emit `hi` right after `io()` (buffered before connect); the real server answers with `hi` and the listener receives it; then disconnect.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.connectsToLocalhost"
+        }
+      ]
+    },
+    {
+      "id": "JS-003",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-003"
+      ],
+      "assertions": "With `autoConnect: false` no engine exists: the manager has no transport and the server counts zero engine connections; the socket is not active.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.doesNotConnectWhenAutoConnectIsFalse"
+        }
+      ]
+    },
+    {
+      "id": "JS-004",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-004"
+      ],
+      "assertions": "`io(url + '/')` twice creates two managers, because the cached manager already has the `/` namespace (lookup rule `sameNamespace`).",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.twoSocketsForTheSameNamespaceGetTwoConnections"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.startsTwoConnectionsWithTheSamePath"
+        }
+      ]
+    },
+    {
+      "id": "JS-005",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-005"
+      ],
+      "assertions": "Same namespace with and without a query string: two managers; the query of the first URL becomes the manager query.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.differentQueryStringsOnTheSameNamespaceGetTwoConnections"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.startsTwoConnectionsWithTheSamePathAndDifferentQueryStrings"
+        }
+      ]
+    },
+    {
+      "id": "JS-006",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-006"
+      ],
+      "assertions": "Same URL with `path: /foo` and `path: /bar`: two managers (the cache key includes the request path).",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.differentPathsGetTwoConnections"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.startsTwoConnectionsWithDifferentPaths"
+        }
+      ]
+    },
+    {
+      "id": "JS-007",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-007"
+      ],
+      "assertions": "`/foo` and `/bar` on the same URL and options share one cached manager; `forceNew` and `multiplex: false` bypass the cache.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.differentNamespacesShareOneConnection"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.startsASingleConnectionWithDifferentNamespaces"
+        }
+      ]
+    },
+    {
+      "id": "JS-008",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-008"
+      ],
+      "assertions": "Server-to-client acknowledgement: emit `ack`; the server emits `ack` with a callback; the client acknowledges with `5, {test: true}`; the server confirms with `got it`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.worksWithAcks"
+        }
+      ]
+    },
+    {
+      "id": "JS-009",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-009"
+      ],
+      "assertions": "Client-to-server acknowledgement carrying a Date: the reply argument is a string (JSON serialisation of the server's Date).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.receivesADateWithAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-010",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-010"
+      ],
+      "assertions": "The server emits `false`; the client receives the boolean `false`, not null or a missing argument.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.worksWithFalse"
+        }
+      ]
+    },
+    {
+      "id": "JS-011",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-011"
+      ],
+      "assertions": "Five UTF-8 strings (Japanese, Cyrillic, German umlauts, em dash twice) arrive in order and byte-exact.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.receivesUtf8MultibyteCharacters"
+        }
+      ]
+    },
+    {
+      "id": "JS-012",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-012"
+      ],
+      "assertions": "After `/` connected on a manager, `manager.socket('/foo')` connects over the same connection.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.connectsToANamespaceAfterTheConnectionIsEstablished"
+        }
+      ]
+    },
+    {
+      "id": "JS-013",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-013"
+      ],
+      "assertions": "After `/` connects and disconnects (closing the connection), opening `/foo` on the same manager reconnects and connects the new namespace.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.opensANewNamespaceAfterTheConnectionGetsClosed"
+        }
+      ]
+    },
+    {
+      "id": "JS-014",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-014"
+      ],
+      "assertions": "With `reconnectionDelay: 10`, closing the transport leads to a `reconnect` manager event (server-side transport kill replaces `engine.close()`).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.reconnectsByDefault"
+        }
+      ]
+    },
+    {
+      "id": "JS-015",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-015"
+      ],
+      "assertions": "Disconnect after connect, then `connect()` again: a second `connect` event follows.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.reconnectsManually"
+        }
+      ]
+    },
+    {
+      "id": "JS-016",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-016"
+      ],
+      "assertions": "After a manual disconnect/connect cycle, automatic reconnection still works: losing the transport produces a `reconnect` event.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.reconnectsAutomaticallyAfterReconnectingManually"
+        }
+      ]
+    },
+    {
+      "id": "JS-017",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-017"
+      ],
+      "assertions": "`timeout: 0`, `reconnectionAttempts: 2`: the first cycle ends with `reconnect_failed`; connecting again starts a fresh budget of exactly two `reconnect_attempt`s ending in another `reconnect_failed`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.attemptsReconnectsAfterAFailedReconnect"
+        }
+      ]
+    },
+    {
+      "id": "JS-018",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-018"
+      ],
+      "assertions": "With `reconnectionDelay: 100` and jitter 0.2, the delay between each open error and the next `reconnect_attempt` grows every time over three attempts ending in `reconnect_failed`. The unit test asserts the exact backoff values on virtual time with a seeded random.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.reconnectionDelaysFollowTheBackoffExactly"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.reconnectDelayIncreasesEveryTime"
+        }
+      ]
+    },
+    {
+      "id": "JS-019",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-019"
+      ],
+      "assertions": "After the first `error`, `disconnect()` stops everything: no `reconnect_attempt` follows within 100 ms.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.doesNotReconnectWhenForceClosed"
+        }
+      ]
+    },
+    {
+      "id": "JS-020",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-020"
+      ],
+      "assertions": "Disconnecting during the first `reconnect_attempt` stops the loop: no further attempt within 100 ms.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.stopsReconnectingWhenForceClosed"
+        }
+      ]
+    },
+    {
+      "id": "JS-021",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-021"
+      ],
+      "assertions": "Disconnecting and connecting again inside the first `reconnect_attempt` restarts reconnection: a second attempt follows.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.reconnectsAfterStoppingReconnection"
+        }
+      ]
+    },
+    {
+      "id": "JS-022",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-022"
+      ],
+      "assertions": "Two namespaces on one manager; on `reconnect_attempt` `/` disconnects: it never reconnects while `/asd` reconnects.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.stopsReconnectingOnASocketAndKeepsReconnectingOnAnother"
+        }
+      ]
+    },
+    {
+      "id": "JS-023",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-023"
+      ],
+      "assertions": "`timeout: 0`, two attempts: exactly two `reconnect_attempt`s, then `reconnect_failed`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.triesToReconnectTwiceAndFailsWithImmediateTimeout"
+        }
+      ]
+    },
+    {
+      "id": "JS-024",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-024"
+      ],
+      "assertions": "`reconnect_attempt` carries the attempt number: 1 then 2, then `reconnect_failed`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.firesReconnectEventsWithAttemptNumbers"
+        }
+      ]
+    },
+    {
+      "id": "JS-025",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-025"
+      ],
+      "assertions": "Same scenario as JS-024 (upstream duplicate): attempt numbers equal the count of attempts so far.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.firesReconnectEventsWithAttemptNumbers"
+        }
+      ]
+    },
+    {
+      "id": "JS-026",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-026"
+      ],
+      "assertions": "Connecting to the correct server with the default timeout: the namespace connects and no `reconnect_attempt` happens within 100 ms.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.doesNotReconnectWhenConnectingToTheCorrectPortWithDefaultTimeout"
+        }
+      ]
+    },
+    {
+      "id": "JS-027",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-027"
+      ],
+      "assertions": "Inside `/foo`'s connect handler, open `/asd` and disconnect `/foo`: `/asd` still connects (the connection is not closed while another socket is active).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.connectsWhileDisconnectingAnotherSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-028",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-028"
+      ],
+      "assertions": "A CONNECT packet without `sid` (a Socket.IO 2.x server) produces `connect_error` with the v2 incompatibility message. The in-memory server answers CONNECT without a session id instead of calling the private `onpacket`.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.emitsConnectErrorForASocketIoV2Server"
+        }
+      ]
+    },
+    {
+      "id": "JS-029",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-029"
+      ],
+      "assertions": "Disconnecting one of two namespaces does not disconnect the other within 200 ms; disconnecting the last one closes the manager (`close` event).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.doesNotCloseTheConnectionWhenDisconnectingASingleSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-030",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-030"
+      ],
+      "assertions": "Setting `reconnection(false)` inside `reconnect_error` stops the loop: no `reconnect_attempt` within 100 ms.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.stopsTryingToReconnect"
+        }
+      ]
+    },
+    {
+      "id": "JS-031",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-031"
+      ],
+      "assertions": "Against a closed port with two attempts: exactly two `reconnect_attempt`s, then `reconnect_failed`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.triesToReconnectTwiceAndFailsWithAnIncorrectAddress"
+        }
+      ]
+    },
+    {
+      "id": "JS-032",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-032"
+      ],
+      "assertions": "Against a closed port with reconnection disabled: an `error`, then no `reconnect_attempt` within 100 ms.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.doesNotReconnectWithAnIncorrectPortWhenReconnectionIsDisabled"
+        }
+      ]
+    },
+    {
+      "id": "JS-033",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-033"
+      ],
+      "assertions": "Opening a second namespace while the first is reconnecting does not reset the budget: exactly two attempts, then `reconnect_failed`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.stillTriesToReconnectTwiceAfterOpeningAnotherSocketAsynchronously"
+        }
+      ]
+    },
+    {
+      "id": "JS-034",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-034"
+      ],
+      "assertions": "Reconnect timers use the configured clock: after a transport loss nothing happens 1 ms before `reconnectionDelayMax`, and the attempt starts once it elapses (virtual time replaces the fake timers).",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.reconnectTimersFollowTheConfiguredClock"
+        }
+      ]
+    },
+    {
+      "id": "JS-036",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-036"
+      ],
+      "assertions": "The server emits a Date: the client receives it as a string.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.emitsADateAsString"
+        }
+      ]
+    },
+    {
+      "id": "JS-037",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-037"
+      ],
+      "assertions": "The server emits `{date: Date}`: the client receives an object whose `date` is a string.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.emitsADateInAnObject"
+        }
+      ]
+    },
+    {
+      "id": "JS-038",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-038"
+      ],
+      "assertions": "Binary still arrives when the transport forces Base64 (`forceBase64`); the bytes decode to `asdfasdf`. JavaScript's `{base64: true, data}` wrapper exists only in browsers without binary support; the native equivalent asserts the decoded bytes.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.getsBinaryDataAsALastResortWithForceBase64"
+        }
+      ]
+    },
+    {
+      "id": "JS-039",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-039"
+      ],
+      "assertions": "The server's `doge` Buffer arrives as binary (ByteArray replaces ArrayBuffer).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.getsBinaryData"
+        }
+      ]
+    },
+    {
+      "id": "JS-040",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-040"
+      ],
+      "assertions": "Emitting binary to `buffa` makes the server see a Buffer and answer `buffack`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.sendsBinaryData"
+        }
+      ]
+    },
+    {
+      "id": "JS-041",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-041"
+      ],
+      "assertions": "Binary nested in JSON (`{hello, message: bytes, goodbye}`) arrives as a Buffer with the surrounding fields intact (`jsonbuff-ack`).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.sendsBinaryDataMixedWithJson"
+        }
+      ]
+    },
+    {
+      "id": "JS-042",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-042"
+      ],
+      "assertions": "A binary emit followed by a text emit arrive in order: the server answers `abuff2-ack` only if the binary came first.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.sendsEventsWithBinaryInTheCorrectOrder"
+        }
+      ]
+    },
+    {
+      "id": "JS-043",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-043"
+      ],
+      "assertions": "A Blob sent to `blob` arrives as a Buffer (`back`). ByteArray is the native counterpart of the browser Blob.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.sendsBinaryDataAsABlob"
+        }
+      ]
+    },
+    {
+      "id": "JS-044",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-044"
+      ],
+      "assertions": "A Blob nested in JSON arrives as a Buffer with the other fields intact (`jsonblob-ack`).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.sendsBinaryDataAsABlobMixedWithJson"
+        }
+      ]
+    },
+    {
+      "id": "JS-045",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-045"
+      ],
+      "assertions": "Blob, string, Blob emitted in order arrive in order (`blob3-ack`).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.sendsEventsWithBlobsInTheCorrectOrder"
+        }
+      ]
+    },
+    {
+      "id": "JS-046",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-046"
+      ],
+      "assertions": "After `/` disconnects, `manager.socket('/')` returns the same socket, which is active again and reconnects.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.reopensACachedSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-047",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-047"
+      ],
+      "assertions": "Calling `manager.socket('/')` twice while active returns one socket and writes only `0` then `1` (one CONNECT, one DISCONNECT), observed with the engine packet observer instead of `packetCreate`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.doesNotReopenACachedButActiveSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-048",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-048"
+      ],
+      "assertions": "Two namespaces opened in the open handler write `0`, `0/foo,`, `1`, `1/foo,`: no namespace is reopened. The port waits until both namespaces connected because the order of the two server replies is not fixed.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ConnectionE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ConnectionE2ETest.doesNotReopenAnAlreadyActiveSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-049",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-049"
+      ],
+      "assertions": "An undecodable packet from the server closes the engine with `parse error`; the manager reconnects with a new engine and the old one is closed. The in-memory server sends the bad packet instead of the test emitting on a private emitter.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.closesTheEngineUponADecodingException"
+        }
+      ]
+    },
+    {
+      "id": "JS-055",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-055"
+      ],
+      "assertions": "`retries: 1`, `ackTimeout: 50`: three acknowledged emits are sent in order with ack ids 0, 1, 2; the queue length is 1, 2, 3 after emitting and 2, 1, 0 inside the acknowledgements; the last acknowledgement is `(null, 3)`. The port emits after connecting and upgrading, so the 50 ms budget measures roundtrips rather than the handshake.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/RetryE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.RetryE2ETest.preservesTheOrderOfThePackets"
+        }
+      ]
+    },
+    {
+      "id": "JS-056",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-056"
+      ],
+      "assertions": "`retries: 3`: an unacknowledged emit is sent four times with ack ids 0..3; the server's four `ack` events are counted before the final failure callback.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/RetryE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.RetryE2ETest.failsWhenTheServerDoesNotAcknowledgeThePacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-057",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-057"
+      ],
+      "assertions": "A queued emit is not tried while disconnected: with a short ack timeout, the emit succeeds after `connect()` 100 ms later. The unit test uses the original 10 ms on virtual time; the E2E test uses 20 ms per try, keeping the proof (all tries would fail inside the wait).",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRetryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRetryTest.doesNotDrainTheQueueWhileDisconnected"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/RetryE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.RetryE2ETest.doesNotDrainTheQueueWhileDisconnected"
+        }
+      ]
+    },
+    {
+      "id": "JS-058",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-058"
+      ],
+      "assertions": "An emit from the connect handler with `retries` is written once: sent packets are `0` and `20[\"echo\",null]`; received are OPEN, CONNECT and the ack `30[null]`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/RetryE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.RetryE2ETest.doesNotEmitAPacketTwiceInTheConnectHandler"
+        }
+      ]
+    },
+    {
+      "id": "JS-059",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-059"
+      ],
+      "assertions": "`socket.id` equals the id the server reports for the default namespace.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.hasAnIdEqualToTheServerSideIdOnTheDefaultNamespace"
+        }
+      ]
+    },
+    {
+      "id": "JS-060",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-060"
+      ],
+      "assertions": "`socket.id` equals the server-side id on `/foo`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.hasAnIdEqualToTheServerSideIdOnACustomNamespace"
+        }
+      ]
+    },
+    {
+      "id": "JS-061",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-061"
+      ],
+      "assertions": "Inside the disconnect listener `socket.id` is already cleared.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.clearsTheIdUponDisconnection"
+        }
+      ]
+    },
+    {
+      "id": "JS-062",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-062"
+      ],
+      "assertions": "Disconnecting while the connection is still opening emits no manager `error` within 300 ms.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotFireAnErrorIfForceDisconnectedWhileOpening"
+        }
+      ]
+    },
+    {
+      "id": "JS-063",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-063"
+      ],
+      "assertions": "Against a closed port with `timeout: 100`: `connect_error` fires.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.firesConnectErrorWhenTheConnectionCannotBeEstablished"
+        }
+      ]
+    },
+    {
+      "id": "JS-064",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-064"
+      ],
+      "assertions": "`timeout: 0` with polling: `connect_error` with message `timeout`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.firesConnectErrorOnOpenTimeoutWithPolling"
+        }
+      ]
+    },
+    {
+      "id": "JS-065",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-065"
+      ],
+      "assertions": "`timeout: 0` with WebSocket: `connect_error` with message `timeout`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.firesConnectErrorOnOpenTimeoutWithWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-066",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-066"
+      ],
+      "assertions": "Once connected, closing the transport does not produce `connect_error` within 300 ms.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotFireConnectErrorWhenTheConnectionIsAlreadyEstablished"
+        }
+      ]
+    },
+    {
+      "id": "JS-067",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-067"
+      ],
+      "assertions": "During `reconnect_attempt` `socket.id` is unset; after `reconnect` the id differs from the first one.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.changesTheIdUponReconnection"
+        }
+      ]
+    },
+    {
+      "id": "JS-068",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-068"
+      ],
+      "assertions": "An emit creates an engine packet with `compress: true` by default (seen through the packet observer, the equivalent of `packetCreate`).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.enablesCompressionByDefault"
+        }
+      ]
+    },
+    {
+      "id": "JS-069",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-069"
+      ],
+      "assertions": "`compress(false).emit` creates an engine packet with `compress: false`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.disablesCompression"
+        }
+      ]
+    },
+    {
+      "id": "JS-070",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-070"
+      ],
+      "assertions": "The `query` option `{e: 'f'}` reaches the server's handshake query on the default namespace.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acceptsAQueryObjectOnTheDefaultNamespace"
+        }
+      ]
+    },
+    {
+      "id": "JS-071",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-071"
+      ],
+      "assertions": "A query string in the URL (`/?c=d`) reaches the handshake query.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acceptsAQueryStringOnTheDefaultNamespace"
+        }
+      ]
+    },
+    {
+      "id": "JS-072",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-072"
+      ],
+      "assertions": "`query: {a: 'b'}` reaches the handshake of `/abc`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acceptsAQueryObject"
+        }
+      ]
+    },
+    {
+      "id": "JS-073",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-073"
+      ],
+      "assertions": "`/abc?b=c&d=e` delivers both query parameters.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acceptsAQueryString"
+        }
+      ]
+    },
+    {
+      "id": "JS-074",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-074"
+      ],
+      "assertions": "Reserved characters are encoded: `{'&a': '&=?a'}` arrives unchanged.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.properlyEncodesTheParameters"
+        }
+      ]
+    },
+    {
+      "id": "JS-075",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-075"
+      ],
+      "assertions": "`auth: {a: 'b', c: 'd'}` arrives as the handshake auth and not as query parameters.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acceptsAnAuthObject"
+        }
+      ]
+    },
+    {
+      "id": "JS-076",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-076"
+      ],
+      "assertions": "The function form of `auth` (Kotlin `AuthProvider`) supplies `{e: 'f'}` as the handshake auth, not as a query.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acceptsAnAuthFunction"
+        }
+      ]
+    },
+    {
+      "id": "JS-077",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-077"
+      ],
+      "assertions": "A middleware failure on `/no` yields `connect_error` with message `Auth failed (custom namespace)`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.firesAnErrorOnMiddlewareFailureFromACustomNamespace"
+        }
+      ]
+    },
+    {
+      "id": "JS-078",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-078"
+      ],
+      "assertions": "A middleware error with data yields `connect_error` whose `data` equals `{code: 401, details: 'Invalid token'}`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.firesConnectErrorWithDataOnMiddlewareFailure"
+        }
+      ]
+    },
+    {
+      "id": "JS-079",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-079"
+      ],
+      "assertions": "After a middleware refusal, forcing a transport close does not retry the namespace: exactly one `connect_error`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotReconnectAfterAMiddlewareFailure"
+        }
+      ]
+    },
+    {
+      "id": "JS-080",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-080"
+      ],
+      "assertions": "`disconnect().connect()` inside the first connect (WebSocket only) produces exactly one disconnect and a new connection.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.properlyDisconnectsThenReconnects"
+        }
+      ]
+    },
+    {
+      "id": "JS-081",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-081"
+      ],
+      "assertions": "Emitting the reserved `disconnecting` throws with the message `\"disconnecting\" is a reserved event name`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.throwsOnReservedEvent"
+        }
+      ]
+    },
+    {
+      "id": "JS-082",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-082"
+      ],
+      "assertions": "An emit buffered before connect is acknowledged before an emit made in the connect handler.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.emitsEventsInOrder"
+        }
+      ]
+    },
+    {
+      "id": "JS-083",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-083"
+      ],
+      "assertions": "`emitWithAck('echo', 123)` returns 123.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.emitsAnEventAndWaitsForTheAcknowledgement"
+        }
+      ]
+    },
+    {
+      "id": "JS-084",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-084"
+      ],
+      "assertions": "A volatile emit while not connected is discarded (its callback never runs) while a normal emit is buffered and acknowledged.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.discardsAVolatilePacketWhenTheSocketIsNotConnected"
+        }
+      ]
+    },
+    {
+      "id": "JS-085",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-085"
+      ],
+      "assertions": "A volatile emit while the transport is busy (a POST in flight right after CONNECT) is discarded; the reliable emit before it is acknowledged.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.discardsAVolatilePacketWhenThePipeIsNotReady"
+        }
+      ]
+    },
+    {
+      "id": "JS-086",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-086"
+      ],
+      "assertions": "A volatile emit repeated while connected is eventually sent and acknowledged once the transport is writable.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.sendsAVolatilePacketWhenConnectedAndThePipeIsReady"
+        }
+      ]
+    },
+    {
+      "id": "JS-087",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-087"
+      ],
+      "assertions": "`onAny` receives `handshake` and its object argument from `/abc`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.onAnyCallsTheListener"
+        }
+      ]
+    },
+    {
+      "id": "JS-088",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-088"
+      ],
+      "assertions": "`prependAny` listeners run before `onAny` ones, in prepend order (counter 0, 1, then the appended listener sees 2).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.onAnyPrependsListeners"
+        }
+      ]
+    },
+    {
+      "id": "JS-089",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-089"
+      ],
+      "assertions": "`offAny(listener)` removes it (the removed listener never runs) and `listenersAny` is empty afterwards.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.offAnyRemovesTheListener"
+        }
+      ]
+    },
+    {
+      "id": "JS-090",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-090"
+      ],
+      "assertions": "`onAnyOutgoing` sees `my-event` and `123` when emitting from the connect handler.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.onAnyOutgoingCallsTheListener"
+        }
+      ]
+    },
+    {
+      "id": "JS-091",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-091"
+      ],
+      "assertions": "An outgoing listener added in the connect handler sees an immediately following binary emit (bytes 1,2,3) with no queue turn in between.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketListenerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketListenerTest.anOutgoingListenerAddedInConnectSeesABinaryEmitWithoutAQueueTurn"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.onAnyOutgoingCallsTheListenerWithBinaryData"
+        }
+      ]
+    },
+    {
+      "id": "JS-092",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-092"
+      ],
+      "assertions": "`prependAnyOutgoing` listeners run first, in prepend order.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.onAnyOutgoingPrependsListeners"
+        }
+      ]
+    },
+    {
+      "id": "JS-093",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-093"
+      ],
+      "assertions": "Removing an outgoing listener takes effect for the very next emit: the removed listener never runs and the list is empty. The unit test runs add, remove and emit in one executor turn, as in JavaScript.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketListenerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketListenerTest.removingAnOutgoingListenerIsEffectiveForTheNextEmit"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.offAnyOutgoingRemovesTheListener"
+        }
+      ]
+    },
+    {
+      "id": "JS-094",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-094"
+      ],
+      "assertions": "`timeout(50).emit` while not connected fails with a timeout error and removes the packet from the send buffer.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.timesOutAfterTheGivenDelayWhenNotConnected"
+        }
+      ]
+    },
+    {
+      "id": "JS-095",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-095"
+      ],
+      "assertions": "`timeout(50).emit` of an unknown event (never acknowledged) fails with a timeout error.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.timesOutWhenTheServerDoesNotAcknowledge"
+        }
+      ]
+    },
+    {
+      "id": "JS-096",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-096"
+      ],
+      "assertions": "`timeout(0).emit('echo', 42)` fails with a timeout error exactly once, even though the server answers later.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.timesOutWhenTheServerDoesNotAcknowledgeInTime"
+        }
+      ]
+    },
+    {
+      "id": "JS-097",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-097"
+      ],
+      "assertions": "`timeout(50).emit('echo', 42)` succeeds with `(null, 42)`. The port waits for the connection and upgrade first so the budget measures the roundtrip only.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotTimeOutWhenTheServerAcknowledges"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotTimeOutWhenTheServerAcknowledgesWithEmitWithAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-098",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-098"
+      ],
+      "assertions": "`timeout(50).emitWithAck('unknown')` throws a timeout error.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.timesOutWhenTheServerDoesNotAcknowledgeWithEmitWithAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-099",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-099"
+      ],
+      "assertions": "`timeout(50).emitWithAck('echo', 42)` returns 42 (after connecting and upgrading, as JS-097).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotTimeOutWhenTheServerAcknowledgesWithEmitWithAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-100",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-100"
+      ],
+      "assertions": "`ackTimeout: 50` applies to a plain acknowledged emit: the callback fails with a timeout error.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.usesTheDefaultTimeoutValue"
+        }
+      ]
+    },
+    {
+      "id": "JS-101",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-101"
+      ],
+      "assertions": "A plain acknowledgement callback is not called on disconnect, and the pending acknowledgements are cleared at once (count 0).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotAckUponDisconnectionWithACallback"
+        }
+      ]
+    },
+    {
+      "id": "JS-102",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-102"
+      ],
+      "assertions": "With `timeout(10000)`, disconnecting fails the callback with an error and leaves no pending acknowledgement.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acksWithAnErrorUponDisconnectionWithCallbackAndTimeout"
+        }
+      ]
+    },
+    {
+      "id": "JS-103",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-103"
+      ],
+      "assertions": "With `ackTimeout: 10000`, disconnecting fails the callback with an error.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acksWithAnErrorUponDisconnectionWithCallbackAndAckTimeout"
+        }
+      ]
+    },
+    {
+      "id": "JS-104",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-104"
+      ],
+      "assertions": "`emitWithAck` rejects with an error when the socket disconnects before the answer; the emit and the disconnect run in the same executor turn, as in JavaScript.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acksWithAnErrorUponDisconnectionWithEmitWithAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-105",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-105"
+      ],
+      "assertions": "`timeout(10000).emitWithAck` rejects with an error on disconnect.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.acksWithAnErrorUponDisconnectionWithEmitWithAckAndTimeout"
+        }
+      ]
+    },
+    {
+      "id": "JS-106",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-106"
+      ],
+      "assertions": "An acknowledged emit made after disconnecting is buffered with its acknowledgement and answered (`a`) after connecting again.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.doesNotDiscardAnUnsentAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-107",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-107"
+      ],
+      "assertions": "With an expired heartbeat deadline (a throttled timer, simulated by advancing the injected clock), an emit is buffered, the connection closes with `ping timeout`, and the acknowledgement arrives after the reconnect.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SocketE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SocketE2ETest.buffersAnEventWhenTheHeartbeatExpiredAndSendsItAfterReconnecting"
+        }
+      ]
+    },
+    {
+      "id": "JS-122",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-122"
+      ],
+      "assertions": "Without a URL, `url()` takes protocol, host and port from the location (`https:`, `woot.com`, `4005`).",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.worksWithoutAUrl"
+        }
+      ]
+    },
+    {
+      "id": "JS-123",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-123"
+      ],
+      "assertions": "A relative path resolves against the location: host `woot.com`, protocol `https`, port `3000`.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.worksWithRelativePaths"
+        }
+      ]
+    },
+    {
+      "id": "JS-124",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-124"
+      ],
+      "assertions": "`localhost:3000` without scheme takes the location protocol: host `localhost`, port `3000`, protocol `http`.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.worksWithoutAProtocol"
+        }
+      ]
+    },
+    {
+      "id": "JS-125",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-125"
+      ],
+      "assertions": "`//localhost:3000` takes the location protocol.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.worksWithoutASchema"
+        }
+      ]
+    },
+    {
+      "id": "JS-126",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-126"
+      ],
+      "assertions": "Implicit and explicit port 80 give the same id; https and a custom path give different ids.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.forcesPortsForUniqueUrlIds"
+        }
+      ]
+    },
+    {
+      "id": "JS-127",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-127"
+      ],
+      "assertions": "The path names the namespace: `/woot`, and `/` for an empty or root path.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.identifiesTheNamespace"
+        }
+      ]
+    },
+    {
+      "id": "JS-128",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-128"
+      ],
+      "assertions": "`http://[::1]`: protocol `http`, host `::1`, port `80`, id `http://[::1]:80`.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.worksWithIpv6"
+        }
+      ]
+    },
+    {
+      "id": "JS-129",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-129"
+      ],
+      "assertions": "Without a URL and an IPv6 location (`[::1]`): host `::1`, port `80`, id `http://[::1]:80`.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.worksWithAnIpv6Location"
+        }
+      ]
+    },
+    {
+      "id": "JS-130",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-130"
+      ],
+      "assertions": "A custom path is part of the id (`https://woot.com:443/some-path`) while the URL path stays the namespace.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.worksWithACustomPath"
+        }
+      ]
+    },
+    {
+      "id": "JS-131",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-131"
+      ],
+      "assertions": "Polling: binary bytes 0..4 sent after the greeting come back as one binary message with the same bytes.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesBinaryDataWhenBouncingItBackOverPolling"
+        }
+      ]
+    },
+    {
+      "id": "JS-132",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-132"
+      ],
+      "assertions": "Polling: bytes 0..4 then `cash money €€€` come back as binary then the exact text, in order.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesBinaryDataAndAMultibyteStringOverPolling"
+        }
+      ]
+    },
+    {
+      "id": "JS-133",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-133"
+      ],
+      "assertions": "Polling with `forceBase64`: bytes 0..4 come back as binary with the same bytes.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesBinaryDataWhenForcingBase64OverPolling"
+        }
+      ]
+    },
+    {
+      "id": "JS-134",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-134"
+      ],
+      "assertions": "Binary packets (72, 20 bytes, 20 chars, 20, 72 bytes) are batched under maxPayload 100 counting Base64 overhead; all five messages come back. The unit test asserts the exact batches (1, 3, 1 packets).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.mergesBinaryPacketsAccordingToMaxPayload"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.mergesBinaryPacketsAccordingToMaxPayload"
+        }
+      ]
+    },
+    {
+      "id": "JS-135",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-135"
+      ],
+      "assertions": "WebSocket: bytes 0..4 come back as binary.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesBinaryDataWhenBouncingItBackOverWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-136",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-136"
+      ],
+      "assertions": "After upgrading to WebSocket: bytes 0..4 then the multibyte text come back in order with their types.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesBinaryDataAndAMultibyteStringAfterUpgrading"
+        }
+      ]
+    },
+    {
+      "id": "JS-137",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-137"
+      ],
+      "assertions": "WebSocket with `forceBase64`: bytes 0..4 come back as binary.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesBinaryDataWhenForcingBase64OverWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-139",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-139"
+      ],
+      "assertions": "Polling: the server's binary reply to `give binary` arrives as bytes 0..4 (ByteArray replaces Blob).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesServerBinaryOverPollingAndWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-140",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-140"
+      ],
+      "assertions": "Polling: binary sent (the Blob of the original) is echoed as the same bytes.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.sendsBinaryAndGetsItBackOnEveryTransport"
+        }
+      ]
+    },
+    {
+      "id": "JS-141",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-141"
+      ],
+      "assertions": "Same batching rule as JS-134 for binary (Blob variant of the original).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.mergesBinaryPacketsAccordingToMaxPayload"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.mergesBinaryPacketsAccordingToMaxPayload"
+        }
+      ]
+    },
+    {
+      "id": "JS-142",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-142"
+      ],
+      "assertions": "WebSocket: the server's `give binary` reply arrives as bytes 0..4.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesServerBinaryOverPollingAndWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-143",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-143"
+      ],
+      "assertions": "WebSocket: binary sent is echoed as the same bytes.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.sendsBinaryAndGetsItBackOnEveryTransport"
+        }
+      ]
+    },
+    {
+      "id": "JS-144",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-144"
+      ],
+      "assertions": "WebSocket with `forceBase64`: binary sent is echoed as the same bytes.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.sendsBinaryAndGetsItBackOnEveryTransport"
+        }
+      ]
+    },
+    {
+      "id": "JS-145",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-145"
+      ],
+      "assertions": "The engine connects to the server (polling first) and receives `hi`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.connectsToLocalhost"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.connectsOverPollingAndReceivesTheGreeting"
+        }
+      ]
+    },
+    {
+      "id": "JS-146",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-146"
+      ],
+      "assertions": "WebSocket only: the engine connects and receives `hi`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.connectsToLocalhostOverWebSocket"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.connectsOverWebSocketOnly"
+        }
+      ]
+    },
+    {
+      "id": "JS-147",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-147"
+      ],
+      "assertions": "Polling: `cash money €€€` is echoed byte-exact.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesMultibyteUtf8StringsWithPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.echoesMultibyteTextAndEmoji"
+        }
+      ]
+    },
+    {
+      "id": "JS-148",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-148"
+      ],
+      "assertions": "Surrogate pairs and private-use characters are echoed exactly.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.receivesEmoji"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.echoesMultibyteTextAndEmoji"
+        }
+      ]
+    },
+    {
+      "id": "JS-149",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-149"
+      ],
+      "assertions": "After `close()`, `send('hi')` creates no packet (no `packetCreate` within 200 ms).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.doesNotSendPacketsIfTheSocketCloses"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.doesNotSendPacketsIfTheSocketCloses"
+        }
+      ]
+    },
+    {
+      "id": "JS-150",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-150"
+      ],
+      "assertions": "Six text packets are batched so that no POST exceeds maxPayload 100 (a 99-byte packet alone, 30+30+35 with separators exactly 100, the 99-byte euro text alone); all six arrive. The unit test asserts the exact POST bodies.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.mergesPacketsAccordingToMaxPayload"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.mergesPacketsAccordingToMaxPayload"
+        }
+      ]
+    },
+    {
+      "id": "JS-151",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-151"
+      ],
+      "assertions": "A single packet above maxPayload is still sent (and the server closes the connection).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.sendsAPacketAboveMaxPayloadAnyway"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.sendsAPacketAboveMaxPayloadAnyway"
+        }
+      ]
+    },
+    {
+      "id": "JS-153",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-153"
+      ],
+      "assertions": "`close()` during `upgrading` waits for the upgrade: `close` is emitted after `upgrade`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.defersCloseWhenUpgrading"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.defersCloseWhenUpgrading"
+        }
+      ]
+    },
+    {
+      "id": "JS-154",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-154"
+      ],
+      "assertions": "With the close deferred during an upgrade, a transport error on the old transport produces `upgradeError` before `close`. The in-memory server fails the pending poll instead of calling the transport's `onError`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.closesOnUpgradeErrorIfClosingIsDeferred"
+        }
+      ]
+    },
+    {
+      "id": "JS-155",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-155"
+      ],
+      "assertions": "After `close()` during `upgrading`, `send()` creates no packet.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.doesNotSendPacketsIfClosingIsDeferred"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.doesNotSendPacketsIfClosingIsDeferred"
+        }
+      ]
+    },
+    {
+      "id": "JS-156",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-156"
+      ],
+      "assertions": "`send('hi')` then `close()` during `upgrading`: the write buffer is empty when `close` is emitted, and the message reached the server.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.sendsAllBufferedPacketsIfClosingIsDeferred"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.sendsAllBufferedPacketsIfClosingIsDeferred"
+        }
+      ]
+    },
+    {
+      "id": "JS-158",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-158"
+      ],
+      "assertions": "The Engine.IO protocol number is exposed (4).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.exposesTheProtocolNumber"
+        }
+      ]
+    },
+    {
+      "id": "JS-159",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-159"
+      ],
+      "assertions": "`http://localhost`: hostname `localhost`, port `80`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.parsesAnHttpUriWithoutPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-160",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-160"
+      ],
+      "assertions": "`https://localhost`: port `443`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.parsesAnHttpsUriWithoutPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-161",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-161"
+      ],
+      "assertions": "`wss://localhost`: port `443`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.parsesAWssUriWithoutPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-162",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-162"
+      ],
+      "assertions": "`wss://localhost:2020`: port `2020`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.parsesAWssUriWithPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-163",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-163"
+      ],
+      "assertions": "`host: 'localhost'` without URL: hostname `localhost`, port `80`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.parsesAHostWithoutPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-164",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-164"
+      ],
+      "assertions": "`host` with `port: '8080'`: port `8080`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.parsesAHostWithPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-165",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-165"
+      ],
+      "assertions": "`addTrailingSlash: false` requests `/engine.io` without the trailing slash.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.handlesTheAddTrailingSlashOption"
+        }
+      ]
+    },
+    {
+      "id": "JS-166",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-166"
+      ],
+      "assertions": "`http://[::1]`: hostname `::1`, port `80`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.parsesAnIpv6UriWithoutPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-167",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-167"
+      ],
+      "assertions": "`http://[::1]:8080`: hostname `::1`, port `8080`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.parsesAnIpv6UriWithPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-168",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-168"
+      ],
+      "assertions": "`host: '[::1]'`: hostname `::1`, port `80`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.parsesABracketedIpv6HostWithoutPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-169",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-169"
+      ],
+      "assertions": "`secure: true, host: '[::1]'`: port `443`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.parsesASecureBracketedIpv6HostWithoutPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-170",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-170"
+      ],
+      "assertions": "`host: '[::1]', port: '8080'`: port `8080`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.parsesABracketedIpv6HostWithPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-171",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-171"
+      ],
+      "assertions": "`host: '::1'` without brackets: hostname `::1`, port `80`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.parsesAnIpv6HostWithoutBrackets"
+        }
+      ]
+    },
+    {
+      "id": "JS-172",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-172"
+      ],
+      "assertions": "`randomString()` returns eight characters and differs between calls.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.generatesARandomString"
+        }
+      ]
+    },
+    {
+      "id": "JS-177",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-177"
+      ],
+      "assertions": "Binary batching under maxPayload (Node Buffer variant of JS-134).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.mergesBinaryPacketsAccordingToMaxPayload"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.mergesBinaryPacketsAccordingToMaxPayload"
+        }
+      ]
+    },
+    {
+      "id": "JS-178",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-178"
+      ],
+      "assertions": "With `withCredentials`, cookies set in the handshake (`1=1`, `2=2`; the expired `3` and `4` dropped) are sent back as `1=1; 2=2`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.sendsCookiesWithWithCredentials"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.sendsCookiesWithWithCredentials"
+        }
+      ]
+    },
+    {
+      "id": "JS-179",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-179"
+      ],
+      "assertions": "Without `withCredentials` no cookie header is sent.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.doesNotSendCookiesWithoutWithCredentials"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.doesNotSendCookiesWithoutWithCredentials"
+        }
+      ]
+    },
+    {
+      "id": "JS-180",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-180"
+      ],
+      "assertions": "`foo=bar` parses to name `foo`, value `bar`, no expiry.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.parsesASimpleSetCookieHeader"
+        }
+      ]
+    },
+    {
+      "id": "JS-181",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-181"
+      ],
+      "assertions": "A complex set-cookie header parses to `foo=bar` with the `Expires` date (the later attribute wins over `Max-Age`).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.parsesAComplexSetCookieHeader"
+        }
+      ]
+    },
+    {
+      "id": "JS-182",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-182"
+      ],
+      "assertions": "`foo=bar=bar&foo=foo&John=Doe&Doe=John` keeps everything after the first `=` as the value.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.parsesAWeirdButValidCookie"
+        }
+      ]
+    },
+    {
+      "id": "JS-183",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-183"
+      ],
+      "assertions": "`parseuri` returns protocol, host, port, query, path, relative, `queryKey`, `pathNames`, user info and anchors for plain, IPv6 (bare, bracketed, with port) and relative inputs, and rejects inputs above 8000 characters with `URI too long`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.parsesAUri"
+        }
+      ]
+    },
+    {
+      "id": "JS-184",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-184"
+      ],
+      "assertions": "`filterUpgrades` keeps only upgrades listed in `transports`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.filterUpgradesReturnsOnlyAvailableTransports"
+        }
+      ]
+    },
+    {
+      "id": "JS-185",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-185"
+      ],
+      "assertions": "The caller's `transports` list is not modified when `tryAllTransports` drops a failed transport.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.doesNotMutateTheCallersTransportsOption"
+        }
+      ]
+    },
+    {
+      "id": "JS-186",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-186"
+      ],
+      "assertions": "No transports: an `error` event `No transports available` on the next tick, not synchronously.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.reportsAnErrorWhenNoTransportsAreAvailable"
+        }
+      ]
+    },
+    {
+      "id": "JS-187",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-187"
+      ],
+      "assertions": "`tryAllTransports` with WebSocket refused (`deny` query): the engine connects over polling.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.connectsWithTheSecondTransportIfTryAllTransports"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.connectsWithTheSecondTransportWhenTryAllTransportsIsTrueAndWebSocketFails"
+        }
+      ]
+    },
+    {
+      "id": "JS-188",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-188"
+      ],
+      "assertions": "`tryAllTransports` with polling refused: the engine connects over WebSocket.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.connectsWithTheSecondTransportIfTryAllTransportsAndPollingFails"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.connectsWithTheSecondTransportWhenTryAllTransportsIsTrueAndPollingFails"
+        }
+      ]
+    },
+    {
+      "id": "JS-189",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-189"
+      ],
+      "assertions": "Without `tryAllTransports` a refused polling transport fails with `xhr poll error`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.doesNotConnectWithTheSecondTransportByDefault"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.doesNotTryTheSecondTransportByDefault"
+        }
+      ]
+    },
+    {
+      "id": "JS-190",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-190"
+      ],
+      "assertions": "A custom transport implementation registered for `polling` is used and connects.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.connectsWithACustomPollingTransport"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.connectsWithACustomPollingTransportImplementation"
+        }
+      ]
+    },
+    {
+      "id": "JS-191",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-191"
+      ],
+      "assertions": "A custom transport implementation registered for `websocket` is used and connects.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.connectsWithACustomWebSocketTransport"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.connectsWithACustomWebSocketTransportImplementation"
+        }
+      ]
+    },
+    {
+      "id": "JS-192",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-192"
+      ],
+      "assertions": "The `No transports available` error is delivered through the configured timers: nothing before they run, the error once they do (the test dispatcher replaces the fake clock).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.reportsAnErrorWhenNoTransportsAreAvailable"
+        }
+      ]
+    },
+    {
+      "id": "JS-194",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-194"
+      ],
+      "assertions": "Polling POST above maxHttpBufferSize: a `TransportError` with description 413 and message `xhr post error`, empty response body, then `close` with `transport error`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.providesDetailsWhenMaxHttpBufferSizeIsReachedOverPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.providesDetailsWhenMaxHttpBufferSizeIsReachedOverPolling"
+        }
+      ]
+    },
+    {
+      "id": "JS-195",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-195"
+      ],
+      "assertions": "WebSocket message above maxHttpBufferSize: `close` with `transport close`, description `websocket connection closed`, close code 1009 and an empty reason.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.providesDetailsWhenMaxHttpBufferSizeIsReachedOverWebSocket"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.providesDetailsWhenMaxHttpBufferSizeIsReachedOverWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-196",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-196"
+      ],
+      "assertions": "Unknown session id over polling: `TransportError` 400 `xhr poll error` with the body `{\"code\":1,\"message\":\"Session ID unknown\"}`, then `transport error`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.providesDetailsWhenTheSessionIdIsUnknownOverPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.providesDetailsWhenTheSessionIdIsUnknownOverPolling"
+        }
+      ]
+    },
+    {
+      "id": "JS-197",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-197"
+      ],
+      "assertions": "Unknown session id over WebSocket: `websocket error`, then `transport error`.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.providesDetailsWhenTheSessionIdIsUnknownOverWebSocket"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.providesDetailsWhenTheSessionIdIsUnknownOverWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-198",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-198"
+      ],
+      "assertions": "`hasPingExpired` is false before and right after open; once the deadline lies in the past it returns true and keeps returning true, and exactly one `ping timeout` close follows (an injected clock replaces the write to `_pingTimeoutTime`).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.detectsAThrottledHeartbeatTimerOnce"
+        }
+      ]
+    },
+    {
+      "id": "JS-199",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-199"
+      ],
+      "assertions": "After a successful WebSocket upgrade, a new engine with `rememberUpgrade` starts directly with WebSocket.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.remembersAWebSocketConnection"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.remembersAWebSocketUpgrade"
+        }
+      ]
+    },
+    {
+      "id": "JS-200",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-200"
+      ],
+      "assertions": "Without `rememberUpgrade` a new engine starts with polling.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.doesNotRememberAWebSocketConnectionByDefault"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.doesNotRememberAWebSocketUpgradeByDefault"
+        }
+      ]
+    },
+    {
+      "id": "JS-201",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-201"
+      ],
+      "assertions": "The transport base class is public API (a public abstract class to subclass).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.exposesTheTransportBaseClass"
+        }
+      ]
+    },
+    {
+      "id": "JS-202",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-202"
+      ],
+      "assertions": "The polling and WebSocket transports are public and constructible (their factories create transports named `polling` and `websocket`).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.exposesThePollingAndWebSocketTransports"
+        }
+      ]
+    },
+    {
+      "id": "JS-203",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-203"
+      ],
+      "assertions": "Polling URI `http://localhost/engine.io?sid=test`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnHttpUri"
+        }
+      ]
+    },
+    {
+      "id": "JS-204",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-204"
+      ],
+      "assertions": "Port 80 is omitted from the http URI.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnHttpUriWithoutPort80"
+        }
+      ]
+    },
+    {
+      "id": "JS-205",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-205"
+      ],
+      "assertions": "Port 3000 is kept: `http://localhost:3000/engine.io?sid=test`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnHttpUriWithAPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-206",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-206"
+      ],
+      "assertions": "Port 443 is omitted from the https URI.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnHttpsUriWithoutPort443"
+        }
+      ]
+    },
+    {
+      "id": "JS-207",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-207"
+      ],
+      "assertions": "Port 443 given as string is omitted (Kotlin keeps ports as strings; same assertion as JS-206).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnHttpsUriWithoutPort443"
+        }
+      ]
+    },
+    {
+      "id": "JS-208",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-208"
+      ],
+      "assertions": "Port 8443 is kept in the https URI.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnHttpsUriWithAPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-209",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-209"
+      ],
+      "assertions": "Polling URIs carry the timestamp parameter `t=<random>` (also by default).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesATimestampedUri"
+        }
+      ]
+    },
+    {
+      "id": "JS-210",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-210"
+      ],
+      "assertions": "IPv6 host in brackets: `http://[::1]/engine.io`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnIpv6Uri"
+        }
+      ]
+    },
+    {
+      "id": "JS-211",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-211"
+      ],
+      "assertions": "IPv6 with port: `http://[::1]:8080/engine.io`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAnIpv6UriWithPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-212",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-212"
+      ],
+      "assertions": "WebSocket URI `ws://test/engine.io?transport=websocket`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAWsUri"
+        }
+      ]
+    },
+    {
+      "id": "JS-213",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-213"
+      ],
+      "assertions": "Secure WebSocket URI `wss://test/engine.io`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAWssUri"
+        }
+      ]
+    },
+    {
+      "id": "JS-214",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-214"
+      ],
+      "assertions": "WebSocket URIs are timestamped only when enabled, with the configured parameter name (`woot`).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.timestampsWsUris"
+        }
+      ]
+    },
+    {
+      "id": "JS-215",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-215"
+      ],
+      "assertions": "WebSocket IPv6 URI `ws://[::1]/engine.io`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAWsIpv6Uri"
+        }
+      ]
+    },
+    {
+      "id": "JS-216",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-216"
+      ],
+      "assertions": "WebSocket IPv6 URI with port `ws://[::1]:8080/engine.io`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.generatesAWsIpv6UriWithPort"
+        }
+      ]
+    },
+    {
+      "id": "JS-217",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-217"
+      ],
+      "assertions": "The Node `agent` option's counterpart: a caller-supplied OkHttp client carries the WebSocket handshake (its interceptor sees the request).",
+      "tests": [
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.CustomOkHttpClientTest.usesTheCallerSuppliedClientForPollingAndWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-218",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-218"
+      ],
+      "assertions": "The caller-supplied OkHttp client carries the polling requests too.",
+      "tests": [
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.CustomOkHttpClientTest.usesTheCallerSuppliedClientForPollingAndWebSocket"
+        }
+      ]
+    },
+    {
+      "id": "JS-219",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-219"
+      ],
+      "assertions": "Extra headers reach the WebSocket handshake.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.setsExtraHeadersPerTransport"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.setsExtraHeadersOnPollingAndWebSocketRequests"
+        }
+      ]
+    },
+    {
+      "id": "JS-220",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-220"
+      ],
+      "assertions": "Extra headers reach polling requests (the server echoes them with `sendHeaders`).",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.setsExtraHeadersPerTransport"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.setsExtraHeadersOnPollingAndWebSocketRequests"
+        }
+      ]
+    },
+    {
+      "id": "JS-221",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-221"
+      ],
+      "assertions": "With threshold 0 the WebSocket frame for `hi` is sent with `compress: true` (the flag handed to the connection, as the original checks the flag handed to `ws.send`).",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.aZeroThresholdCompressesEveryMessage"
+        }
+      ]
+    },
+    {
+      "id": "JS-222",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-222"
+      ],
+      "assertions": "With the default threshold (1024) a short frame is sent with `compress: false` even though the packet asked for compression.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineClientApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineClientApiTest.doesNotCompressBelowTheThreshold"
+        }
+      ]
+    },
+    {
+      "id": "JS-223",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-223"
+      ],
+      "assertions": "Per-transport options (`transportOptions.polling.extraHeaders`) apply to polling requests.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.setsExtraHeadersPerTransport"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.setsExtraHeadersOnPollingAndWebSocketRequests"
+        }
+      ]
+    },
+    {
+      "id": "JS-240",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-240"
+      ],
+      "assertions": "EVENT `[a, 2 zero bytes]` with id 0 encodes to a binary packet and decodes back equal.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesAnArrayBuffer"
+        }
+      ]
+    },
+    {
+      "id": "JS-242",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-242"
+      ],
+      "assertions": "A typed-array view (ByteBuffer) encodes its bytes and round-trips; only the view's remaining bytes are sent.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesATypedArray"
+        }
+      ]
+    },
+    {
+      "id": "JS-243",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-243"
+      ],
+      "assertions": "Binary nested two levels deep in objects round-trips with namespace `/deep` and id 999.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesArrayBuffersDeepInJson"
+        }
+      ]
+    },
+    {
+      "id": "JS-244",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-244"
+      ],
+      "assertions": "Binary next to nested nulls round-trips with id 600.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesDeepBinaryJsonWithNullValues"
+        }
+      ]
+    },
+    {
+      "id": "JS-245",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-245"
+      ],
+      "assertions": "Encoding does not modify the input packet, and the header uses placeholders 0 and 1 followed by the two attachments.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.doesNotModifyTheInputPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-246",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-246"
+      ],
+      "assertions": "A Blob (binary) with id 0 round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesABlob"
+        }
+      ]
+    },
+    {
+      "id": "JS-247",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-247"
+      ],
+      "assertions": "A Blob nested in an object round-trips on `/deep` with id 999.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesABlobDeepInJson"
+        }
+      ]
+    },
+    {
+      "id": "JS-248",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-248"
+      ],
+      "assertions": "A binary ACK with nested binary round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesABinaryAckWithABlob"
+        }
+      ]
+    },
+    {
+      "id": "JS-249",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-249"
+      ],
+      "assertions": "EVENT with a Buffer on `/cool`, id 23, round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesABuffer"
+        }
+      ]
+    },
+    {
+      "id": "JS-250",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-250"
+      ],
+      "assertions": "A Buffer nested in an array inside an object round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesANestedBuffer"
+        }
+      ]
+    },
+    {
+      "id": "JS-251",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-251"
+      ],
+      "assertions": "A binary ACK with a Buffer and an empty object on `/back`, id 127, round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.encodesABinaryAckWithBuffer"
+        }
+      ]
+    },
+    {
+      "id": "JS-253",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-253"
+      ],
+      "assertions": "A placeholder with a string `num` fails with `illegal attachments` once the attachment arrives.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.throwsWhenAnAttachmentPlaceholderHasAStringNum"
+        }
+      ]
+    },
+    {
+      "id": "JS-254",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-254"
+      ],
+      "assertions": "A placeholder index out of range fails with `illegal attachments`.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.throwsWhenAnAttachmentPlaceholderIsOutOfBounds"
+        }
+      ]
+    },
+    {
+      "id": "JS-255",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-255"
+      ],
+      "assertions": "Binary data without a preceding header fails with `got binary data when not reconstructing a packet`.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.throwsWhenAddingAnAttachmentWithoutHeader"
+        }
+      ]
+    },
+    {
+      "id": "JS-256",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-256"
+      ],
+      "assertions": "Text while an attachment is expected fails with `got plaintext data when reconstructing a packet`.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.throwsWhenDecodingABinaryEventWithoutAttachments"
+        }
+      ]
+    },
+    {
+      "id": "JS-257",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-257"
+      ],
+      "assertions": "The seven packet types are exposed with their numbers 0..6.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.exposesTypes"
+        }
+      ]
+    },
+    {
+      "id": "JS-258",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-258"
+      ],
+      "assertions": "CONNECT with `{token: '123'}` on `/woot` round-trips (and encodes to `0/woot,{...}`).",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesConnection"
+        }
+      ]
+    },
+    {
+      "id": "JS-259",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-259"
+      ],
+      "assertions": "DISCONNECT on `/woot` round-trips (`1/woot,`).",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesDisconnection"
+        }
+      ]
+    },
+    {
+      "id": "JS-260",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-260"
+      ],
+      "assertions": "EVENT `[a, 1, {}]` round-trips (`2[\"a\",1,{}]`).",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesAnEvent"
+        }
+      ]
+    },
+    {
+      "id": "JS-261",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-261"
+      ],
+      "assertions": "An event with a numeric name round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesAnEventWithAnIntegerAsEventName"
+        }
+      ]
+    },
+    {
+      "id": "JS-262",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-262"
+      ],
+      "assertions": "EVENT with ack id 1 on `/test` round-trips (`2/test,1[...]`).",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesAnEventWithAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-263",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-263"
+      ],
+      "assertions": "ACK id 123 round-trips (`3123[...]`).",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesAnAck"
+        }
+      ]
+    },
+    {
+      "id": "JS-264",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-264"
+      ],
+      "assertions": "CONNECT_ERROR with a string round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesAConnectError"
+        }
+      ]
+    },
+    {
+      "id": "JS-265",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-265"
+      ],
+      "assertions": "CONNECT_ERROR with `{message}` round-trips.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesAConnectErrorWithObject"
+        }
+      ]
+    },
+    {
+      "id": "JS-266",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-266"
+      ],
+      "assertions": "Circular input cannot be encoded: converting a self-referencing map or list fails (Kotlin values are immutable trees, so the cycle can only exist in the input).",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.throwsWhenEncodingCircularObjects"
+        }
+      ]
+    },
+    {
+      "id": "JS-267",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-267"
+      ],
+      "assertions": "The header `5` fails with an error mentioning `Illegal`.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.decodesABadBinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-268",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-268"
+      ],
+      "assertions": "With `maxAttachments: 2`, a header declaring 3 fails with `too many attachments`.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.throwsWhenReceivingTooManyAttachments"
+        }
+      ]
+    },
+    {
+      "id": "JS-269",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-269"
+      ],
+      "assertions": "A reviver upper-cases the value of key `a`: `[b, {a: VAL}]`.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.decodesWithACustomReviver"
+        }
+      ]
+    },
+    {
+      "id": "JS-270",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-270"
+      ],
+      "assertions": "The same reviver given through the options object.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.decodesWithACustomReviverFromTheOptionsObject"
+        }
+      ]
+    },
+    {
+      "id": "JS-271",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-271"
+      ],
+      "assertions": "Eleven malformed payloads fail with `invalid payload`, five attachment headers with `Illegal attachments`, and `999` with `unknown packet type 9`. The non-string input case cannot be expressed: the decoder only accepts text or bytes.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.throwsAnErrorUponParsingError"
+        }
+      ]
+    },
+    {
+      "id": "JS-272",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-272"
+      ],
+      "assertions": "After `destroy()` during a pending binary packet, a plain event decodes normally.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.resumesDecodingAfterDestroy"
+        }
+      ]
+    },
+    {
+      "id": "JS-273",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-273"
+      ],
+      "assertions": "`isPacketValid` accepts a CONNECT without data and rejects ten invalid combinations (wrong payload types, reserved names, non-string or non-number event names).",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.ensuresThatAPacketIsValid"
+        }
+      ]
+    },
+    {
+      "id": "JS-283",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-283"
+      ],
+      "assertions": "`message: test` encodes to `4test` and decodes back equal.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.encodesAndDecodesAString"
+        }
+      ]
+    },
+    {
+      "id": "JS-284",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-284"
+      ],
+      "assertions": "`''` and `a123` decode to the error packet `parser error`.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.failsToDecodeAMalformedPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-285",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-285"
+      ],
+      "assertions": "Open, close, ping/pong probe and a message encode to `0\\x1e1\\x1e2probe\\x1e3probe\\x1e4test` and decode back.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.encodesAndDecodesAllPacketTypesInAPayload"
+        }
+      ]
+    },
+    {
+      "id": "JS-286",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-286"
+      ],
+      "assertions": "`{`, `{}` and a JSON array decode to a single error packet.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.failsToDecodeAMalformedPayload"
+        }
+      ]
+    },
+    {
+      "id": "JS-287",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-287"
+      ],
+      "assertions": "Stream framing: `1€` gives header 5 and payload bytes 52 49 226 130 172.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.encodesAPlaintextPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-288",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-288"
+      ],
+      "assertions": "Binary 1,2,3 gives header 131 (binary bit) and the bytes.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.encodesABinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-289",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-289"
+      ],
+      "assertions": "Same as JS-288 for an ArrayBuffer source.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.encodesABinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-290",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-290"
+      ],
+      "assertions": "Six little-endian bytes (a Uint16Array [1,2,257]) give header 134 and the bytes.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.encodesABinaryPacketOfSixteenBitValues"
+        }
+      ]
+    },
+    {
+      "id": "JS-291",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-291"
+      ],
+      "assertions": "12345 bytes give the 16-bit length header 254 48 57.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.encodesAMediumBinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-292",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-292"
+      ],
+      "assertions": "123456789 bytes give the 64-bit length header 255 0 0 0 0 7 91 205 21.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.encodesABigBinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-293",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-293"
+      ],
+      "assertions": "Header 5 then payload decode to `message 1€`.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.decodesAPlaintextPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-294",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-294"
+      ],
+      "assertions": "Fed byte by byte, the stream decodes `1€`, a ping and a pong.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.decodesPlaintextPacketsByteByByte"
+        }
+      ]
+    },
+    {
+      "id": "JS-295",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-295"
+      ],
+      "assertions": "Fed at once, the same three packets decode.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.decodesPlaintextPacketsAllAtOnce"
+        }
+      ]
+    },
+    {
+      "id": "JS-296",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-296"
+      ],
+      "assertions": "Header 131 and three bytes decode to a binary message.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.decodesABinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-297",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-297"
+      ],
+      "assertions": "A medium payload split across chunks decodes exactly.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.decodesAMediumBinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-298",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-298"
+      ],
+      "assertions": "A 123456789-byte payload decodes with a large maxPayload.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.decodesABigBinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-299",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-299"
+      ],
+      "assertions": "A length above maxPayload yields the error packet.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.returnsAnErrorPacketWhenThePayloadIsTooBig"
+        }
+      ]
+    },
+    {
+      "id": "JS-300",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-300"
+      ],
+      "assertions": "Length 0 yields the error packet.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.returnsAnErrorPacketWhenThePayloadLengthIsInvalid"
+        }
+      ]
+    },
+    {
+      "id": "JS-301",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-301"
+      ],
+      "assertions": "A 64-bit length above 2^53-1 yields the error packet.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.returnsAnErrorPacketWhenTheLengthExceedsTheSafeIntegerRange"
+        }
+      ]
+    },
+    {
+      "id": "JS-302",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-302"
+      ],
+      "assertions": "A binary message encodes as itself with binary support and decodes back equal.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.encodesAndDecodesABuffer"
+        }
+      ]
+    },
+    {
+      "id": "JS-303",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-303"
+      ],
+      "assertions": "Without binary support it encodes to `bAQIDBA==` and decodes back.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.encodesAndDecodesABufferAsBase64"
+        }
+      ]
+    },
+    {
+      "id": "JS-308",
+      "kind": "native-assertion-equivalent",
+      "upstream_ids": [
+        "JS-308"
+      ],
+      "assertions": "A raw binary frame decodes to a binary message with the same bytes.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.decodesARawBinaryFrameAsBinaryMessage"
+        }
+      ]
+    },
+    {
+      "id": "JS-309",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-309"
+      ],
+      "assertions": "Text plus binary payload encodes to `4test\\x1ebAQIDBA==` and decodes back.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.encodesAndDecodesAStringPlusBufferPayload"
+        }
+      ]
+    },
+    {
+      "id": "JS-310",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-310"
+      ],
+      "assertions": "Stream framing of a Buffer: header 131 and the bytes.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.encodesABinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "JS-311",
+      "kind": "assertion-port",
+      "upstream_ids": [
+        "JS-311"
+      ],
+      "assertions": "Stream decoding of header 131 and three bytes yields binary data.",
+      "tests": [
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.decodesABinaryPacket"
+        }
+      ]
+    },
+    {
+      "id": "KT-RESILIENCE",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "Real-server failure scenarios: a revoked token is replaced by the auth provider on the next attempt; a rejected token fails with the server's data and connects after renewal; losing the network during the upgrade reconnects cleanly; an emit interrupted during a polling POST is retried after reconnecting; an acknowledgement lost with the connection fails or is retried, never both; waking after the heartbeat deadline gives exactly one disconnect and one reconnect; a full send buffer rejects the new emit without evicting accepted ones.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.aRevokedTokenIsReplacedByTheProviderOnTheNextAttempt"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.aRejectedTokenFailsWithServerDataAndConnectsAfterRenewal"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.losingTheNetworkDuringTheUpgradeReconnectsCleanly"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.anEmitInterruptedDuringAPollingPostIsRetriedAfterReconnecting"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.anAcknowledgementLostWithTheConnectionFailsOrIsRetried"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.wakingUpAfterTheHeartbeatDeadlineGivesOneDisconnectAndOneReconnect"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.aFullSendBufferRejectsTheNewEmitWithoutEvictingAcceptedOnes"
+        }
+      ]
+    },
+    {
+      "id": "KT-TRANSPORT-LIMITS",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "Stalled and trickling handshakes and stalled POSTs time out instead of hanging; messages close to maxPayload arrive intact on polling, WebSocket and after the upgrade; heartbeats keep an idle connection alive; one smoke scenario connects, emits and acknowledges over every transport mode.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/PollingTimeoutE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.PollingTimeoutE2ETest.aStalledHandshakeTimesOut"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/PollingTimeoutE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.PollingTimeoutE2ETest.aTricklingHandshakeTimesOut"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/PollingTimeoutE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.PollingTimeoutE2ETest.aStalledPostTimesOut"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/MaxPayloadE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.MaxPayloadE2ETest.largeMessagesNearMaxPayloadArriveIntactOnEveryTransport"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.EngineE2ETest.heartbeatsKeepTheConnectionAlive"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/SmokeE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.SmokeE2ETest.connectsEmitsAndAcknowledgesOverEveryTransportMode"
+        }
+      ]
+    },
+    {
+      "id": "KT-TLS",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "HTTPS and WSS against a private CA connect only with that CA trusted; the system trust store, an expired certificate and a host name mismatch are rejected; public-key pins accept a matching key and reject others; a client certificate is presented for mutual TLS; invalid policies are rejected when built.",
+      "tests": [
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.TlsE2ETest.connectsOverHttpsAndWssWithAPrivateCa"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.TlsE2ETest.rejectsTheServerWithTheSystemTrustStore"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.TlsE2ETest.rejectsAnExpiredCertificate"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.TlsE2ETest.rejectsAHostNameMismatch"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.TlsE2ETest.enforcesPublicKeyPins"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.TlsE2ETest.presentsAClientCertificateForMutualTls"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.trustsAPrivateCa"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.rejectsAServerOutsideTheCustomTrust"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.theSystemTrustStoreDoesNotTrustAPrivateCa"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.acceptsAMatchingPinAndRejectsAMismatch"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.presentsAClientCertificateForMutualTls"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.validatesItsArguments"
+        }
+      ]
+    },
+    {
+      "id": "KT-OKHTTP",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "The OkHttp stack sends headers and bodies, reports error statuses, bounds response bodies while reading, applies the request timeout but no read timeout (long polls wait), never follows an HTTPS-to-HTTP redirect, exchanges WebSocket frames and reports the close and a failed handshake's status, offers permessage-deflate only when compression is enabled, is discovered through ServiceLoader, and reports a dropped connection as a failure.",
+      "tests": [
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.sendsHeadersAndBodiesAndReturnsTheResponse"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.reportsErrorStatusesAsResponses"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.boundsTheResponseBodyWhileReading"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.appliesTheRequestTimeout"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.hasNoReadTimeoutSoLongPollsCanWait"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.neverFollowsARedirectFromHttpsToHttp"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.exchangesWebSocketFramesAndReportsTheClose"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.reportsTheHandshakeStatusOfAFailedWebSocket"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.offersPerMessageDeflateOnlyWhenCompressionIsEnabled"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.isDiscoveredThroughTheServiceLoader"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.aConnectionDroppedBeforeTheResponseIsAFailure"
+        }
+      ]
+    },
+    {
+      "id": "KT-ENGINE",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "Engine behaviour beyond the upstream titles: pings are answered and missing pings close with `ping timeout`, a server ping resets the deadline, an invalid handshake is rejected, default path and query follow JavaScript, closing polling sends the close packet, the network-lost hook closes with `transport close`; the upgrade buffers packets and waits for a pending POST, a failed probe keeps polling and reports `upgradeError`, `upgrade: false` stays on polling; invalid cookies are ignored; POST bodies are UTF-8; query components are encoded like `encodeURIComponent`.",
+      "tests": [
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.answersPingsAndClosesWithPingTimeoutWhenPingsStop"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.closesWithPingTimeoutWhenTheServerStopsPinging"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.aServerPingResetsTheDeadline"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.rejectsAnInvalidHandshake"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.theDefaultPathAndQueryFollowJavaScript"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.sendsTheClosePacketWhenClosingPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.theNetworkLostHookClosesWithTransportClose"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineSocketTest.usesTheTestTimeSourceByDefaultInTests"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.upgradesFromPollingToWebSocket"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.packetsSentWhileUpgradingAreBufferedAndFlushedOverTheNewTransport"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.theUpgradeWaitsForAPendingPost"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.aFailedProbeKeepsPollingAndReportsUpgradeError"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineUpgradeTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineUpgradeTest.upgradeDisabledStaysOnPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.ignoresInvalidCookiesAndExpiresOldOnes"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.postsAreSentAsUtf8Text"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.encodesQueryComponentsLikeEncodeUriComponent"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.randomStringIsUrlSafe"
+        }
+      ]
+    },
+    {
+      "id": "KT-PARSER-SAFETY",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "Hostile peer input: 20,000 seeded malformed inputs and random text only ever fail with parse errors; known malformed headers are rejected; random values round-trip through encoder and decoder and encoder output is always decodable; ack ids outside the safe-integer range, excessive text, depth and attachment counts are rejected; a throwing reviver makes the payload invalid; attachments are numbered in JavaScript traversal order; the Engine.IO codec stops at the first error packet, decodes Base64 as leniently as Node, copies binary defensively and survives arbitrary chunk boundaries.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.twentyThousandSeededMalformedInputsOnlyEverFailWithParseErrors"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.knownMalformedHeadersAreRejected"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.aBinaryHeaderWithoutPayloadWaitsLikeJavaScriptAndYieldsAnEmptyEvent"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.randomTextNeverEscapesAsAnotherException"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.randomValuesRoundTripThroughEncoderAndDecoder"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.applicationPlaceholderLookalikesBehaveLikeJavaScript"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.encoderOutputIsAlwaysDecodable"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.decodesThePayloadlessAndCoercedFormsJavaScriptAccepts"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.rejectsAckIdsThatAreNotSafeIntegers"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.enforcesTheOptionalTextAndDepthLimits"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.rejectsInvalidParserOptions"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.aThrowingReviverMakesThePayloadInvalidLikeTryParse"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.encodesBinaryOutsideEventsLikeNodeBufferToJson"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.numbersAttachmentsInJavaScriptTraversalOrder"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOBinaryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOBinaryTest.enforcesTheOptionalBinaryPacketLimit"
+        },
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.decodingAPayloadStopsAtTheFirstErrorPacket"
+        },
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.base64DecodingIsAsLenientAsNodeBuffers"
+        },
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.binaryDataIsDefensivelyCopied"
+        },
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOParserTest.encodesEveryPacketTypeCode"
+        },
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.roundTripsFramesAcrossArbitraryChunkBoundaries"
+        },
+        {
+          "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.staysFailedAfterAFramingError"
+        }
+      ]
+    },
+    {
+      "id": "KT-JSON-MODEL",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "The value model behaves like JavaScript JSON: numbers print like `Number.prototype.toString`, integers stay exact, strings escape like `JSON.stringify`, parsing accepts and rejects what `JSON.parse` does, object keys order like JavaScript (duplicate keys keep the first position and the last value), deep nesting parses and prints without recursion, revivers run bottom-up, `Number()` coercion matches; Kotlin and Java values (including dates as ISO strings) convert both ways, unsupported types are rejected, values are immutable; kotlinx.serialization classes round-trip.",
+      "tests": [
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.formatsNumbersLikeJavaScript"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.keepsIntegersExactAsLongs"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.escapesStringsLikeJsonStringify"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.parsesEscapesAndWhitespaceLikeJsonParse"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.rejectsWhatJsonParseRejects"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.ordersObjectKeysLikeJavaScript"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.duplicateKeysKeepTheFirstPositionAndTheLastValue"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.parsesAndPrintsDeepNestingWithoutRecursion"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.appliesARevierBottomUpWithTheRootLast"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.implementsJavaScriptNumberCoercion"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOJsonTest.equalityIsStructuralAndOrderInsensitiveForObjects"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.convertsKotlinAndJavaValues"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.convertsDatesLikeJavaScriptToIsoString"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.rejectsUnsupportedTypes"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.sharedButAcyclicReferencesAreFine"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.convertsDeepInputWithoutRecursion"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.exposesTypedAccessors"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.convertsBackToKotlin"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.valuesAreImmutable"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketIOSerializationTest.roundTripsSerializableClasses"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketIOSerializationTest.ignoresUnknownKeysByDefault"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketIOSerializationTest.convertsJsonTreesBothWays"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketIOSerializationTest.rejectsBinaryAndMismatchedPayloads"
+        }
+      ]
+    },
+    {
+      "id": "KT-CONCURRENCY",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "Lincheck proves the protocol executor and the listener registry linearizable; many threads emitting with acknowledgements lose and duplicate nothing; concurrent connect and disconnect end in a consistent state.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/ConcurrencyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.ConcurrencyTest.theProtocolExecutorLinearizesUnsynchronizedState"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/ConcurrencyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.ConcurrencyTest.theListenerRegistryIsLinearizable"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/ConcurrencyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.ConcurrencyTest.manyThreadsEmittingWithAcknowledgementsLoseNothingAndDuplicateNothing"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/ConcurrencyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.ConcurrencyTest.concurrentConnectAndDisconnectEndInAConsistentState"
+        }
+      ]
+    },
+    {
+      "id": "KT-CLIENT-API",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "Kotlin API contracts: `emitWithAck` returns every argument and cancelling it withdraws the acknowledgement, the buffered packet and the retry entry; timed-out buffered emits leave the buffer; server acknowledgement requests are answered once and unknown ack ids ignored; reserved names and unsupported arguments fail synchronously; the auth provider runs before every connect, a throwing provider fails the attempt, late results are dropped and a slow provider delays only its namespace; buffer limits reject new emits and an overfull receive buffer or an incomplete binary packet past its deadline closes the connection; once/off/any listeners, lifecycle events, flows and outgoing interceptors behave as documented; the retry queue reads acknowledgements err-first and volatile emits bypass it; recovery replays missed events, takes offsets only from plain events and merges user auth after pid and offset; the manager caps backoff, emits one close, defers reconnection while offline, honours `reconnectNow`, isolates listener exceptions, shares one connection and closes it with the last socket; setup blocks run once; a missing HTTP stack is a connect error.",
+      "tests": [
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.emitWithAckReturnsEveryAcknowledgementArgument"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.cancellingEmitWithAckWithdrawsTheAckAndTheBufferedPacket"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.cancellingBeforeRegistrationNeverSendsThePacket"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.aTimedOutBufferedEmitLeavesTheSendBuffer"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.plainAcknowledgementsSurviveADisconnectOnlyWhileBuffered"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.answersServerAcknowledgementRequestsOnce"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.anUnknownAckIdIsIgnored"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.theDefaultAckTimeoutAppliesToEmitWithAck"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAckTest.rejectsReservedEventNamesAndUnsupportedArgumentsSynchronously"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAuthProviderTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAuthProviderTest.theProviderRunsBeforeEveryConnectIncludingReconnects"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAuthProviderTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAuthProviderTest.aThrowingProviderFailsTheAttemptWithConnectError"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAuthProviderTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAuthProviderTest.aResultArrivingAfterDisconnectIsDropped"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAuthProviderTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAuthProviderTest.aSuspendingProviderDelaysOnlyItsOwnNamespace"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAuthProviderTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketAuthProviderTest.aStaticAuthMustBeAnObject"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketBufferLimitsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketBufferLimitsTest.theSendBufferByteLimitRejectsTheNewEmit"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketBufferLimitsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketBufferLimitsTest.theRetryQueueLimitRejectsTheNewEmit"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketBufferLimitsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketBufferLimitsTest.anOverfullReceiveBufferClosesTheConnection"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketBufferLimitsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketBufferLimitsTest.aBinaryPacketMissingAttachmentsPastTheDeadlineIsAParseError"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketBufferLimitsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketBufferLimitsTest.receiveBufferedEventsAreDeliveredAfterConnect"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketBufferLimitsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketBufferLimitsTest.rejectsInvalidLimits"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketListenerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketListenerTest.onceListenersFireOnceAndOffRemovesByInstanceOrName"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketListenerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketListenerTest.reservedNamesReceiveLifecycleEventsLikeJavaScript"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketListenerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketListenerTest.theFlowApiDeliversStateAndEvents"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketListenerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketListenerTest.outgoingInterceptorsSeeBufferedSentAndDroppedEmits"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRetryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRetryTest.retriesWithAFreshAckIdAndGivesUpAfterTheConfiguredRetries"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRetryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRetryTest.theQueueReadsAcknowledgementsErrFirstEvenWithoutATimeout"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRetryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRetryTest.volatileEmitsBypassTheQueue"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRecoveryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRecoveryTest.recoversTheSessionAndReplaysMissedEvents"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRecoveryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRecoveryTest.theOffsetIsNotTakenFromEventsWithAcknowledgements"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRecoveryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRecoveryTest.userAuthIsMergedAfterPidAndOffset"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRecoveryTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRecoveryTest.aServerWithoutRecoveryNeverReportsRecovered"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.theBackoffIsCappedAtTheMaximumDelay"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.emitsOneCloseAndDisconnectOnlyAfterConnect"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.anUnavailableNetworkDefersReconnectionUntilItReturns"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.reconnectNowSkipsTheRemainingBackoff"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.aConnectTimeoutOfZeroFailsEveryAttemptImmediately"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.listenerExceptionsNeverReachTheProtocol"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.socketsShareOneConnectionAndTheLastDisconnectClosesIt"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.publishesTheTransportName"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerTest.forwardsDecodedPacketsAsManagerEvents"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerOpenOrderTest.anOpenListenerThatClosesTheConnectionIsNoticed"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRobustnessTest.cancellingEmitWithAckRemovesTheEmitFromTheRetryQueue"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRobustnessTest.clearRecoveryStateStartsAFreshSession"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRobustnessTest.aMissingHttpStackIsAConnectErrorNotACrash"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRobustnessTest.aThrowingInterceptorIsReportedAndDoesNotStopTheEmit"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRobustnessTest.theSetupBlockRunsOnlyWhenTheSocketIsCreated"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRobustnessTest.aBoundedEventFlowRejectsInvalidCapacities"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.defaultsToHttpsWithoutALocation"
+        }
+      ]
+    },
+    {
+      "id": "KT-ANDROID",
+      "kind": "kotlin-extension",
+      "upstream_ids": [],
+      "assertions": "Android integration under Robolectric: losing the network closes at once and its return reconnects without backoff; a new default network moves the connection; the background policy pauses and resumes, and coming back before the delay keeps the connection; the logger is gated by `Log.isLoggable`; the clock is `elapsedRealtime` and keeps counting in sleep; org.json values convert both ways and large, deep JSON streams with JsonReader; the configuration saves and restores; trim-memory releases idle connections; the Android options configure the manager; the KeyChain key manager serves only its alias.",
+      "tests": [
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.losingTheNetworkClosesAtOnceAndItsReturnReconnectsWithoutBackoff"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.aNewDefaultNetworkMovesTheConnection"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.theBackgroundPolicyPausesAndResumesTheConnection"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.comingBackBeforeTheDelayKeepsTheConnection"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.theLoggerIsGatedByIsLoggable"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.theElapsedRealtimeClockKeepsCountingInSleep"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.convertsBetweenOrgJsonAndSocketIOValues"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.streamsLargeAndDeepJsonWithJsonReader"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.savesAndRestoresTheConfiguration"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.trimMemoryReleasesIdleConnections"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.theAndroidOptionsConfigureTheManager"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.theKeyChainKeyManagerOnlyServesItsAlias"
+        }
+      ]
+    }
   ],
-  "contracts": [],
-  "excluded_unsupported_features": []
+  "excluded_unsupported_features": [
+    {
+      "feature": "WebTransport",
+      "upstream_ids": [
+        "JS-224",
+        "JS-225",
+        "JS-226",
+        "JS-227",
+        "JS-228",
+        "JS-229",
+        "JS-230",
+        "JS-231",
+        "JS-232",
+        "JS-233",
+        "JS-234"
+      ],
+      "reason": "Android and the JVM provide no WebTransport API (no HTTP/3 WebTransport sessions in OkHttp or the platform). The client offers polling and WebSocket; the stream framing that WebTransport uses is still ported and tested (JS-287..JS-311)."
+    }
+  ]
 }

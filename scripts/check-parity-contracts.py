@@ -68,13 +68,16 @@ def validate(root=ROOT, junit=None, upstream_inventory=None, strict=False, summa
     if remaining != sorted(manifest['remaining_unmapped_ids']):
         errors.append('Unmapped backlog changed without explicit review')
 
-    passed = set()
+    passed, failed = set(), set()
     if junit is not None:
         passed, failed, files = read_junit(junit)
         if not files:
             errors.append('No JUnit XML reports matched ' + ', '.join(junit))
         elif not passed:
             errors.append('No passed test cases found in the supplied JUnit reports')
+        # The plan forbids skipped or failing tests anywhere, not only in contracts.
+        for symbol in sorted(failed):
+            errors.append('JUnit reports a failed or skipped test: ' + symbol)
 
     certified = set()
     seen_contracts = set()
@@ -186,6 +189,8 @@ def validate(root=ROOT, junit=None, upstream_inventory=None, strict=False, summa
             'kotlin_extension_contracts': len([c for c in manifest['contracts'] if c.get('kind') == 'kotlin-extension']),
             'contract_tests': len({t['symbol'] for c in manifest['contracts'] for t in c.get('tests', [])}),
             'junit_evidence': junit is not None,
+            'junit_passed_tests': len(passed) if junit is not None else None,
+            'junit_failed_or_skipped_tests': len(failed) if junit is not None else None,
         }
         Path(summary).write_text(json.dumps(result, indent=2) + '\n')
     return errors

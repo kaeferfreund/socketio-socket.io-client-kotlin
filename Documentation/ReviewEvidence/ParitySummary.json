@@ -1,0 +1,28 @@
+{
+  "upstream_sha": "aaf2af36ec8ad05910f357a788e0e358bad32738",
+  "declarations": 311,
+  "runtime_declarations": 297,
+  "typescript_type_declarations": 14,
+  "statuses": {
+    "focused-regression": 252,
+    "api-difference": 1,
+    "platform-specific": 33,
+    "unsupported-feature": 11,
+    "typescript-only": 14,
+    "unmapped": 0
+  },
+  "runtime_by_package": {
+    "socket.io-client": 116,
+    "engine.io-client": 109,
+    "socket.io-parser": 34,
+    "engine.io-parser": 38
+  },
+  "certified_runtime_rows": 252,
+  "uncertified_supported_rows": [],
+  "contracts": 262,
+  "kotlin_extension_contracts": 10,
+  "contract_tests": 431,
+  "junit_evidence": true,
+  "junit_passed_tests": 432,
+  "junit_failed_or_skipped_tests": 0
+}
