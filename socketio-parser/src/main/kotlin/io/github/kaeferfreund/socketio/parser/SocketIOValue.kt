@@ -462,6 +462,10 @@ internal object ValueConverter {
         }
 
     /** Converts scalars; returns `null` for containers. */
+
+    // One branch per supported input type, the conversion table of SocketIOValue.of.
+
+    @Suppress("CyclomaticComplexMethod")
     private fun leafOrNull(value: Any?): SocketIOValue? =
         when (value) {
             null, Unit -> SocketIOValue.Null
