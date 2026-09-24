@@ -66,7 +66,7 @@ The [migration guide](Documentation/Guides/Migration.md) maps the Java API to th
 
 | Component | Minimum / supported range |
 | --- | --- |
-| Language | Kotlin 2.4 (explicit API mode), JVM bytecode 17 |
+| Language | Built with Kotlin 2.4 (explicit API mode); apps on Kotlin 2.2 or newer can use it. JVM bytecode 17 |
 | Android | `minSdk` 26 (Android 8.0), compiled against API 37 |
 | JVM | Java 17 or newer (server-side Kotlin, tests, tools) |
 | Server | Socket.IO 4.x, Engine.IO 4 |

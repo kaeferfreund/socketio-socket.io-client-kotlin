@@ -22,7 +22,7 @@ client: the server must speak Socket.IO 4.x (Engine.IO protocol 4).
 
 | Minimum | |
 | --- | --- |
-| Kotlin | 2.4 |
+| Kotlin | 2.2 (2.3.20 for `socketio-serialization`) |
 | JVM | Java 17 |
 | Android | `minSdk` 26 (Android 8.0) |
 | Socket.IO server | 4.x |

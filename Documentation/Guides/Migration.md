@@ -108,9 +108,9 @@ never called, as in JavaScript: always set a timeout where the result matters.
 attempts it took.
 
 **Payload conversion is strict.** Arguments are converted with `SocketIOValue.of`
-when `emit` is called. A `JSONObject` or any other unsupported type throws
-`IllegalArgumentException` immediately; convert it with `toSocketIOValue()`
-(Android `org.json` adapters) or pass a `Map`/`List`. Emitting a reserved name
+when `emit` is called. `JSONObject`/`JSONArray` arguments keep working and are
+converted like a `Map`/`List`; any other unsupported type (your own classes, for
+example) throws `IllegalArgumentException` immediately. Emitting a reserved name
 (`connect`, `connect_error`, `disconnect`, `disconnecting`, `newListener`,
 `removeListener`) also throws.
 

@@ -222,8 +222,9 @@ Recovery is not guaranteed: the server discards the session after
 `maxDisconnectionDuration`, after a restart, and after a deliberate disconnect by
 either side. Always handle a fresh session. The client does not deduplicate replayed
 events, and [retries](Acknowledgements.md#retries) may resend client events; make
-handlers idempotent where duplicates matter. To switch to another user, close the
-manager and create a new one so no recovery state carries over.
+handlers idempotent where duplicates matter. To switch to another user, call
+`socket.clearRecoveryState()` before the next connect (the new session starts fresh),
+or close the manager and create a new one.
 
 ## Pausing and network changes
 

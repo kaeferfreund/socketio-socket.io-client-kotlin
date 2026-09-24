@@ -89,8 +89,10 @@ Each argument is converted with `SocketIOValue.of` **on the calling thread**:
 
 Any other type throws `IllegalArgumentException` from `emit`, as do cyclic
 structures. Convert your own classes to a `Map`, a `SocketIOValue`, or use
-[kotlinx.serialization](#kotlinxserialization). An `org.json.JSONObject` is not
-converted implicitly; see [org.json adapters](#orgjson-adapters).
+[kotlinx.serialization](#kotlinxserialization). `org.json` values
+(`JSONObject`, `JSONArray`, `JSONObject.NULL`) are converted too when `org.json` is
+on the classpath, as it always is on Android; see [org.json adapters](#orgjson-adapters)
+for the way back.
 
 Binary data can appear anywhere in a payload, including inside maps and lists; the
 client sends it as a Socket.IO binary attachment:
@@ -270,7 +272,7 @@ For code migrating from `socket.io-client-java`, `socketio-android` converts bet
 import io.github.kaeferfreund.socketio.android.toJSONObject
 import io.github.kaeferfreund.socketio.android.toSocketIOValue
 
-socket.emit("legacy", JSONObject().put("id", 7).toSocketIOValue())
+socket.emit("legacy", JSONObject().put("id", 7)) // converted like a Map
 
 socket.on("legacy") { event ->
     val json: JSONObject? = (event[0] as? SocketIOValue.Object)?.toJSONObject()

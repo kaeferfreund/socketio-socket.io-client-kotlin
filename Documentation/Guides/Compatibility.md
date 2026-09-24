@@ -50,7 +50,7 @@ Durations are `Duration` instead of milliseconds.
 | `requestTimeout` | Same name (polling only) |
 | `withCredentials` | Same name; per-connection cookie jar, as the Node client |
 | `protocols` | Same name |
-| `perMessageDeflate` | `perMessageDeflateThreshold`; OkHttp compresses by size only, the per-message `compress` flag cannot be forwarded |
+| `perMessageDeflate` | `perMessageDeflateThreshold` (`null` = no compression offered); the per-message `compress` flag reaches the transport, but OkHttp compresses by size only |
 | `transportOptions` | Same name, `TransportOverrides` (`query`, `extraHeaders`, `requestTimeout`, `timestampRequests`, `forceBase64`, `path`) |
 | `parser` | Not available; `parserOptions` bounds the default parser |
 | `auth` (object) | `SocketOptions.auth` |
@@ -77,7 +77,7 @@ including deliberate differences, is in [PARITY.md](../../PARITY.md).
 | --- | --- |
 | Android | `minSdk` 26 (Android 8.0), compiled against API 37 |
 | JVM | Java 17 or newer |
-| Kotlin | Built with Kotlin 2.4; consumers need a Kotlin compiler that reads its metadata |
+| Kotlin | Built with Kotlin 2.4 for language and API version 2.2: apps on Kotlin 2.2 or newer (the version AGP 9 bundles) can use it. `socketio-serialization` needs what kotlinx.serialization 1.11 needs (Kotlin 2.3.20) |
 | Coroutines | `kotlinx-coroutines` 1.11 |
 | HTTP stack | OkHttp 5 (5.5.0), an `api` dependency of `socketio-okhttp` |
 | AndroidX | `lifecycle-process` and `tracing` (added by `socketio-android`) |

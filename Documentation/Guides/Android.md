@@ -44,7 +44,9 @@ In addition, `android(context)` always sets `timeSource = ElapsedRealtimeTimeSou
 and installs the network monitor. Options assigned after the `android(context)`
 call in the same builder override what it set (for example `logger`). Do not call
 `okHttp { }` after it: that replaces the network-bound client. Configure the base
-client through `okHttpClient` instead.
+client through `okHttpClient`, or add settings inside the block with
+`configureOkHttp { … }` (proxy, interceptors, cookie jar), which is applied on top
+of the network binding.
 
 ## Network changes
 
