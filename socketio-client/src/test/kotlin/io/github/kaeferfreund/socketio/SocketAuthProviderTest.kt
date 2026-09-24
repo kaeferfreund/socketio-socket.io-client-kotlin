@@ -16,7 +16,7 @@ import kotlin.time.Duration.Companion.seconds
 class SocketAuthProviderTest {
     @Test
     fun theProviderRunsBeforeEveryConnectIncludingReconnects() =
-        runTest {
+        runClientTest {
             var token = "first"
             val attempts = ArrayList<Int>()
             val h =
@@ -49,7 +49,7 @@ class SocketAuthProviderTest {
 
     @Test
     fun aThrowingProviderFailsTheAttemptWithConnectError() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val errors = ArrayList<Throwable>()
             val socket =
@@ -66,7 +66,7 @@ class SocketAuthProviderTest {
 
     @Test
     fun aResultArrivingAfterDisconnectIsDropped() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val release = CompletableDeferred<Unit>()
             val socket =
@@ -91,7 +91,7 @@ class SocketAuthProviderTest {
 
     @Test
     fun aSuspendingProviderDelaysOnlyItsOwnNamespace() =
-        runTest {
+        runClientTest {
             val h = clientHarness { namespace("/fast") }
             val manager = h.manager()
             val slow =
@@ -116,7 +116,7 @@ class SocketAuthProviderTest {
 
     @Test
     fun aStaticAuthMustBeAnObject() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val errors = ArrayList<Throwable>()
             h.manager().socket(options = SocketOptions { auth = listOf(1) }) { onConnectError { errors += it } }

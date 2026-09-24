@@ -47,6 +47,8 @@ internal class NetworkMonitor(
                         if (logger.isLoggable(LogLevel.INFO)) logger.log(LogLevel.INFO, "network", "default network changed; reconnecting on the new one")
                         client.connectionPool.evictAll()
                         manager.onNetworkLost()
+                        // Reconnect on the new network now rather than after the backoff delay.
+                        if (settings.reconnectOnNetworkAvailable) manager.reconnectNow()
                     }
                     status.value = NetworkStatus(true, status.value.metered, status.value.validated)
                     if (settings.reconnectOnNetworkAvailable) manager.setNetworkAvailable(true)

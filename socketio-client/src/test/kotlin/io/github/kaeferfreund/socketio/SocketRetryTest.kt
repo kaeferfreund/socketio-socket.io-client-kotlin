@@ -14,7 +14,7 @@ class SocketRetryTest {
     // JS-057 with the original 10 ms acknowledgement timeout.
     @Test
     fun doesNotDrainTheQueueWhileDisconnected() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val socket =
                 h.manager { autoConnect = false }.socket(
@@ -38,7 +38,7 @@ class SocketRetryTest {
 
     @Test
     fun retriesWithAFreshAckIdAndGivesUpAfterTheConfiguredRetries() =
-        runTest {
+        runClientTest {
             val h = clientHarness { namespace("/").onConnection { client -> client.on("never") { _, _ -> } } }
             val socket =
                 h.manager().socket(
@@ -60,7 +60,7 @@ class SocketRetryTest {
 
     @Test
     fun theQueueReadsAcknowledgementsErrFirstEvenWithoutATimeout() =
-        runTest {
+        runClientTest {
             // JavaScript would treat the first acknowledgement argument ("x") as an error here
             // and resend the packet; the Kotlin queue always uses err-first callbacks.
             val h = clientHarness()
@@ -76,7 +76,7 @@ class SocketRetryTest {
 
     @Test
     fun volatileEmitsBypassTheQueue() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val socket = h.manager().socket(options = SocketOptions { retries = 3 })
             h.settle()

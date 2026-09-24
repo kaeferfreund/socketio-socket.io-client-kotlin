@@ -17,7 +17,7 @@ import kotlin.time.Duration.Companion.seconds
 class SocketAckTest {
     @Test
     fun emitWithAckReturnsEveryAcknowledgementArgument() =
-        runTest {
+        runClientTest {
             val h = clientHarness { namespace("/").onConnection { c -> c.on("pair") { _, ack -> ack!!(listOf(1, "two")) } } }
             val socket = h.manager().socket()
             h.settle()
@@ -29,7 +29,7 @@ class SocketAckTest {
 
     @Test
     fun cancellingEmitWithAckWithdrawsTheAckAndTheBufferedPacket() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val manager = h.manager { autoConnect = false }
             val socket = manager.socket()
@@ -49,7 +49,7 @@ class SocketAckTest {
 
     @Test
     fun cancellingBeforeRegistrationNeverSendsThePacket() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val socket = h.manager().socket()
             h.settle()
@@ -64,7 +64,7 @@ class SocketAckTest {
 
     @Test
     fun aTimedOutBufferedEmitLeavesTheSendBuffer() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val socket = h.manager { autoConnect = false }.socket()
             var result: Result<*>? = null
@@ -80,7 +80,7 @@ class SocketAckTest {
 
     @Test
     fun plainAcknowledgementsSurviveADisconnectOnlyWhileBuffered() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val socket = h.manager().socket()
             h.settle()
@@ -104,7 +104,7 @@ class SocketAckTest {
 
     @Test
     fun answersServerAcknowledgementRequestsOnce() =
-        runTest {
+        runClientTest {
             var answers = ArrayList<List<SocketIOValue>>()
             val h = clientHarness { namespace("/").onConnection { c -> c.emitWithAck("question", 1) { answers.add(it) } } }
             val socket =
@@ -122,7 +122,7 @@ class SocketAckTest {
 
     @Test
     fun anUnknownAckIdIsIgnored() =
-        runTest {
+        runClientTest {
             val h = clientHarness { namespace("/").onConnection { c -> c.write(io.github.kaeferfreund.socketio.parser.SocketIOPacket(SocketIOPacketType.ACK, "/", SocketIOValue.arrayOf(), 99)) } }
             val socket = h.manager().socket()
             h.settle()
@@ -132,7 +132,7 @@ class SocketAckTest {
 
     @Test
     fun theDefaultAckTimeoutAppliesToEmitWithAck() =
-        runTest {
+        runClientTest {
             val h = clientHarness { namespace("/").onConnection { c -> c.on("never") { _, _ -> } } }
             val socket = h.manager().socket(options = SocketOptions { ackTimeout = 1.seconds })
             h.settle()
@@ -144,7 +144,7 @@ class SocketAckTest {
 
     @Test
     fun rejectsReservedEventNamesAndUnsupportedArgumentsSynchronously() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val socket = h.manager { autoConnect = false }.socket()
             for (name in listOf("connect", "connect_error", "disconnect", "disconnecting", "newListener", "removeListener")) {

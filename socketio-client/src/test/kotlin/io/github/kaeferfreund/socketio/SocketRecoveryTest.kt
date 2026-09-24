@@ -13,7 +13,7 @@ import kotlin.time.Duration.Companion.seconds
 class SocketRecoveryTest {
     @Test
     fun recoversTheSessionAndReplaysMissedEvents() =
-        runTest {
+        runClientTest {
             val h = clientHarness(recovery = true)
             val received = ArrayList<String>()
             val socket = h.manager { reconnectionDelay = 1.seconds }.socket { on("news") { received += it[0]!!.string!! } }
@@ -40,7 +40,7 @@ class SocketRecoveryTest {
 
     @Test
     fun theOffsetIsNotTakenFromEventsWithAcknowledgements() =
-        runTest {
+        runClientTest {
             val h = clientHarness(recovery = true)
             val socket = h.manager { reconnectionDelay = 1.seconds }.socket { on("q") { it.ack?.send() } }
             h.settle()
@@ -56,7 +56,7 @@ class SocketRecoveryTest {
 
     @Test
     fun userAuthIsMergedAfterPidAndOffset() =
-        runTest {
+        runClientTest {
             val h = clientHarness(recovery = true)
             val socket = h.manager { reconnectionDelay = 1.seconds }.socket(options = SocketOptions { auth = mapOf("token" to "t") })
             h.settle()
@@ -70,7 +70,7 @@ class SocketRecoveryTest {
 
     @Test
     fun aServerWithoutRecoveryNeverReportsRecovered() =
-        runTest {
+        runClientTest {
             val h = clientHarness(recovery = false)
             val socket = h.manager { reconnectionDelay = 1.seconds }.socket()
             h.settle()

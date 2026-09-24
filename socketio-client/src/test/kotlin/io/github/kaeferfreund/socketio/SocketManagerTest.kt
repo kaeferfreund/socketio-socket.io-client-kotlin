@@ -21,7 +21,7 @@ class SocketManagerTest {
     // JS-018 with exact values: 100 ms × 2^n with ±20 % jitter from a seeded random.
     @Test
     fun reconnectionDelaysFollowTheBackoffExactly() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             h.server.engine.allowRequest = { 503 }
             val times = ArrayList<Long>()
@@ -57,7 +57,7 @@ class SocketManagerTest {
     // JS-034: timers run on the configured dispatcher, so a test clock drives the reconnect delay.
     @Test
     fun reconnectTimersFollowTheConfiguredClock() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             var reconnected = false
             val manager =
@@ -82,7 +82,7 @@ class SocketManagerTest {
     // JS-028
     @Test
     fun emitsConnectErrorForASocketIoV2Server() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             // A v2 server answers CONNECT without a session id.
             h.server.engine.onConnection = { session ->
@@ -99,7 +99,7 @@ class SocketManagerTest {
     // JS-049: the server sends an undecodable packet.
     @Test
     fun closesTheEngineUponADecodingException() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val engines = ArrayList<EngineSocket>()
             var reasons = ArrayList<DisconnectReason>()
@@ -125,7 +125,7 @@ class SocketManagerTest {
 
     @Test
     fun emitsOneCloseAndDisconnectOnlyAfterConnect() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val closes = ArrayList<DisconnectReason>()
             val manager = h.manager(setup = { on<ManagerEvent.Close> { closes += it.reason } }) { reconnectionDelay = 1.seconds }
@@ -149,7 +149,7 @@ class SocketManagerTest {
 
     @Test
     fun anUnavailableNetworkDefersReconnectionUntilItReturns() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val attempts = ArrayList<Long>()
             val manager =
@@ -174,7 +174,7 @@ class SocketManagerTest {
 
     @Test
     fun reconnectNowSkipsTheRemainingBackoff() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val manager = h.manager { reconnectionDelay = 5.seconds }
             val socket = manager.socket("/")
@@ -190,7 +190,7 @@ class SocketManagerTest {
 
     @Test
     fun aConnectTimeoutOfZeroFailsEveryAttemptImmediately() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val errors = ArrayList<String?>()
             val manager =
@@ -206,7 +206,7 @@ class SocketManagerTest {
 
     @Test
     fun listenerExceptionsNeverReachTheProtocol() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val reported = ArrayList<Throwable>()
             val manager = h.manager { listenerErrorHandler = { reported += it } }
@@ -225,7 +225,7 @@ class SocketManagerTest {
 
     @Test
     fun socketsShareOneConnectionAndTheLastDisconnectClosesIt() =
-        runTest {
+        runClientTest {
             val h = clientHarness { namespace("/foo") }
             val manager = h.manager()
             val a = manager.socket("/")
@@ -244,7 +244,7 @@ class SocketManagerTest {
 
     @Test
     fun publishesTheTransportName() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val manager = h.manager()
             manager.socket("/")
@@ -258,7 +258,7 @@ class SocketManagerTest {
 
     @Test
     fun forwardsDecodedPacketsAsManagerEvents() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             val packets = ArrayList<SocketIOPacket>()
             val manager = h.manager(setup = { on<ManagerEvent.Packet> { packets += it.packet } })
@@ -277,7 +277,7 @@ class SocketManagerOpenOrderTest {
     // manager "open" with a dead engine (JavaScript subscribes after emitting "open").
     @Test
     fun anOpenListenerThatClosesTheConnectionIsNoticed() =
-        runTest {
+        runClientTest {
             val h = clientHarness()
             var lost = false
             val manager =

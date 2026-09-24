@@ -48,6 +48,23 @@ internal class ClientHarness(
     }
 }
 
+/**
+ * Runs [block] with a harness whose managers are always closed afterwards, so
+ * a failing assertion cannot leave reconnection timers running on the test
+ * scheduler (which would make `runTest` spin instead of reporting the failure).
+ */
+internal fun runClientTest(block: suspend TestScope.() -> Unit) =
+    kotlinx.coroutines.test.runTest {
+        try {
+            block()
+        } finally {
+            openHarnesses.get().forEach { it.close() }
+            openHarnesses.get().clear()
+        }
+    }
+
+private val openHarnesses = ThreadLocal.withInitial { ArrayList<ClientHarness>() }
+
 internal fun TestScope.clientHarness(
     pingInterval: Duration = 25.seconds,
     pingTimeout: Duration = 20.seconds,
@@ -63,5 +80,5 @@ internal fun TestScope.clientHarness(
         client.on("hi") { _, _ -> client.emit("hi") }
     }
     server.configure()
-    return ClientHarness(this, server)
+    return ClientHarness(this, server).also { openHarnesses.get().add(it) }
 }
