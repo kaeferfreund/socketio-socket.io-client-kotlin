@@ -606,11 +606,25 @@ public class Socket internal constructor(
 
     private fun registerAckCallback(
         id: Long,
-        ack: (Throwable?, List<SocketIOValue>) -> Unit,
+        rawAck: (Throwable?, List<SocketIOValue>) -> Unit,
         withError: Boolean,
         flagTimeout: Duration?,
         outgoing: OutgoingEvent,
     ) {
+        val tracer = manager.options.tracer
+        val ack: (Throwable?, List<SocketIOValue>) -> Unit =
+            if (tracer == null) {
+                rawAck
+            } else {
+                val name = "socket.io ack ${outgoing.name}"
+                val cookie = System.identityHashCode(outgoing)
+                tracer.beginAsyncSection(name, cookie)
+                val traced: (Throwable?, List<SocketIOValue>) -> Unit = { error, args ->
+                    tracer.endAsyncSection(name, cookie)
+                    rawAck(error, args)
+                }
+                traced
+            }
         val timeout = flagTimeout ?: options.ackTimeout
         if (timeout == null) {
             acks[id] = AckEntry(withError, ack)

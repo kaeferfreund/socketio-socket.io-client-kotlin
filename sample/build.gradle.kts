@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "io.github.kaeferfreund.socketio.sample"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "io.github.kaeferfreund.socketio.sample"
         minSdk = 26

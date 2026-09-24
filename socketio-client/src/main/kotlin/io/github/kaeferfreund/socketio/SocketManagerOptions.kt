@@ -137,6 +137,8 @@ public class SocketManagerOptions private constructor(
     public val listenerErrorHandler: ((Throwable) -> Unit)? = builder.listenerErrorHandler
     public val random: Random = builder.random
     public val logger: SocketLogger = builder.logger
+    public val plugins: List<SocketManagerPlugin> = builder.plugins.toList()
+    public val tracer: SocketTracer? = builder.tracer
 
     /** The Engine.IO options derived from these options. */
     public val engine: EngineOptions =
@@ -240,6 +242,12 @@ public class SocketManagerOptions private constructor(
         public var random: Random = from?.random ?: Random.Default
 
         public var logger: SocketLogger = from?.logger ?: SocketLogger.NONE
+
+        /** Platform integrations attached to every manager built from these options. */
+        public val plugins: MutableList<SocketManagerPlugin> = ArrayList(from?.plugins ?: emptyList())
+
+        /** Receives asynchronous timing sections (connect, upgrade, acknowledgement roundtrips). */
+        public var tracer: SocketTracer? = from?.tracer
 
         /** Request path (`path`), `/socket.io` by default. */
         public var path: String = from?.engine?.path ?: "/socket.io"

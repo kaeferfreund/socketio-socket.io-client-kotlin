@@ -105,6 +105,8 @@ public class SocketManager(
 
     private val listeners = CallbackListeners<ManagerEvent>()
 
+    private val pluginHandles: List<Cancellable> = options.plugins.map { it.attach(this) }
+
     init {
         setup?.invoke(this)
         if (options.autoConnect) open()
@@ -236,8 +238,43 @@ public class SocketManager(
         }
     }
 
+    /**
+     * Closes the connection but keeps every active socket subscribed, so
+     * [resume] reconnects them — with connection state recovery when the
+     * server supports it. Sockets see a `"forced close"` disconnect. Used by
+     * the Android background policy; no automatic reconnection happens while
+     * paused.
+     */
+    public fun pause() {
+        executor.execute {
+            paused = true
+            if (readyState != ManagerState.CLOSED || reconnecting) closeOnExecutor()
+        }
+    }
+
+    /** Reopens the connection after [pause]; active sockets reconnect. */
+    public fun resume() {
+        executor.execute {
+            if (!paused) return@execute
+            paused = false
+            if (nsps.values.any { it.isActive }) openOnExecutor(null)
+        }
+    }
+
+    /** Whether [pause] is in effect. Protocol state, published for diagnostics. */
+    public val isPaused: Boolean get() = pausedView
+
+    @Volatile private var pausedView = false
+
+    private var paused: Boolean = false
+        set(value) {
+            field = value
+            pausedView = value
+        }
+
     /** Disconnects and releases the executor; the manager cannot be used afterwards. */
     override fun close() {
+        pluginHandles.forEach(Cancellable::cancel)
         executor.execute {
             for (socket in nsps.values) socket.disconnectOnExecutor()
             closeOnExecutor()
@@ -273,18 +310,30 @@ public class SocketManager(
 
     internal fun openOnExecutor(fn: ((Throwable?) -> Unit)?) {
         if (readyState == ManagerState.OPENING || readyState == ManagerState.OPEN) return
+        if (paused) return
         val socket = EngineSocket(uri, options.engine, executor)
         engine = socket
         readyState = ManagerState.OPENING
         skipReconnect = false
+        val traceCookie = socket.hashCode()
+        options.tracer?.beginAsyncSection(TRACE_CONNECT, traceCookie)
+        var traceOpen = true
+        val endTrace = {
+            if (traceOpen) {
+                traceOpen = false
+                options.tracer?.endAsyncSection(TRACE_CONNECT, traceCookie)
+            }
+        }
 
         val openSub =
             socket.events.on<EngineEvent.Open, EngineEvent> {
+                endTrace()
                 onopen()
                 fn?.invoke(null)
             }
         lateinit var onError: (Throwable) -> Unit
         onError = { err ->
+            endTrace()
             cleanup()
             readyState = ManagerState.CLOSED
             emit(ManagerEvent.Error(err))
@@ -324,7 +373,12 @@ public class SocketManager(
                 socket.events.on<EngineEvent.Close, EngineEvent> {
                     onclose(DisconnectReason.fromWireValue(it.reason) ?: DisconnectReason.TRANSPORT_CLOSE, it.description)
                 },
-                socket.events.on<EngineEvent.Upgrade, EngineEvent> { transportFlow.value = it.transport.name },
+                socket.events.on<EngineEvent.Upgrade, EngineEvent> {
+                    transportFlow.value = it.transport.name
+                    options.tracer?.endAsyncSection(TRACE_UPGRADE, socket.hashCode())
+                },
+                socket.events.on<EngineEvent.Upgrading, EngineEvent> { options.tracer?.beginAsyncSection(TRACE_UPGRADE, socket.hashCode()) },
+                socket.events.on<EngineEvent.UpgradeError, EngineEvent> { options.tracer?.endAsyncSection(TRACE_UPGRADE, socket.hashCode()) },
             )
         emit(ManagerEvent.Open)
     }
@@ -516,6 +570,11 @@ public class SocketManager(
     }
 
     internal enum class ManagerState { OPENING, OPEN, CLOSED }
+
+    internal companion object {
+        const val TRACE_CONNECT = "socket.io connect"
+        const val TRACE_UPGRADE = "socket.io upgrade"
+    }
 }
 
 /** A registration that can be cancelled; cancelling twice is harmless. */
