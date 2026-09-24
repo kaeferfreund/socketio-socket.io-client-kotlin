@@ -19,8 +19,16 @@ android {
     buildFeatures { compose = true }
 }
 
+kotlin {
+    compilerOptions {
+        allWarningsAsErrors.set(true)
+        optIn.add("io.github.kaeferfreund.socketio.engineio.InternalSocketIOApi")
+    }
+}
+
 dependencies {
     implementation(project(":socketio-android"))
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
     implementation(libs.activity.compose)

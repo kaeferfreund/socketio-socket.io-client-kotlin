@@ -790,7 +790,11 @@ public class Socket internal constructor(
         if (listener == null) {
             namedListeners.removeAll { it.event == event }
         } else {
-            namedListeners.firstOrNull { it.event == event && it.listener === listener }?.let(namedListeners::remove)
+            // Retry until one entry is removed: a concurrent off() may take the entry we found.
+            while (true) {
+                val entry = namedListeners.firstOrNull { it.event == event && it.listener === listener } ?: break
+                if (namedListeners.remove(entry)) break
+            }
         }
         return this
     }
