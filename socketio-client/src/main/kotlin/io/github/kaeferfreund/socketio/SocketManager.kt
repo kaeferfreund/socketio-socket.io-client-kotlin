@@ -314,7 +314,8 @@ public class SocketManager(
         readyState = ManagerState.OPEN
         val socket = engine!!
         transportFlow.value = socket.transport?.name
-        emit(ManagerEvent.Open)
+        // Subscribed before "open" is emitted (JavaScript subscribes after), so an open
+        // listener that closes the connection synchronously is still noticed.
         subs +=
             listOf(
                 socket.events.on<EngineEvent.Ping, EngineEvent> { emit(ManagerEvent.Ping) },
@@ -325,6 +326,7 @@ public class SocketManager(
                 },
                 socket.events.on<EngineEvent.Upgrade, EngineEvent> { transportFlow.value = it.transport.name },
             )
+        emit(ManagerEvent.Open)
     }
 
     private fun ondata(data: EngineIOData) {

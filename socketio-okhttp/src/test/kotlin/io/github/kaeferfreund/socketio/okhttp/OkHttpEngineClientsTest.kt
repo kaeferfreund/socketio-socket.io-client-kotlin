@@ -1,0 +1,272 @@
+package io.github.kaeferfreund.socketio.okhttp
+
+import io.github.kaeferfreund.socketio.engineio.EngineClients
+import io.github.kaeferfreund.socketio.engineio.EngineHttpCallback
+import io.github.kaeferfreund.socketio.engineio.EngineHttpRequest
+import io.github.kaeferfreund.socketio.engineio.EngineHttpResponse
+import io.github.kaeferfreund.socketio.engineio.EngineWebSocketListener
+import io.github.kaeferfreund.socketio.engineio.EngineWebSocketRequest
+import mockwebserver3.MockResponse
+import mockwebserver3.MockWebServer
+import mockwebserver3.SocketEffect
+import okhttp3.Response
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
+import okhttp3.tls.HandshakeCertificates
+import okhttp3.tls.HeldCertificate
+import okio.Buffer
+import okio.ByteString
+import okio.ByteString.Companion.toByteString
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.milliseconds
+
+/** The OkHttp adapter against MockWebServer: what reaches the wire and what comes back. */
+class OkHttpEngineClientsTest {
+    private lateinit var server: MockWebServer
+
+    @BeforeEach
+    fun start() {
+        server = MockWebServer()
+        server.start()
+    }
+
+    @AfterEach
+    fun stop() {
+        server.close()
+    }
+
+    private fun execute(
+        clients: OkHttpEngineClients,
+        request: EngineHttpRequest,
+    ): Result<EngineHttpResponse> {
+        val future = CompletableFuture<Result<EngineHttpResponse>>()
+        clients.execute(
+            request,
+            object : EngineHttpCallback {
+                override fun onResponse(response: EngineHttpResponse) {
+                    future.complete(Result.success(response))
+                }
+
+                override fun onFailure(error: Throwable) {
+                    future.complete(Result.failure(error))
+                }
+            },
+        )
+        return future.get(10, TimeUnit.SECONDS)
+    }
+
+    private fun get(
+        path: String = "/socket.io/?EIO=4",
+        maxResponseBytes: Long = Long.MAX_VALUE,
+        timeout: kotlin.time.Duration? = null,
+    ) = EngineHttpRequest("GET", server.url(path).toString(), listOf("X-Custom" to "1", "Accept" to "*/*"), null, timeout, maxResponseBytes)
+
+    @Test
+    fun sendsHeadersAndBodiesAndReturnsTheResponse() {
+        val clients = OkHttpEngineClients()
+        server.enqueue(MockResponse.Builder().body("0{\"sid\":\"a\"}").addHeader("Set-Cookie", "a=b").build())
+        val response = execute(clients, get()).getOrThrow()
+        assertEquals(200, response.status)
+        assertEquals("0{\"sid\":\"a\"}", response.body)
+        assertEquals(listOf("a=b"), response.headerValues("set-cookie"))
+        val recorded = server.takeRequest()
+        assertEquals("GET", recorded.method)
+        assertEquals("1", recorded.headers["X-Custom"])
+
+        server.enqueue(MockResponse.Builder().body("ok").build())
+        val post = EngineHttpRequest("POST", server.url("/socket.io/?EIO=4&sid=a").toString(), listOf("Content-type" to "text/plain;charset=UTF-8"), "4héllo", null)
+        assertEquals("ok", execute(clients, post).getOrThrow().body)
+        val recordedPost = server.takeRequest()
+        assertEquals("POST", recordedPost.method)
+        assertEquals("4héllo", recordedPost.body!!.utf8())
+        assertEquals("text/plain;charset=UTF-8", recordedPost.headers["Content-Type"])
+    }
+
+    @Test
+    fun reportsErrorStatusesAsResponses() {
+        server.enqueue(MockResponse.Builder().code(400).body("{\"code\":1,\"message\":\"Session ID unknown\"}").build())
+        val response = execute(OkHttpEngineClients(), get()).getOrThrow()
+        assertEquals(400, response.status)
+        assertEquals("{\"code\":1,\"message\":\"Session ID unknown\"}", response.body)
+    }
+
+    @Test
+    fun boundsTheResponseBodyWhileReading() {
+        val clients = OkHttpEngineClients()
+        server.enqueue(MockResponse.Builder().body("x".repeat(100)).build())
+        assertTrue(execute(clients, get(maxResponseBytes = 99)).exceptionOrNull() is ResponseTooLargeException)
+        // A chunked body has no Content-Length: it is cut off as soon as it crosses the limit.
+        server.enqueue(MockResponse.Builder().chunkedBody("y".repeat(50_000), 1000).build())
+        assertTrue(execute(clients, get(maxResponseBytes = 10_000)).exceptionOrNull() is ResponseTooLargeException)
+        server.enqueue(MockResponse.Builder().body("z".repeat(100)).build())
+        assertEquals(100, execute(clients, get(maxResponseBytes = 100)).getOrThrow().body.length)
+    }
+
+    @Test
+    fun appliesTheRequestTimeout() {
+        server.enqueue(MockResponse.Builder().body("late").headersDelay(2, TimeUnit.SECONDS).build())
+        val result = execute(OkHttpEngineClients(), get(timeout = 200.milliseconds))
+        assertTrue(result.exceptionOrNull() is java.io.IOException, "$result")
+    }
+
+    @Test
+    fun hasNoReadTimeoutSoLongPollsCanWait() {
+        val clients = OkHttpEngineClients()
+        assertEquals(0, clients.client.readTimeoutMillis)
+        assertTrue(!clients.client.followSslRedirects)
+        assertTrue(clients.client.dispatcher.maxRequestsPerHost >= 64)
+    }
+
+    @Test
+    fun neverFollowsARedirectFromHttpsToHttp() {
+        val localhost = HeldCertificate.Builder().addSubjectAlternativeName("localhost").build()
+        val serverCerts = HandshakeCertificates.Builder().heldCertificate(localhost).build()
+        val clientCerts = HandshakeCertificates.Builder().addTrustedCertificate(localhost.certificate).build()
+        val plain = MockWebServer()
+        plain.start()
+        try {
+            plain.enqueue(MockResponse.Builder().body("downgraded").build())
+            server.useHttps(serverCerts.sslSocketFactory())
+            server.enqueue(MockResponse.Builder().code(302).addHeader("Location", plain.url("/socket.io/").toString()).build())
+            val clients =
+                OkHttpEngineClients(
+                    okhttp3.OkHttpClient.Builder().sslSocketFactory(clientCerts.sslSocketFactory(), clientCerts.trustManager).build(),
+                )
+            val url = server.url("/socket.io/").newBuilder().host("localhost").build().toString()
+            val response = execute(clients, EngineHttpRequest("GET", url, emptyList(), null, null)).getOrThrow()
+            assertEquals(302, response.status)
+            assertEquals(0, plain.requestCount)
+        } finally {
+            plain.close()
+        }
+    }
+
+    @Test
+    fun exchangesWebSocketFramesAndReportsTheClose() {
+        val serverSide = LinkedBlockingQueue<Any>()
+        server.enqueue(
+            MockResponse.Builder()
+                .webSocketUpgrade(
+                    object : WebSocketListener() {
+                        override fun onOpen(
+                            webSocket: WebSocket,
+                            response: Response,
+                        ) {
+                            webSocket.send("0{\"sid\":\"w\"}")
+                            webSocket.send(byteArrayOf(1, 2, 3).toByteString())
+                        }
+
+                        override fun onMessage(
+                            webSocket: WebSocket,
+                            text: String,
+                        ) {
+                            serverSide.put(text)
+                            if (text == "bye") webSocket.close(1000, "done")
+                        }
+
+                        override fun onMessage(
+                            webSocket: WebSocket,
+                            bytes: ByteString,
+                        ) {
+                            serverSide.put(bytes.toByteArray())
+                        }
+                    },
+                ).build(),
+        )
+        val events = LinkedBlockingQueue<Any>()
+        val connection =
+            OkHttpEngineClients().connect(
+                EngineWebSocketRequest(server.url("/socket.io/?EIO=4&transport=websocket").toString().replace("http", "ws"), listOf("X-Ws" to "1"), emptyList(), 1024),
+                object : EngineWebSocketListener {
+                    override fun onOpen(responseHeaders: List<Pair<String, String>>) {
+                        events.put("open")
+                    }
+
+                    override fun onMessage(text: String) {
+                        events.put(text)
+                    }
+
+                    override fun onMessage(bytes: ByteArray) {
+                        events.put(bytes)
+                    }
+
+                    override fun onClosed(
+                        code: Int,
+                        reason: String,
+                    ) {
+                        events.put("closed:$code:$reason")
+                    }
+
+                    override fun onFailure(
+                        error: Throwable,
+                        httpStatus: Int?,
+                    ) {
+                        events.put("failure:$httpStatus")
+                    }
+                },
+            )
+        assertEquals("open", events.poll(5, TimeUnit.SECONDS))
+        assertEquals("0{\"sid\":\"w\"}", events.poll(5, TimeUnit.SECONDS))
+        assertArrayEquals(byteArrayOf(1, 2, 3), events.poll(5, TimeUnit.SECONDS) as ByteArray)
+        assertTrue(connection.send("4hi", compress = true))
+        assertTrue(connection.send(byteArrayOf(9), compress = false))
+        assertEquals("4hi", serverSide.poll(5, TimeUnit.SECONDS))
+        assertArrayEquals(byteArrayOf(9), serverSide.poll(5, TimeUnit.SECONDS) as ByteArray)
+        connection.send("bye", compress = true)
+        assertEquals("closed:1000:done", events.poll(5, TimeUnit.SECONDS))
+        assertEquals("1", server.takeRequest().headers["X-Ws"])
+    }
+
+    @Test
+    fun reportsTheHandshakeStatusOfAFailedWebSocket() {
+        server.enqueue(MockResponse.Builder().code(400).body("{\"code\":1}").build())
+        val failure = CompletableFuture<Int?>()
+        OkHttpEngineClients().connect(
+            EngineWebSocketRequest(server.url("/socket.io/").toString().replace("http", "ws"), emptyList(), emptyList(), null),
+            object : EngineWebSocketListener {
+                override fun onOpen(responseHeaders: List<Pair<String, String>>) = Unit
+
+                override fun onMessage(text: String) = Unit
+
+                override fun onMessage(bytes: ByteArray) = Unit
+
+                override fun onClosed(
+                    code: Int,
+                    reason: String,
+                ) = Unit
+
+                override fun onFailure(
+                    error: Throwable,
+                    httpStatus: Int?,
+                ) {
+                    failure.complete(httpStatus)
+                }
+            },
+        )
+        assertEquals(400, failure.get(5, TimeUnit.SECONDS))
+    }
+
+    @Test
+    fun isDiscoveredThroughTheServiceLoader() {
+        val clients = EngineClients.discover()
+        assertTrue(clients?.http is OkHttpEngineClients)
+        assertTrue(clients?.webSocket is OkHttpEngineClients)
+    }
+
+    @Test
+    fun theDisconnectingResponseEffectIsReportedAsFailure() {
+        server.enqueue(MockResponse.Builder().onResponseStart(SocketEffect.ShutdownConnection).build())
+        assertTrue(execute(OkHttpEngineClients(), get()).isFailure)
+        assertNull(null)
+        Buffer()
+    }
+}

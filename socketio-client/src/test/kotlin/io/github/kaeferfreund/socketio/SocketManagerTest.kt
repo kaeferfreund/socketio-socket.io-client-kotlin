@@ -271,3 +271,30 @@ class SocketManagerTest {
             h.close()
         }
 }
+
+class SocketManagerOpenOrderTest {
+    // An open listener that closes the connection synchronously must not leave the
+    // manager "open" with a dead engine (JavaScript subscribes after emitting "open").
+    @Test
+    fun anOpenListenerThatClosesTheConnectionIsNoticed() =
+        runTest {
+            val h = clientHarness()
+            var lost = false
+            val manager =
+                h.manager(setup = {
+                    on<ManagerEvent.Open> {
+                        if (!lost) {
+                            lost = true
+                            onNetworkLost()
+                        }
+                    }
+                }) { reconnectionDelay = 100.milliseconds }
+            val socket = manager.socket("/")
+            h.settle()
+            advanceTimeBy(1.seconds)
+            assertTrue(lost)
+            assertTrue(socket.connected)
+            assertEquals(2, h.server.engine.sessions.size)
+            h.close()
+        }
+}
