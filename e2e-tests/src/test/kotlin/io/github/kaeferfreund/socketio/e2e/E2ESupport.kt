@@ -44,8 +44,50 @@ internal class E2EScope(
 
     fun manager(
         uri: String = url,
+        setup: (SocketManager.() -> Unit)? = null,
         block: SocketManagerOptions.Builder.() -> Unit = {},
-    ): SocketManager = SocketManager(uri, SocketManagerOptions(block)).also { managers.add(it) }
+    ): SocketManager = SocketManager(uri, SocketManagerOptions(block), setup).also { managers.add(it) }
+
+    /** `io(BASE_URL + path, { forceNew: true, … })`. */
+    fun io(
+        path: String = "",
+        socketOptions: io.github.kaeferfreund.socketio.SocketOptions = io.github.kaeferfreund.socketio.SocketOptions.DEFAULT,
+        setup: (Socket.() -> Unit)? = null,
+        block: SocketManagerOptions.Builder.() -> Unit = {},
+    ): Socket {
+        val socket =
+            io.github.kaeferfreund.socketio.SocketIO.io(
+                url + path,
+                SocketManagerOptions {
+                    forceNew = true
+                    block()
+                },
+                socketOptions,
+                setup,
+            )
+        managers.add(socket.manager)
+        return socket
+    }
+
+    /** Closes the server side of [socket]'s connection, the native replacement for `socket.io.engine.close()` in the JavaScript suite. */
+    fun killTransport(socket: Socket) {
+        val sid = requireNotNull(socket.id) { "socket not connected" }
+        val (status, body) = server.admin("/admin/kill-transport?sid=$sid&nsp=${java.net.URLEncoder.encode(socket.namespace, "UTF-8")}")
+        check(status == 200) { "kill-transport failed: $status $body" }
+    }
+}
+
+/** Fails the test if [block] is ever called; the returned list holds the failures. */
+internal class Unexpected {
+    private val failures = java.util.concurrent.CopyOnWriteArrayList<String>()
+
+    fun fail(message: String) {
+        failures.add(message)
+    }
+
+    fun check() {
+        if (failures.isNotEmpty()) throw AssertionError("unexpected: $failures")
+    }
 }
 
 /** Collects events of [name] as they arrive. */

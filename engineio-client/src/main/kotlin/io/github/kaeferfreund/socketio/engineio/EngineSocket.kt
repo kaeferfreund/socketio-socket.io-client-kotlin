@@ -188,6 +188,7 @@ public class EngineSocket(
 
     private fun onPacket(packet: EngineIOPacket) {
         if (readyState != EngineState.OPENING && readyState != EngineState.OPEN && readyState != EngineState.CLOSING) return
+        options.packetObserver?.onPacket(false, packet)
         events.emit(EngineEvent.PacketReceived(packet))
         events.emit(EngineEvent.Heartbeat)
         when (packet.type) {
@@ -302,6 +303,7 @@ public class EngineSocket(
     ) {
         if (readyState == EngineState.CLOSING || readyState == EngineState.CLOSED) return
         val packet = EngineIOPacket(type, data, options)
+        this.options.packetObserver?.onPacket(true, packet)
         events.emit(EngineEvent.PacketCreated(packet))
         buffer.add(packet)
         if (onFlush != null) events.once<EngineEvent.Flush, EngineEvent> { onFlush() }

@@ -39,12 +39,21 @@ import kotlin.time.Duration
  * a [SocketManagerOptions.callbackDispatcher] is configured.
  *
  * With `autoConnect` (the default) the connection opens right away, as
- * `new Manager(uri)` does in JavaScript.
+ * `new Manager(uri)` does in JavaScript. JavaScript can attach listeners
+ * before anything happens because it is single-threaded; here, attach them
+ * in [setup], which runs before the connection opens:
+ *
+ * ```kotlin
+ * val manager = SocketManager(url) {
+ *     on<ManagerEvent.ReconnectAttempt> { println("attempt ${it.attempt}") }
+ * }
+ * ```
  */
 public class SocketManager(
     /** The server URL; only scheme, host, port and query are used, the path comes from [SocketManagerOptions.Builder.path]. */
     public val uri: String,
     public val options: SocketManagerOptions = SocketManagerOptions.DEFAULT,
+    setup: (SocketManager.() -> Unit)? = null,
 ) : AutoCloseable {
     /** The serial executor owning all protocol state of this manager and its sockets. */
     @InternalSocketIOApi
@@ -97,6 +106,7 @@ public class SocketManager(
     private val listeners = CallbackListeners<ManagerEvent>()
 
     init {
+        setup?.invoke(this)
         if (options.autoConnect) open()
     }
 
@@ -170,10 +180,13 @@ public class SocketManager(
     /**
      * The socket for namespace [nsp], created on first use (`manager.socket()`).
      * An existing inactive socket is reconnected when `autoConnect` is on.
+     * [setup] runs before that connection starts, so listeners it adds see
+     * every event.
      */
     public fun socket(
         nsp: String = "/",
         options: SocketOptions = SocketOptions.DEFAULT,
+        setup: (Socket.() -> Unit)? = null,
     ): Socket {
         var created = false
         val socket =
@@ -181,6 +194,7 @@ public class SocketManager(
                 created = true
                 Socket(this, nsp, options)
             }
+        setup?.invoke(socket)
         if (created) {
             if (this.options.autoConnect) socket.connect()
         } else if (this.options.autoConnect) {
@@ -389,12 +403,16 @@ public class SocketManager(
         reason: DisconnectReason,
         description: Any?,
     ) {
+        val wasClosed = readyState == ManagerState.CLOSED
         cleanup()
         engine?.close()
         backoff.reset()
         readyState = ManagerState.CLOSED
         transportFlow.value = null
-        emit(ManagerEvent.Close(reason, DisconnectDetails.from(description)))
+        // JavaScript emits "close" again when an already closed manager is closed
+        // (for example `disconnect()` while waiting to reconnect); one close per
+        // connection is emitted here.
+        if (!wasClosed) emit(ManagerEvent.Close(reason, DisconnectDetails.from(description)))
         if (reconnectionEnabled && !skipReconnect) reconnect()
     }
 

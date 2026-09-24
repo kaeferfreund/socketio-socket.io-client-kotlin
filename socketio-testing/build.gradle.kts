@@ -7,5 +7,5 @@ description = "Test utilities for Socket.IO client users: fake transports, packe
 dependencies {
     api(project(":engineio-client"))
     api(libs.coroutines.core)
-    compileOnly(project(":socketio-parser"))
+    api(project(":socketio-parser"))
 }

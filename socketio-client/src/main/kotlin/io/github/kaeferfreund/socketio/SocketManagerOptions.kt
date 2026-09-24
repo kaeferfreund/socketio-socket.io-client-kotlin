@@ -2,6 +2,7 @@ package io.github.kaeferfreund.socketio
 
 import io.github.kaeferfreund.socketio.engineio.EngineClients
 import io.github.kaeferfreund.socketio.engineio.EngineOptions
+import io.github.kaeferfreund.socketio.engineio.EnginePacketObserver
 import io.github.kaeferfreund.socketio.engineio.EngineTransport
 import io.github.kaeferfreund.socketio.engineio.HandshakeLimits
 import io.github.kaeferfreund.socketio.engineio.PollingTransport
@@ -97,7 +98,7 @@ public class SocketOptions private constructor(
 
         public fun build(): SocketOptions {
             require(retries >= 0) { "retries must not be negative" }
-            require(ackTimeout == null || ackTimeout!!.isPositive()) { "ackTimeout must be positive" }
+            require(ackTimeout == null || !ackTimeout!!.isNegative()) { "ackTimeout must not be negative" }
             return SocketOptions(auth, authProvider, retries, ackTimeout, outgoingInterceptor)
         }
     }
@@ -161,6 +162,7 @@ public class SocketManagerOptions private constructor(
             maxPollingResponseBytes = builder.maxPollingResponseBytes,
             handshakeLimits = builder.handshakeLimits,
             logger = builder.logger,
+            packetObserver = builder.packetObserver,
         )
 
     private val extensions: Map<Key<*>, Any> = HashMap(builder.extensions)
@@ -206,7 +208,7 @@ public class SocketManagerOptions private constructor(
         /** Jitter between 0 and 1 (`randomizationFactor`). */
         public var randomizationFactor: Double = from?.randomizationFactor ?: 0.5
 
-        /** Connection timeout of each attempt; `null` disables it (`timeout`). */
+        /** Connection timeout of each attempt; `null` disables it, zero fails every attempt at once (`timeout`). */
         public var timeout: Duration? = if (from != null) from.timeout else 20.seconds
 
         /** Connect on creation (`autoConnect`). */
@@ -266,6 +268,9 @@ public class SocketManagerOptions private constructor(
         public var maxPollingResponseBytes: Long = from?.engine?.maxPollingResponseBytes ?: Long.MAX_VALUE
         public var handshakeLimits: HandshakeLimits = from?.engine?.handshakeLimits ?: HandshakeLimits()
 
+        /** Sees every Engine.IO packet in both directions (debugging, logging, tests). */
+        public var packetObserver: EnginePacketObserver? = from?.engine?.packetObserver
+
         internal val extensions: MutableMap<Key<*>, Any> = HashMap(from?.extensions ?: emptyMap())
 
         /** Stores an integration value under [key]. */
@@ -286,7 +291,7 @@ public class SocketManagerOptions private constructor(
             require(reconnectionAttempts >= 0) { "reconnectionAttempts must not be negative" }
             require(!reconnectionDelay.isNegative() && !reconnectionDelayMax.isNegative()) { "reconnection delays must not be negative" }
             require(randomizationFactor in 0.0..1.0) { "randomizationFactor must be between 0 and 1" }
-            require(timeout == null || timeout!!.isPositive()) { "timeout must be positive" }
+            require(timeout == null || !timeout!!.isNegative()) { "timeout must not be negative" }
             return SocketManagerOptions(this)
         }
     }

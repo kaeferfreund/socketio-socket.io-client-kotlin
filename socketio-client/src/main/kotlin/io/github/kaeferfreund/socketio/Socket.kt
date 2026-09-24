@@ -122,6 +122,11 @@ public class Socket internal constructor(
     /** Emits waiting in the send buffer or the retry queue. */
     public val pendingEmits: StateFlow<Int> = pendingFlow.asStateFlow()
 
+    private val pendingAcksFlow = MutableStateFlow(0)
+
+    /** Acknowledgements this socket is waiting for. */
+    public val pendingAcknowledgements: StateFlow<Int> = pendingAcksFlow.asStateFlow()
+
     @Volatile private var activeView = false
 
     /** The namespace session id, `null` while disconnected (`socket.id`). */
@@ -274,10 +279,13 @@ public class Socket internal constructor(
         reason: DisconnectReason,
         details: DisconnectDetails?,
     ) {
+        val wasConnected = connectedState
         connectedState = false
         idState = null
         stateFlow.value = ConnectionState.Disconnected(reason, details)
-        dispatchLifecycle(SocketEvent.Disconnected(reason, details))
+        // JavaScript also emits "disconnect" for a socket that never connected (its
+        // CONNECT was still pending); here every disconnect follows a connect.
+        if (wasConnected) dispatchLifecycle(SocketEvent.Disconnected(reason, details))
         clearAcks()
     }
 
@@ -292,6 +300,7 @@ public class Socket internal constructor(
             entry.timer?.cancel()
             if (entry.withError) failed.add(entry)
         }
+        updatePending()
         for (entry in failed) entry.callback(SocketDisconnectedException(), emptyList())
     }
 
@@ -398,6 +407,7 @@ public class Socket internal constructor(
         val id = packet.id ?: return
         val entry = acks.remove(id) ?: return
         entry.timer?.cancel()
+        updatePending()
         val args = (packet.data as? SocketIOValue.Array)?.items ?: emptyList()
         entry.callback(null, args)
     }
@@ -590,6 +600,7 @@ public class Socket internal constructor(
         manager.emit(ManagerEvent.Error(error))
         val entry = id?.let { acks.remove(it) } ?: return
         entry.timer?.cancel()
+        updatePending()
         entry.callback(error, emptyList())
     }
 
@@ -603,12 +614,14 @@ public class Socket internal constructor(
         val timeout = flagTimeout ?: options.ackTimeout
         if (timeout == null) {
             acks[id] = AckEntry(withError, ack)
+            updatePending()
             return
         }
         val entry = AckEntry(true, ack)
         entry.timer =
             executor.schedule(timeout) {
                 if (acks.remove(id) == null) return@schedule
+                updatePending()
                 val removed = sendBuffer.removeAll { it.packet.id == id }
                 if (removed) {
                     recomputeSendBufferBytes()
@@ -618,16 +631,15 @@ public class Socket internal constructor(
                 ack(AckTimeoutException(), emptyList())
             }
         acks[id] = entry
+        updatePending()
     }
 
     /** Withdraws an acknowledgement (and its packet, if still buffered) for a cancelled `emitWithAck`. */
     internal fun withdrawAck(id: Long) {
         val entry = acks.remove(id) ?: return
         entry.timer?.cancel()
-        if (sendBuffer.removeAll { it.packet.id == id }) {
-            recomputeSendBufferBytes()
-            updatePending()
-        }
+        if (sendBuffer.removeAll { it.packet.id == id }) recomputeSendBufferBytes()
+        updatePending()
     }
 
     private fun recomputeSendBufferBytes() {
@@ -699,6 +711,7 @@ public class Socket internal constructor(
 
     private fun updatePending() {
         pendingFlow.value = sendBuffer.size + queue.size
+        pendingAcksFlow.value = acks.size
     }
 
     private fun dispatchLifecycle(event: SocketEvent) {

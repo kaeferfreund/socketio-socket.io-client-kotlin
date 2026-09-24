@@ -99,6 +99,8 @@ public class FakeEngineServer(
     /** A client connection. */
     public inner class Session internal constructor(
         public val id: String,
+        /** The request that opened the session (polling handshake or WebSocket upgrade). */
+        public val handshakeRequest: RecordedRequest,
     ) {
         /** `"polling"` or `"websocket"`. */
         public var transport: String = "polling"
@@ -236,8 +238,11 @@ public class FakeEngineServer(
         }
     }
 
-    private fun newSession(transport: String): Session {
-        val session = Session("sid${nextId++}")
+    private fun newSession(
+        transport: String,
+        request: RecordedRequest,
+    ): Session {
+        val session = Session("sid${nextId++}", request)
         session.transport = transport
         sessions[session.id] = session
         return session
@@ -289,7 +294,7 @@ public class FakeEngineServer(
                 respond(guarded, EngineHttpResponse(400, "{\"code\":2,\"message\":\"Bad handshake method\"}"))
                 return handle
             }
-            val session = newSession("polling")
+            val session = newSession("polling", recorded)
             respondHandshake(guarded, session)
             onConnection(session)
             session.startHeartbeat()
@@ -354,7 +359,7 @@ public class FakeEngineServer(
             }
             val sid = recorded.query["sid"]
             if (sid == null) {
-                val session = newSession("websocket")
+                val session = newSession("websocket", recorded)
                 session.webSocket = socket
                 socket.session = session
                 socket.open(handshakeHeaders)

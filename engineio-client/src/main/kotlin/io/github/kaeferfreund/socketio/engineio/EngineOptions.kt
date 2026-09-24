@@ -88,6 +88,8 @@ public class EngineOptions(
     /** Hardening: handshake values above these limits are rejected. */
     public val handshakeLimits: HandshakeLimits = HandshakeLimits(),
     public val logger: SocketLogger = SocketLogger.NONE,
+    /** Sees every Engine.IO packet in both directions, on the protocol executor. */
+    public val packetObserver: EnginePacketObserver? = null,
 ) {
     init {
         require(requestTimeout == null || requestTimeout.isPositive()) { "requestTimeout must be positive" }
@@ -103,11 +105,12 @@ public class EngineOptions(
         extraHeaders: Map<String, String> = this.extraHeaders,
         clients: EngineClients? = this.clients,
         logger: SocketLogger = this.logger,
+        packetObserver: EnginePacketObserver? = this.packetObserver,
     ): EngineOptions =
         EngineOptions(
             path, query, upgrade, forceBase64, timestampParam, timestampRequests, transports, tryAllTransports, rememberUpgrade,
             requestTimeout, transportOptions, extraHeaders, withCredentials, protocols, perMessageDeflateThreshold, addTrailingSlash,
-            transportFactories, clients, maxPollingResponseBytes, handshakeLimits, logger,
+            transportFactories, clients, maxPollingResponseBytes, handshakeLimits, logger, packetObserver,
         )
 }
 
@@ -120,3 +123,16 @@ public class HandshakeLimits(
     public val maxPingInterval: Duration = Duration.INFINITE,
     public val maxPingTimeout: Duration = Duration.INFINITE,
 )
+
+/**
+ * Observes Engine.IO packets for debugging, logging or tests: the
+ * counterpart of listening to `packetCreate` and `packet` on a JavaScript
+ * engine. Called on the protocol executor; keep it fast.
+ */
+public fun interface EnginePacketObserver {
+    /** [outgoing] is `true` for packets created by the client, `false` for packets received. */
+    public fun onPacket(
+        outgoing: Boolean,
+        packet: io.github.kaeferfreund.socketio.engineio.parser.EngineIOPacket,
+    )
+}

@@ -84,7 +84,9 @@ public class FixtureServer private constructor(
             tls: Boolean = false,
         ): FixtureServer {
             ensureNodeModules(fixturesDir)
-            val builder = ProcessBuilder("node", script).directory(fixturesDir).redirectErrorStream(true)
+            // The watchdog ends the server when this JVM goes away, so a killed test run
+            // cannot leave servers behind.
+            val builder = ProcessBuilder("node", "--require", watchdog.absolutePath, script).directory(fixturesDir).redirectErrorStream(true)
             builder.environment().putAll(environment)
             val process = builder.start()
             val output = StringBuffer()
@@ -130,5 +132,19 @@ public class FixtureServer private constructor(
         }
 
         private val READY = Regex("READY port=(\\d+) secret=(\\S+)")
+
+        private val watchdog: File by lazy {
+            File.createTempFile("socketio-fixture-watchdog", ".cjs").apply {
+                deleteOnExit()
+                writeText(
+                    """
+                    // Exit when the parent closes our stdin (it exited or was killed).
+                    process.stdin.on("end", () => process.exit(0));
+                    process.stdin.on("error", () => process.exit(0));
+                    process.stdin.resume();
+                    """.trimIndent(),
+                )
+            }
+        }
     }
 }
