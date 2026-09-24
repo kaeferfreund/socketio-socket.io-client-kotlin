@@ -1,0 +1,44 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+// Shared by every pure-JVM module: Kotlin 2 with warnings as errors, JVM 17
+// bytecode (Android D8 and every supported JDK read it), JUnit Platform tests.
+plugins {
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jmailen.kotlinter")
+}
+
+val libs = the<VersionCatalogsExtension>().named("libs")
+
+kotlin {
+    compilerOptions {
+        allWarningsAsErrors.set(true)
+        jvmTarget.set(JvmTarget.JVM_17)
+        freeCompilerArgs.addAll("-Xjdk-release=17")
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    "testImplementation"(platform(libs.findLibrary("junit-bom").get()))
+    "testImplementation"(libs.findLibrary("junit-jupiter").get())
+    "testRuntimeOnly"(libs.findLibrary("junit-platform-launcher").get())
+    "testImplementation"(libs.findLibrary("coroutines-test").get())
+    "testImplementation"(kotlin("test-junit5"))
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+    maxHeapSize = "1g"
+    testLogging {
+        events("failed", "skipped")
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStandardStreams = providers.gradleProperty("showTestOutput").isPresent
+    }
+    // A skipped test is never evidence; the parity gate reads JUnit XML and
+    // requires "passed". Failing fast on a disabled test keeps that honest.
+    systemProperty("junit.jupiter.extensions.autodetection.enabled", "false")
+}

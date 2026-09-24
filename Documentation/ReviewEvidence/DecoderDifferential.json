@@ -1,0 +1,11 @@
+{
+  "upstream": "aaf2af36ec8ad05910f357a788e0e358bad32738",
+  "validCases": 5000,
+  "otherCases": 29,
+  "encodeCases": 1000,
+  "javascriptEncoderCases": 1000,
+  "javascriptEncoderDifferences": [],
+  "validDifferences": 0,
+  "encodeDifferences": [],
+  "differences": []
+}

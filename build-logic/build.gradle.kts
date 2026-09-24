@@ -1,0 +1,12 @@
+plugins {
+    `kotlin-dsl`
+}
+
+dependencies {
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.android.gradle.plugin)
+    implementation(libs.kover.gradle.plugin)
+    implementation(libs.kotlinter.gradle.plugin)
+    implementation(libs.kotlin.serialization.plugin)
+    implementation(libs.kotlin.compose.plugin)
+}
