@@ -9,7 +9,7 @@
 | `check-documentation.py` | Offline check of relative links, heading anchors and the marked README quick start | Python 3.9+ |
 | `test-documentation.py` | Unit tests of the documentation checker | Python 3.9+ |
 | `test-consumer.sh` | Publishes to `mavenLocal()` and compiles the README quick start in the independent `consumer/` build | JDK 17 and 21, Android SDK |
-| `test-parser-parity.sh <socket.io> [out.json]` | Differential test of this codec against the pinned JavaScript parser | Node 24, a `socketio/socket.io` checkout at the pinned commit |
+| `test-parser-parity.sh <socket.io> [out.json]` | Differential test of this codec against the pinned JavaScript parser | Node 24, a `socketio/socket.io` checkout at the pinned commit, `typescript` on `NODE_PATH` (for example `npm install --prefix /tmp/tools typescript@5.8.3`) |
 | `test-upstream-clients.sh <socket.io> <out-dir>` | Runs the unmodified upstream Node suites and compares the committed inventory with a fresh scan | Node 24, the pinned checkout, free port 3000 |
 | `inventory-upstream-tests.cjs <socket.io> [out-dir]` | AST scan of upstream test declarations (used by the script above) | Node, `typescript` from the upstream checkout (`NODE_PATH`) |
 | `parser-parity/prepare.cjs`, `parser-parity/compare.cjs` | Build the pinned parser and compare outputs (used by `test-parser-parity.sh`) | Node |

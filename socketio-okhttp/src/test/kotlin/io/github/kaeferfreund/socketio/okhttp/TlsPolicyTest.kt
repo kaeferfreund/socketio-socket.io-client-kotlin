@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import java.net.InetAddress
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLException
@@ -24,6 +25,7 @@ class TlsPolicyTest {
     private val leaf = HeldCertificate.Builder().signedBy(ca).addSubjectAlternativeName("localhost").commonName("localhost").build()
     private val otherCa = HeldCertificate.Builder().certificateAuthority(0).commonName("other CA").build()
     private val server = MockWebServer()
+    private val loopback = InetAddress.getByName("127.0.0.1")
 
     @AfterEach
     fun stop() = server.close()
@@ -36,12 +38,14 @@ class TlsPolicyTest {
                 .build()
         server.useHttps(certificates.sslSocketFactory())
         if (requireClientAuth) server.requireClientAuth()
-        server.start()
+        server.start(loopback, 0)
     }
 
     private fun call(policy: TlsPolicy): Result<EngineHttpResponse> {
         server.enqueue(MockResponse.Builder().body("ok").build())
-        val clients = OkHttpEngineClients(policy.applyTo(OkHttpClient.Builder()).build())
+        // "localhost" must reach the server on its only address. Where it also resolves to ::1,
+        // OkHttp's fast fallback would report the refused IPv6 route instead of the TLS failure.
+        val clients = OkHttpEngineClients(policy.applyTo(OkHttpClient.Builder()).dns { listOf(loopback) }.build())
         val future = CompletableFuture<Result<EngineHttpResponse>>()
         val url = server.url("/socket.io/").newBuilder().host("localhost").build().toString()
         clients.execute(

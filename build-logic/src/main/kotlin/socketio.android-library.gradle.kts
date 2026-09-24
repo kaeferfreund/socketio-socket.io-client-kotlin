@@ -29,6 +29,8 @@ android {
             test.useJUnitPlatform()
             // Robolectric sandboxes for SDK 35+ need Java 21; the library still targets Java 17.
             test.javaLauncher.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(21)) })
+            // Robolectric's SDK 36 sandbox sets FileDescriptor internals through SharedSecrets.
+            test.jvmArgs("--add-exports=java.base/jdk.internal.access=ALL-UNNAMED", "--add-opens=java.base/java.io=ALL-UNNAMED")
             // Robolectric's native runtime (SDK 35+) has no Linux/aarch64 build.
             val arch = System.getProperty("os.arch")
             if (System.getProperty("os.name").startsWith("Linux") && (arch == "aarch64" || arch == "arm64")) {
