@@ -6,6 +6,7 @@ description = "Engine.IO 4 client: engine socket, transports, heartbeat and upgr
 
 dependencies {
     api(project(":engineio-parser"))
+    api(project(":socketio-parser"))
     api(libs.coroutines.core)
     testImplementation(project(":socketio-testing"))
 }

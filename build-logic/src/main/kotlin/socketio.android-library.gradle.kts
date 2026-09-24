@@ -45,6 +45,7 @@ kotlin {
     compilerOptions {
         allWarningsAsErrors.set(true)
         jvmTarget.set(JvmTarget.JVM_17)
+        optIn.add("io.github.kaeferfreund.socketio.engineio.InternalSocketIOApi")
     }
 }
 

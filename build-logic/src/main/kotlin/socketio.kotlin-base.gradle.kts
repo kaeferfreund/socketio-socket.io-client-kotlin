@@ -14,7 +14,16 @@ kotlin {
         allWarningsAsErrors.set(true)
         jvmTarget.set(JvmTarget.JVM_17)
         freeCompilerArgs.addAll("-Xjdk-release=17")
+        // Modules of this repository may use each other's internal API.
+        if (project.name !in setOf("engineio-parser", "socketio-parser", "parser-parity")) {
+            optIn.add("io.github.kaeferfreund.socketio.engineio.InternalSocketIOApi")
+        }
     }
+}
+
+// Tests drive virtual time with the experimental kotlinx-coroutines-test API.
+tasks.named<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileTestKotlin") {
+    compilerOptions.optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
 }
 
 java {
