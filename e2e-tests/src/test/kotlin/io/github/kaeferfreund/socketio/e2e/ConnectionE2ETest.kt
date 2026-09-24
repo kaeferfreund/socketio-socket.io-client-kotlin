@@ -692,6 +692,42 @@ class ConnectionE2ETest {
             socket.disconnect()
         }
 
+    // JS-043: a browser Blob is binary content; ByteArray is its native counterpart.
+    @Test
+    fun sendsBinaryDataAsABlob() =
+        e2e {
+            val socket = io()
+            val back = socket.channel("back")
+            socket.emit("blob", "hello world".encodeToByteArray())
+            back.next()
+            socket.disconnect()
+        }
+
+    // JS-044
+    @Test
+    fun sendsBinaryDataAsABlobMixedWithJson() =
+        e2e {
+            val socket = io()
+            val ack = socket.channel("jsonblob-ack")
+            socket.emit("jsonblob", mapOf("hello" to "lol", "message" to "EEEEEEEEE".encodeToByteArray(), "goodbye" to "gotcha"))
+            ack.next()
+            socket.disconnect()
+        }
+
+    // JS-045
+    @Test
+    fun sendsEventsWithBlobsInTheCorrectOrder() =
+        e2e {
+            val socket = io()
+            val ack = socket.channel("blob3-ack")
+            val blob = "BLOBBLOB".encodeToByteArray()
+            socket.emit("blob1", blob)
+            socket.emit("blob2", "second")
+            socket.emit("blob3", blob)
+            ack.next()
+            socket.disconnect()
+        }
+
     // JS-046
     @Test
     fun reopensACachedSocket() =

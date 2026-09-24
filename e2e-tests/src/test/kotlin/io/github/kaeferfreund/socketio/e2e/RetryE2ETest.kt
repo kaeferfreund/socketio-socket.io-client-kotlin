@@ -1,10 +1,12 @@
 package io.github.kaeferfreund.socketio.e2e
 
 import io.github.kaeferfreund.socketio.SocketOptions
+import io.github.kaeferfreund.socketio.Transport
 import io.github.kaeferfreund.socketio.engineio.EnginePacketObserver
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withTimeout
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
@@ -24,7 +26,9 @@ class RetryE2ETest {
         if (outgoing) sent += text else received?.add(text)
     }
 
-    // JS-055
+    // JS-055. The acknowledgement timer starts at emit, so the original emits before the
+    // connection exists. Here the socket is connected and upgraded first: the 50 ms budget
+    // then covers the roundtrips only, not the handshake on a loaded machine.
     @Test
     fun preservesTheOrderOfThePackets() =
         e2e {
@@ -36,6 +40,8 @@ class RetryE2ETest {
                         ackTimeout = 50.milliseconds
                     },
                 ) { packetObserver = observer(sent) }
+            socket.awaitConnect()
+            socket.manager.transportName.first { it == Transport.WEBSOCKET }
             val queueLengths = CopyOnWriteArrayList<Int>()
             val done = CompletableDeferred<Pair<Throwable?, SocketIOValue?>>()
             socket.manager.executor.execute {

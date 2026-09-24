@@ -90,6 +90,12 @@ public class EngineOptions(
     public val logger: SocketLogger = SocketLogger.NONE,
     /** Sees every Engine.IO packet in both directions, on the protocol executor. */
     public val packetObserver: EnginePacketObserver? = null,
+    /** Host (optionally `[ipv6]`) when no URI is given (`host`). */
+    public val host: String? = null,
+    /** Port when no URI is given (`port`); defaults from [secure]. */
+    public val port: String? = null,
+    /** Use TLS when no URI is given (`secure`). */
+    public val secure: Boolean? = null,
 ) {
     init {
         require(requestTimeout == null || requestTimeout.isPositive()) { "requestTimeout must be positive" }
@@ -110,7 +116,7 @@ public class EngineOptions(
         EngineOptions(
             path, query, upgrade, forceBase64, timestampParam, timestampRequests, transports, tryAllTransports, rememberUpgrade,
             requestTimeout, transportOptions, extraHeaders, withCredentials, protocols, perMessageDeflateThreshold, addTrailingSlash,
-            transportFactories, clients, maxPollingResponseBytes, handshakeLimits, logger, packetObserver,
+            transportFactories, clients, maxPollingResponseBytes, handshakeLimits, logger, packetObserver, host, port, secure,
         )
 }
 

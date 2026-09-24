@@ -165,6 +165,31 @@ server.on("connection", (socket) => {
     if (receivedAbuff1) socket.emit("abuff2-ack");
   });
 
+  // expect sent blob to be buffer
+  socket.on("blob", (a) => {
+    if (Buffer.isBuffer(a)) socket.emit("back");
+  });
+
+  // expect sent blob mixed with json to be buffer
+  socket.on("jsonblob", (a) => {
+    if (a.hello === "lol" && Buffer.isBuffer(a.message) && a.goodbye === "gotcha") {
+      socket.emit("jsonblob-ack");
+    }
+  });
+
+  // expect blobs sent in order to arrive in correct order
+  let receivedblob1 = false;
+  let receivedblob2 = false;
+  socket.on("blob1", (a) => {
+    if (Buffer.isBuffer(a)) receivedblob1 = true;
+  });
+  socket.on("blob2", (a) => {
+    if (receivedblob1 && a === "second") receivedblob2 = true;
+  });
+  socket.on("blob3", (a) => {
+    if (Buffer.isBuffer(a) && receivedblob1 && receivedblob2) socket.emit("blob3-ack");
+  });
+
   // emit buffer to base64 receiving browsers
   socket.on("getbin", () => {
     const buf = Buffer.from("asdfasdf", "utf8");

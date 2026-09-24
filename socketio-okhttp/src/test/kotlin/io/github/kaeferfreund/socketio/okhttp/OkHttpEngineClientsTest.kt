@@ -310,3 +310,76 @@ class OkHttpEngineClientsTest {
         assertTrue(execute(OkHttpEngineClients(), get()).isFailure)
     }
 }
+
+/** JS-217, JS-218: the Node `agent` option's counterpart is a caller-supplied OkHttp client. */
+class CustomOkHttpClientTest {
+    // JS-217, JS-218
+    @org.junit.jupiter.api.Test
+    fun usesTheCallerSuppliedClientForPollingAndWebSocket() {
+        val server = mockwebserver3.MockWebServer()
+        server.start()
+        try {
+            val seen = java.util.concurrent.CopyOnWriteArrayList<String>()
+            val agent =
+                okhttp3.OkHttpClient
+                    .Builder()
+                    .addInterceptor { chain ->
+                        seen += chain.request().url.encodedPath
+                        chain.proceed(chain.request())
+                    }.build()
+            val clients = OkHttpEngineClients(agent)
+            server.enqueue(mockwebserver3.MockResponse.Builder().body("ok").build())
+            val done = java.util.concurrent.CompletableFuture<Unit>()
+            clients.execute(
+                io.github.kaeferfreund.socketio.engineio.EngineHttpRequest("GET", server.url("/polling/").toString(), emptyList(), null, null),
+                object : io.github.kaeferfreund.socketio.engineio.EngineHttpCallback {
+                    override fun onResponse(response: io.github.kaeferfreund.socketio.engineio.EngineHttpResponse) {
+                        done.complete(Unit)
+                    }
+
+                    override fun onFailure(error: Throwable) {
+                        done.completeExceptionally(error)
+                    }
+                },
+            )
+            done.get(5, java.util.concurrent.TimeUnit.SECONDS)
+            server.enqueue(mockwebserver3.MockResponse.Builder().webSocketUpgrade(object : okhttp3.WebSocketListener() {}).build())
+            val opened = java.util.concurrent.CompletableFuture<Unit>()
+            val ws =
+                clients.connect(
+                    io.github.kaeferfreund.socketio.engineio.EngineWebSocketRequest(
+                        server.url("/websocket/").toString().replace("http", "ws"),
+                        emptyList(),
+                        emptyList(),
+                        1024,
+                    ),
+                    object : io.github.kaeferfreund.socketio.engineio.EngineWebSocketListener {
+                        override fun onOpen(responseHeaders: List<Pair<String, String>>) {
+                            opened.complete(Unit)
+                        }
+
+                        override fun onMessage(text: String) = Unit
+
+                        override fun onMessage(bytes: ByteArray) = Unit
+
+                        override fun onClosed(
+                            code: Int,
+                            reason: String,
+                        ) = Unit
+
+                        override fun onFailure(
+                            error: Throwable,
+                            httpStatus: Int?,
+                        ) {
+                            opened.completeExceptionally(error)
+                        }
+                    },
+                )
+            opened.get(5, java.util.concurrent.TimeUnit.SECONDS)
+            ws.cancel()
+            org.junit.jupiter.api.Assertions.assertEquals(listOf("/polling/", "/websocket/"), seen.toList())
+        } finally {
+            server.close()
+        }
+    }
+}

@@ -8,23 +8,54 @@ import kotlin.math.ceil
  * (`contrib/parseuri.ts`, `contrib/parseqs.ts`, `util.ts`).
  */
 public object EngineUri {
-    /** The parts of a URI that `engine.io-client` uses. */
+    /** Every part `parseuri` returns (its `parts` array plus `pathNames` and `queryKey`). */
     public class Parsed internal constructor(
+        /** The input. */
+        public val source: String,
         /** `http`, `https`, `ws`, `wss` or empty when the input had no scheme. */
         public val protocol: String,
+        public val authority: String,
+        public val userInfo: String,
+        public val user: String,
+        public val password: String,
         /** Host name; IPv6 addresses without brackets. */
         public val host: String,
         /** Port as written, or empty. */
         public val port: String,
+        /** Path plus query and anchor. */
+        public val relative: String,
         /** Path, possibly empty. */
         public val path: String,
+        public val directory: String,
+        public val file: String,
         /** Raw query string without `?`, or empty. */
         public val query: String,
-        /** `true` when the host is an IPv6 literal. */
+        public val anchor: String,
+        /** `true` when the host is a bracketed IPv6 literal. */
         public val ipv6: Boolean,
     ) {
         /** `true` for `https` and `wss`. */
         public val secure: Boolean get() = protocol == "https" || protocol == "wss"
+
+        /** Non-empty path segments, `pathNames` in JavaScript. */
+        public val pathNames: List<String>
+            get() {
+                val names = path.replace(Regex("/{2,9}"), "/").split("/").toMutableList()
+                if (path.startsWith("/") || path.isEmpty()) names.removeAt(0)
+                if (path.endsWith("/") && names.isNotEmpty()) names.removeAt(names.size - 1)
+                return names
+            }
+
+        /** Query parameters without decoding, `queryKey` in JavaScript. */
+        public val queryKey: Map<String, String>
+            get() {
+                val data = LinkedHashMap<String, String>()
+                Regex("(?:^|&)([^&=]*)=?([^&]*)").findAll(query).forEach { match ->
+                    val key = match.groupValues[1]
+                    if (key.isNotEmpty()) data[key] = match.groupValues[2]
+                }
+                return data
+            }
 
         override fun toString(): String = "Parsed(protocol=$protocol, host=$host, port=$port, path=$path, query=$query)"
     }
@@ -38,7 +69,7 @@ public object EngineUri {
 
     /**
      * `parse()` of `engine.io-client`: a regex-based parser that accepts the
-     * same relaxed inputs (missing scheme, IPv6 hosts in brackets).
+     * same relaxed inputs (missing scheme, IPv6 hosts in brackets or bare).
      */
     public fun parse(uri: String): Parsed {
         require(uri.length <= 8000) { "URI too long" }
@@ -52,13 +83,26 @@ public object EngineUri {
         val m = PARSE_URI.find(str) ?: error("unparseable URI")
         fun group(i: Int) = m.groups[i]?.value.orEmpty()
         var host = group(6)
-        if (bracketed) host = host.substring(1, host.length - 1).replace(';', ':')
+        var authority = group(2)
+        if (bracketed) {
+            host = host.substring(1, host.length - 1).replace(';', ':')
+            authority = authority.replace("[", "").replace("]", "").replace(';', ':')
+        }
         return Parsed(
+            source = if (bracketed) uri else group(0),
             protocol = group(1),
+            authority = authority,
+            userInfo = group(3),
+            user = group(4),
+            password = group(5),
             host = host,
             port = group(7),
+            relative = group(8),
             path = group(9),
+            directory = group(10),
+            file = group(11),
             query = group(12),
+            anchor = group(13),
             ipv6 = bracketed,
         )
     }

@@ -181,7 +181,8 @@ class EngineSocketTest {
             h.close()
         }
 
-    // JS-186: JavaScript reports it as an error event on the next tick, as here.
+    // JS-186, JS-192: JavaScript reports it as an error event on the next tick of its (fake) timers;
+    // here the configured test dispatcher plays that role, so nothing is emitted before it runs.
     @Test
     fun reportsAnErrorWhenNoTransportsAreAvailable() =
         runTest {
