@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jmailen.kotlinter")
+    id("dev.detekt")
 }
 
 val libs = the<VersionCatalogsExtension>().named("libs")
@@ -50,4 +51,10 @@ tasks.withType<Test>().configureEach {
     // A skipped test is never evidence; the parity gate reads JUnit XML and
     // requires "passed". Failing fast on a disabled test keeps that honest.
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "false")
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom(rootProject.layout.projectDirectory.file("config/detekt.yml"))
+    parallel = true
 }

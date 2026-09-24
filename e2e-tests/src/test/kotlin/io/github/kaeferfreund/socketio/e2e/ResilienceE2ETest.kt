@@ -128,10 +128,13 @@ class ResilienceE2ETest {
                             }
                         }
                 }
-            val socket = manager.socket("/", SocketOptions {
-                retries = 3
-                ackTimeout = 2.seconds
-            })
+            val socket = manager.socket(
+                "/",
+                SocketOptions {
+                    retries = 3
+                    ackTimeout = 2.seconds
+                },
+            )
             socket.awaitConnect()
             val reply = socket.emitWithAck("echo", "interrupted")
             assertEquals("interrupted", reply[0].string)
@@ -216,7 +219,10 @@ class ResilienceE2ETest {
     @Test
     fun aFullSendBufferRejectsTheNewEmitWithoutEvictingAcceptedOnes() =
         e2e {
-            val socket = manager { autoConnect = false; bufferLimits = SocketBufferLimits(maxSendBufferPackets = 2) }.socket("/")
+            val socket = manager {
+                autoConnect = false
+                bufferLimits = SocketBufferLimits(maxSendBufferPackets = 2)
+            }.socket("/")
             val results = CopyOnWriteArrayList<Result<*>>()
             repeat(3) { index -> socket.emit("echo", index) { results += it } }
             delay(100.milliseconds)

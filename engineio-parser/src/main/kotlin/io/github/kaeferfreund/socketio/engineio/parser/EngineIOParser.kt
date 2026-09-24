@@ -109,7 +109,9 @@ public object EngineIOParser {
         val header: ByteArray =
             when {
                 length < 126 -> byteArrayOf(length.toByte())
+
                 length < 65536 -> byteArrayOf(126.toByte(), (length ushr 8).toByte(), length.toByte())
+
                 else -> {
                     val value = length.toLong()
                     ByteArray(9).also { bytes ->
@@ -144,6 +146,8 @@ public class EngineIOFrameDecoder(
     private var failed = false
 
     /** Appends [chunk] and returns every packet that is now complete. */
+    // A state machine ported from createPacketDecoderStream; kept in one piece to compare with the source.
+    @Suppress("CyclomaticComplexMethod")
     public fun push(chunk: ByteArray): List<EngineIOPacket> {
         if (failed) return emptyList()
         if (chunk.isNotEmpty()) {
@@ -165,12 +169,14 @@ public class EngineIOFrameDecoder(
                             else -> State.LENGTH_64
                         }
                 }
+
                 State.LENGTH_16 -> {
                     if (available < 2) break
                     val bytes = take(2)
                     expectedLength = ((bytes[0].toLong() and 0xff) shl 8) or (bytes[1].toLong() and 0xff)
                     state = State.PAYLOAD
                 }
+
                 State.LENGTH_64 -> {
                     if (available < 8) break
                     val bytes = take(8)
@@ -186,6 +192,7 @@ public class EngineIOFrameDecoder(
                     expectedLength = high * (1L shl 32) + low
                     state = State.PAYLOAD
                 }
+
                 State.PAYLOAD -> {
                     if (available < expectedLength) break
                     val data = take(expectedLength.toInt())

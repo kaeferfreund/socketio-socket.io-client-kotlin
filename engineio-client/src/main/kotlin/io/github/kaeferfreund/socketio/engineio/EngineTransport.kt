@@ -216,8 +216,7 @@ public abstract class EngineTransport(
         return headers
     }
 
-    /** The transport-specific URL of the next request. */
-    @InternalSocketIOApi
+    /** The URL of the next request: [createUri] with this transport's scheme and query. */
     public abstract fun uri(): String
 
     protected abstract fun doOpen()

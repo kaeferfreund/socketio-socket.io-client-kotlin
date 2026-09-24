@@ -1,0 +1,135 @@
+public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer : io/github/kaeferfreund/socketio/engineio/EngineHttpClient, io/github/kaeferfreund/socketio/engineio/EngineWebSocketClient {
+	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineScope;JJJLjava/util/List;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineScope;JJJLjava/util/List;ZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun connect (Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketRequest;Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketListener;)Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketConnection;
+	public fun execute (Lio/github/kaeferfreund/socketio/engineio/EngineHttpRequest;Lio/github/kaeferfreund/socketio/engineio/EngineHttpCallback;)Lio/github/kaeferfreund/socketio/engineio/Cancellable;
+	public final fun getAllowRequest ()Lkotlin/jvm/functions/Function1;
+	public final fun getClients ()Lio/github/kaeferfreund/socketio/engineio/EngineClients;
+	public final fun getHandshakeHeaders ()Ljava/util/List;
+	public final fun getHeartbeat ()Z
+	public final fun getLatency-UwyO8pc ()J
+	public final fun getMaxPayload ()J
+	public final fun getOnConnection ()Lkotlin/jvm/functions/Function1;
+	public final fun getPingInterval-UwyO8pc ()J
+	public final fun getPingTimeout-UwyO8pc ()J
+	public final fun getReleasePollOnProbe ()Z
+	public final fun getRequests ()Ljava/util/List;
+	public final fun getSessions ()Ljava/util/Map;
+	public final fun getStall ()Lkotlin/jvm/functions/Function1;
+	public final fun getUpgrades ()Ljava/util/List;
+	public final fun setAllowRequest (Lkotlin/jvm/functions/Function1;)V
+	public final fun setHandshakeHeaders (Ljava/util/List;)V
+	public final fun setLatency-LRDsOJo (J)V
+	public final fun setOnConnection (Lkotlin/jvm/functions/Function1;)V
+	public final fun setReleasePollOnProbe (Z)V
+	public final fun setStall (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer$FakeWebSocket : io/github/kaeferfreund/socketio/engineio/EngineWebSocketConnection {
+	public fun cancel ()V
+	public fun close (ILjava/lang/String;)V
+	public final fun getFrames ()Ljava/util/List;
+	public fun getQueuedBytes ()J
+	public fun send (Ljava/lang/String;Z)Z
+	public fun send ([BZ)Z
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer$RecordedRequest {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;)V
+	public final fun getBody ()Ljava/lang/String;
+	public final fun getHeaders ()Ljava/util/List;
+	public final fun getMethod ()Ljava/lang/String;
+	public final fun getQuery ()Ljava/util/Map;
+	public final fun getUrl ()Ljava/lang/String;
+	public final fun header (Ljava/lang/String;)Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer$Session {
+	public final fun close ()V
+	public final fun failPendingPoll (ILjava/lang/String;)V
+	public static synthetic fun failPendingPoll$default (Lio/github/kaeferfreund/socketio/testing/FakeEngineServer$Session;ILjava/lang/String;ILjava/lang/Object;)V
+	public final fun getHandshakeRequest ()Lio/github/kaeferfreund/socketio/testing/FakeEngineServer$RecordedRequest;
+	public final fun getHasPendingPoll ()Z
+	public final fun getId ()Ljava/lang/String;
+	public final fun getMessages ()Ljava/util/List;
+	public final fun getOnClose ()Lkotlin/jvm/functions/Function1;
+	public final fun getOnMessage ()Lkotlin/jvm/functions/Function1;
+	public final fun getReceived ()Ljava/util/List;
+	public final fun getTransport ()Ljava/lang/String;
+	public final fun isOpen ()Z
+	public final fun kill ()V
+	public final fun ping ()V
+	public final fun send (Ljava/lang/String;)V
+	public final fun send ([B)V
+	public final fun sendPacket (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)V
+	public final fun setOnClose (Lkotlin/jvm/functions/Function1;)V
+	public final fun setOnMessage (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeSocketIOServer {
+	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineScope;JJJLjava/util/List;ZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineScope;JJJLjava/util/List;ZZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getClients ()Lio/github/kaeferfreund/socketio/engineio/EngineClients;
+	public final fun getEngine ()Lio/github/kaeferfreund/socketio/testing/FakeEngineServer;
+	public final fun getReceived ()Ljava/util/List;
+	public final fun getRecovery ()Z
+	public final fun namespace (Ljava/lang/String;)Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Namespace;
+	public static synthetic fun namespace$default (Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer;Ljava/lang/String;ILjava/lang/Object;)Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Namespace;
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Client {
+	public final fun disconnect (Z)V
+	public static synthetic fun disconnect$default (Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Client;ZILjava/lang/Object;)V
+	public final fun emit (Ljava/lang/String;[Ljava/lang/Object;)V
+	public final fun emitWithAck (Ljava/lang/String;[Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)V
+	public final fun getConnected ()Z
+	public final fun getEvents ()Ljava/util/List;
+	public final fun getHandshake ()Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Handshake;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getNamespace ()Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Namespace;
+	public final fun getSession ()Lio/github/kaeferfreund/socketio/testing/FakeEngineServer$Session;
+	public final fun on (Ljava/lang/String;Lkotlin/jvm/functions/Function2;)V
+	public final fun write (Lio/github/kaeferfreund/socketio/parser/SocketIOPacket;)V
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Handshake {
+	public fun <init> (Ljava/lang/String;Lio/github/kaeferfreund/socketio/parser/SocketIOValue$Object;Ljava/util/Map;)V
+	public final fun getAuth ()Lio/github/kaeferfreund/socketio/parser/SocketIOValue$Object;
+	public final fun getNamespace ()Ljava/lang/String;
+	public final fun getQuery ()Ljava/util/Map;
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Namespace {
+	public final fun emit (Ljava/lang/String;[Ljava/lang/Object;)V
+	public final fun getClients ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun onConnection (Lkotlin/jvm/functions/Function1;)Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Namespace;
+	public final fun use (Lkotlin/jvm/functions/Function1;)Lio/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Namespace;
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FakeSocketIOServer$Refusal {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getData ()Ljava/lang/Object;
+	public final fun getMessage ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FixtureServer : java/lang/AutoCloseable {
+	public static final field Companion Lio/github/kaeferfreund/socketio/testing/FixtureServer$Companion;
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/Process;Ljava/lang/StringBuffer;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun admin (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lkotlin/Pair;
+	public static synthetic fun admin$default (Lio/github/kaeferfreund/socketio/testing/FixtureServer;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lkotlin/Pair;
+	public fun close ()V
+	public final fun getLog ()Ljava/lang/String;
+	public final fun getPort ()I
+	public final fun getSecret ()Ljava/lang/String;
+	public final fun getUrl ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/testing/FixtureServer$Companion {
+	public final fun ensureNodeModules (Ljava/io/File;)V
+	public final fun start-zkXUZaI (Ljava/io/File;Ljava/lang/String;Ljava/util/Map;JZ)Lio/github/kaeferfreund/socketio/testing/FixtureServer;
+	public static synthetic fun start-zkXUZaI$default (Lio/github/kaeferfreund/socketio/testing/FixtureServer$Companion;Ljava/io/File;Ljava/lang/String;Ljava/util/Map;JZILjava/lang/Object;)Lio/github/kaeferfreund/socketio/testing/FixtureServer;
+}
+

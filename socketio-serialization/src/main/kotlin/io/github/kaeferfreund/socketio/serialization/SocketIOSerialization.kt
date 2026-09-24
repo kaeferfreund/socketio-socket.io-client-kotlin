@@ -3,6 +3,7 @@ package io.github.kaeferfreund.socketio.serialization
 import io.github.kaeferfreund.socketio.AckCallback
 import io.github.kaeferfreund.socketio.IncomingEvent
 import io.github.kaeferfreund.socketio.Socket
+import io.github.kaeferfreund.socketio.SocketEmitter
 import io.github.kaeferfreund.socketio.Subscription
 import io.github.kaeferfreund.socketio.parser.SocketIOJson
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
@@ -33,6 +34,7 @@ public object SocketIOSerialization {
     public fun fromJsonElement(element: JsonElement): SocketIOValue =
         when (element) {
             is JsonNull -> SocketIOValue.Null
+
             is JsonPrimitive ->
                 when {
                     element.isString -> SocketIOValue.Text(element.content)
@@ -40,7 +42,9 @@ public object SocketIOSerialization {
                     element.content == "false" -> SocketIOValue.FALSE
                     else -> SocketIOJson.parse(element.content)
                 }
+
             is JsonArray -> SocketIOValue.Array(element.map(::fromJsonElement))
+
             is JsonObject -> SocketIOValue.Object(element.mapValues { fromJsonElement(it.value) })
         }
 
@@ -72,7 +76,7 @@ public object SocketIOSerialization {
 }
 
 /** Encodes a `@Serializable` value. */
-public inline fun <reified T> T.toSocketIOValue(json: Json = SocketIOSerialization.DefaultJson): SocketIOValue =
+public inline fun <reified T> T.encodeToSocketIOValue(json: Json = SocketIOSerialization.DefaultJson): SocketIOValue =
     SocketIOSerialization.encode(serializer<T>(), this, json)
 
 /** Decodes this value into a `@Serializable` type. */
@@ -84,14 +88,28 @@ public inline fun <reified T> Socket.emitSerializable(
     event: String,
     value: T,
     json: Json = SocketIOSerialization.DefaultJson,
-): Socket = emit(event, value.toSocketIOValue(json))
+): Socket = emit(event, value.encodeToSocketIOValue(json))
+
+/** Emits [event] with [value] encoded by `kotlinx.serialization`, with this emitter's flags. */
+public inline fun <reified T> SocketEmitter.emitSerializable(
+    event: String,
+    value: T,
+    json: Json = SocketIOSerialization.DefaultJson,
+): SocketEmitter = emit(event, value.encodeToSocketIOValue(json))
+
+/** Like [Socket.emitSerializableWithAck], with this emitter's flags (for example a timeout). */
+public suspend inline fun <reified T, reified R> SocketEmitter.emitSerializableWithAck(
+    event: String,
+    value: T,
+    json: Json = SocketIOSerialization.DefaultJson,
+): R = emitWithAck(event, value.encodeToSocketIOValue(json)).first().decodeAs(json)
 
 /** Emits [event] with [value] and decodes the first acknowledgement argument as [R]. */
 public suspend inline fun <reified T, reified R> Socket.emitSerializableWithAck(
     event: String,
     value: T,
     json: Json = SocketIOSerialization.DefaultJson,
-): R = emitWithAck(event, value.toSocketIOValue(json)).first().decodeAs(json)
+): R = emitWithAck(event, value.encodeToSocketIOValue(json)).first().decodeAs(json)
 
 /**
  * Calls [listener] with the first argument of every [event], decoded as [T].

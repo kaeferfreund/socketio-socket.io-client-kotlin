@@ -1,0 +1,123 @@
+public final class io/github/kaeferfreund/socketio/android/AndroidLogger : io/github/kaeferfreund/socketio/engineio/SocketLogger {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun isLoggable (Lio/github/kaeferfreund/socketio/engineio/LogLevel;)Z
+	public fun log (Lio/github/kaeferfreund/socketio/engineio/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+}
+
+public final class io/github/kaeferfreund/socketio/android/AndroidOptionsKt {
+	public static final fun android (Lio/github/kaeferfreund/socketio/SocketManagerOptions$Builder;Landroid/content/Context;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun android$default (Lio/github/kaeferfreund/socketio/SocketManagerOptions$Builder;Landroid/content/Context;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public static final fun getNetworkStatus (Lio/github/kaeferfreund/socketio/SocketManager;)Lkotlinx/coroutines/flow/StateFlow;
+}
+
+public final class io/github/kaeferfreund/socketio/android/AndroidSocketOptions {
+	public final fun configureOkHttp (Lkotlin/jvm/functions/Function1;)V
+	public final fun getBackgroundPolicy ()Lio/github/kaeferfreund/socketio/android/BackgroundPolicy;
+	public final fun getBindToActiveNetwork ()Z
+	public final fun getLogTag ()Ljava/lang/String;
+	public final fun getMainThreadCallbacks ()Z
+	public final fun getOkHttpClient ()Lokhttp3/OkHttpClient;
+	public final fun getReconnectOnNetworkAvailable ()Z
+	public final fun getReleaseConnectionsOnTrimMemory ()Z
+	public final fun getTlsPolicy ()Lio/github/kaeferfreund/socketio/okhttp/TlsPolicy;
+	public final fun getTracing ()Z
+	public final fun getTrafficStatsTag ()Ljava/lang/Integer;
+	public final fun setBackgroundPolicy (Lio/github/kaeferfreund/socketio/android/BackgroundPolicy;)V
+	public final fun setBindToActiveNetwork (Z)V
+	public final fun setLogTag (Ljava/lang/String;)V
+	public final fun setMainThreadCallbacks (Z)V
+	public final fun setOkHttpClient (Lokhttp3/OkHttpClient;)V
+	public final fun setReconnectOnNetworkAvailable (Z)V
+	public final fun setReleaseConnectionsOnTrimMemory (Z)V
+	public final fun setTlsPolicy (Lio/github/kaeferfreund/socketio/okhttp/TlsPolicy;)V
+	public final fun setTracing (Z)V
+	public final fun setTrafficStatsTag (Ljava/lang/Integer;)V
+}
+
+public final class io/github/kaeferfreund/socketio/android/AndroidTracer : io/github/kaeferfreund/socketio/SocketTracer {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/android/AndroidTracer;
+	public fun beginAsyncSection (Ljava/lang/String;I)V
+	public fun endAsyncSection (Ljava/lang/String;I)V
+}
+
+public abstract class io/github/kaeferfreund/socketio/android/BackgroundPolicy {
+}
+
+public final class io/github/kaeferfreund/socketio/android/BackgroundPolicy$DisconnectAfter : io/github/kaeferfreund/socketio/android/BackgroundPolicy {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDelay-UwyO8pc ()J
+}
+
+public final class io/github/kaeferfreund/socketio/android/BackgroundPolicy$DisconnectImmediately : io/github/kaeferfreund/socketio/android/BackgroundPolicy {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/android/BackgroundPolicy$DisconnectImmediately;
+}
+
+public final class io/github/kaeferfreund/socketio/android/BackgroundPolicy$KeepAlive : io/github/kaeferfreund/socketio/android/BackgroundPolicy {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/android/BackgroundPolicy$KeepAlive;
+}
+
+public final class io/github/kaeferfreund/socketio/android/ElapsedRealtimeTimeSource : kotlin/time/AbstractLongTimeSource {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/android/ElapsedRealtimeTimeSource;
+}
+
+public final class io/github/kaeferfreund/socketio/android/JsonAdaptersKt {
+	public static final fun fromJson (Ljava/lang/Object;)Lio/github/kaeferfreund/socketio/parser/SocketIOValue;
+	public static final fun readSocketIOValue (Ljava/io/Reader;)Lio/github/kaeferfreund/socketio/parser/SocketIOValue;
+	public static final fun toJSONArray (Lio/github/kaeferfreund/socketio/parser/SocketIOValue$Array;)Lorg/json/JSONArray;
+	public static final fun toJSONObject (Lio/github/kaeferfreund/socketio/parser/SocketIOValue$Object;)Lorg/json/JSONObject;
+	public static final fun toJson (Lio/github/kaeferfreund/socketio/parser/SocketIOValue;)Ljava/lang/Object;
+	public static final fun toSocketIOValue (Lorg/json/JSONArray;)Lio/github/kaeferfreund/socketio/parser/SocketIOValue$Array;
+	public static final fun toSocketIOValue (Lorg/json/JSONObject;)Lio/github/kaeferfreund/socketio/parser/SocketIOValue$Object;
+}
+
+public final class io/github/kaeferfreund/socketio/android/KeyChainKeyManager : javax/net/ssl/X509ExtendedKeyManager {
+	public fun <init> (Landroid/content/Context;Ljava/lang/String;)V
+	public fun chooseClientAlias ([Ljava/lang/String;[Ljava/security/Principal;Ljava/net/Socket;)Ljava/lang/String;
+	public fun chooseEngineClientAlias ([Ljava/lang/String;[Ljava/security/Principal;Ljavax/net/ssl/SSLEngine;)Ljava/lang/String;
+	public fun chooseServerAlias (Ljava/lang/String;[Ljava/security/Principal;Ljava/net/Socket;)Ljava/lang/String;
+	public fun getCertificateChain (Ljava/lang/String;)[Ljava/security/cert/X509Certificate;
+	public fun getClientAliases (Ljava/lang/String;[Ljava/security/Principal;)[Ljava/lang/String;
+	public fun getPrivateKey (Ljava/lang/String;)Ljava/security/PrivateKey;
+	public fun getServerAliases (Ljava/lang/String;[Ljava/security/Principal;)[Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/android/KeyChainKeyManagerKt {
+	public static final fun chooseKeyChainAlias (Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun chooseKeyChainAlias$default (Landroid/app/Activity;Ljava/lang/String;ILjava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun withKeyChainAlias (Lio/github/kaeferfreund/socketio/okhttp/TlsPolicy;Landroid/content/Context;Ljava/lang/String;)Lio/github/kaeferfreund/socketio/okhttp/TlsPolicy;
+}
+
+public final class io/github/kaeferfreund/socketio/android/NetworkStatus {
+	public static final field Companion Lio/github/kaeferfreund/socketio/android/NetworkStatus$Companion;
+	public fun <init> (ZZZ)V
+	public final fun getAvailable ()Z
+	public final fun getMetered ()Z
+	public final fun getValidated ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/android/NetworkStatus$Companion {
+	public final fun getUNKNOWN ()Lio/github/kaeferfreund/socketio/android/NetworkStatus;
+}
+
+public final class io/github/kaeferfreund/socketio/android/SavedSocketConfig {
+	public static final field Companion Lio/github/kaeferfreund/socketio/android/SavedSocketConfig$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/Map;Ljava/util/Map;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/util/Map;Ljava/util/Map;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun applyTo (Lio/github/kaeferfreund/socketio/SocketManagerOptions$Builder;)V
+	public static final fun fromBundle (Landroid/os/Bundle;)Lio/github/kaeferfreund/socketio/android/SavedSocketConfig;
+	public final fun getExtraHeaders ()Ljava/util/Map;
+	public final fun getNamespaces ()Ljava/util/List;
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getQuery ()Ljava/util/Map;
+	public final fun getTransports ()Ljava/util/List;
+	public final fun getUri ()Ljava/lang/String;
+	public final fun toBundle ()Landroid/os/Bundle;
+}
+
+public final class io/github/kaeferfreund/socketio/android/SavedSocketConfig$Companion {
+	public final fun fromBundle (Landroid/os/Bundle;)Lio/github/kaeferfreund/socketio/android/SavedSocketConfig;
+}
+

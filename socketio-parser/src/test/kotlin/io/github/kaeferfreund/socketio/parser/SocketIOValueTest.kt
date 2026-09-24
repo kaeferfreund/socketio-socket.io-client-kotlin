@@ -111,3 +111,21 @@ class SocketIOValueTest {
         assertArrayEquals(bytesOf(1, 2), binary.bytes)
     }
 }
+
+class OrgJsonConversionTest {
+    @org.junit.jupiter.api.Test
+    fun convertsOrgJsonPayloadsLikeTheJavaClientAccepts() {
+        val json = org.json.JSONObject()
+        json.put("text", "x")
+        json.put("n", 2)
+        json.put("nothing", org.json.JSONObject.NULL)
+        json.put("list", org.json.JSONArray().put(1).put(true))
+        json.put("bytes", byteArrayOf(1, 2))
+        val value = SocketIOValue.of(json)
+        val expected = SocketIOValue.of(mapOf("text" to "x", "n" to 2, "nothing" to null, "list" to listOf(1, true), "bytes" to byteArrayOf(1, 2)))
+        org.junit.jupiter.api.Assertions.assertEquals(expected, value)
+        org.junit.jupiter.api.Assertions.assertTrue(value.containsBinary)
+        org.junit.jupiter.api.Assertions.assertEquals(SocketIOValue.Null, SocketIOValue.of(org.json.JSONObject.NULL))
+        org.junit.jupiter.api.Assertions.assertEquals(SocketIOValue.arrayOf("a"), SocketIOValue.of(org.json.JSONArray().put("a")))
+    }
+}

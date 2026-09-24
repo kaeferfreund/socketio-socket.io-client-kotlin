@@ -1,0 +1,515 @@
+public abstract interface class io/github/kaeferfreund/socketio/engineio/Cancellable {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/Cancellable$Companion;
+	public abstract fun cancel ()V
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/Cancellable$Companion {
+	public final fun getNONE ()Lio/github/kaeferfreund/socketio/engineio/Cancellable;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/CloseDetails {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCode ()Ljava/lang/Integer;
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getReason ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineClients {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/EngineClients$Companion;
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/EngineHttpClient;Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketClient;)V
+	public final fun getHttp ()Lio/github/kaeferfreund/socketio/engineio/EngineHttpClient;
+	public final fun getWebSocket ()Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketClient;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineClients$Companion {
+	public final fun discover ()Lio/github/kaeferfreund/socketio/engineio/EngineClients;
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineClients$Provider {
+	public abstract fun create ()Lio/github/kaeferfreund/socketio/engineio/EngineClients;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineCloseReason {
+	public static final field FORCED_CLOSE Ljava/lang/String;
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineCloseReason;
+	public static final field PING_TIMEOUT Ljava/lang/String;
+	public static final field TRANSPORT_CLOSE Ljava/lang/String;
+	public static final field TRANSPORT_ERROR Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineCookie {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/EngineCookie$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/time/Instant;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpires ()Ljava/time/Instant;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineCookie$Companion {
+	public final fun parse (Ljava/lang/String;Ljava/time/Instant;)Lio/github/kaeferfreund/socketio/engineio/EngineCookie;
+	public static synthetic fun parse$default (Lio/github/kaeferfreund/socketio/engineio/EngineCookie$Companion;Ljava/lang/String;Ljava/time/Instant;ILjava/lang/Object;)Lio/github/kaeferfreund/socketio/engineio/EngineCookie;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineCookieJar {
+	public fun <init> ()V
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun cookieHeader ()Ljava/lang/String;
+	public final fun getCurrent ()Ljava/util/List;
+	public final fun parseCookies (Ljava/util/List;)V
+}
+
+public abstract class io/github/kaeferfreund/socketio/engineio/EngineEvent {
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Close : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Object;)V
+	public final fun getDescription ()Ljava/lang/Object;
+	public final fun getReason ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Drain : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineEvent$Drain;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Error : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/EngineIOException;)V
+	public final fun getError ()Lio/github/kaeferfreund/socketio/engineio/EngineIOException;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Flush : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineEvent$Flush;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$HandshakeReceived : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/Handshake;)V
+	public final fun getHandshake ()Lio/github/kaeferfreund/socketio/engineio/Handshake;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Heartbeat : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineEvent$Heartbeat;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Message : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;)V
+	public final fun getData ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Open : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineEvent$Open;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$PacketCreated : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)V
+	public final fun getPacket ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$PacketReceived : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)V
+	public final fun getPacket ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Ping : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineEvent$Ping;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Pong : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineEvent$Pong;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Upgrade : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/EngineTransport;)V
+	public final fun getTransport ()Lio/github/kaeferfreund/socketio/engineio/EngineTransport;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$UpgradeError : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/EngineIOException;Ljava/lang/String;)V
+	public final fun getError ()Lio/github/kaeferfreund/socketio/engineio/EngineIOException;
+	public final fun getTransportName ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineEvent$Upgrading : io/github/kaeferfreund/socketio/engineio/EngineEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/EngineTransport;)V
+	public final fun getTransport ()Lio/github/kaeferfreund/socketio/engineio/EngineTransport;
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineHttpCallback {
+	public abstract fun onFailure (Ljava/lang/Throwable;)V
+	public abstract fun onResponse (Lio/github/kaeferfreund/socketio/engineio/EngineHttpResponse;)V
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineHttpClient {
+	public abstract fun execute (Lio/github/kaeferfreund/socketio/engineio/EngineHttpRequest;Lio/github/kaeferfreund/socketio/engineio/EngineHttpCallback;)Lio/github/kaeferfreund/socketio/engineio/Cancellable;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineHttpRequest {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Lkotlin/time/Duration;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Lkotlin/time/Duration;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBody ()Ljava/lang/String;
+	public final fun getHeaders ()Ljava/util/List;
+	public final fun getMaxResponseBytes ()J
+	public final fun getMethod ()Ljava/lang/String;
+	public final fun getTimeout-FghU774 ()Lkotlin/time/Duration;
+	public final fun getUrl ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineHttpResponse {
+	public fun <init> (ILjava/lang/String;Ljava/util/List;)V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBody ()Ljava/lang/String;
+	public final fun getHeaders ()Ljava/util/List;
+	public final fun getStatus ()I
+	public final fun headerValues (Ljava/lang/String;)Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+}
+
+public class io/github/kaeferfreund/socketio/engineio/EngineIOException : java/lang/RuntimeException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineOptions {
+	public fun <init> ()V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ZZLjava/lang/String;Ljava/lang/Boolean;Ljava/util/List;ZZLkotlin/time/Duration;Ljava/util/Map;Ljava/util/Map;ZLjava/util/List;Ljava/lang/Integer;ZLjava/util/Map;Lio/github/kaeferfreund/socketio/engineio/EngineClients;JLio/github/kaeferfreund/socketio/engineio/HandshakeLimits;Lio/github/kaeferfreund/socketio/engineio/SocketLogger;Lio/github/kaeferfreund/socketio/engineio/EnginePacketObserver;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ZZLjava/lang/String;Ljava/lang/Boolean;Ljava/util/List;ZZLkotlin/time/Duration;Ljava/util/Map;Ljava/util/Map;ZLjava/util/List;Ljava/lang/Integer;ZLjava/util/Map;Lio/github/kaeferfreund/socketio/engineio/EngineClients;JLio/github/kaeferfreund/socketio/engineio/HandshakeLimits;Lio/github/kaeferfreund/socketio/engineio/SocketLogger;Lio/github/kaeferfreund/socketio/engineio/EnginePacketObserver;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/Map;Lio/github/kaeferfreund/socketio/engineio/EngineClients;Lio/github/kaeferfreund/socketio/engineio/SocketLogger;Lio/github/kaeferfreund/socketio/engineio/EnginePacketObserver;)Lio/github/kaeferfreund/socketio/engineio/EngineOptions;
+	public static synthetic fun copy$default (Lio/github/kaeferfreund/socketio/engineio/EngineOptions;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Ljava/util/Map;Lio/github/kaeferfreund/socketio/engineio/EngineClients;Lio/github/kaeferfreund/socketio/engineio/SocketLogger;Lio/github/kaeferfreund/socketio/engineio/EnginePacketObserver;ILjava/lang/Object;)Lio/github/kaeferfreund/socketio/engineio/EngineOptions;
+	public final fun getAddTrailingSlash ()Z
+	public final fun getClients ()Lio/github/kaeferfreund/socketio/engineio/EngineClients;
+	public final fun getExtraHeaders ()Ljava/util/Map;
+	public final fun getForceBase64 ()Z
+	public final fun getHandshakeLimits ()Lio/github/kaeferfreund/socketio/engineio/HandshakeLimits;
+	public final fun getLogger ()Lio/github/kaeferfreund/socketio/engineio/SocketLogger;
+	public final fun getMaxPollingResponseBytes ()J
+	public final fun getPacketObserver ()Lio/github/kaeferfreund/socketio/engineio/EnginePacketObserver;
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getPerMessageDeflateThreshold ()Ljava/lang/Integer;
+	public final fun getProtocols ()Ljava/util/List;
+	public final fun getQuery ()Ljava/util/Map;
+	public final fun getRememberUpgrade ()Z
+	public final fun getRequestTimeout-FghU774 ()Lkotlin/time/Duration;
+	public final fun getTimestampParam ()Ljava/lang/String;
+	public final fun getTimestampRequests ()Ljava/lang/Boolean;
+	public final fun getTransportFactories ()Ljava/util/Map;
+	public final fun getTransportOptions ()Ljava/util/Map;
+	public final fun getTransports ()Ljava/util/List;
+	public final fun getTryAllTransports ()Z
+	public final fun getUpgrade ()Z
+	public final fun getWithCredentials ()Z
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EnginePacketObserver {
+	public abstract fun onPacket (ZLio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)V
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineServerException : io/github/kaeferfreund/socketio/engineio/EngineIOException {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getCode ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineSocket {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/EngineSocket$Companion;
+	public static final field PROTOCOL I
+	public fun <init> (Ljava/lang/String;Lio/github/kaeferfreund/socketio/engineio/EngineOptions;Lio/github/kaeferfreund/socketio/engineio/ProtocolExecutor;)V
+	public final fun close ()V
+	public final fun filterUpgrades (Ljava/util/List;)Ljava/util/List;
+	public final fun getExecutor ()Lio/github/kaeferfreund/socketio/engineio/ProtocolExecutor;
+	public final fun getHostname ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getOptions ()Lio/github/kaeferfreund/socketio/engineio/EngineOptions;
+	public final fun getPort ()Ljava/lang/String;
+	public final fun getReadyState ()Lio/github/kaeferfreund/socketio/engineio/EngineState;
+	public final fun getTransport ()Lio/github/kaeferfreund/socketio/engineio/EngineTransport;
+	public final fun getTransports ()Ljava/util/List;
+	public final fun getUpgrading ()Z
+	public final fun getWriteBuffer ()Ljava/util/List;
+	public final fun hasPingExpired ()Z
+	public final fun onNetworkLost ()V
+	public final fun open ()V
+	public final fun send (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions;Lkotlin/jvm/functions/Function0;)V
+	public final fun send (Ljava/lang/String;)V
+	public static synthetic fun send$default (Lio/github/kaeferfreund/socketio/engineio/EngineSocket;Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineSocket$Companion {
+	public final fun getPriorWebsocketSuccess ()Ljava/util/concurrent/atomic/AtomicBoolean;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineState : java/lang/Enum {
+	public static final field CLOSED Lio/github/kaeferfreund/socketio/engineio/EngineState;
+	public static final field CLOSING Lio/github/kaeferfreund/socketio/engineio/EngineState;
+	public static final field OPEN Lio/github/kaeferfreund/socketio/engineio/EngineState;
+	public static final field OPENING Lio/github/kaeferfreund/socketio/engineio/EngineState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/kaeferfreund/socketio/engineio/EngineState;
+	public static fun values ()[Lio/github/kaeferfreund/socketio/engineio/EngineState;
+}
+
+public abstract class io/github/kaeferfreund/socketio/engineio/EngineTransport {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/TransportOptions;)V
+	public final fun close ()V
+	protected final fun createUri (Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+	protected abstract fun doClose ()V
+	protected abstract fun doOpen ()V
+	protected final fun getExecutor ()Lio/github/kaeferfreund/socketio/engineio/ProtocolExecutor;
+	public abstract fun getName ()Ljava/lang/String;
+	protected final fun getOptions ()Lio/github/kaeferfreund/socketio/engineio/TransportOptions;
+	public final fun getQuery ()Ljava/util/Map;
+	public final fun getReadyState ()Lio/github/kaeferfreund/socketio/engineio/TransportState;
+	protected fun getSupportsBinary ()Z
+	public final fun getWritable ()Z
+	protected fun onClose (Lio/github/kaeferfreund/socketio/engineio/CloseDetails;)V
+	protected fun onData (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;)V
+	protected final fun onError (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Throwable;)V
+	public static synthetic fun onError$default (Lio/github/kaeferfreund/socketio/engineio/EngineTransport;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Throwable;ILjava/lang/Object;)V
+	protected fun onOpen ()V
+	protected final fun onPacket (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)V
+	public final fun open ()V
+	public fun pause (Lkotlin/jvm/functions/Function0;)V
+	protected final fun requestHeaders ()Ljava/util/List;
+	public final fun send (Ljava/util/List;)V
+	protected final fun setReadyState (Lio/github/kaeferfreund/socketio/engineio/TransportState;)V
+	protected final fun setWritable (Z)V
+	public abstract fun uri ()Ljava/lang/String;
+	protected abstract fun write (Ljava/util/List;)V
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineTransport$Factory {
+	public abstract fun create (Lio/github/kaeferfreund/socketio/engineio/TransportOptions;)Lio/github/kaeferfreund/socketio/engineio/EngineTransport;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineUri {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/EngineUri;
+	public final fun byteLength (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;)J
+	public final fun decodeQuery (Ljava/lang/String;)Ljava/util/Map;
+	public final fun decodeURIComponent (Ljava/lang/String;)Ljava/lang/String;
+	public final fun encodeQuery (Ljava/util/Map;)Ljava/lang/String;
+	public final fun encodeURIComponent (Ljava/lang/String;)Ljava/lang/String;
+	public final fun parse (Ljava/lang/String;)Lio/github/kaeferfreund/socketio/engineio/EngineUri$Parsed;
+	public final fun randomString (J)Ljava/lang/String;
+	public static synthetic fun randomString$default (Lio/github/kaeferfreund/socketio/engineio/EngineUri;JILjava/lang/Object;)Ljava/lang/String;
+	public final fun utf8Length (Ljava/lang/String;)J
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineUri$Parsed {
+	public final fun getHost ()Ljava/lang/String;
+	public final fun getIpv6 ()Z
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getPort ()Ljava/lang/String;
+	public final fun getProtocol ()Ljava/lang/String;
+	public final fun getQuery ()Ljava/lang/String;
+	public final fun getSecure ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineWebSocketClient {
+	public abstract fun connect (Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketRequest;Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketListener;)Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketConnection;
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineWebSocketConnection {
+	public abstract fun cancel ()V
+	public abstract fun close (ILjava/lang/String;)V
+	public abstract fun getQueuedBytes ()J
+	public abstract fun send (Ljava/lang/String;Z)Z
+	public abstract fun send ([BZ)Z
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineWebSocketListener {
+	public abstract fun onClosed (ILjava/lang/String;)V
+	public abstract fun onFailure (Ljava/lang/Throwable;Ljava/lang/Integer;)V
+	public abstract fun onMessage (Ljava/lang/String;)V
+	public abstract fun onMessage ([B)V
+	public abstract fun onOpen (Ljava/util/List;)V
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineWebSocketRequest {
+	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;)V
+	public final fun getCompressionThreshold ()Ljava/lang/Integer;
+	public final fun getHeaders ()Ljava/util/List;
+	public final fun getProtocols ()Ljava/util/List;
+	public final fun getUrl ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/Handshake {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;JJLjava/lang/Long;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMaxPayload ()Ljava/lang/Long;
+	public final fun getPingInterval-UwyO8pc ()J
+	public final fun getPingTimeout-UwyO8pc ()J
+	public final fun getSid ()Ljava/lang/String;
+	public final fun getUpgrades ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/HandshakeLimits {
+	public fun <init> ()V
+	public synthetic fun <init> (JJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMaxPingInterval-UwyO8pc ()J
+	public final fun getMaxPingTimeout-UwyO8pc ()J
+}
+
+public abstract interface annotation class io/github/kaeferfreund/socketio/engineio/InternalSocketIOApi : java/lang/annotation/Annotation {
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/LogLevel : java/lang/Enum {
+	public static final field DEBUG Lio/github/kaeferfreund/socketio/engineio/LogLevel;
+	public static final field ERROR Lio/github/kaeferfreund/socketio/engineio/LogLevel;
+	public static final field INFO Lio/github/kaeferfreund/socketio/engineio/LogLevel;
+	public static final field VERBOSE Lio/github/kaeferfreund/socketio/engineio/LogLevel;
+	public static final field WARN Lio/github/kaeferfreund/socketio/engineio/LogLevel;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/kaeferfreund/socketio/engineio/LogLevel;
+	public static fun values ()[Lio/github/kaeferfreund/socketio/engineio/LogLevel;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/PollingTransport : io/github/kaeferfreund/socketio/engineio/EngineTransport {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/PollingTransport$Companion;
+	public static final field NAME Ljava/lang/String;
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/TransportOptions;)V
+	public fun getName ()Ljava/lang/String;
+	public fun pause (Lkotlin/jvm/functions/Function0;)V
+	public fun uri ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/PollingTransport$Companion {
+	public final fun getFACTORY ()Lio/github/kaeferfreund/socketio/engineio/EngineTransport$Factory;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/ProtocolExecutor {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlin/time/TimeSource$WithComparableMarks;)V
+	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlin/time/TimeSource$WithComparableMarks;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun execute (Lkotlin/jvm/functions/Function0;)V
+	public final fun getTimeSource ()Lkotlin/time/TimeSource$WithComparableMarks;
+	public final fun isCurrent ()Z
+	public final fun post (Lkotlin/jvm/functions/Function0;)V
+	public final fun schedule-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lio/github/kaeferfreund/socketio/engineio/Cancellable;
+	public final fun shutdown ()V
+}
+
+public abstract interface class io/github/kaeferfreund/socketio/engineio/SocketLogger {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/SocketLogger$Companion;
+	public abstract fun isLoggable (Lio/github/kaeferfreund/socketio/engineio/LogLevel;)Z
+	public abstract fun log (Lio/github/kaeferfreund/socketio/engineio/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+	public static synthetic fun log$default (Lio/github/kaeferfreund/socketio/engineio/SocketLogger;Lio/github/kaeferfreund/socketio/engineio/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;ILjava/lang/Object;)V
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/SocketLogger$Companion {
+	public final fun console (Lio/github/kaeferfreund/socketio/engineio/LogLevel;)Lio/github/kaeferfreund/socketio/engineio/SocketLogger;
+	public static synthetic fun console$default (Lio/github/kaeferfreund/socketio/engineio/SocketLogger$Companion;Lio/github/kaeferfreund/socketio/engineio/LogLevel;ILjava/lang/Object;)Lio/github/kaeferfreund/socketio/engineio/SocketLogger;
+	public final fun getNONE ()Lio/github/kaeferfreund/socketio/engineio/SocketLogger;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/SocketLogger$DefaultImpls {
+	public static synthetic fun log$default (Lio/github/kaeferfreund/socketio/engineio/SocketLogger;Lio/github/kaeferfreund/socketio/engineio/LogLevel;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;ILjava/lang/Object;)V
+}
+
+public abstract class io/github/kaeferfreund/socketio/engineio/TransportEvent {
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportEvent$Close : io/github/kaeferfreund/socketio/engineio/TransportEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/CloseDetails;)V
+	public final fun getDetails ()Lio/github/kaeferfreund/socketio/engineio/CloseDetails;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportEvent$Drain : io/github/kaeferfreund/socketio/engineio/TransportEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/TransportEvent$Drain;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportEvent$Error : io/github/kaeferfreund/socketio/engineio/TransportEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/TransportException;)V
+	public final fun getError ()Lio/github/kaeferfreund/socketio/engineio/TransportException;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportEvent$Open : io/github/kaeferfreund/socketio/engineio/TransportEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/TransportEvent$Open;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportEvent$Packet : io/github/kaeferfreund/socketio/engineio/TransportEvent {
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)V
+	public final fun getPacket ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportEvent$Poll : io/github/kaeferfreund/socketio/engineio/TransportEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/TransportEvent$Poll;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportEvent$PollComplete : io/github/kaeferfreund/socketio/engineio/TransportEvent {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/TransportEvent$PollComplete;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportException : io/github/kaeferfreund/socketio/engineio/EngineIOException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDescription ()Ljava/lang/Object;
+	public final fun getResponseBody ()Ljava/lang/String;
+	public final fun getStatusCode ()Ljava/lang/Integer;
+	public final fun getType ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportOptions {
+	public synthetic fun <init> (Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/util/Map;Ljava/lang/Boolean;Ljava/lang/String;ZLjava/util/Map;Lkotlin/time/Duration;ZLjava/util/List;Ljava/lang/Integer;JLio/github/kaeferfreund/socketio/engineio/ProtocolExecutor;Lio/github/kaeferfreund/socketio/engineio/EngineCookieJar;Lio/github/kaeferfreund/socketio/engineio/EngineHttpClient;Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketClient;Lio/github/kaeferfreund/socketio/engineio/SocketLogger;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCookieJar ()Lio/github/kaeferfreund/socketio/engineio/EngineCookieJar;
+	public final fun getExecutor ()Lio/github/kaeferfreund/socketio/engineio/ProtocolExecutor;
+	public final fun getExtraHeaders ()Ljava/util/Map;
+	public final fun getForceBase64 ()Z
+	public final fun getHostname ()Ljava/lang/String;
+	public final fun getHttpClient ()Lio/github/kaeferfreund/socketio/engineio/EngineHttpClient;
+	public final fun getLogger ()Lio/github/kaeferfreund/socketio/engineio/SocketLogger;
+	public final fun getMaxPollingResponseBytes ()J
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getPerMessageDeflateThreshold ()Ljava/lang/Integer;
+	public final fun getPort ()Ljava/lang/String;
+	public final fun getProtocols ()Ljava/util/List;
+	public final fun getQuery ()Ljava/util/Map;
+	public final fun getRequestTimeout-FghU774 ()Lkotlin/time/Duration;
+	public final fun getSecure ()Z
+	public final fun getTimestampParam ()Ljava/lang/String;
+	public final fun getTimestampRequests ()Ljava/lang/Boolean;
+	public final fun getWebSocketClient ()Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketClient;
+	public final fun getWithCredentials ()Z
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportOverrides {
+	public fun <init> ()V
+	public synthetic fun <init> (Ljava/util/Map;Ljava/util/Map;Lkotlin/time/Duration;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/util/Map;Ljava/util/Map;Lkotlin/time/Duration;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getExtraHeaders ()Ljava/util/Map;
+	public final fun getForceBase64 ()Ljava/lang/Boolean;
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getQuery ()Ljava/util/Map;
+	public final fun getRequestTimeout-FghU774 ()Lkotlin/time/Duration;
+	public final fun getTimestampRequests ()Ljava/lang/Boolean;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/TransportState : java/lang/Enum {
+	public static final field CLOSED Lio/github/kaeferfreund/socketio/engineio/TransportState;
+	public static final field OPEN Lio/github/kaeferfreund/socketio/engineio/TransportState;
+	public static final field OPENING Lio/github/kaeferfreund/socketio/engineio/TransportState;
+	public static final field PAUSED Lio/github/kaeferfreund/socketio/engineio/TransportState;
+	public static final field PAUSING Lio/github/kaeferfreund/socketio/engineio/TransportState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/kaeferfreund/socketio/engineio/TransportState;
+	public static fun values ()[Lio/github/kaeferfreund/socketio/engineio/TransportState;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/WebSocketTransport : io/github/kaeferfreund/socketio/engineio/EngineTransport {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/WebSocketTransport$Companion;
+	public static final field NAME Ljava/lang/String;
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/TransportOptions;)V
+	public fun getName ()Ljava/lang/String;
+	public fun uri ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/WebSocketTransport$Companion {
+	public final fun getFACTORY ()Lio/github/kaeferfreund/socketio/engineio/EngineTransport$Factory;
+}
+

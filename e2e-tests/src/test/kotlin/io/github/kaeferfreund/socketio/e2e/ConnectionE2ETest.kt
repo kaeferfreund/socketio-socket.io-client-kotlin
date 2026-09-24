@@ -212,6 +212,7 @@ class ConnectionE2ETest {
                     onConnect {
                         when (phase.getAndIncrement()) {
                             0 -> disconnect()
+
                             // Connected again manually: now lose the transport.
                             1 -> killTransport(socket)
                         }
@@ -737,7 +738,8 @@ class ConnectionE2ETest {
                 },
             ) {
                 autoConnect = true
-                packetObserver = io.github.kaeferfreund.socketio.engineio.EnginePacketObserver { outgoing, packet -> if (outgoing) created += packet.text.orEmpty() }
+                packetObserver =
+                    io.github.kaeferfreund.socketio.engineio.EnginePacketObserver { outgoing, packet -> if (outgoing) created += packet.text.orEmpty() }
             }
             assertTrue(withTimeout(10.seconds) { done.await() })
             delay(50.milliseconds)
@@ -758,7 +760,8 @@ class ConnectionE2ETest {
                     },
                 ) {
                     autoConnect = true
-                    packetObserver = io.github.kaeferfreund.socketio.engineio.EnginePacketObserver { outgoing, packet -> if (outgoing) created += packet.text.orEmpty() }
+                    packetObserver =
+                        io.github.kaeferfreund.socketio.engineio.EnginePacketObserver { outgoing, packet -> if (outgoing) created += packet.text.orEmpty() }
                 }
             withTimeout(10.seconds) { done.await() }
             delay(50.milliseconds)
@@ -770,20 +773,20 @@ class ConnectionE2ETest {
         done: CompletableDeferred<Unit>,
     ) {
         run {
-                val socket = manager.socket("/")
-                val socketFoo = manager.socket("/foo")
-                // JavaScript relies on /foo's CONNECT reply arriving first; the order of the
-                // two replies is the server's, so wait for both before disconnecting.
-                val both = AtomicInteger()
-                val onBoth = {
-                    if (both.incrementAndGet() == 2) {
-                        socket.disconnect()
-                        socketFoo.disconnect()
-                        done.complete(Unit)
-                    }
+            val socket = manager.socket("/")
+            val socketFoo = manager.socket("/foo")
+            // JavaScript relies on /foo's CONNECT reply arriving first; the order of the
+            // two replies is the server's, so wait for both before disconnecting.
+            val both = AtomicInteger()
+            val onBoth = {
+                if (both.incrementAndGet() == 2) {
+                    socket.disconnect()
+                    socketFoo.disconnect()
+                    done.complete(Unit)
                 }
-                socket.onConnect { onBoth() }
-                socketFoo.onConnect { onBoth() }
             }
+            socket.onConnect { onBoth() }
+            socketFoo.onConnect { onBoth() }
+        }
     }
 }

@@ -34,7 +34,13 @@ public class SocketIOPacket(
     public val id: Long? = null,
 ) {
     /** The event name of an EVENT packet (a string or a number), else `null`. */
-    public val eventName: SocketIOValue? get() = if (type == SocketIOPacketType.EVENT || type == SocketIOPacketType.BINARY_EVENT) (data as? SocketIOValue.Array)?.get(0) else null
+    public val eventName: SocketIOValue? get() = if (type == SocketIOPacketType.EVENT ||
+        type == SocketIOPacketType.BINARY_EVENT
+    ) {
+        (data as? SocketIOValue.Array)?.get(0)
+    } else {
+        null
+    }
 
     /** The arguments of an event (after the name) or of an acknowledgement. */
     public val arguments: List<SocketIOValue>
@@ -75,10 +81,15 @@ public class SocketIOPacket(
         ): Boolean =
             when (type) {
                 SocketIOPacketType.CONNECT -> payload == null || payload is SocketIOValue.Object
+
                 SocketIOPacketType.DISCONNECT -> payload == null
+
                 SocketIOPacketType.EVENT -> isEventPayloadValid(payload)
+
                 SocketIOPacketType.ACK -> payload is SocketIOValue.Array
+
                 SocketIOPacketType.CONNECT_ERROR -> payload is SocketIOValue.Text || payload is SocketIOValue.Object
+
                 // isPacketValid rejects the binary types; they only exist on the wire.
                 SocketIOPacketType.BINARY_EVENT, SocketIOPacketType.BINARY_ACK -> false
             }

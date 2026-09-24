@@ -2,8 +2,8 @@ package io.github.kaeferfreund.socketio
 
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runCurrent
 import org.junit.jupiter.api.Assertions.assertEquals

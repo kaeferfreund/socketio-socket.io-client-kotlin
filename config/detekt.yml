@@ -1,0 +1,45 @@
+# Built upon detekt's defaults. Thresholds are raised where the code is a
+# deliberate line-by-line port of the JavaScript reference (engine, manager,
+# socket, decoder), whose structure is kept so it can be compared side by side.
+complexity:
+  LongMethod:
+    allowedLines: 90
+  CyclomaticComplexMethod:
+    allowedComplexity: 25
+  LongParameterList:
+    allowedFunctionParameters: 8
+    allowedConstructorParameters: 24
+  TooManyFunctions:
+    allowedFunctionsPerFile: 40
+    # Socket mirrors the JavaScript Socket API one function per method.
+    allowedFunctionsPerClass: 80
+    allowedFunctionsPerObject: 30
+  NestedBlockDepth:
+    allowedDepth: 6
+  LargeClass:
+    allowedLines: 900
+  ComplexCondition:
+    allowedConditions: 5
+style:
+  MagicNumber:
+    active: false
+  ReturnCount:
+    active: false
+  ThrowsCount:
+    active: false
+  MaxLineLength:
+    maxLineLength: 160
+  LoopWithTooManyJumpStatements:
+    active: false
+  UnusedPrivateProperty:
+    active: true
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Test', 'Operation']
+  MatchingDeclarationName:
+    active: false
+exceptions:
+  TooGenericExceptionCaught:
+    active: true
+  SwallowedException:
+    allowedExceptionNameRegex: '_|(ignore|expected).*|e'

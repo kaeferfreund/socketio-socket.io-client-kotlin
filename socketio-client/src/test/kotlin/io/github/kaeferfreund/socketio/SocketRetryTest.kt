@@ -19,10 +19,10 @@ class SocketRetryTest {
             val socket =
                 h.manager { autoConnect = false }.socket(
                     options =
-                        SocketOptions {
-                            retries = 3
-                            ackTimeout = 10.milliseconds
-                        },
+                    SocketOptions {
+                        retries = 3
+                        ackTimeout = 10.milliseconds
+                    },
                 )
             var result: Result<*>? = null
             socket.emit("echo", 1) { result = it }
@@ -43,10 +43,10 @@ class SocketRetryTest {
             val socket =
                 h.manager().socket(
                     options =
-                        SocketOptions {
-                            retries = 2
-                            ackTimeout = 50.milliseconds
-                        },
+                    SocketOptions {
+                        retries = 2
+                        ackTimeout = 50.milliseconds
+                    },
                 )
             h.settle()
             var result: Result<*>? = null

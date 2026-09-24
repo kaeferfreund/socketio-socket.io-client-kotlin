@@ -127,7 +127,6 @@ public class WebSocketTransport(
         connection = null
     }
 
-    @InternalSocketIOApi
     override fun uri(): String {
         val schema = if (options.secure) "wss" else "ws"
         if (options.timestampRequests == true) query[options.timestampParam] = EngineUri.randomString()

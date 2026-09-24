@@ -138,6 +138,7 @@ public class SocketManagerOptions private constructor(
     public val random: Random = builder.random
     public val logger: SocketLogger = builder.logger
     public val plugins: List<SocketManagerPlugin> = builder.plugins.toList()
+    public val eventFlowCapacity: Int = builder.eventFlowCapacity
     public val tracer: SocketTracer? = builder.tracer
 
     /** The Engine.IO options derived from these options. */
@@ -246,6 +247,13 @@ public class SocketManagerOptions private constructor(
         /** Platform integrations attached to every manager built from these options. */
         public val plugins: MutableList<SocketManagerPlugin> = ArrayList(from?.plugins ?: emptyList())
 
+        /**
+         * Buffer of the `events` flows per slow collector. Unbounded by default
+         * (a collector never misses an event); a bounded capacity drops the
+         * oldest undelivered events for a collector that falls behind.
+         */
+        public var eventFlowCapacity: Int = from?.eventFlowCapacity ?: Int.MAX_VALUE
+
         /** Receives asynchronous timing sections (connect, upgrade, acknowledgement roundtrips). */
         public var tracer: SocketTracer? = from?.tracer
 
@@ -300,6 +308,7 @@ public class SocketManagerOptions private constructor(
             require(!reconnectionDelay.isNegative() && !reconnectionDelayMax.isNegative()) { "reconnection delays must not be negative" }
             require(randomizationFactor in 0.0..1.0) { "randomizationFactor must be between 0 and 1" }
             require(timeout == null || !timeout!!.isNegative()) { "timeout must not be negative" }
+            require(eventFlowCapacity > 0) { "eventFlowCapacity must be positive" }
             return SocketManagerOptions(this)
         }
     }

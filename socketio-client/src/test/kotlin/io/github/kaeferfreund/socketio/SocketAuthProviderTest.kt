@@ -26,13 +26,13 @@ class SocketAuthProviderTest {
             val socket =
                 h.manager { reconnectionDelay = 1.seconds }.socket(
                     options =
-                        SocketOptions {
-                            authProvider =
-                                AuthProvider { attempt ->
-                                    attempts += attempt
-                                    mapOf("token" to token)
-                                }
-                        },
+                    SocketOptions {
+                        authProvider =
+                            AuthProvider { attempt ->
+                                attempts += attempt
+                                mapOf("token" to token)
+                            }
+                    },
                 )
             h.settle()
             assertTrue(socket.connected)
@@ -72,13 +72,13 @@ class SocketAuthProviderTest {
             val socket =
                 h.manager().socket(
                     options =
-                        SocketOptions {
-                            authProvider =
-                                AuthProvider {
-                                    release.await()
-                                    mapOf("token" to "late")
-                                }
-                        },
+                    SocketOptions {
+                        authProvider =
+                            AuthProvider {
+                                release.await()
+                                mapOf("token" to "late")
+                            }
+                    },
                 )
             h.settle()
             socket.disconnect()
@@ -97,13 +97,13 @@ class SocketAuthProviderTest {
             val slow =
                 manager.socket(
                     options =
-                        SocketOptions {
-                            authProvider =
-                                AuthProvider {
-                                    delay(500.milliseconds)
-                                    mapOf("slow" to true)
-                                }
-                        },
+                    SocketOptions {
+                        authProvider =
+                            AuthProvider {
+                                delay(500.milliseconds)
+                                mapOf("slow" to true)
+                            }
+                    },
                 )
             val fast = manager.socket("/fast")
             h.settle()

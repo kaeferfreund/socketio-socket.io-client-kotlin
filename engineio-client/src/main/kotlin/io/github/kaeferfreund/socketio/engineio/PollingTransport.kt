@@ -111,7 +111,6 @@ public class PollingTransport(
         }
     }
 
-    @InternalSocketIOApi
     override fun uri(): String {
         val schema = if (options.secure) "https" else "http"
         if (options.timestampRequests != false) query[options.timestampParam] = EngineUri.randomString()
@@ -208,4 +207,3 @@ public class PollingTransport(
         public val FACTORY: Factory = Factory { PollingTransport(it) }
     }
 }
-

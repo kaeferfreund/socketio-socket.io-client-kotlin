@@ -56,7 +56,7 @@ class SocketE2ETest {
         e2e {
             val socket = io()
             socket.awaitConnect()
-            val idAtDisconnect = await<String?> { d -> socket.onDisconnect { _, _ -> d.complete(socket.id) } .also { socket.disconnect() } }
+            val idAtDisconnect = await<String?> { d -> socket.onDisconnect { _, _ -> d.complete(socket.id) }.also { socket.disconnect() } }
             assertNull(idAtDisconnect)
         }
 
@@ -156,7 +156,14 @@ class SocketE2ETest {
             val compress = CompletableDeferred<Boolean>()
             val socket =
                 io {
-                    packetObserver = EnginePacketObserver { outgoing, packet -> if (outgoing && packet.text?.startsWith("2") == true) compress.complete(packet.options.compress) }
+                    packetObserver =
+                        EnginePacketObserver { outgoing, packet ->
+                            if (outgoing &&
+                                packet.text?.startsWith("2") == true
+                            ) {
+                                compress.complete(packet.options.compress)
+                            }
+                        }
                 }
             socket.awaitConnect()
             socket.emit("hi")
@@ -171,7 +178,14 @@ class SocketE2ETest {
             val compress = CompletableDeferred<Boolean>()
             val socket =
                 io {
-                    packetObserver = EnginePacketObserver { outgoing, packet -> if (outgoing && packet.text?.startsWith("2") == true) compress.complete(packet.options.compress) }
+                    packetObserver =
+                        EnginePacketObserver { outgoing, packet ->
+                            if (outgoing &&
+                                packet.text?.startsWith("2") == true
+                            ) {
+                                compress.complete(packet.options.compress)
+                            }
+                        }
                 }
             socket.awaitConnect()
             socket.compress(false).emit("hi")
@@ -693,7 +707,13 @@ class SocketE2ETest {
             val socket = io()
             socket.awaitConnect()
             socket.disconnect()
-            val value = await<String?> { d -> socket.emit("echo", "a") { d.complete(it.getOrThrow()[0].string) } .also { kotlinx.coroutines.runBlocking { delay(100) }; socket.connect() } }
+            val value =
+                await<String?> { d ->
+                    socket.emit("echo", "a") { d.complete(it.getOrThrow()[0].string) }.also {
+                        kotlinx.coroutines.runBlocking { delay(100) }
+                        socket.connect()
+                    }
+                }
             assertEquals("a", value)
             socket.disconnect()
         }

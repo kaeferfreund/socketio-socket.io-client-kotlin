@@ -153,8 +153,12 @@ class SocketIOParserSafetyTest {
             val r = rs.random
             return when {
                 depth > 4 || r.nextInt(4) < 2 -> if (r.nextInt(5) == 0) ByteArray(r.nextInt(6)) { it.toByte() } else scalars[r.nextInt(scalars.size)]
+
                 r.nextBoolean() -> List(r.nextInt(4)) { randomValue(rs, depth + 1) }
-                else -> (0 until r.nextInt(4)).associate { listOf("x", "1", "0", "🦧", "placeholder", "num", "k$it")[r.nextInt(7)] to randomValue(rs, depth + 1) }
+
+                else -> (0 until r.nextInt(4)).associate {
+                    listOf("x", "1", "0", "🦧", "placeholder", "num", "k$it")[r.nextInt(7)] to randomValue(rs, depth + 1)
+                }
             }
         }
     }

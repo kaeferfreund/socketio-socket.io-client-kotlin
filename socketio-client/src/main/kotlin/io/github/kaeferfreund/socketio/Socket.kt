@@ -82,7 +82,7 @@ public class Socket internal constructor(
     ) {
         var tryCount = 0
         var pending = false
-        lateinit var callback: (Throwable?, List<SocketIOValue>) -> Unit
+        var callback: (Throwable?, List<SocketIOValue>) -> Unit = { _, _ -> }
     }
 
     /** An acknowledgement awaiting its response. [withError] callbacks get err-first semantics, as in JavaScript. */
@@ -112,7 +112,7 @@ public class Socket internal constructor(
     /** The connection state; updated on the protocol executor. */
     public val state: StateFlow<ConnectionState> = stateFlow.asStateFlow()
 
-    private val eventFlow = MutableSharedFlow<SocketEvent>(extraBufferCapacity = Int.MAX_VALUE)
+    private val eventFlow = eventFlow<SocketEvent>(manager.options)
 
     /** Lifecycle events and received events as a hot stream. */
     public val events: SharedFlow<SocketEvent> = eventFlow.asSharedFlow()
@@ -175,6 +175,19 @@ public class Socket internal constructor(
 
     /** Alias of [disconnect] (`socket.close()`). */
     public fun close(): Socket = disconnect()
+
+    /**
+     * Forgets the connection-state-recovery session (`pid` and offset), so the
+     * next CONNECT starts a fresh session — for example after the signed-in
+     * user changed. Has no effect on the current connection.
+     */
+    public fun clearRecoveryState(): Socket {
+        executor.execute {
+            pid = null
+            lastOffset = null
+        }
+        return this
+    }
 
     internal fun connectOnExecutor() {
         if (connectedState) return
@@ -321,9 +334,13 @@ public class Socket internal constructor(
                     )
                 }
             }
+
             SocketIOPacketType.EVENT, SocketIOPacketType.BINARY_EVENT -> onevent(packet)
+
             SocketIOPacketType.ACK, SocketIOPacketType.BINARY_ACK -> onack(packet)
+
             SocketIOPacketType.DISCONNECT -> ondisconnect()
+
             SocketIOPacketType.CONNECT_ERROR -> {
                 destroy()
                 val data = packet.data
@@ -438,7 +455,7 @@ public class Socket internal constructor(
         for (item in buffered) {
             notifyOutgoingListeners(item.event)
             packet(item.packet, item.compress)
-            options.outgoingInterceptor?.onSent(item.event)
+            intercept { it.onSent(item.event) }
         }
     }
 
@@ -540,7 +557,7 @@ public class Socket internal constructor(
         handle: AckHandle?,
     ) {
         if (options.retries > 0 && !flags.fromQueue && !flags.volatile) {
-            addToQueue(name, args, flags, ack)
+            addToQueue(name, args, flags, ack, handle)
             return
         }
         val data = SocketIOValue.Array(listOf(SocketIOValue.Text(name)) + args)
@@ -557,12 +574,14 @@ public class Socket internal constructor(
         val isConnected = connectedState && !(engine?.hasPingExpired() ?: false)
         val discard = flags.volatile && !isTransportWritable
         when {
-            discard -> options.outgoingInterceptor?.onDropped(outgoing, null)
+            discard -> intercept { it.onDropped(outgoing, null) }
+
             isConnected -> {
                 notifyOutgoingListeners(outgoing)
                 packet(packet, flags.compress)
-                options.outgoingInterceptor?.onSent(outgoing)
+                intercept { it.onSent(outgoing) }
             }
+
             else -> {
                 val limits = manager.options.bufferLimits
                 val bytes = estimateBytes(data.items)
@@ -575,8 +594,10 @@ public class Socket internal constructor(
                                 sendBuffer.size + 1L,
                                 false,
                             )
+
                         sendBufferBytes + bytes > limits.maxSendBufferBytes ->
                             SocketBufferLimitException(SocketBufferLimitException.Buffer.SEND_BUFFER, limits.maxSendBufferBytes, sendBufferBytes + bytes, true)
+
                         else -> null
                     }
                 if (error != null) {
@@ -586,7 +607,7 @@ public class Socket internal constructor(
                 sendBuffer.add(BufferedPacket(packet, flags.compress, bytes, outgoing))
                 sendBufferBytes += bytes
                 updatePending()
-                options.outgoingInterceptor?.onBuffered(outgoing)
+                intercept { it.onBuffered(outgoing) }
             }
         }
     }
@@ -596,7 +617,7 @@ public class Socket internal constructor(
         outgoing: OutgoingEvent,
         error: SocketBufferLimitException,
     ) {
-        options.outgoingInterceptor?.onDropped(outgoing, error)
+        intercept { it.onDropped(outgoing, error) }
         manager.emit(ManagerEvent.Error(error))
         val entry = id?.let { acks.remove(it) } ?: return
         entry.timer?.cancel()
@@ -640,7 +661,7 @@ public class Socket internal constructor(
                 if (removed) {
                     recomputeSendBufferBytes()
                     updatePending()
-                    options.outgoingInterceptor?.onDropped(outgoing, AckTimeoutException())
+                    intercept { it.onDropped(outgoing, AckTimeoutException()) }
                 }
                 ack(AckTimeoutException(), emptyList())
             }
@@ -665,6 +686,7 @@ public class Socket internal constructor(
         args: List<SocketIOValue>,
         flags: EmitFlags,
         ack: ((Throwable?, List<SocketIOValue>) -> Unit)?,
+        handle: AckHandle?,
     ) {
         val limits = manager.options.bufferLimits
         val bytes = estimateBytes(args) + name.length
@@ -672,18 +694,21 @@ public class Socket internal constructor(
             when {
                 queue.size + 1 > limits.maxRetryQueuePackets ->
                     SocketBufferLimitException(SocketBufferLimitException.Buffer.RETRY_QUEUE, limits.maxRetryQueuePackets.toLong(), queue.size + 1L, false)
+
                 queueBytes + bytes > limits.maxRetryQueueBytes ->
                     SocketBufferLimitException(SocketBufferLimitException.Buffer.RETRY_QUEUE, limits.maxRetryQueueBytes, queueBytes + bytes, true)
+
                 else -> null
             }
         if (error != null) {
-            options.outgoingInterceptor?.onDropped(OutgoingEvent(name, args), error)
+            intercept { it.onDropped(OutgoingEvent(name, args), error) }
             manager.emit(ManagerEvent.Error(error))
             ack?.invoke(error, emptyList())
             return
         }
         val packet = QueuedPacket(queueSeq++, name, args, flags.copy(fromQueue = true), bytes)
         packet.callback = { err, responseArgs ->
+            inFlightAckIds.remove(packet.id)
             if (queue.firstOrNull() === packet) {
                 if (err != null) {
                     if (packet.tryCount > options.retries) {
@@ -704,9 +729,28 @@ public class Socket internal constructor(
         }
         queue.add(packet)
         queueBytes += bytes
+        handle?.bindQueued(this, packet.id)
         updatePending()
         drainQueue()
     }
+
+    /** Removes a queued emit whose `emitWithAck` was cancelled; an in-flight try's acknowledgement is withdrawn too. */
+    internal fun withdrawQueued(queueId: Long) {
+        val index = queue.indexOfFirst { it.id == queueId }
+        if (index < 0) return
+        val packet = queue.removeAt(index)
+        queueBytes -= packet.bytes
+        if (packet.pending) {
+            // Ignore the acknowledgement of the try already sent.
+            packet.callback = { _, _ -> }
+            inFlightAckIds.remove(queueId)?.let { withdrawAck(it) }
+        }
+        updatePending()
+        if (index == 0) drainQueue()
+    }
+
+    /** Ack id of the try currently in flight, by queue id. */
+    private val inFlightAckIds = HashMap<Long, Long>()
 
     private fun drainQueue(force: Boolean = false) {
         if (!connectedState || queue.isEmpty()) return
@@ -714,9 +758,22 @@ public class Socket internal constructor(
         if (packet.pending && !force) return
         packet.pending = true
         packet.tryCount++
+        inFlightAckIds[packet.id] = ids
         // The queue always reads the acknowledgement err-first; JavaScript only does so when a
         // timeout applies, which makes the first ack argument an "error" without ackTimeout.
-        emitOnExecutor(packet.name, packet.args, packet.flags, packet.callback, withError = true, handle = null)
+        emitOnExecutor(packet.name, packet.args, packet.flags, { error, args -> packet.callback(error, args) }, withError = true, handle = null)
+    }
+
+    /** Calls the outgoing interceptor, isolating its exceptions like any listener's. */
+    private inline fun intercept(block: (OutgoingInterceptor) -> Unit) {
+        val interceptor = options.outgoingInterceptor ?: return
+        try {
+            block(interceptor)
+        } catch (
+            @Suppress("TooGenericExceptionCaught") e: Exception,
+        ) {
+            manager.reportListenerError(e)
+        }
     }
 
     private fun notifyOutgoingListeners(event: OutgoingEvent) {
@@ -732,6 +789,7 @@ public class Socket internal constructor(
         val named: Pair<String, List<SocketIOValue>>? =
             when (event) {
                 is SocketEvent.Connected -> "connect" to emptyList()
+
                 is SocketEvent.ConnectError ->
                     "connect_error" to
                         listOf(
@@ -740,7 +798,9 @@ public class Socket internal constructor(
                                 "data" to (event.error as? SocketConnectException)?.data,
                             ),
                         )
+
                 is SocketEvent.Disconnected -> "disconnect" to listOf(SocketIOValue.Text(event.reason.wireValue))
+
                 is SocketEvent.Received -> null
             }
         lifecycle.dispatch(event, manager)
@@ -877,15 +937,19 @@ public class Socket internal constructor(
                 total +=
                     when (val value = stack.removeLast()) {
                         is SocketIOValue.Text -> value.value.length.toLong() * 2
+
                         is SocketIOValue.Binary -> value.size.toLong()
+
                         is SocketIOValue.Array -> {
                             stack.addAll(value.items)
                             8
                         }
+
                         is SocketIOValue.Object -> {
                             stack.addAll(value.fields.values)
                             8L + value.fields.keys.sumOf { it.length.toLong() * 2 }
                         }
+
                         else -> 8
                     }
             }
@@ -911,6 +975,7 @@ internal class AckHandle {
     @Volatile var cancelled = false
     private var socket: Socket? = null
     private var id: Long? = null
+    private var queueId: Long? = null
 
     /** Executor only. */
     fun bind(
@@ -921,10 +986,19 @@ internal class AckHandle {
         this.id = id
     }
 
+    /** Executor only: the emit went to the retry queue. */
+    fun bindQueued(
+        socket: Socket,
+        queueId: Long,
+    ) {
+        this.socket = socket
+        this.queueId = queueId
+    }
+
     /** Executor only. */
     fun withdraw() {
-        val id = id ?: return
-        socket?.withdrawAck(id)
+        queueId?.let { socket?.withdrawQueued(it) }
+        id?.let { socket?.withdrawAck(it) }
     }
 }
 

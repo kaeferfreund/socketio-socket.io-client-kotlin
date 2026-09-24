@@ -2,9 +2,9 @@ package io.github.kaeferfreund.socketio.e2e
 
 import io.github.kaeferfreund.socketio.SocketOptions
 import io.github.kaeferfreund.socketio.Transport
-import org.junit.jupiter.api.Assertions.assertEquals
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 /**

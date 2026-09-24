@@ -93,7 +93,7 @@ public class SocketManager(
 
     // ---- Published views. -----------------------------------------------------------------------
 
-    private val eventFlow = MutableSharedFlow<ManagerEvent>(extraBufferCapacity = Int.MAX_VALUE)
+    private val eventFlow = eventFlow<ManagerEvent>(options)
 
     /** Every manager event, for coroutine consumers. Hot: only events after collection starts are seen. */
     public val events: SharedFlow<ManagerEvent> = eventFlow.asSharedFlow()
@@ -182,8 +182,11 @@ public class SocketManager(
     /**
      * The socket for namespace [nsp], created on first use (`manager.socket()`).
      * An existing inactive socket is reconnected when `autoConnect` is on.
-     * [setup] runs before that connection starts, so listeners it adds see
-     * every event.
+     *
+     * [setup] runs once, when the socket is created and before it connects,
+     * so listeners it adds see every event. For an existing socket, [options]
+     * and [setup] are ignored (as JavaScript ignores the options of a cached
+     * socket) — add listeners to the returned socket directly.
      */
     public fun socket(
         nsp: String = "/",
@@ -196,7 +199,7 @@ public class SocketManager(
                 created = true
                 Socket(this, nsp, options)
             }
-        setup?.invoke(socket)
+        if (created) setup?.invoke(socket)
         if (created) {
             if (this.options.autoConnect) socket.connect()
         } else if (this.options.autoConnect) {
@@ -576,6 +579,14 @@ public class SocketManager(
         const val TRACE_UPGRADE = "socket.io upgrade"
     }
 }
+
+/** The shared flows behind `events`: unbounded by default, or bounded with the oldest events dropped. */
+internal fun <T> eventFlow(options: SocketManagerOptions): MutableSharedFlow<T> =
+    if (options.eventFlowCapacity == Int.MAX_VALUE) {
+        MutableSharedFlow(extraBufferCapacity = Int.MAX_VALUE)
+    } else {
+        MutableSharedFlow(extraBufferCapacity = options.eventFlowCapacity, onBufferOverflow = kotlinx.coroutines.channels.BufferOverflow.DROP_OLDEST)
+    }
 
 /** A registration that can be cancelled; cancelling twice is harmless. */
 public fun interface Subscription : Cancellable

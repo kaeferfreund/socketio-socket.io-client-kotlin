@@ -205,6 +205,8 @@ public class SocketIODecoder(
     )
 
     /** A line-by-line port of `Decoder.decodeString`, including its JavaScript coercions. */
+    // A line-by-line port of Decoder.decodeString; splitting it would hide the correspondence.
+    @Suppress("CyclomaticComplexMethod")
     private fun decodeString(str: String): Decoded {
         var i = 0
         val typeNumber = SocketIOJson.javaScriptNumber(charAt(str, 0))
@@ -320,11 +322,14 @@ internal fun utf8Length(text: String): Long {
         length +=
             when {
                 c.code < 0x80 -> 1
+
                 c.code < 0x800 -> 2
+
                 Character.isHighSurrogate(c) && i + 1 < text.length && Character.isLowSurrogate(text[i + 1]) -> {
                     i++
                     4
                 }
+
                 else -> 3
             }
         i++

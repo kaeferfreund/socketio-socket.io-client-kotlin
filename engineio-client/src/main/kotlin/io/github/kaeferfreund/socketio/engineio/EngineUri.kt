@@ -88,7 +88,7 @@ public object EngineUri {
 
     private const val HEX = "0123456789ABCDEF"
 
-    private fun isUnreserved(c: Char): Boolean = c.isLetterOrDigit() && c.code < 128 || c in "-_.!~*'()"
+    private fun isUnreserved(c: Char): Boolean = (c.isLetterOrDigit() && c.code < 128) || c in "-_.!~*'()"
 
     /** `parseqs.encode`: `key=value` pairs joined with `&`, both URI-component encoded, in insertion order. */
     public fun encodeQuery(query: Map<String, String>): String =
@@ -135,8 +135,11 @@ public object EngineUri {
             length +=
                 when {
                     c < 0x80 -> 1
+
                     c < 0x800 -> 2
+
                     c < 0xd800 || c >= 0xe000 -> 3
+
                     else -> {
                         i++
                         4

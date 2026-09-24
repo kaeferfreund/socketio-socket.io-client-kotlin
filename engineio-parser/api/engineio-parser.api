@@ -1,0 +1,99 @@
+public abstract class io/github/kaeferfreund/socketio/engineio/parser/EngineIOData {
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOData$Binary : io/github/kaeferfreund/socketio/engineio/parser/EngineIOData {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData$Binary$Companion;
+	public fun <init> ([B)V
+	public synthetic fun <init> ([BZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBytes ()[B
+	public final fun getSize ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOData$Binary$Companion {
+	public final fun wrap ([B)Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData$Binary;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOData$Text : io/github/kaeferfreund/socketio/engineio/parser/EngineIOData {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameDecoder {
+	public fun <init> (J)V
+	public final fun push ([B)Ljava/util/List;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket$Companion;
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions;)V
+	public synthetic fun <init> (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getData ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;
+	public final fun getOptions ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions;
+	public final fun getText ()Ljava/lang/String;
+	public final fun getType ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket$Companion {
+	public final fun getPARSER_ERROR ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions {
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions$Companion;
+	public fun <init> ()V
+	public fun <init> (Z)V
+	public synthetic fun <init> (ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCompress ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions$Companion {
+	public final fun getDEFAULT ()Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketOptions;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType : java/lang/Enum {
+	public static final field CLOSE Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static final field Companion Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType$Companion;
+	public static final field ERROR Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static final field MESSAGE Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static final field NOOP Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static final field OPEN Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static final field PING Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static final field PONG Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static final field UPGRADE Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public final fun getCode ()Ljava/lang/Character;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getWireName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+	public static fun values ()[Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType$Companion {
+	public final fun fromCode (C)Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacketType;
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/parser/EngineIOParser {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOParser;
+	public static final field PROTOCOL I
+	public static final field SEPARATOR C
+	public final fun decodePacket (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;)Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;
+	public final fun decodePacket (Ljava/lang/String;)Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;
+	public final fun decodePacket ([B)Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;
+	public final fun decodePayload (Ljava/lang/String;)Ljava/util/List;
+	public final fun encodeFrame (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)Ljava/util/List;
+	public final fun encodePacket (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;Z)Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOData;
+	public final fun encodePacketToBinary (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)[B
+	public final fun encodePayload (Ljava/util/List;)Ljava/lang/String;
+}
+

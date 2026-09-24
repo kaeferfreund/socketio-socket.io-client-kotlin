@@ -14,7 +14,6 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okhttp3.tls.HandshakeCertificates
 import okhttp3.tls.HeldCertificate
-import okio.Buffer
 import okio.ByteString
 import okio.ByteString.Companion.toByteString
 import org.junit.jupiter.api.AfterEach
@@ -83,7 +82,8 @@ class OkHttpEngineClientsTest {
         assertEquals("1", recorded.headers["X-Custom"])
 
         server.enqueue(MockResponse.Builder().body("ok").build())
-        val post = EngineHttpRequest("POST", server.url("/socket.io/?EIO=4&sid=a").toString(), listOf("Content-type" to "text/plain;charset=UTF-8"), "4héllo", null)
+        val post =
+            EngineHttpRequest("POST", server.url("/socket.io/?EIO=4&sid=a").toString(), listOf("Content-type" to "text/plain;charset=UTF-8"), "4héllo", null)
         assertEquals("ok", execute(clients, post).getOrThrow().body)
         val recordedPost = server.takeRequest()
         assertEquals("POST", recordedPost.method)
@@ -185,7 +185,12 @@ class OkHttpEngineClientsTest {
         val events = LinkedBlockingQueue<Any>()
         val connection =
             OkHttpEngineClients().connect(
-                EngineWebSocketRequest(server.url("/socket.io/?EIO=4&transport=websocket").toString().replace("http", "ws"), listOf("X-Ws" to "1"), emptyList(), 1024),
+                EngineWebSocketRequest(
+                    server.url("/socket.io/?EIO=4&transport=websocket").toString().replace("http", "ws"),
+                    listOf("X-Ws" to "1"),
+                    emptyList(),
+                    1024,
+                ),
                 object : EngineWebSocketListener {
                     override fun onOpen(responseHeaders: List<Pair<String, String>>) {
                         events.put("open")
@@ -256,6 +261,43 @@ class OkHttpEngineClientsTest {
     }
 
     @Test
+    fun offersPerMessageDeflateOnlyWhenCompressionIsEnabled() {
+        for (threshold in listOf(1024, null)) {
+            server.enqueue(MockResponse.Builder().webSocketUpgrade(object : WebSocketListener() {}).build())
+            val opened = CompletableFuture<Unit>()
+            val connection =
+                OkHttpEngineClients().connect(
+                    EngineWebSocketRequest(server.url("/socket.io/").toString().replace("http", "ws"), emptyList(), emptyList(), threshold),
+                    object : EngineWebSocketListener {
+                        override fun onOpen(responseHeaders: List<Pair<String, String>>) {
+                            opened.complete(Unit)
+                        }
+
+                        override fun onMessage(text: String) = Unit
+
+                        override fun onMessage(bytes: ByteArray) = Unit
+
+                        override fun onClosed(
+                            code: Int,
+                            reason: String,
+                        ) = Unit
+
+                        override fun onFailure(
+                            error: Throwable,
+                            httpStatus: Int?,
+                        ) {
+                            opened.completeExceptionally(error)
+                        }
+                    },
+                )
+            opened.get(5, TimeUnit.SECONDS)
+            val offered = server.takeRequest().headers["Sec-WebSocket-Extensions"]
+            if (threshold == null) assertNull(offered) else assertEquals("permessage-deflate", offered)
+            connection.cancel()
+        }
+    }
+
+    @Test
     fun isDiscoveredThroughTheServiceLoader() {
         val clients = EngineClients.discover()
         assertTrue(clients?.http is OkHttpEngineClients)
@@ -263,10 +305,8 @@ class OkHttpEngineClientsTest {
     }
 
     @Test
-    fun theDisconnectingResponseEffectIsReportedAsFailure() {
+    fun aConnectionDroppedBeforeTheResponseIsAFailure() {
         server.enqueue(MockResponse.Builder().onResponseStart(SocketEffect.ShutdownConnection).build())
         assertTrue(execute(OkHttpEngineClients(), get()).isFailure)
-        assertNull(null)
-        Buffer()
     }
 }

@@ -39,6 +39,7 @@ public fun JSONArray.toSocketIOValue(): SocketIOValue.Array = fromJson(this) as 
 public fun fromJson(value: Any?): SocketIOValue =
     when (value) {
         null, JSONObject.NULL -> SocketIOValue.Null
+
         is JSONObject -> {
             val map = LinkedHashMap<String, SocketIOValue>()
             val keys = value.keys()
@@ -48,7 +49,9 @@ public fun fromJson(value: Any?): SocketIOValue =
             }
             SocketIOValue.Object(map)
         }
+
         is JSONArray -> SocketIOValue.Array(List(value.length()) { fromJson(value.opt(it)) })
+
         else -> SocketIOValue.of(value)
     }
 
@@ -83,29 +86,37 @@ private fun readValue(json: JsonReader): SocketIOValue {
                     stack.addLast(Frame(LinkedHashMap(), null))
                     null
                 }
+
                 JsonToken.BEGIN_ARRAY -> {
                     json.beginArray()
                     stack.addLast(Frame(null, ArrayList()))
                     null
                 }
+
                 JsonToken.END_OBJECT -> {
                     json.endObject()
                     SocketIOValue.Object(stack.removeLast().fields!!)
                 }
+
                 JsonToken.END_ARRAY -> {
                     json.endArray()
                     SocketIOValue.Array(stack.removeLast().items!!)
                 }
+
                 JsonToken.STRING -> SocketIOValue.Text(json.nextString())
+
                 JsonToken.NUMBER -> {
                     val text = json.nextString()
                     text.toLongOrNull()?.let { SocketIOValue.Number.of(it) } ?: SocketIOValue.Number.of(text.toDouble())
                 }
+
                 JsonToken.BOOLEAN -> SocketIOValue.Bool.of(json.nextBoolean())
+
                 JsonToken.NULL -> {
                     json.nextNull()
                     SocketIOValue.Null
                 }
+
                 else -> throw IllegalArgumentException("unexpected token ${json.peek()}")
             }
         if (value == null) continue
@@ -115,7 +126,9 @@ private fun readValue(json: JsonReader): SocketIOValue {
                 result = value
                 break
             }
+
             parent.fields != null -> parent.fields[parent.key!!] = value
+
             else -> parent.items!!.add(value)
         }
     }

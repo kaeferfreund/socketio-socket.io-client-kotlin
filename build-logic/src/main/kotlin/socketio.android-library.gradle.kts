@@ -5,6 +5,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlinx.kover")
     id("org.jmailen.kotlinter")
+    id("dev.detekt")
     id("socketio.publish")
 }
 
@@ -61,4 +62,30 @@ dependencies {
     "testRuntimeOnly"(libs.findLibrary("junit-platform-launcher").get())
     "testImplementation"(libs.findLibrary("junit4").get())
     "testImplementation"(libs.findLibrary("coroutines-test").get())
+}
+
+// Public API dump and check, like the JVM modules (see AndroidApiTasks.kt).
+val releaseClasses = layout.buildDirectory.dir("intermediates/built_in_kotlinc/release/compileReleaseKotlin/classes")
+val apiFile = layout.projectDirectory.file("api/${project.name}.api")
+tasks.register<AndroidApiDumpTask>("apiDump") {
+    group = "verification"
+    description = "Writes the public API of the release classes to api/${project.name}.api"
+    dependsOn("compileReleaseKotlin")
+    classes.set(releaseClasses)
+    dumpFile.set(apiFile)
+}
+val apiCheck =
+    tasks.register<AndroidApiCheckTask>("apiCheck") {
+        group = "verification"
+        description = "Fails when the public API differs from api/${project.name}.api"
+        dependsOn("compileReleaseKotlin")
+        classes.set(releaseClasses)
+        dumpFile.set(apiFile)
+    }
+tasks.named("check") { dependsOn(apiCheck) }
+
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom(rootProject.layout.projectDirectory.file("config/detekt.yml"))
+    parallel = true
 }

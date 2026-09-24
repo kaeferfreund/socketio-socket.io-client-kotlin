@@ -80,6 +80,17 @@ public class AndroidSocketOptions internal constructor() {
 
     /** Base OkHttp client (proxy, interceptors, cookie jar …); a shared default when `null`. */
     public var okHttpClient: OkHttpClient? = null
+
+    internal val okHttpCustomizations = ArrayList<OkHttpClient.Builder.() -> Unit>()
+
+    /**
+     * Further OkHttp settings (proxy, interceptors, cookie jar …). Use this
+     * instead of the `okHttp { }` builder extension, which would replace the
+     * network-bound client this integration installs.
+     */
+    public fun configureOkHttp(block: OkHttpClient.Builder.() -> Unit) {
+        okHttpCustomizations += block
+    }
 }
 
 /**
@@ -105,6 +116,7 @@ public fun SocketManagerOptions.Builder.android(
     val binding = NetworkBinding(settings.trafficStatsTag)
     val builder = (settings.okHttpClient ?: OkHttpEngineClients.defaultClient).newBuilder()
     settings.tlsPolicy.applyTo(builder)
+    settings.okHttpCustomizations.forEach { builder.it() }
     builder.socketFactory(binding.socketFactory)
     builder.dns(binding.dns)
     val clients = OkHttpEngineClients(builder.build())

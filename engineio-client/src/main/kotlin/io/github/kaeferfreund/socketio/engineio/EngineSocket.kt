@@ -113,7 +113,16 @@ public class EngineSocket(
                 transportNames[0]
             }
         readyState = EngineState.OPENING
-        val transport = createTransport(name)
+        val transport =
+            try {
+                createTransport(name)
+            } catch (
+                @Suppress("TooGenericExceptionCaught") e: RuntimeException,
+            ) {
+                // A missing HTTP stack or a failing custom factory is a connection error, never a crash.
+                executor.post { onError(EngineIOException(e.message ?: "cannot create transport \"$name\"", e)) }
+                return
+            }
         transport.open()
         setTransport(transport)
     }
@@ -188,7 +197,7 @@ public class EngineSocket(
 
     private fun onPacket(packet: EngineIOPacket) {
         if (readyState != EngineState.OPENING && readyState != EngineState.OPEN && readyState != EngineState.CLOSING) return
-        options.packetObserver?.onPacket(false, packet)
+        observe(false, packet)
         events.emit(EngineEvent.PacketReceived(packet))
         events.emit(EngineEvent.Heartbeat)
         when (packet.type) {
@@ -200,14 +209,18 @@ public class EngineSocket(
                     onHandshake(handshake)
                 }
             }
+
             EngineIOPacketType.PING -> {
                 sendPacket(EngineIOPacketType.PONG, null, EngineIOPacketOptions.DEFAULT, null)
                 events.emit(EngineEvent.Ping)
                 events.emit(EngineEvent.Pong)
                 resetPingTimeout()
             }
+
             EngineIOPacketType.ERROR -> onError(EngineServerException(packet.text))
+
             EngineIOPacketType.MESSAGE -> packet.data?.let { events.emit(EngineEvent.Message(it)) }
+
             else -> Unit
         }
     }
@@ -227,6 +240,20 @@ public class EngineSocket(
 
     /** `_filterUpgrades`: the offered upgrades this client is configured to use. */
     public fun filterUpgrades(upgrades: List<String>): List<String> = upgrades.filter { it in transportNames }
+
+    private fun observe(
+        outgoing: Boolean,
+        packet: EngineIOPacket,
+    ) {
+        val observer = options.packetObserver ?: return
+        try {
+            observer.onPacket(outgoing, packet)
+        } catch (
+            @Suppress("TooGenericExceptionCaught") e: RuntimeException,
+        ) {
+            logger.log(LogLevel.ERROR, "engine", "the packet observer threw", e)
+        }
+    }
 
     private fun resetPingTimeout() {
         pingTimeoutTimer?.cancel()
@@ -303,7 +330,7 @@ public class EngineSocket(
     ) {
         if (readyState == EngineState.CLOSING || readyState == EngineState.CLOSED) return
         val packet = EngineIOPacket(type, data, options)
-        this.options.packetObserver?.onPacket(true, packet)
+        observe(true, packet)
         events.emit(EngineEvent.PacketCreated(packet))
         buffer.add(packet)
         if (onFlush != null) events.once<EngineEvent.Flush, EngineEvent> { onFlush() }
@@ -381,7 +408,15 @@ public class EngineSocket(
     }
 
     private fun probe(name: String) {
-        var transport: EngineTransport? = createTransport(name)
+        var transport: EngineTransport? =
+            try {
+                createTransport(name)
+            } catch (
+                @Suppress("TooGenericExceptionCaught") e: RuntimeException,
+            ) {
+                events.emit(EngineEvent.UpgradeError(EngineIOException("probe error: ${e.message}", e), name))
+                return
+            }
         var failed = false
         priorWebsocketSuccess.set(false)
         val subscriptions = ArrayList<Cancellable>()

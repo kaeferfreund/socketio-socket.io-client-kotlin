@@ -56,14 +56,20 @@ public object SocketIOJson {
         while (stack.isNotEmpty()) {
             when (val item = stack.removeLast()) {
                 is String -> out.append(item)
+
                 is SocketIOValue.Null -> out.append("null")
+
                 is SocketIOValue.Bool -> out.append(item.value)
+
                 is SocketIOValue.Number -> out.append(formatNumber(item))
+
                 is SocketIOValue.Text -> quote(item.value, out)
+
                 is SocketIOValue.Binary -> {
                     require(binaryAsPlaceholderText) { "binary data cannot be written as JSON" }
                     quote("<binary ${item.size} bytes>", out)
                 }
+
                 is SocketIOValue.Array -> {
                     out.append('[')
                     stack.addLast("]")
@@ -72,6 +78,7 @@ public object SocketIOJson {
                         if (i > 0) stack.addLast(",")
                     }
                 }
+
                 is SocketIOValue.Object -> {
                     out.append('{')
                     stack.addLast("}")
@@ -82,10 +89,12 @@ public object SocketIOJson {
                         if (i > 0) stack.addLast(",")
                     }
                 }
+
                 is QuotedKey -> {
                     quote(item.key, out)
                     out.append(':')
                 }
+
                 else -> error("unexpected work item")
             }
         }
@@ -108,13 +117,21 @@ public object SocketIOJson {
             val c = text[i]
             when {
                 c == '"' -> out.append("\\\"")
+
                 c == '\\' -> out.append("\\\\")
+
                 c == '\b' -> out.append("\\b")
+
                 c == '\u000c' -> out.append("\\f")
+
                 c == '\n' -> out.append("\\n")
+
                 c == '\r' -> out.append("\\r")
+
                 c == '\t' -> out.append("\\t")
+
                 c < ' ' -> appendUnicodeEscape(c, out)
+
                 Character.isHighSurrogate(c) -> {
                     if (i + 1 < length && Character.isLowSurrogate(text[i + 1])) {
                         out.append(c).append(text[i + 1])
@@ -123,7 +140,9 @@ public object SocketIOJson {
                         appendUnicodeEscape(c, out)
                     }
                 }
+
                 Character.isLowSurrogate(c) -> appendUnicodeEscape(c, out)
+
                 else -> out.append(c)
             }
             i++
@@ -173,8 +192,11 @@ public object SocketIOJson {
         val body =
             when {
                 n in k..21 -> digits + "0".repeat(n - k)
+
                 n in 1..21 -> digits.substring(0, n) + "." + digits.substring(n)
+
                 n in -5..0 -> "0." + "0".repeat(-n) + digits
+
                 else -> {
                     val e = n - 1
                     val sign = if (e < 0) "-" else "+"
@@ -225,8 +247,8 @@ public object SocketIOJson {
     /** ECMAScript WhiteSpace and LineTerminator code points. */
     public fun isJavaScriptWhitespace(c: Char): Boolean =
         when (c) {
-            '\t', '\n', '\u000b', '\u000c', '\r', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '　', '﻿' -> true
-            else -> c in ' '..' '
+            '\t', '\n', '\u000b', '\u000c', '\r', ' ', '\u00a0', '\u1680', '\u2028', '\u2029', '\u202f', '\u205f', '\u3000', '\ufeff' -> true
+            else -> c in '\u2000'..'\u200a'
         }
 
     private fun revive(
@@ -268,11 +290,13 @@ public object SocketIOJson {
             val rebuilt: SocketIOValue =
                 when (frame.value) {
                     is SocketIOValue.Array -> SocketIOValue.Array(frame.revived.map { it ?: SocketIOValue.Null })
+
                     is SocketIOValue.Object -> {
                         val map = LinkedHashMap<String, SocketIOValue>()
                         frame.revived.forEachIndexed { i, child -> if (child != null) map[frame.keys[i]] = child }
                         SocketIOValue.Object(map)
                     }
+
                     else -> frame.value
                 }
             val revived = reviver(frame.key, rebuilt)
@@ -301,6 +325,8 @@ private class JsonReader(
         }
     }
 
+    // The iterative JSON reader: one loop over the grammar instead of recursion.
+    @Suppress("CyclomaticComplexMethod")
     fun read(): SocketIOValue {
         val stack = ArrayDeque<Container>()
         var result: SocketIOValue? = null
@@ -324,6 +350,7 @@ private class JsonReader(
                         continue@loop
                     }
                 }
+
                 '[' -> {
                     pos++
                     if (stack.size + 1 > maxDepth) fail("maximum nesting depth $maxDepth exceeded")
@@ -336,10 +363,15 @@ private class JsonReader(
                         continue@loop
                     }
                 }
+
                 '"' -> value = SocketIOValue.Text(readString())
+
                 't' -> value = literal("true", SocketIOValue.Bool.TRUE)
+
                 'f' -> value = literal("false", SocketIOValue.Bool.FALSE)
+
                 'n' -> value = literal("null", SocketIOValue.Null)
+
                 else -> value = readNumber()
             }
             // Attach the complete value, closing containers as they finish.
@@ -359,13 +391,16 @@ private class JsonReader(
                                 skipWhitespace()
                                 continue@loop
                             }
+
                             ']' -> {
                                 stack.removeLast()
                                 complete = SocketIOValue.Array(top.items)
                             }
+
                             else -> fail("expected ',' or ']'")
                         }
                     }
+
                     is Container.ObjectBuilder -> {
                         top.fields[top.key!!] = complete
                         when (next()) {
@@ -375,10 +410,12 @@ private class JsonReader(
                                 skipWhitespace()
                                 continue@loop
                             }
+
                             '}' -> {
                                 stack.removeLast()
                                 complete = SocketIOValue.Object(top.fields)
                             }
+
                             else -> fail("expected ',' or '}'")
                         }
                     }
@@ -421,6 +458,8 @@ private class JsonReader(
         return value
     }
 
+    // Every JSON escape is one branch.
+    @Suppress("CyclomaticComplexMethod")
     private fun readString(): String {
         pos++ // opening quote
         val start = pos
@@ -439,18 +478,28 @@ private class JsonReader(
             val c = text[pos++]
             when {
                 c == '"' -> return out.toString()
+
                 c < ' ' -> fail("control character in string")
+
                 c == '\\' -> {
                     if (pos >= text.length) fail("unterminated escape")
                     when (text[pos++]) {
                         '"' -> out.append('"')
+
                         '\\' -> out.append('\\')
+
                         '/' -> out.append('/')
+
                         'b' -> out.append('\b')
+
                         'f' -> out.append('\u000c')
+
                         'n' -> out.append('\n')
+
                         'r' -> out.append('\r')
+
                         't' -> out.append('\t')
+
                         'u' -> {
                             if (pos + 4 > text.length) fail("bad unicode escape")
                             var code = 0
@@ -462,14 +511,18 @@ private class JsonReader(
                             pos += 4
                             out.append(code.toChar())
                         }
+
                         else -> fail("bad escape")
                     }
                 }
+
                 else -> out.append(c)
             }
         }
     }
 
+    // The JSON number grammar, branch by branch.
+    @Suppress("CyclomaticComplexMethod")
     private fun readNumber(): SocketIOValue {
         val start = pos
         if (pos < text.length && text[pos] == '-') pos++

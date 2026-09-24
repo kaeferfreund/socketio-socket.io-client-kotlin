@@ -198,8 +198,11 @@ public class FakeEngineServer(
                     pongDeadline?.cancel()
                     pongDeadline = null
                 }
+
                 EngineIOPacketType.MESSAGE -> packet.data?.let(onMessage)
+
                 EngineIOPacketType.CLOSE -> close("transport close", sendClosePacket = false)
+
                 else -> Unit
             }
         }
@@ -462,6 +465,7 @@ public class FakeEngineServer(
                             // Release the pending long poll so the client can pause polling.
                             if (releasePollOnProbe) session.sendPacket(EngineIOPacket(EngineIOPacketType.NOOP))
                         }
+
                         packet.type == EngineIOPacketType.UPGRADE -> {
                             probing = false
                             session.received.add(packet)
@@ -471,6 +475,7 @@ public class FakeEngineServer(
                             session.outbox.forEach(::deliverPacket)
                             session.outbox.clear()
                         }
+
                         else -> session.close("transport error", sendClosePacket = false)
                     }
                 } else {

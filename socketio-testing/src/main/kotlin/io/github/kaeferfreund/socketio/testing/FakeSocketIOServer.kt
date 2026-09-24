@@ -237,14 +237,18 @@ public class FakeSocketIOServer(
                 received.add(packet)
                 when (packet.type) {
                     SocketIOPacketType.CONNECT -> onConnect(session, packet, clients, query)
+
                     SocketIOPacketType.EVENT, SocketIOPacketType.BINARY_EVENT -> clients[packet.nsp]?.onEvent(packet)
+
                     SocketIOPacketType.ACK, SocketIOPacketType.BINARY_ACK -> clients[packet.nsp]?.onAck(packet)
+
                     SocketIOPacketType.DISCONNECT -> {
                         clients.remove(packet.nsp)?.let {
                             it.connected = false
                             it.namespace.clients.remove(it)
                         }
                     }
+
                     else -> Unit
                 }
             }

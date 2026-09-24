@@ -1,0 +1,11 @@
+public final class io/github/kaeferfreund/socketio/serialization/SocketIOSerialization {
+	public static final field INSTANCE Lio/github/kaeferfreund/socketio/serialization/SocketIOSerialization;
+	public final fun decode (Lkotlinx/serialization/DeserializationStrategy;Lio/github/kaeferfreund/socketio/parser/SocketIOValue;Lkotlinx/serialization/json/Json;)Ljava/lang/Object;
+	public static synthetic fun decode$default (Lio/github/kaeferfreund/socketio/serialization/SocketIOSerialization;Lkotlinx/serialization/DeserializationStrategy;Lio/github/kaeferfreund/socketio/parser/SocketIOValue;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encode (Lkotlinx/serialization/SerializationStrategy;Ljava/lang/Object;Lkotlinx/serialization/json/Json;)Lio/github/kaeferfreund/socketio/parser/SocketIOValue;
+	public static synthetic fun encode$default (Lio/github/kaeferfreund/socketio/serialization/SocketIOSerialization;Lkotlinx/serialization/SerializationStrategy;Ljava/lang/Object;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lio/github/kaeferfreund/socketio/parser/SocketIOValue;
+	public final fun fromJsonElement (Lkotlinx/serialization/json/JsonElement;)Lio/github/kaeferfreund/socketio/parser/SocketIOValue;
+	public final fun getDefaultJson ()Lkotlinx/serialization/json/Json;
+	public final fun toJsonElement (Lio/github/kaeferfreund/socketio/parser/SocketIOValue;)Lkotlinx/serialization/json/JsonElement;
+}
+

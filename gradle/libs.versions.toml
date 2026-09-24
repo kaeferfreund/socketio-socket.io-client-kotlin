@@ -22,10 +22,13 @@ compose-bom = "2026.09.00"
 activity-compose = "1.13.0"
 
 [libraries]
+org-json = { module = "org.json:json", version = "20260814" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kover-gradle-plugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
 kotlinter-gradle-plugin = { module = "org.jmailen.gradle:kotlinter-gradle", version.ref = "kotlinter" }
+detekt-gradle-plugin = { module = "dev.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+bcv-library = { module = "org.jetbrains.kotlinx:binary-compatibility-validator", version.ref = "bcv" }
 kotlin-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlin-compose-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 

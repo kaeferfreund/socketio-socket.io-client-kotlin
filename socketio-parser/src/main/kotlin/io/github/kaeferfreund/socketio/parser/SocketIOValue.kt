@@ -284,6 +284,8 @@ private fun javaScriptOrder(fields: Map<String, SocketIOValue>): LinkedHashMap<S
     return result
 }
 
+// One iterative comparison for all seven value kinds, to stay stack-safe.
+@Suppress("CyclomaticComplexMethod")
 private fun structurallyEqual(
     a: SocketIOValue,
     b: SocketIOValue,
@@ -296,14 +298,20 @@ private fun structurallyEqual(
         if (x.cachedHash != y.cachedHash) return false
         when (x) {
             is SocketIOValue.Null -> if (y !== SocketIOValue.Null) return false
+
             is SocketIOValue.Bool -> if (y !is SocketIOValue.Bool || x.value != y.value) return false
+
             is SocketIOValue.Number -> if (y !is SocketIOValue.Number || x.value != y.value) return false
+
             is SocketIOValue.Text -> if (y !is SocketIOValue.Text || x.value != y.value) return false
+
             is SocketIOValue.Binary -> if (y !is SocketIOValue.Binary || !x.unsafeBytes().contentEquals(y.unsafeBytes())) return false
+
             is SocketIOValue.Array -> {
                 if (y !is SocketIOValue.Array || x.size != y.size) return false
                 for (i in 0 until x.size) stack.addLast(x.items[i] to y.items[i])
             }
+
             is SocketIOValue.Object -> {
                 if (y !is SocketIOValue.Object || x.size != y.size) return false
                 for ((key, value) in x.fields) {
@@ -360,6 +368,7 @@ private fun toKotlinValue(root: SocketIOValue): Any? {
                     if (item is SocketIOValue.Array || item is SocketIOValue.Object) stack.addLast(item to converted)
                 }
             }
+
             is SocketIOValue.Object -> {
                 @Suppress("UNCHECKED_CAST")
                 val map = target as MutableMap<String, Any?>
@@ -369,6 +378,7 @@ private fun toKotlinValue(root: SocketIOValue): Any? {
                     if (item is SocketIOValue.Array || item is SocketIOValue.Object) stack.addLast(item to converted)
                 }
             }
+
             else -> Unit
         }
     }
@@ -397,11 +407,19 @@ internal object ValueConverter {
 
         fun open(container: Any): Frame {
             require(inProgress.put(container, Unit) == null) { "Converting circular structure to a Socket.IO value" }
-            return when (container) {
-                is Map<*, *> -> {
+            return when {
+                container is Map<*, *> -> {
                     val entries = container.entries.toList()
                     Frame(container, entries.map { it.value }.iterator(), entries.map { it.key }.iterator(), null, LinkedHashMap(entries.size))
                 }
+
+                OrgJson.isObject(container) -> {
+                    val keys = OrgJson.keys(container)
+                    Frame(container, keys.map { OrgJson.get(container, it) }.iterator(), keys.iterator(), null, LinkedHashMap(keys.size))
+                }
+
+                OrgJson.isArray(container) -> Frame(container, OrgJson.elements(container).iterator(), null, ArrayList(), null)
+
                 else -> Frame(container, iterate(container), null, ArrayList(), null)
             }
         }
@@ -447,35 +465,62 @@ internal object ValueConverter {
     private fun leafOrNull(value: Any?): SocketIOValue? =
         when (value) {
             null, Unit -> SocketIOValue.Null
+
             is SocketIOValue -> value
+
             is Boolean -> SocketIOValue.Bool.of(value)
+
             is Long -> SocketIOValue.Number.of(value)
+
             is Int -> SocketIOValue.Number.of(value)
+
             is Short -> SocketIOValue.Number.of(value.toInt())
+
             is Byte -> SocketIOValue.Number.of(value.toInt())
+
             is Double -> SocketIOValue.Number.of(value)
+
             is Float -> SocketIOValue.Number.of(value.toString().toDouble())
+
             is java.math.BigInteger ->
                 if (value.bitLength() < 64) SocketIOValue.Number.of(value.toLong()) else SocketIOValue.Number.of(value.toDouble())
+
             is java.math.BigDecimal -> SocketIOValue.Number.of(value.toDouble())
+
             is kotlin.Number -> SocketIOValue.Number.of(value.toDouble())
+
             is CharSequence -> SocketIOValue.Text(value.toString())
+
             is Char -> SocketIOValue.Text(value.toString())
+
             is Enum<*> -> SocketIOValue.Text(value.name)
+
             is ByteArray -> SocketIOValue.Binary(value)
+
             is ByteBuffer -> {
                 val copy = ByteArray(value.remaining())
                 value.duplicate().get(copy)
                 SocketIOValue.Binary.wrap(copy)
             }
+
             is Date -> SocketIOValue.Text(ISO_INSTANT.format(value.toInstant()))
+
             is Instant -> SocketIOValue.Text(ISO_INSTANT.format(value))
+
             is Map<*, *>, is Iterable<*>, is kotlin.Array<*>, is Sequence<*>,
             is IntArray, is LongArray, is ShortArray, is DoubleArray, is FloatArray, is BooleanArray, is CharArray,
             -> null
-            else -> throw IllegalArgumentException(
-                "Cannot convert ${value::class.java.name} to a Socket.IO value; convert it to a Map, List or SocketIOValue first",
-            )
+
+            else ->
+                when {
+                    OrgJson.isNull(value) -> SocketIOValue.Null
+
+                    OrgJson.isObject(value) || OrgJson.isArray(value) -> null
+
+                    else -> throw IllegalArgumentException(
+                        "Cannot convert ${value::class.java.name} to a Socket.IO value; convert it to a Map, List or SocketIOValue first",
+                    )
+                }
         }
 
     private fun iterate(container: Any): Iterator<Any?> =
@@ -492,4 +537,47 @@ internal object ValueConverter {
             is CharArray -> container.map { it.toString() }.iterator()
             else -> error("not a container: ${container::class.java.name}")
         }
+}
+
+/**
+ * `org.json` support without a compile-time dependency: Android ships
+ * `org.json` in the framework, and apps migrating from socket.io-client-java
+ * pass `JSONObject`/`JSONArray` payloads. Binary values inside them stay
+ * binary, as with the Java client.
+ */
+internal object OrgJson {
+    private val objectClass: Class<*>? = load("org.json.JSONObject")
+    private val arrayClass: Class<*>? = load("org.json.JSONArray")
+    private val nullValue: Any? = objectClass?.let { runCatching { it.getField("NULL").get(null) }.getOrNull() }
+
+    private fun load(name: String): Class<*>? =
+        try {
+            Class.forName(name, false, OrgJson::class.java.classLoader)
+        } catch (e: ClassNotFoundException) {
+            null
+        } catch (e: LinkageError) {
+            null
+        }
+
+    fun isObject(value: Any): Boolean = objectClass?.isInstance(value) == true
+
+    fun isArray(value: Any): Boolean = arrayClass?.isInstance(value) == true
+
+    fun isNull(value: Any): Boolean = nullValue != null && value === nullValue
+
+    fun keys(value: Any): List<String> {
+        val iterator = value.javaClass.getMethod("keys").invoke(value) as Iterator<*>
+        return iterator.asSequence().map { it.toString() }.toList()
+    }
+
+    fun get(
+        value: Any,
+        key: String,
+    ): Any? = value.javaClass.getMethod("opt", String::class.java).invoke(value, key)
+
+    fun elements(value: Any): List<Any?> {
+        val length = value.javaClass.getMethod("length").invoke(value) as Int
+        val opt = value.javaClass.getMethod("opt", Int::class.javaPrimitiveType)
+        return List(length) { opt.invoke(value, it) }
+    }
 }

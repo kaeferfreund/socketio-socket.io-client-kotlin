@@ -9,4 +9,6 @@ dependencies {
     implementation(libs.kotlinter.gradle.plugin)
     implementation(libs.kotlin.serialization.plugin)
     implementation(libs.kotlin.compose.plugin)
+    implementation(libs.bcv.library)
+    implementation(libs.detekt.gradle.plugin)
 }

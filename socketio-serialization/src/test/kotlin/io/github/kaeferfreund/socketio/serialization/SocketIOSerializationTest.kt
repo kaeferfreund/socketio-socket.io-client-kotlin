@@ -21,7 +21,7 @@ class SocketIOSerializationTest {
     @Test
     fun roundTripsSerializableClasses() {
         val stamp = Stamp(42, "in", 1.5, listOf("a", "b"))
-        val value = stamp.toSocketIOValue()
+        val value = stamp.encodeToSocketIOValue()
         assertEquals(SocketIOValue.of(mapOf("id" to 42, "label" to "in", "at" to 1.5, "tags" to listOf("a", "b"))), value)
         assertEquals(stamp, value.decodeAs<Stamp>())
     }

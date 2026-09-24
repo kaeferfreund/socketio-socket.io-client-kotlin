@@ -123,7 +123,12 @@ class SocketAckTest {
     @Test
     fun anUnknownAckIdIsIgnored() =
         runClientTest {
-            val h = clientHarness { namespace("/").onConnection { c -> c.write(io.github.kaeferfreund.socketio.parser.SocketIOPacket(SocketIOPacketType.ACK, "/", SocketIOValue.arrayOf(), 99)) } }
+            val h =
+                clientHarness {
+                    namespace("/").onConnection { c ->
+                        c.write(io.github.kaeferfreund.socketio.parser.SocketIOPacket(SocketIOPacketType.ACK, "/", SocketIOValue.arrayOf(), 99))
+                    }
+                }
             val socket = h.manager().socket()
             h.settle()
             assertTrue(socket.connected)

@@ -30,10 +30,12 @@ class RetryE2ETest {
         e2e {
             val sent = CopyOnWriteArrayList<String>()
             val socket =
-                io(socketOptions = SocketOptions {
-                    retries = 1
-                    ackTimeout = 50.milliseconds
-                }) { packetObserver = observer(sent) }
+                io(
+                    socketOptions = SocketOptions {
+                        retries = 1
+                        ackTimeout = 50.milliseconds
+                    },
+                ) { packetObserver = observer(sent) }
             val queueLengths = CopyOnWriteArrayList<Int>()
             val done = CompletableDeferred<Pair<Throwable?, SocketIOValue?>>()
             socket.manager.executor.execute {
@@ -89,10 +91,12 @@ class RetryE2ETest {
     fun doesNotDrainTheQueueWhileDisconnected() =
         e2e {
             val socket =
-                io(socketOptions = SocketOptions {
-                    retries = 3
-                    ackTimeout = 20.milliseconds
-                }) { autoConnect = false }
+                io(
+                    socketOptions = SocketOptions {
+                        retries = 3
+                        ackTimeout = 20.milliseconds
+                    },
+                ) { autoConnect = false }
             val result = CompletableDeferred<Throwable?>()
             socket.emit("echo", 1) { result.complete(it.exceptionOrNull()) }
             delay(100.milliseconds)

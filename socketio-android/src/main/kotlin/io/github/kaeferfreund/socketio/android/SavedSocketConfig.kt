@@ -2,6 +2,7 @@ package io.github.kaeferfreund.socketio.android
 
 import android.os.Bundle
 import io.github.kaeferfreund.socketio.SocketManagerOptions
+import io.github.kaeferfreund.socketio.Transport
 
 /**
  * The part of a manager's configuration that can be saved in a [Bundle]
@@ -15,7 +16,7 @@ import io.github.kaeferfreund.socketio.SocketManagerOptions
 public class SavedSocketConfig(
     public val uri: String,
     public val path: String = "/socket.io",
-    public val transports: List<String> = listOf("polling", "websocket"),
+    public val transports: List<String> = listOf(Transport.POLLING, Transport.WEBSOCKET),
     public val query: Map<String, String> = emptyMap(),
     public val extraHeaders: Map<String, String> = emptyMap(),
     public val namespaces: List<String> = listOf("/"),
@@ -54,18 +55,26 @@ public class SavedSocketConfig(
             return SavedSocketConfig(
                 uri = uri,
                 path = bundle.getString(KEY_PATH) ?: "/socket.io",
-                transports = bundle.getStringArrayList(KEY_TRANSPORTS) ?: listOf("polling", "websocket"),
+                transports = bundle.getStringArrayList(KEY_TRANSPORTS) ?: listOf(Transport.POLLING, Transport.WEBSOCKET),
                 query = bundle.getBundle(KEY_QUERY).toMap(),
                 extraHeaders = bundle.getBundle(KEY_HEADERS).toMap(),
                 namespaces = bundle.getStringArrayList(KEY_NAMESPACES) ?: listOf("/"),
             )
         }
 
-        private fun Map<String, String>.toBundle(): Bundle = Bundle().also { bundle -> forEach { (key, value) -> bundle.putString(key, value) } }
+        private const val KEY_ORDER = "socketio.order"
+
+        /** Keeps insertion order, which a bundle's key set does not. */
+        private fun Map<String, String>.toBundle(): Bundle =
+            Bundle().also { bundle ->
+                forEach { (key, value) -> bundle.putString(key, value) }
+                bundle.putStringArrayList(KEY_ORDER, ArrayList(keys))
+            }
 
         private fun Bundle?.toMap(): Map<String, String> {
             val bundle = this ?: return emptyMap()
-            return bundle.keySet().sorted().associateWith { bundle.getString(it).orEmpty() }
+            val order = bundle.getStringArrayList(KEY_ORDER) ?: bundle.keySet().sorted()
+            return order.associateWith { bundle.getString(it).orEmpty() }
         }
     }
 }

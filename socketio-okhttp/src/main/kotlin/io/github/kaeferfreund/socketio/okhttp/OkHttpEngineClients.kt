@@ -127,11 +127,19 @@ public class OkHttpEngineClients(
         val builder = Request.Builder().url(request.url)
         for ((name, value) in request.headers) builder.addHeader(name, value)
         if (request.protocols.isNotEmpty()) builder.header("Sec-WebSocket-Protocol", request.protocols.joinToString(", "))
-        val wsClient =
-            client
-                .newBuilder()
-                .minWebSocketMessageToCompress(request.compressionThreshold?.toLong() ?: Long.MAX_VALUE)
-                .build()
+        val wsBuilder = client.newBuilder()
+        val threshold = request.compressionThreshold
+        if (threshold != null) {
+            wsBuilder.minWebSocketMessageToCompress(threshold.toLong())
+        } else {
+            // perMessageDeflate disabled: do not even offer the extension. OkHttp skips network
+            // interceptors for WebSocket upgrades, so an application interceptor removes the header.
+            wsBuilder.minWebSocketMessageToCompress(Long.MAX_VALUE)
+            wsBuilder.addInterceptor { chain ->
+                chain.proceed(chain.request().newBuilder().removeHeader("Sec-WebSocket-Extensions").build())
+            }
+        }
+        val wsClient = wsBuilder.build()
         val socket =
             wsClient.newWebSocket(
                 builder.build(),
