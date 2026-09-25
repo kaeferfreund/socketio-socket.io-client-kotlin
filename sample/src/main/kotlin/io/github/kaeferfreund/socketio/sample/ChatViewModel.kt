@@ -10,6 +10,7 @@ import io.github.kaeferfreund.socketio.SocketManager
 import io.github.kaeferfreund.socketio.SocketManagerOptions
 import io.github.kaeferfreund.socketio.android.BackgroundPolicy
 import io.github.kaeferfreund.socketio.android.android
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,6 +23,9 @@ class ChatViewModel(
 ) : AndroidViewModel(application) {
     private var manager: SocketManager? = null
     private var socket: Socket? = null
+
+    /** The collectors of the current connection's flows; cancelled with it. */
+    private var collectors: List<Job> = emptyList()
 
     private val log = MutableStateFlow(listOf<String>())
     val messages: StateFlow<List<String>> = log.asStateFlow()
@@ -52,8 +56,11 @@ class ChatViewModel(
             }
         this.manager = manager
         this.socket = socket
-        viewModelScope.launch { socket.state.collect { connection.value = it } }
-        viewModelScope.launch { manager.transportName.collect { transport.value = it } }
+        collectors =
+            listOf(
+                viewModelScope.launch { socket.state.collect { connection.value = it } },
+                viewModelScope.launch { manager.transportName.collect { transport.value = it } },
+            )
     }
 
     fun send(text: String) {
@@ -72,6 +79,9 @@ class ChatViewModel(
     }
 
     fun disconnect() {
+        // The old connection's late updates must not overwrite the next one's state.
+        collectors.forEach(Job::cancel)
+        collectors = emptyList()
         manager?.close()
         manager = null
         socket = null
