@@ -82,15 +82,17 @@ class EngineClientApiTest {
             assertEquals("80", client.port)
         }
 
-    // JS-172
+    // JS-172, independent of the clock: the upstream test assumes 8 base-36 time digits
+    // (true until 2059) and two different calls (false once in 46,656 within a millisecond).
     @Test
     fun generatesARandomString() {
-        val a = EngineUri.randomString()
-        val b = EngineUri.randomString()
-        val c = EngineUri.randomString()
+        val now = 1_790_000_000_000L
+        val a = EngineUri.randomString(now)
         assertEquals(8, a.length)
-        assertNotEquals(a, b)
-        assertNotEquals(b, c)
+        assertEquals(java.lang.Long.toString(now, 36).substring(3), a.substring(0, 5))
+        val sameMillisecond = List(20) { EngineUri.randomString(now) }.toSet()
+        assertTrue(sameMillisecond.size > 1)
+        assertNotEquals(EngineUri.randomString(now), EngineUri.randomString(now + 36L * 36 * 36))
     }
 
     // JS-183
