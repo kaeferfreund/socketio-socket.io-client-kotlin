@@ -90,7 +90,8 @@ changed URL. Emulators need hardware virtualization; on machines without it
 python3 scripts/test-documentation.py && python3 scripts/check-documentation.py
 python3 scripts/test-review-regressions.py
 bash scripts/test-consumer.sh
-./gradlew koverXmlReport   # coverage per module in */build/reports/kover/report.xml
+./gradlew koverXmlReport   # per module (own tests) in */build/reports/kover/report.xml
+./gradlew :koverHtmlReport # JVM modules across all JVM suites incl. e2e: build/reports/kover/html
 ./gradlew apiDump          # only for intended public API changes; review the .api diff
 ```
 

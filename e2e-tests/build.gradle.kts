@@ -1,5 +1,7 @@
 plugins {
     id("socketio.kotlin-internal")
+    // Measures the library code the end-to-end suites execute; merged at the root.
+    id("org.jetbrains.kotlinx.kover")
 }
 
 dependencies {

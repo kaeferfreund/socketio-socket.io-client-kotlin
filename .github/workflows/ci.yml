@@ -99,13 +99,15 @@ jobs:
           node --test *.test.mjs
           node upgrade-race-proof.mjs
           node max-payload-proof.mjs
-      - name: End-to-end suites (HTTP, HTTPS, WS, WSS, mTLS)
-        run: ./gradlew :e2e-tests:test
+      - name: End-to-end suites (HTTP, HTTPS, WS, WSS, mTLS) and merged JVM coverage
+        run: ./gradlew :e2e-tests:test :koverXmlReport
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:
           name: e2e-test-results
-          path: e2e-tests/build/test-results/**/*.xml
+          path: |
+            e2e-tests/build/test-results/**/*.xml
+            build/reports/kover/report.xml
           retention-days: 7
 
   parity-gate:
