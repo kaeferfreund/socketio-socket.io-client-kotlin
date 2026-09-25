@@ -29,7 +29,7 @@ module's manifest adds `INTERNET` and `ACCESS_NETWORK_STATE`.
 
 | Setting | Default | Effect |
 | --- | --- | --- |
-| `bindToActiveNetwork` | `true` | Sockets and DNS go through the current default network and move with it |
+| `bindToActiveNetwork` | `true` | Sockets and DNS go through the current default network and move with it; a VPN is left to the system's routing |
 | `reconnectOnNetworkAvailable` | `true` | Hold reconnection attempts while offline; reconnect as soon as a network returns |
 | `backgroundPolicy` | `BackgroundPolicy.KeepAlive` | What happens while no activity is visible |
 | `trafficStatsTag` | `null` | `TrafficStats` tag for this manager's sockets |
@@ -64,7 +64,10 @@ Without this, a connection on a vanished network is only noticed after
 
 With `bindToActiveNetwork`, connections are created with `Network.socketFactory`
 and names are resolved with `Network.getAllByName`. A connection therefore belongs
-to exactly one network and fails cleanly when it goes away instead of hanging. Set
+to exactly one network and fails cleanly when it goes away instead of hanging. A
+VPN default network is not bound (the system routes through it anyway, and bound
+lookups on some VPNs fail); a bound lookup that fails falls back to the system
+resolver. Set
 it to `false` if the app manages routing itself (for example
 `ConnectivityManager.bindProcessToNetwork`).
 

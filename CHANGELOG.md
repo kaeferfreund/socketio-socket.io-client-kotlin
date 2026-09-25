@@ -71,6 +71,14 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   deviation, documented in PARITY.md).
 - See [the triage report](Documentation/UpstreamIssueTriage-2026-09-25.md).
 
+### Android: VPN networks (#1)
+
+- `bindToActiveNetwork` no longer binds a VPN default network. Lookups bound to
+  a Tailscale VPN failed with `EAI_NODATA` without sending a query, so apps
+  behind the VPN could not connect with the default settings. The system routes
+  unbound traffic through the VPN anyway; network changes are still followed.
+- A lookup that fails on the bound network is retried with the system resolver.
+
 ### Validation
 
 - Every supported runtime test declaration of the pinned upstream

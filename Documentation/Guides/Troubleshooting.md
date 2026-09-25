@@ -177,11 +177,18 @@ bounded only by the server's `maxHttpBufferSize`).
 
 ## Network binding and VPNs
 
-With `bindToActiveNetwork` (default), connections use Android's default network.
-When a VPN is active, that is the VPN. A server on the local Wi-Fi is unreachable if
-the default network is mobile data or a VPN that does not route the LAN. Either
-ensure the default network can reach it, or set `bindToActiveNetwork = false` and
-route the process yourself.
+With `bindToActiveNetwork` (default), connections are bound to Android's default
+network. When the default network is a VPN (Tailscale, WireGuard, corporate VPNs),
+nothing is bound: the system routes the app's sockets and DNS through the VPN, as it
+does for any unbound app. Binding to some VPN networks made DNS fail with
+`UnknownHostException` / `EAI_NODATA` although the name resolved system-wide (for
+example Tailscale MagicDNS names); if a bound lookup fails anyway, the client retries
+it with the system resolver. Network changes are still followed: switching into or
+out of a VPN drops the old connection and reconnects at once.
+
+A server on the local Wi-Fi is unreachable if the default network is mobile data or
+a VPN that does not route the LAN. Either ensure the default network can reach it, or
+set `bindToActiveNetwork = false` and route the process yourself.
 
 ## TLS errors
 

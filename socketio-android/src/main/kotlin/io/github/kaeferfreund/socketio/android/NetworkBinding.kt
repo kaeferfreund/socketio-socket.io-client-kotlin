@@ -5,6 +5,7 @@ import android.net.TrafficStats
 import okhttp3.Dns
 import java.net.InetAddress
 import java.net.Socket
+import java.net.UnknownHostException
 import javax.net.SocketFactory
 
 /**
@@ -12,9 +13,15 @@ import javax.net.SocketFactory
  * go through [network] when one is set (`Network.socketFactory` and
  * `Network.getAllByName`), so a connection belongs to exactly one network and
  * breaks cleanly when that network goes away instead of silently hanging.
+ *
+ * A lookup that fails on the bound network falls back to the system resolver:
+ * some networks answer bound lookups with EAI_NODATA without sending a query
+ * (issue #1, a Tailscale VPN), while the system resolver answers.
  */
 internal class NetworkBinding(
     private val trafficStatsTag: Int?,
+    private val systemDns: Dns = Dns.SYSTEM,
+    private val lookupOnNetwork: (Network, String) -> List<InetAddress> = { network, host -> network.getAllByName(host).toList() },
 ) {
     @Volatile var network: Network? = null
 
@@ -63,7 +70,16 @@ internal class NetworkBinding(
 
     val dns: Dns =
         Dns { hostname ->
-            val bound = network
-            if (bound != null) bound.getAllByName(hostname).toList() else Dns.SYSTEM.lookup(hostname)
+            val bound = network ?: return@Dns systemDns.lookup(hostname)
+            try {
+                lookupOnNetwork(bound, hostname)
+            } catch (e: UnknownHostException) {
+                try {
+                    systemDns.lookup(hostname)
+                } catch (fallback: UnknownHostException) {
+                    fallback.addSuppressed(e)
+                    throw fallback
+                }
+            }
         }
 }

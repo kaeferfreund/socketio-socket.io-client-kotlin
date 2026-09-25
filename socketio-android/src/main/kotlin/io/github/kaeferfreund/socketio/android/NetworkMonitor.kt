@@ -32,7 +32,18 @@ internal class NetworkMonitor(
         networkStatusByManager[manager] = status
         val logger = manager.options.logger
         var current: Network? = connectivity.activeNetwork
-        if (settings.bindToActiveNetwork) binding.network = current
+
+        // A VPN is not bound: the system already routes the app's traffic through it,
+        // and lookups bound to some VPN networks fail with EAI_NODATA without sending a
+        // query (issue #1, Tailscale). The network change handling below still applies.
+        fun bind(
+            network: Network?,
+            capabilities: NetworkCapabilities? = network?.let(connectivity::getNetworkCapabilities),
+        ) {
+            if (!settings.bindToActiveNetwork) return
+            binding.network = if (capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_VPN) == true) null else network
+        }
+        bind(current)
         if (current == null) {
             status.value = NetworkStatus(available = false, metered = false, validated = false)
             if (settings.reconnectOnNetworkAvailable) manager.setNetworkAvailable(false)
@@ -42,7 +53,7 @@ internal class NetworkMonitor(
                 override fun onAvailable(network: Network) {
                     val previous = current
                     current = network
-                    if (settings.bindToActiveNetwork) binding.network = network
+                    bind(network)
                     if (previous != null && previous != network) {
                         if (logger.isLoggable(LogLevel.INFO)) logger.log(LogLevel.INFO, "network", "default network changed; reconnecting on the new one")
                         client.connectionPool.evictAll()
@@ -70,6 +81,7 @@ internal class NetworkMonitor(
                     capabilities: NetworkCapabilities,
                 ) {
                     if (network != current) return
+                    bind(network, capabilities)
                     status.value =
                         NetworkStatus(
                             available = true,

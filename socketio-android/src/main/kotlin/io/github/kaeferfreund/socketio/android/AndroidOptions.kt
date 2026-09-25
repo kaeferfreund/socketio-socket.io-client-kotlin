@@ -48,7 +48,12 @@ public class NetworkStatus(
 
 /** The Android integration settings; see [android]. */
 public class AndroidSocketOptions internal constructor() {
-    /** Route sockets and DNS through the current default network and move with it. */
+    /**
+     * Route sockets and DNS through the current default network and move with it.
+     * A VPN default network is left to the system's routing (which already goes
+     * through the VPN); a lookup that fails on the bound network is retried with
+     * the system resolver.
+     */
     public var bindToActiveNetwork: Boolean = true
 
     /**
