@@ -383,6 +383,13 @@ public class EngineSocket(
     private fun onError(error: EngineIOException) {
         priorWebsocketSuccess.set(false)
         if (options.tryAllTransports && transportNames.size > 1 && readyState == EngineState.OPENING) {
+            // JavaScript only drops the failed transport's listeners. It can already be open here
+            // (a handshake this client rejects arrives on an open polling transport) and would
+            // keep polling without listeners, so it is closed as well.
+            val failed = transport
+            clearTransportListeners()
+            transport = null
+            failed?.close()
             transportNames.removeAt(0)
             open()
             return

@@ -94,6 +94,59 @@ class EngineRobustnessTest {
         }
 
     @Test
+    fun aRejectedHandshakeWithTryAllTransportsClosesThePollingTransport() =
+        runTest {
+            val h = engineHarness()
+            val polls = ArrayList<EngineHttpCallback>()
+            val posts = ArrayList<String?>()
+            val http =
+                object : EngineHttpClient {
+                    override fun execute(
+                        request: EngineHttpRequest,
+                        callback: EngineHttpCallback,
+                    ): Cancellable {
+                        if (request.method == "GET") polls.add(callback) else posts.add(request.body)
+                        return Cancellable.NONE
+                    }
+                }
+            val options = EngineOptions(tryAllTransports = true, clients = EngineClients(http, RecordingWebSocketClient()))
+            val engine = EngineSocket("http://localhost", options, h.executor)
+            h.executor.execute { engine.open() }
+            h.settle()
+            // The polling transport opens with this response, but the handshake has no sid.
+            polls.single().onResponse(EngineHttpResponse(200, "0{}"))
+            h.settle()
+            assertEquals(1, polls.size, "the abandoned polling transport polled again")
+            assertEquals(listOf<String?>("1"), posts)
+            assertEquals("websocket", engine.transport!!.name)
+            h.close()
+        }
+
+    @Test
+    fun closingAConnectingWebSocketCancelsIt() =
+        runTest {
+            val h = engineHarness()
+            val ws = RecordingWebSocketClient()
+            val engine = EngineSocket("http://localhost", EngineOptions(transports = listOf("websocket"), clients = EngineClients(null, ws)), h.executor)
+            h.executor.execute { engine.open() }
+            h.settle()
+            h.executor.execute { engine.close() }
+            h.settle()
+            assertEquals(listOf("cancel"), ws.calls)
+
+            val open = RecordingWebSocketClient()
+            val connected = EngineSocket("http://localhost", EngineOptions(transports = listOf("websocket"), clients = EngineClients(null, open)), h.executor)
+            h.executor.execute { connected.open() }
+            h.settle()
+            open.listener!!.onOpen(emptyList())
+            h.settle()
+            h.executor.execute { connected.close() }
+            h.settle()
+            assertEquals(listOf("close 1000"), open.calls)
+            h.close()
+        }
+
+    @Test
     fun anUnknownTransportNameIsAnErrorEventNotAnException() =
         runTest {
             val h = engineHarness()
@@ -210,6 +263,43 @@ class EngineRobustnessTest {
             assertTrue(h.all<EngineEvent.Open>().isEmpty())
             h.close()
         }
+}
+
+/** A WebSocket client whose connections never open by themselves; records how they end. */
+private class RecordingWebSocketClient : EngineWebSocketClient {
+    var listener: EngineWebSocketListener? = null
+    val calls = ArrayList<String>()
+
+    override fun connect(
+        request: EngineWebSocketRequest,
+        listener: EngineWebSocketListener,
+    ): EngineWebSocketConnection {
+        this.listener = listener
+        return object : EngineWebSocketConnection {
+            override fun send(
+                text: String,
+                compress: Boolean,
+            ) = true
+
+            override fun send(
+                bytes: ByteArray,
+                compress: Boolean,
+            ) = true
+
+            override val queuedBytes: Long get() = 0
+
+            override fun close(
+                code: Int,
+                reason: String?,
+            ) {
+                calls += "close $code"
+            }
+
+            override fun cancel() {
+                calls += "cancel"
+            }
+        }
+    }
 }
 
 /** Answers every request with [body], like a broken or hostile server. */

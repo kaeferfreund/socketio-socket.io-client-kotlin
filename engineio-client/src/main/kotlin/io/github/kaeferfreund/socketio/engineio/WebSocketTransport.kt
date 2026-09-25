@@ -155,7 +155,9 @@ public class WebSocketTransport(
     override fun doClose() {
         generation++
         outgoing.clear()
-        connection?.close(1000, null)
+        // A socket still connecting is aborted, as close() does in browsers and in Node's ws;
+        // OkHttp's close() would only queue a close frame behind a handshake that may never end.
+        if (readyState == TransportState.OPENING) connection?.cancel() else connection?.close(1000, null)
         connection = null
     }
 

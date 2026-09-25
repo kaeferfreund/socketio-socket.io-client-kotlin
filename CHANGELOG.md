@@ -94,6 +94,11 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   overflows the stack.
 - A `Set-Cookie` `Max-Age` beyond the date range no longer throws inside the
   protocol executor; like JavaScript's Invalid Date, such a cookie never expires.
+- With `tryAllTransports`, a transport that fails after it opened (a
+  handshake this client rejects) is closed before the next one is tried; it used
+  to keep polling, creating a server session per request. Closing a WebSocket
+  that is still connecting aborts it instead of queueing a close frame behind a
+  handshake that may never complete.
 
 ### Validation
 

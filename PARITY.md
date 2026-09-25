@@ -141,6 +141,10 @@ and do not change a certified assertion:
   error"`, reported on the next tick like `Request._create` does. JavaScript's
   polling transport skips an invalid extra header instead. The cookie jar ignores
   cookies that are not printable ASCII, since they could not be sent back.
+- With `tryAllTransports`, the transport that failed is closed before the next
+  one is tried; JavaScript only drops its listeners. Unlike JavaScript, this client
+  rejects invalid handshakes, which can arrive on an already open polling
+  transport that would otherwise keep polling.
 - Payloads are `SocketIOValue` trees. Values are converted explicitly
   (`SocketIOValue.of`, kotlinx.serialization); there is no `toJSON()` hook.
 - Optional limits (text length, nesting depth, buffered packets, polling body
