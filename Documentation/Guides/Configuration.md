@@ -66,7 +66,7 @@ properties of a running `SocketManager`, like the JavaScript setters.
 | `rememberUpgrade` | `false` | Start with WebSocket when a previous connection in this process upgraded successfully |
 | `path` | `"/socket.io"` | Request path on the server; must match the server's `path` |
 | `addTrailingSlash` | `true` | Append `/` to `path` (`/socket.io/`) |
-| `query` | empty | Query parameters on every request |
+| `query` | empty | Query parameters on every request; a query string in the manager URL replaces it, as in JavaScript |
 | `extraHeaders` | empty | Headers on every polling request and on the WebSocket handshake |
 | `withCredentials` | `false` | Keep `Set-Cookie` values and resend them within one connection |
 | `forceBase64` | `false` | Send binary attachments as Base64 text |

@@ -127,6 +127,9 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
 - Polling requests follow redirects only within the same origin, and the
   WebSocket handshake follows none: a redirect to another host used to receive
   the extra headers (API keys), cookies and the POST body with the auth payload.
+- A query string in the manager URL replaces the `query` option, as
+  `engine.io-client` does (`opts.query = parsedUri.query`); the two used to be
+  merged with the option winning, under a comment that claimed JavaScript parity.
 
 ### Validation
 

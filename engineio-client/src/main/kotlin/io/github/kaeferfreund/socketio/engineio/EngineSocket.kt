@@ -81,18 +81,17 @@ public class EngineSocket(
         var hostname = ""
         var port = options.port.orEmpty()
         var secure = options.secure ?: false
-        var query = LinkedHashMap<String, String>()
+        var query = LinkedHashMap(options.query)
         if (uri != null) {
             val parsed = EngineUri.parse(uri)
             hostname = parsed.host
             secure = parsed.secure
             port = parsed.port
+            // As in JavaScript (`opts.query = parsedUri.query`), a query in the URL replaces the `query` option.
             if (parsed.query.isNotEmpty()) query = LinkedHashMap(EngineUri.decodeQuery(parsed.query))
         } else if (options.host != null) {
             hostname = EngineUri.parse(options.host).host
         }
-        // Options win over the URL query, as `Object.assign` does in JavaScript.
-        query.putAll(options.query)
         this.secure = secure
         if (hostname.isNotEmpty() && port.isEmpty()) port = if (secure) "443" else "80"
         this.hostname = hostname.ifEmpty { "localhost" }

@@ -425,10 +425,15 @@ class EngineSocketTest {
     fun theDefaultPathAndQueryFollowJavaScript() =
         runTest {
             val h = engineHarness()
-            h.engine(EngineOptions(transports = listOf("polling"), query = mapOf("a" to "b c")), uri = "http://localhost:3000/?x=1")
+            h.engine(EngineOptions(transports = listOf("polling"), query = mapOf("a" to "b c")), uri = "http://localhost:3000")
             h.settle()
             val first = h.server.requests.first()
-            assertTrue(first.url.startsWith("http://localhost:3000/engine.io/?x=1&a=b%20c&EIO=4&transport=polling&t="), first.url)
+            assertTrue(first.url.startsWith("http://localhost:3000/engine.io/?a=b%20c&EIO=4&transport=polling&t="), first.url)
+            // As in JavaScript (`opts.query = parsedUri.query`), a query in the URL replaces the option.
+            h.engine(EngineOptions(transports = listOf("polling"), query = mapOf("a" to "b c")), uri = "http://localhost:3000/?x=1")
+            h.settle()
+            val second = h.server.requests.first { "x=1" in it.url }
+            assertTrue(second.url.startsWith("http://localhost:3000/engine.io/?x=1&EIO=4&transport=polling&t="), second.url)
             h.close()
         }
 
