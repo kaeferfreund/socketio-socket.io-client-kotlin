@@ -209,6 +209,8 @@ class ResilienceE2ETest {
                 repeat(3) { index -> socket.emit("echo", "after-sleep-$index") { if (index == 2) woke.complete(it.getOrNull()?.get(0)?.string) } }
             }
             assertEquals("after-sleep-2", withTimeout(10.seconds) { woke.await() })
+            eventually { reconnects.isNotEmpty() }
+            // Negative check: no second disconnect or reconnect follows.
             delay(300.milliseconds)
             assertEquals(listOf(DisconnectReason.PING_TIMEOUT), reasons)
             assertEquals(1, reconnects.size)
@@ -225,13 +227,14 @@ class ResilienceE2ETest {
             }.socket("/")
             val results = CopyOnWriteArrayList<Result<*>>()
             repeat(3) { index -> socket.emit("echo", index) { results += it } }
-            delay(100.milliseconds)
+            // The third emit is rejected after the first two were buffered, in executor order.
+            eventually { results.isNotEmpty() }
             assertEquals(1, results.size)
             assertTrue(results.single().exceptionOrNull() is SocketBufferLimitException)
             assertEquals(2, socket.pendingEmits.value)
             socket.connect()
             socket.awaitConnect()
-            delay(300.milliseconds)
+            eventually { results.size >= 3 }
             assertEquals(3, results.size)
             assertEquals(2, results.count { it.isSuccess })
             socket.disconnect()

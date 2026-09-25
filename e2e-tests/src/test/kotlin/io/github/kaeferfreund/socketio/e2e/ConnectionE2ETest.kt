@@ -778,7 +778,7 @@ class ConnectionE2ETest {
                     io.github.kaeferfreund.socketio.engineio.EnginePacketObserver { outgoing, packet -> if (outgoing) created += packet.text.orEmpty() }
             }
             assertTrue(withTimeout(10.seconds) { done.await() })
-            delay(50.milliseconds)
+            eventually { "1" in created }
             assertEquals(listOf("0", "1"), created.filter { it.isNotEmpty() })
         }
 
@@ -800,7 +800,7 @@ class ConnectionE2ETest {
                         io.github.kaeferfreund.socketio.engineio.EnginePacketObserver { outgoing, packet -> if (outgoing) created += packet.text.orEmpty() }
                 }
             withTimeout(10.seconds) { done.await() }
-            delay(50.milliseconds)
+            eventually { "1" in created && "1/foo," in created }
             assertEquals(listOf("0", "0/foo,", "1", "1/foo,"), created.filter { it.isNotEmpty() })
         }
 

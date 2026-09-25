@@ -729,7 +729,7 @@
       "upstream_ids": [
         "JS-057"
       ],
-      "assertions": "A queued emit is not tried while disconnected: with a short ack timeout, the emit succeeds after `connect()` 100 ms later. The unit test uses the original 10 ms on virtual time; the E2E test uses 20 ms per try, keeping the proof (all tries would fail inside the wait).",
+      "assertions": "A queued emit is not tried while disconnected: with a short ack timeout, the emit succeeds after `connect()` 100 ms later. The unit test uses the original 10 ms on virtual time; the E2E test scales the timing (250 ms per try, a 1.5 s wait), keeping the proof: all tries would fail inside the wait.",
       "tests": [
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRetryTest.kt",

@@ -111,6 +111,14 @@ internal suspend fun Socket.awaitConnect(timeout: Duration = 10.seconds) {
     }
 }
 
+/** Waits until [condition] holds, checking every 10 ms, and fails after [timeout]. */
+internal suspend fun eventually(
+    timeout: Duration = 10.seconds,
+    condition: () -> Boolean,
+) {
+    withTimeout(timeout) { while (!condition()) kotlinx.coroutines.delay(10) }
+}
+
 internal suspend fun <T> await(
     timeout: Duration = 10.seconds,
     register: (CompletableDeferred<T>) -> Unit,

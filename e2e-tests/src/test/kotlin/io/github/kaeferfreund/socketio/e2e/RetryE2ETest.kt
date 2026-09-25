@@ -59,7 +59,7 @@ class RetryE2ETest {
             assertNull(error)
             assertEquals(3L, value!!.long)
             socket.disconnect()
-            delay(50.milliseconds)
+            eventually { "1" in sent }
             // Queue length right after each emit (1, 2, 3), then inside each acknowledgement (2, 1, 0).
             assertEquals(listOf(1, 2, 3, 2, 1, 0), queueLengths)
             assertEquals(listOf("0", "20[\"echo\",1]", "21[\"echo\",2]", "22[\"echo\",3]", "1"), sent.filter { it != "3" })
@@ -85,14 +85,14 @@ class RetryE2ETest {
                 ) { packetObserver = observer(sent) }
             assertEquals(4, withTimeout(10.seconds) { done.await() })
             socket.disconnect()
-            delay(50.milliseconds)
+            eventually { "1" in sent }
             assertEquals(listOf("0", "20[\"ack\"]", "21[\"ack\"]", "22[\"ack\"]", "23[\"ack\"]", "1"), sent.filter { it != "3" })
         }
 
-    // JS-057: JavaScript uses a 10 ms acknowledgement timeout, which a cold JVM roundtrip can
-    // exceed. 20 ms keeps the test's power: had the queue drained while disconnected, all four
-    // tries (80 ms) would have failed before the 100 ms wait ends. The virtual-time unit test
-    // `SocketRetryTest.doesNotDrainTheQueueWhileDisconnected` asserts the exact 10 ms case.
+    // JS-057: JavaScript uses a 10 ms acknowledgement timeout and a 100 ms wait, which a loaded
+    // CI runner cannot guarantee for a real roundtrip. Both are scaled by the same idea: had the
+    // queue drained while disconnected, all four tries (4 x 250 ms) would have failed before the
+    // 1.5 s wait ends. The virtual-time unit test `SocketRetryTest` asserts the exact 10 ms case.
     @Test
     fun doesNotDrainTheQueueWhileDisconnected() =
         e2e {
@@ -100,12 +100,12 @@ class RetryE2ETest {
                 io(
                     socketOptions = SocketOptions {
                         retries = 3
-                        ackTimeout = 20.milliseconds
+                        ackTimeout = 250.milliseconds
                     },
                 ) { autoConnect = false }
             val result = CompletableDeferred<Throwable?>()
             socket.emit("echo", 1) { result.complete(it.exceptionOrNull()) }
-            delay(100.milliseconds)
+            delay(1500.milliseconds)
             socket.connect()
             assertNull(withTimeout(10.seconds) { result.await() })
             socket.disconnect()
@@ -126,7 +126,9 @@ class RetryE2ETest {
                     // Polling only, so no upgrade noop/probe packets appear in the observation.
                     transports = listOf(io.github.kaeferfreund.socketio.Transport.POLLING)
                 }
-            delay(300.milliseconds)
+            // Wait for the acknowledgement instead of a fixed delay: a duplicate would have been
+            // written before the server answered the first copy.
+            withTimeout(10.seconds) { while (received.none { it.second == "30[null]" }) delay(10.milliseconds) }
             assertEquals(listOf("0", "20[\"echo\",null]"), sent)
             // 1: engine.io OPEN packet, 2: socket.io CONNECT packet, 3: ack packet
             assertEquals(3, received.size, "$received")
