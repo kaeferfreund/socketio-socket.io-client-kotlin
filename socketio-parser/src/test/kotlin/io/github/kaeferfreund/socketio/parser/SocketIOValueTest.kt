@@ -146,4 +146,15 @@ class OrgJsonConversionTest {
         org.junit.jupiter.api.Assertions.assertEquals(SocketIOValue.Null, SocketIOValue.of(org.json.JSONObject.NULL))
         org.junit.jupiter.api.Assertions.assertEquals(SocketIOValue.arrayOf("a"), SocketIOValue.of(org.json.JSONArray().put("a")))
     }
+
+    // socket.io-client-java#743: a primitive array put into a JSONObject reached the server as
+    // "[I@50bf616", because org.json stringified the array object. It must arrive as a JSON array.
+    @org.junit.jupiter.api.Test
+    fun primitiveArraysInsideOrgJsonBecomeJsonArrays() {
+        val json = org.json.JSONObject().put("sellCIndices", intArrayOf(0, 2)).put("next", "PROCESS")
+        val value = SocketIOValue.of(json)
+        org.junit.jupiter.api.Assertions.assertEquals(SocketIOValue.of(mapOf("sellCIndices" to listOf(0, 2), "next" to "PROCESS")), value)
+        // Key order is whatever the org.json implementation iterates (HashMap on the JVM).
+        org.junit.jupiter.api.Assertions.assertTrue(SocketIOJson.stringify(value).contains("\"sellCIndices\":[0,2]"))
+    }
 }

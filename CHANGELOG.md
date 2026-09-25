@@ -55,6 +55,15 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   detected and rejected with a clear error.
 - WebTransport is not supported.
 
+### Findings from the socket.io-client-java issues and forks
+
+- WebSocket writes are paced below OkHttp's 16 MiB outgoing queue, which OkHttp
+  answers with a close and browsers and Node do not have (socket.io-client-java
+  #773, #726: bursts of large emits ended in `transport close`). A single message
+  above 16 MiB fails with a transport error that names the limit.
+- Regression tests for primitive arrays inside `org.json` payloads (#743) and
+  JSON-looking acknowledgement strings (#567).
+
 ### Validation
 
 - Every supported runtime test declaration of the pinned upstream

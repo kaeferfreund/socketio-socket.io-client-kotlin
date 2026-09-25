@@ -100,6 +100,13 @@ public interface EngineWebSocketConnection {
     /** Bytes queued but not yet written to the network. */
     public val queuedBytes: Long
 
+    /**
+     * The most bytes the connection can hold queued; sending beyond it fails the
+     * connection. OkHttp closes a WebSocket at 16 MiB, a limit browsers and Node do
+     * not have, so the WebSocket transport paces its writes to stay below it.
+     */
+    public val maxQueuedBytes: Long get() = Long.MAX_VALUE
+
     /** Starts the closing handshake. */
     public fun close(
         code: Int,

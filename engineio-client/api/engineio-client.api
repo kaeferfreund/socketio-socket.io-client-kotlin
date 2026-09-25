@@ -330,9 +330,14 @@ public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineW
 public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineWebSocketConnection {
 	public abstract fun cancel ()V
 	public abstract fun close (ILjava/lang/String;)V
+	public fun getMaxQueuedBytes ()J
 	public abstract fun getQueuedBytes ()J
 	public abstract fun send (Ljava/lang/String;Z)Z
 	public abstract fun send ([BZ)Z
+}
+
+public final class io/github/kaeferfreund/socketio/engineio/EngineWebSocketConnection$DefaultImpls {
+	public static fun getMaxQueuedBytes (Lio/github/kaeferfreund/socketio/engineio/EngineWebSocketConnection;)J
 }
 
 public abstract interface class io/github/kaeferfreund/socketio/engineio/EngineWebSocketListener {

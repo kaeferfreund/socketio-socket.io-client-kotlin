@@ -31,6 +31,7 @@ public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer$Fake
 	public fun cancel ()V
 	public fun close (ILjava/lang/String;)V
 	public final fun getFrames ()Ljava/util/List;
+	public fun getMaxQueuedBytes ()J
 	public fun getQueuedBytes ()J
 	public fun send (Ljava/lang/String;Z)Z
 	public fun send ([BZ)Z

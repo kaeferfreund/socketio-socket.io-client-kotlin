@@ -3,6 +3,7 @@ package io.github.kaeferfreund.socketio.engineio
 import io.github.kaeferfreund.socketio.engineio.parser.EngineIOData
 import io.github.kaeferfreund.socketio.engineio.parser.EngineIOPacket
 import io.github.kaeferfreund.socketio.engineio.parser.EngineIOParser
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * WebSocket transport, a port of `BaseWS`/`WS` in `engine.io-client`, on
@@ -22,6 +23,7 @@ public class WebSocketTransport(
         }
 
     private var connection: EngineWebSocketConnection? = null
+    private val outgoing = ArrayDeque<EngineIOPacket>()
     private var generation = 0
 
     override fun doOpen() {
@@ -81,20 +83,53 @@ public class WebSocketTransport(
 
     override fun write(packets: List<EngineIOPacket>) {
         writable = false
-        for ((index, packet) in packets.withIndex()) {
+        outgoing.addAll(packets)
+        pump()
+    }
+
+    /**
+     * Hands queued packets to the connection. JavaScript passes every packet to
+     * `ws.send` at once; OkHttp, unlike browsers and Node, closes the socket when its
+     * queue would exceed [EngineWebSocketConnection.maxQueuedBytes], so packets that
+     * do not fit wait until the queue has drained. `drain` (writable again) follows
+     * once the last packet is handed over, on the next tick as in JavaScript.
+     */
+    private fun pump() {
+        val ws = connection ?: return
+        while (outgoing.isNotEmpty()) {
+            val packet = outgoing.first()
             val data = EngineIOParser.encodePacket(packet, supportsBinary)
-            doWrite(packet, data)
-            if (index == packets.size - 1) {
-                // nextTick: the drain comes after the caller's synchronous code.
-                val current = generation
-                executor.post {
-                    if (current != generation) return@post
-                    writable = true
-                    events.emit(TransportEvent.Drain)
-                }
+            val size = byteSize(data)
+            if (size > ws.maxQueuedBytes) {
+                outgoing.clear()
+                onError(
+                    "websocket error",
+                    cause = EngineIOException("a message of $size bytes exceeds the WebSocket client's limit of ${ws.maxQueuedBytes} bytes"),
+                )
+                return
             }
+            if (ws.queuedBytes > 0 && ws.queuedBytes + size > ws.maxQueuedBytes) {
+                val current = generation
+                executor.schedule(QUEUE_RETRY) { if (current == generation) pump() }
+                return
+            }
+            outgoing.removeFirst()
+            doWrite(packet, data)
+        }
+        // nextTick: the drain comes after the caller's synchronous code.
+        val current = generation
+        executor.post {
+            if (current != generation) return@post
+            writable = true
+            events.emit(TransportEvent.Drain)
         }
     }
+
+    private fun byteSize(data: EngineIOData): Long =
+        when (data) {
+            is EngineIOData.Text -> EngineUri.utf8Length(data.value)
+            is EngineIOData.Binary -> data.size.toLong()
+        }
 
     private fun doWrite(
         packet: EngineIOPacket,
@@ -104,12 +139,7 @@ public class WebSocketTransport(
         var compress = packet.options.compress
         val threshold = options.perMessageDeflateThreshold
         if (threshold != null) {
-            val length =
-                when (data) {
-                    is EngineIOData.Text -> EngineUri.utf8Length(data.value)
-                    is EngineIOData.Binary -> data.size.toLong()
-                }
-            if (length < threshold) compress = false
+            if (byteSize(data) < threshold) compress = false
         }
         val accepted =
             when (data) {
@@ -123,6 +153,7 @@ public class WebSocketTransport(
 
     override fun doClose() {
         generation++
+        outgoing.clear()
         connection?.close(1000, null)
         connection = null
     }
@@ -136,6 +167,9 @@ public class WebSocketTransport(
 
     public companion object {
         public const val NAME: String = "websocket"
+
+        /** How often a write waiting for the connection's queue checks it again. */
+        private val QUEUE_RETRY = 5.milliseconds
 
         /** Factory for [EngineOptions.transportFactories]. */
         public val FACTORY: Factory = Factory { WebSocketTransport(it) }

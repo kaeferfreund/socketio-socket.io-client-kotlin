@@ -31,4 +31,45 @@ class MaxPayloadE2ETest {
             }
         }
     }
+
+    // socket.io-client-java#773 and #726: many large emits in a burst. OkHttp closes a WebSocket
+    // whose outgoing queue exceeds 16 MiB, a limit browsers and Node do not have; the JavaScript
+    // client sends all of them. The transport must not overfill OkHttp's queue.
+    @Test
+    fun aBurstOfLargeEmitsOverWebSocketArrivesWithoutClosingTheConnection() =
+        e2e("server.js", mapOf("MAX_HTTP_BUFFER_SIZE" to "100000000")) {
+            val socket = manager { transports = listOf(Transport.WEBSOCKET) }.socket("/", SocketOptions { ackTimeout = kotlin.time.Duration.parse("60s") })
+            socket.awaitConnect()
+            val disconnects = java.util.concurrent.CopyOnWriteArrayList<String>()
+            socket.onDisconnect { reason, details -> disconnects += "${reason.wireValue} $details" }
+            val payload = ByteArray(1024 * 1024) { it.toByte() }
+            val replies =
+                kotlinx.coroutines.coroutineScope {
+                    List(40) { async { socket.emitWithAck("parity-binary", payload)[0].bytes!!.size } }.awaitAll()
+                }
+            assertEquals(List(40) { payload.size }, replies)
+            assertEquals(emptyList<String>(), disconnects)
+            socket.disconnect()
+        }
+
+    // A single WebSocket message above OkHttp's fixed 16 MiB queue cannot be sent at all. Instead
+    // of OkHttp's silent close, the disconnect names the limit, and the connection recovers.
+    @Test
+    fun aWebSocketMessageAboveOkHttpsLimitFailsWithAClearReasonAndTheSocketRecovers() =
+        e2e("server.js", mapOf("MAX_HTTP_BUFFER_SIZE" to "100000000")) {
+            val socket =
+                manager {
+                    transports = listOf(Transport.WEBSOCKET)
+                    reconnectionDelay = kotlin.time.Duration.parse("100ms")
+                }.socket("/")
+            socket.awaitConnect()
+            val disconnects = java.util.concurrent.CopyOnWriteArrayList<io.github.kaeferfreund.socketio.DisconnectDetails?>()
+            socket.onDisconnect { _, details -> disconnects += details }
+            socket.emit("parity-binary", ByteArray(17 * 1024 * 1024))
+            await<Unit> { done -> socket.onConnect { done.complete(Unit) } }
+            val cause = disconnects.single()!!.error!!.cause!!
+            assertEquals(true, cause.message!!.contains("exceeds the WebSocket client's limit of 16777216 bytes"), cause.message)
+            assertEquals(ByteArray(3).size, socket.emitWithAck("parity-binary", ByteArray(3))[0].bytes!!.size)
+            socket.disconnect()
+        }
 }

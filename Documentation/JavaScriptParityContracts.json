@@ -3723,7 +3723,7 @@
       "id": "KT-TRANSPORT-LIMITS",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Stalled and trickling handshakes and stalled POSTs time out instead of hanging; messages close to maxPayload arrive intact on polling, WebSocket and after the upgrade; heartbeats keep an idle connection alive; one smoke scenario connects, emits and acknowledges over every transport mode.",
+      "assertions": "Stalled and trickling handshakes and stalled POSTs time out instead of hanging; messages close to maxPayload arrive intact on polling, WebSocket and after the upgrade; bursts of large WebSocket emits are paced below OkHttp's 16 MiB queue instead of closing the connection (socket.io-client-java #773/#726), and a single larger message fails with a transport error naming the limit; heartbeats keep an idle connection alive; one smoke scenario connects, emits and acknowledges over every transport mode.",
       "tests": [
         {
           "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/PollingTimeoutE2ETest.kt",
@@ -3740,6 +3740,26 @@
         {
           "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/MaxPayloadE2ETest.kt",
           "symbol": "io.github.kaeferfreund.socketio.e2e.MaxPayloadE2ETest.largeMessagesNearMaxPayloadArriveIntactOnEveryTransport"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/MaxPayloadE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.MaxPayloadE2ETest.aBurstOfLargeEmitsOverWebSocketArrivesWithoutClosingTheConnection"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/MaxPayloadE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.MaxPayloadE2ETest.aWebSocketMessageAboveOkHttpsLimitFailsWithAClearReasonAndTheSocketRecovers"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/WebSocketBackpressureTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.WebSocketBackpressureTest.packetsWaitWhileTheConnectionQueueIsFullAndDrainComesLast"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/WebSocketBackpressureTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.WebSocketBackpressureTest.withoutAQueueLimitEverythingIsSentAtOnceAndDrainFollows"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/WebSocketBackpressureTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.WebSocketBackpressureTest.aMessageLargerThanTheConnectionLimitIsAClearTransportError"
         },
         {
           "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/EngineE2ETest.kt",
@@ -4075,7 +4095,7 @@
       "id": "KT-JSON-MODEL",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "The value model behaves like JavaScript JSON: numbers print like `Number.prototype.toString`, integers stay exact, strings escape like `JSON.stringify`, parsing accepts and rejects what `JSON.parse` does, object keys order like JavaScript (duplicate keys keep the first position and the last value), deep nesting parses and prints without recursion, revivers run bottom-up, `Number()` coercion matches; Kotlin and Java values (including dates as ISO strings) convert both ways, unsupported types are rejected, values are immutable; kotlinx.serialization classes round-trip; the emit, listener and acknowledgement helpers send encoded objects with the given `Json`, decode acknowledgements and events, keep emitter flags (timeouts), route undecodable payloads to `onError` or the listener error handler without stopping later events, and report decode failures and timeouts through `serializableAck`.",
+      "assertions": "The value model behaves like JavaScript JSON: numbers print like `Number.prototype.toString`, integers stay exact, strings escape like `JSON.stringify`, parsing accepts and rejects what `JSON.parse` does, object keys order like JavaScript (duplicate keys keep the first position and the last value), deep nesting parses and prints without recursion, revivers run bottom-up, `Number()` coercion matches; Kotlin and Java values (including dates as ISO strings) convert both ways, unsupported types are rejected, values are immutable; org.json payloads convert, including primitive arrays inside them (socket.io-client-java #743); kotlinx.serialization classes round-trip; the emit, listener and acknowledgement helpers send encoded objects with the given `Json`, decode acknowledgements and events, keep emitter flags (timeouts), route undecodable payloads to `onError` or the listener error handler without stopping later events, and report decode failures and timeouts through `serializableAck`.",
       "tests": [
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
@@ -4156,6 +4176,14 @@
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.valuesAreImmutable"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.OrgJsonConversionTest.convertsOrgJsonPayloadsLikeTheJavaClientAccepts"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.OrgJsonConversionTest.primitiveArraysInsideOrgJsonBecomeJsonArrays"
         },
         {
           "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",

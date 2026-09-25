@@ -134,6 +134,12 @@ class SocketApiTest {
             h.settle()
             assertTrue(ack.isSent)
             assertEquals(listOf(listOf(SocketIOValue.Text("answer"))), answers)
+            // socket.io-client-java#567: a string that looks like JSON stays a string.
+            h.server.namespace("/").clients.single().emitWithAck("question", 2) { answers += it }
+            h.settle()
+            acks.last().send("{\"data\":[]}")
+            h.settle()
+            assertEquals(listOf(SocketIOValue.Text("{\"data\":[]}")), answers.last())
             assertTrue(socket.connected)
             h.close()
         }

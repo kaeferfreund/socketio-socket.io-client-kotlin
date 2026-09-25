@@ -50,6 +50,7 @@ Durations are `Duration` instead of milliseconds.
 | `requestTimeout` | Same name (polling only) |
 | `withCredentials` | Same name; per-connection cookie jar, as the Node client |
 | `protocols` | Same name |
+| WebSocket message size | Unlimited in browsers and Node; OkHttp sends at most 16 MiB per message. Bursts are paced below OkHttp's queue limit |
 | `perMessageDeflate` | `perMessageDeflateThreshold` (`null` = no compression offered); the per-message `compress` flag reaches the transport, but OkHttp compresses by size only |
 | `transportOptions` | Same name, `TransportOverrides` (`query`, `extraHeaders`, `requestTimeout`, `timestampRequests`, `forceBase64`, `path`) |
 | `parser` | Not available; `parserOptions` bounds the default parser |

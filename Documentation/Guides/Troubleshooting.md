@@ -166,6 +166,15 @@ not sent. `buffer`, `limit` and `attempted` identify it. A polling response abov
 `maxPollingResponseBytes` fails with `"xhr poll error"` caused by
 `ResponseTooLargeException`.
 
+**Messages above 16 MiB over WebSocket.** OkHttp holds at most 16 MiB of outgoing
+WebSocket data and closes the socket beyond that; browsers and Node have no such
+limit. The client paces its writes, so many large emits in a row are fine. A
+*single* message larger than 16 MiB cannot be sent over OkHttp's WebSocket: the
+connection closes with `"websocket error"`, whose cause says *"a message of N bytes
+exceeds the WebSocket client's limit of 16777216 bytes"*, and reconnects. Split such
+payloads, or use `transports = listOf(Transport.POLLING)` for them (polling is
+bounded only by the server's `maxHttpBufferSize`).
+
 ## Network binding and VPNs
 
 With `bindToActiveNetwork` (default), connections use Android's default network.

@@ -99,6 +99,10 @@ Notes:
   by size only (`perMessageDeflateThreshold`). The per-message flag of
   `socket.compress(false)` is carried to the transport, but OkHttp offers no way to
   switch compression off for a single frame.
+- **Large WebSocket messages:** OkHttp queues at most 16 MiB of outgoing WebSocket
+  data. The transport hands it only what fits and waits for the rest, so bursts of
+  large emits do not close the connection; a single message above 16 MiB cannot be
+  sent over WebSocket (see [Troubleshooting](Troubleshooting.md#limits)).
 - `requestTimeout` applies to polling only. OkHttp's read timeout is always
   disabled for the transports because a long poll legitimately waits a full
   heartbeat interval; the heartbeat detects dead connections.

@@ -206,6 +206,10 @@ public class OkHttpEngineClients(
 
         override val queuedBytes: Long get() = socket.queueSize()
 
+        // OkHttp's RealWebSocket closes the socket (1001) when a send would push its
+        // queue past 16 MiB; the transport paces its writes below this.
+        override val maxQueuedBytes: Long get() = OKHTTP_MAX_QUEUE_BYTES
+
         override fun close(
             code: Int,
             reason: String?,
@@ -220,6 +224,9 @@ public class OkHttpEngineClients(
 
     public companion object {
         private val TEXT_PLAIN = "text/plain;charset=UTF-8".toMediaType()
+
+        /** `RealWebSocket.MAX_QUEUE_SIZE`: OkHttp's limit for queued outgoing WebSocket bytes. */
+        private const val OKHTTP_MAX_QUEUE_BYTES = 16L * 1024 * 1024
 
         /** The client used when none is given: OkHttp defaults plus the adjustments above. */
         public val defaultClient: OkHttpClient by lazy { OkHttpClient() }
