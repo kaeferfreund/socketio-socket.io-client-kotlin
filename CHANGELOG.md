@@ -61,8 +61,12 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   answers with a close and browsers and Node do not have (socket.io-client-java
   #773, #726: bursts of large emits ended in `transport close`). A single message
   above 16 MiB fails with a transport error that names the limit.
-- Regression tests for primitive arrays inside `org.json` payloads (#743) and
-  JSON-looking acknowledgement strings (#567).
+- Regression tests for primitive arrays inside `org.json` payloads (#743),
+  JSON-looking acknowledgement strings (#567) and many connect/disconnect cycles
+  (#289); end-to-end tests wait for events instead of fixed delays.
+- `SECURITY.md` and Dependabot (#785); the JVM process-exit behaviour of OkHttp's
+  dispatcher threads is documented (#324).
+- See [the triage report](Documentation/UpstreamIssueTriage-2026-09-25.md).
 
 ### Validation
 

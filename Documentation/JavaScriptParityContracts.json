@@ -3687,7 +3687,7 @@
       "id": "KT-RESILIENCE",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Real-server failure scenarios: a revoked token is replaced by the auth provider on the next attempt; a rejected token fails with the server's data and connects after renewal; losing the network during the upgrade reconnects cleanly; an emit interrupted during a polling POST is retried after reconnecting; an acknowledgement lost with the connection fails or is retried, never both; waking after the heartbeat deadline gives exactly one disconnect and one reconnect; a full send buffer rejects the new emit without evicting accepted ones.",
+      "assertions": "Real-server failure scenarios: a revoked token is replaced by the auth provider on the next attempt; a rejected token fails with the server's data and connects after renewal; losing the network during the upgrade reconnects cleanly; an emit interrupted during a polling POST is retried after reconnecting; an acknowledgement lost with the connection fails or is retried, never both; waking after the heartbeat deadline gives exactly one disconnect and one reconnect; a full send buffer rejects the new emit without evicting accepted ones; 150 connect/disconnect cycles all connect (socket.io-client-java #289).",
       "tests": [
         {
           "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
@@ -3716,6 +3716,10 @@
         {
           "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
           "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.aFullSendBufferRejectsTheNewEmitWithoutEvictingAcceptedOnes"
+        },
+        {
+          "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/ResilienceE2ETest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.e2e.ResilienceE2ETest.hundredsOfConnectDisconnectCyclesAllConnect"
         }
       ]
     },

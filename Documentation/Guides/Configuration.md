@@ -103,6 +103,12 @@ Notes:
   data. The transport hands it only what fits and waits for the rest, so bursts of
   large emits do not close the connection; a single message above 16 MiB cannot be
   sent over WebSocket (see [Troubleshooting](Troubleshooting.md#limits)).
+- **JVM applications and process exit:** `manager.close()` stops every timer; the
+  protocol runs on daemon threads. OkHttp's request dispatcher, however, uses
+  non-daemon threads that stay idle for up to 60 seconds, so a `main` function can
+  outlive its work by that long (socket.io-client-java #324). Pass your own client
+  with `okHttp { client = … }` and call `dispatcher.executorService.shutdown()` on it
+  when the application ends. Android apps are not affected.
 - `requestTimeout` applies to polling only. OkHttp's read timeout is always
   disabled for the transports because a long poll legitimately waits a full
   heartbeat interval; the heartbeat detects dead connections.

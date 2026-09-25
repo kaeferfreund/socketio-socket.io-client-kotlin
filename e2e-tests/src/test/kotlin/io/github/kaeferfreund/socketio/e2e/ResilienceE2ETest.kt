@@ -239,4 +239,22 @@ class ResilienceE2ETest {
             assertEquals(2, results.count { it.isSuccess })
             socket.disconnect()
         }
+
+    // socket.io-client-java#289: after tens to hundreds of connect/disconnect cycles the Java
+    // client stopped emitting connect. Every cycle must connect, and nothing may leak between them.
+    @Test
+    fun hundredsOfConnectDisconnectCyclesAllConnect() =
+        e2e {
+            val socket = manager { autoConnect = false }.socket("/")
+            val connects = java.util.concurrent.atomic.AtomicInteger()
+            socket.onConnect { connects.incrementAndGet() }
+            repeat(150) { cycle ->
+                socket.connect()
+                eventually { connects.get() == cycle + 1 }
+                socket.disconnect()
+                eventually { !socket.active }
+            }
+            assertEquals(150, connects.get())
+            assertEquals(0, socket.pendingAcknowledgements.value)
+        }
 }

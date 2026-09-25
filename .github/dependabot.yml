@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      gradle:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  # The fixture servers stay on the Socket.IO release the tests were written for:
+  # no version-update PRs. Security updates follow the repository's Dependabot setting.
+  - package-ecosystem: npm
+    directory: /fixtures
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0

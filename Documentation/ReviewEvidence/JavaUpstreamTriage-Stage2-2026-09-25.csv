@@ -1,0 +1,351 @@
+id,topic,title,jev_status,p_status,jev_second,p_second,kotlin_test_quoted,p_tested,priority,priority_score
+engine38,ack,pingInterval and pingTimeout calculated wrong,already_addressed,0.94,affected_fix_within_js,0.03,True,0.91,Important,1.06
+engine39,ack,fixed wrong pingInterval and pingTimeout,would_deviate_from_js,0.59,already_addressed,0.3,True,0.66,Important,1.32
+engine99,ack,Add allEvent listener to emitter,already_addressed,0.66,would_deviate_from_js,0.19,False,0.47,Routine,0.11
+forkengine19,ack,fork change of varunoberoi/engine.io-client-java,already_addressed,0.74,matches_js_client,0.12,True,0.61,Routine,0.49
+forkjava17,ack,fork change of revern/socket.io-client-java,already_addressed,0.78,not_applicable,0.16,True,0.74,Important,0.83
+java153,ack,NullPointerException: Attempt to invoke interface method 'void com.github.nkzawa,already_addressed,0.93,affected_fix_within_js,0.04,True,0.56,Important,1.1
+java204,ack,Send ack message to socket.io server and timeout,already_addressed,0.89,matches_js_client,0.09,True,0.87,Important,0.71
+java234,ack,emit callback sometimes not getting fired,matches_js_client,0.9,already_addressed,0.08,True,0.63,Routine,0.18
+java25,ack,on ack callback,already_addressed,0.92,matches_js_client,0.08,True,0.86,Routine,0.39
+java309,ack,Emit or Ack timeout handling?,already_addressed,0.99,matches_js_client,0.01,True,0.8,Important,0.83
+java367,ack,ClassCastException: java.lang.Integer cannot be cast to io.socket.client.Ack,already_addressed,0.96,not_applicable,0.04,False,0.08,Important,1.22
+java413,ack,Timeout over 10000 ms not being handled properly (Android 7.1.1),already_addressed,0.96,not_applicable,0.03,False,0.13,Routine,0.75
+java414,ack,Client timeout also triggers Socket.EVENT_CONNECT_ERROR event (Android 7.1.1),matches_js_client,0.69,already_addressed,0.23,True,0.88,Routine,0.04
+java415,ack,Redundant Socket.EVENT_CONNECT_ERROR event being fired for connection timeout  (,matches_js_client,0.52,would_deviate_from_js,0.28,True,0.88,Routine,0.02
+java517,ack,Emit with timeout,already_addressed,0.9,would_deviate_from_js,0.04,True,0.88,Routine,0.66
+java541,ack,add timeout,already_addressed,0.86,would_deviate_from_js,0.07,True,0.77,Routine,0.07
+java567,ack,Sending a String Ack which looks like a JSON is stringified,already_addressed,0.49,matches_js_client,0.48,False,0.33,Routine,0.04
+java605,ack,ack.call( byte[] ); Can you support it? Thanks!,already_addressed,1,affected_fix_within_js,0,True,0.84,Routine,0.02
+java622,ack,"""io.socket.client.SocketIOException: timeout"" (goes away after jvm restart)",insufficient_evidence,0.59,affected_fix_within_js,0.18,False,0.05,Important,1.31
+java664,ack,why not merge this PR #517 ?,already_addressed,0.98,not_applicable,0.01,True,0.78,Routine,0.05
+java691,ack,okio.AsyncTimeout Caused by java.lang.IllegalStateException Unbalanced enter/exi,not_applicable,1,insufficient_evidence,0,False,0.02,Routine,0.44
+java726,ack,Transport close when using 2.1.0 client send big message to 4.5.2 NodeJS server,already_addressed,0.98,affected_fix_within_js,0.02,False,0.41,Important,1.41
+java770,ack,Fixing the Concurrent Modification and clearAcks() logic,already_addressed,0.56,would_deviate_from_js,0.42,False,0.26,Routine,0.08
+java775,ack,args[1] is received as null instead of socket acknowledgment callback,already_addressed,0.69,not_applicable,0.28,False,0.3,Routine,0.36
+java82,ack,"Fatal signal 11 (SIGSEGV), code 1, fault",not_applicable,0.88,already_addressed,0.08,False,0.03,Routine,0.74
+engine80,android,fix https://github.com/square/okhttp/issues/2283 SecurityException,already_addressed,0.87,not_applicable,0.07,False,0.03,Important,1.28
+engine83,android,Connection will lost soon on Android 5.1 in battery mode,already_addressed,0.83,not_applicable,0.16,False,0.06,Routine,0.61
+java122,android,It takes client very long time to get connected when using 3G network,matches_js_client,0.32,insufficient_evidence,0.29,False,0.03,Important,0.63
+java170,android,Socket Connection error,matches_js_client,0.62,insufficient_evidence,0.15,False,0.05,Routine,0.44
+java230,android,socket.io timeout problem Android,already_addressed,0.59,matches_js_client,0.35,False,0.06,Important,0.96
+java241,android,Consistent XHR Post Error,matches_js_client,0.67,already_addressed,0.21,False,0.06,Routine,0.52
+java262,android,Change Buffer Size,matches_js_client,0.4,would_deviate_from_js,0.35,False,0.04,Important,1.05
+java272,android,latency in receiving socket.on message on android client,matches_js_client,0.8,insufficient_evidence,0.07,False,0.04,Routine,0.52
+java325,android,Socket connect callback  socket.id() returns null,already_addressed,0.71,insufficient_evidence,0.12,False,0.38,Important,1.22
+java328,android,"Consistent ""xhr poll error"" caused by poor network",affected_fix_within_js,0.33,already_addressed,0.26,False,0.44,High,2.17
+java332,android,Unable to trigger acknowledgement function,already_addressed,0.43,not_applicable,0.27,False,0.4,Important,1.22
+java383,android,how can I send audio file from android client to node.js server when stream is n,matches_js_client,0.89,would_deviate_from_js,0.05,False,0.05,Routine,0.18
+java392,android,Android Memory Usage increase with every Socket.emit Call,insufficient_evidence,0.63,affected_fix_within_js,0.18,False,0.03,High,1.51
+java407,android,"send message in handler ""client error"" ?",already_addressed,0.62,insufficient_evidence,0.13,False,0.05,Important,0.7
+java45,android,マルチバイト文字が文字化けする(?),already_addressed,0.79,not_applicable,0.13,False,0.05,Routine,0.44
+java459,android,Emitter.Listener sometime don't download all messages chat,already_addressed,0.73,insufficient_evidence,0.16,False,0.04,Important,1.23
+java485,android,android socket.io native heap leak,not_applicable,0.55,matches_js_client,0.17,False,0.03,Important,1.22
+java511,android,Socket io is randomly corrupting the data in other font,already_addressed,0.8,insufficient_evidence,0.13,False,0.04,High,1.59
+java606,android,Cleartext HTTP traffic not permitted on android 9,matches_js_client,0.45,already_addressed,0.3,False,0.03,Routine,0.25
+java673,android,Docmentation for v1,not_applicable,0.64,matches_js_client,0.27999999999999997,False,0.02,Routine,0.03
+java692,android,Whether to support Android 11?,already_addressed,0.33999999999999997,not_applicable,0.33,False,0.03,Routine,0.27
+java703,android,sslContext is missing from the options,not_applicable,0.64,already_addressed,0.17,False,0.05,Routine,0.36
+java708,android,Different data formats sent by `emit`,already_addressed,0.87,not_applicable,0.06,False,0.04,Routine,0.54
+java720,android,Android 11.0 (API30 ) app crashing with error:  java.lang.ArrayIndexOutOfBoundsE,not_applicable,0.6,already_addressed,0.34,False,0.05,Important,0.93
+java746,android,Android 13 not available,not_applicable,0.94,insufficient_evidence,0.03,False,0.04,Routine,0.26
+java766,android,Android 14 not compatible with version 2.1.0,not_applicable,0.45,already_addressed,0.26,False,0.05,Important,1.19
+engine125,api_config,Change HashMap to LinkedHashMap for query parameters,already_addressed,0.95,would_deviate_from_js,0.03,False,0.12,Routine,0.14
+engine24,api_config,Fix http headers type,matches_js_client,0.73,already_addressed,0.22,False,0.47,Routine,0.39
+engine50,api_config,Is there an API upgrade guide?,already_addressed,0.86,not_applicable,0.07,False,0.39,Routine,0.06
+engine82,api_config,Add option to share OkHttpClient,already_addressed,1,not_applicable,0,True,0.74,Routine,0.05
+engine92,api_config,update for engine.io-client 1.8.4,already_addressed,1,not_applicable,0,True,0.71,Routine,0.49
+forkengine10,api_config,fork change of jaccek/engine.io-client-java,already_addressed,0.98,not_applicable,0.02,False,0.4,Routine,0.58
+forkengine3,api_config,fork change of phapntm/engine.io-client-java,already_addressed,0.87,matches_js_client,0.07,False,0.05,Important,0.76
+forkjava13,api_config,fork change of ali-heidari/socket.io-client-java,would_deviate_from_js,0.87,matches_js_client,0.1,False,0.03,Routine,0.05
+forkjava20,api_config,fork change of arghaffari/socket.io-client-java,not_applicable,0.58,already_addressed,0.22,False,0.03,Routine,0.28
+forkjava3,api_config,fork change of RobinPcrd/socket.io-client-java,already_addressed,0.66,matches_js_client,0.17,True,0.91,Routine,0.82
+forkjava4,api_config,fork change of sinabolouki/socket.io-client-java,already_addressed,0.88,matches_js_client,0.08,True,0.94,Routine,0.5
+forkjava5,api_config,fork change of tchernykh/socket.io-client-java,already_addressed,0.93,matches_js_client,0.04,True,0.92,Routine,0.4
+java134,api_config,readme needs updated,already_addressed,0.69,not_applicable,0.18,False,0.04,Routine,0.02
+java214,api_config,Buffer option,matches_js_client,0.48,would_deviate_from_js,0.44,False,0.05,Routine,0.13
+java237,api_config,"Map<String, List<String>> for header?",already_addressed,0.53,matches_js_client,0.38,False,0.33,Routine,0.1
+java240,api_config,parameter in opts.query became null to server,not_applicable,0.57,insufficient_evidence,0.19,False,0.04,Routine,0.36
+java282,api_config,Ability to query socket status?,already_addressed,1,matches_js_client,0,True,0.57,Routine,0.02
+java304,api_config,Add new SocketOptionBuilder which helps creating IO.Option as builder…,already_addressed,0.57,not_applicable,0.27,False,0.18,Routine,0.07
+java366,api_config,"IO.opts missing settings for ""rejectUnauthorized""",would_deviate_from_js,0.72,already_addressed,0.15,False,0.05,Routine,0.55
+java37,api_config,Listening all events.,already_addressed,0.99,matches_js_client,0.01,True,0.88,Routine,0.13
+java401,api_config,Identify socket from Emitter.Listener callback,matches_js_client,0.71,affected_fix_within_js,0.16,False,0.04,Routine,0.19
+java408,api_config,No options for Origin-Header,already_addressed,1,insufficient_evidence,0,True,0.84,Routine,0.14
+java416,api_config,socket-io-client-java should support option changes after instantiation,already_addressed,0.8,affected_fix_within_js,0.16,True,0.68,Routine,0.18
+java46,api_config,"Is it possible to execute a callback function in the ""on"" event ?",already_addressed,1,insufficient_evidence,0,True,0.86,Routine,0.06
+java475,api_config,"No ""Socket.onAny(Event)"" function in Java",already_addressed,1,would_deviate_from_js,0,True,0.92,Routine,0.63
+java498,api_config,can't configure logging framework,already_addressed,0.53,would_deviate_from_js,0.43,False,0.47,Routine,0.34
+java513,api_config,Cant send query string,already_addressed,0.82,affected_fix_within_js,0.07,True,0.87,Important,0.94
+java529,api_config,Add the ability to set Options without recreating socket object,already_addressed,0.42,matches_js_client,0.31,True,0.61,Routine,0.43
+java543,api_config,(HTTPLog)-Static: isSBSettingEnabled false Makes com.github.nkzawa.socketio.clie,not_applicable,0.8,insufficient_evidence,0.2,False,0.02,Routine,0.27
+java546,api_config,Conflict with Retrofit,insufficient_evidence,0.65,not_applicable,0.35,False,0.02,Routine,0.4
+java599,api_config,toString result from org.json is not reliable,already_addressed,0.83,not_applicable,0.17,False,0.04,Routine,0.42
+java613,api_config,Add headers to sending pockets,already_addressed,0.53,would_deviate_from_js,0.44,False,0.06,Routine,0.03
+java614,api_config,socket.io connection timeout does not working,matches_js_client,0.59,already_addressed,0.22,False,0.14,Important,1
+java67,api_config,Is possible to get socket identifier?,already_addressed,1,would_deviate_from_js,0,False,0.27,Routine,0.21
+java672,api_config,when the internet connection is turned off / turned on,already_addressed,0.95,would_deviate_from_js,0.04,True,0.58,Important,0.98
+java695,api_config,fix: fix emitting of events received during connection establishment,already_addressed,1,not_applicable,0,True,0.62,Important,0.88
+java696,api_config,The listener cannot be removed by calling the `off('EVENT')` method,already_addressed,0.93,not_applicable,0.04,True,0.6,Routine,0.29
+java7,api_config,How to get connection errors,already_addressed,0.99,affected_fix_within_js,0.01,True,0.58,Routine,0.6
+java701,api_config,Missing option in the IO.Options,would_deviate_from_js,0.67,not_applicable,0.17,False,0.07,Routine,0.14
+java713,api_config,Client socket.io doesn't receive any messages,insufficient_evidence,0.38,not_applicable,0.28,False,0.16,Important,0.96
+java730,api_config,Required onAny Function in Version 1x,already_addressed,0.98,not_applicable,0.02,True,0.71,Routine,0.02
+java737,api_config,Cannot interop with server implemented in 'io.socket:socket.io-server:4.0.1',insufficient_evidence,0.3,matches_js_client,0.21,False,0.07,Important,1.25
+java755,api_config,Straightforward logging option for Android,would_deviate_from_js,0.55,matches_js_client,0.22,False,0.3,Routine,0.1
+java760,api_config,Connection state recovery,already_addressed,0.93,would_deviate_from_js,0.03,True,0.85,Important,0.68
+java780,api_config,More control over auth property,already_addressed,0.86,would_deviate_from_js,0.06,True,0.69,Routine,0.49
+java789,api_config,feat: auth callback function,already_addressed,0.98,not_applicable,0.01,True,0.92,Routine,0.5
+java794,api_config,feat: add connection state recovery and flexible auth,would_deviate_from_js,0.55,already_addressed,0.37,True,0.81,Important,0.96
+engine123,engine_transport,Add WebTransport support to Engine.IO Java client,would_deviate_from_js,0.32,not_applicable,0.28,False,0.03,Routine,0.06
+engine126,engine_transport,fix: query reorder on WebSocket Transport,already_addressed,0.92,matches_js_client,0.03,False,0.07,Important,0.6
+engine14,engine_transport,Replace Java-WebSocket to OkHttp WebSocket,not_applicable,0.59,already_addressed,0.35,False,0.08,Routine,0.17
+engine15,engine_transport,Switch to OkHttp 2.3,already_addressed,0.86,not_applicable,0.07,True,0.76,Routine,0.12
+engine18,engine_transport,Replace UrlConnection to OkHttpClient,already_addressed,0.77,not_applicable,0.12,True,0.6,Routine,0.17
+engine37,engine_transport,Problem with connections through proxy,already_addressed,0.39,insufficient_evidence,0.35000000000000003,False,0.05,Routine,0.43
+engine40,engine_transport,okhttp 2.7.0,not_applicable,1,matches_js_client,0,False,0.04,Routine,0.02
+engine42,engine_transport,okhttp 3,not_applicable,0.99,already_addressed,0.01,False,0.05,Routine,0.08
+engine51,engine_transport,proxy support,already_addressed,0.33999999999999997,insufficient_evidence,0.21,False,0.06,Important,0.75
+engine59,engine_transport,Added permessage defalte comperssion,already_addressed,0.95,matches_js_client,0.02,True,0.89,Routine,0.58
+engine72,engine_transport,Android connection close every double 'pingInterval' seconds,already_addressed,0.77,matches_js_client,0.11,True,0.78,Important,1
+engine76,engine_transport,Failed polling transport kills websocket transport,already_addressed,0.99,affected_fix_within_js,0.01,True,0.91,Important,0.79
+engine78,engine_transport,okhttp-ws into okhttp,not_applicable,0.76,already_addressed,0.2,False,0.04,Routine,0.02
+engine79,engine_transport,add a keepCookies option to presever cookies across XHR requests,already_addressed,0.63,would_deviate_from_js,0.3,True,0.79,Routine,0.12
+engine81,engine_transport,Improper creation of OkHttpClient in Websocket.java probably causing Out Of Memo,already_addressed,0.95,not_applicable,0.03,False,0.13,High,2.13
+engine85,engine_transport,Options for inject okhttp Call/WebSocket factory,already_addressed,0.99,matches_js_client,0.01,True,0.84,Important,0.8
+engine86,engine_transport,Websocket connection closed with 1001 when high loading (1M messaging),already_addressed,1,not_applicable,0,True,0.79,High,1.98
+engine87,engine_transport,allowRequest Error code read from android,already_addressed,0.77,would_deviate_from_js,0.19,True,0.75,Routine,0.6
+engine95,engine_transport,Cannot use a custom path,already_addressed,1,affected_fix_within_js,0,True,0.8,Important,0.96
+forkengine1,engine_transport,fork change of ParadiseDevTeam/engine.io-client-java,not_applicable,0.76,already_addressed,0.11,False,0.04,Important,1.04
+forkengine11,engine_transport,fork change of pfjia/engine.io-client-java,not_applicable,0.75,already_addressed,0.11,False,0.03,Routine,0.41
+forkengine12,engine_transport,fork change of alibaba-archive/engine.io-client-java,would_deviate_from_js,0.38,affected_fix_within_js,0.22,False,0.05,Important,1.16
+forkengine15,engine_transport,fork change of hiredman/engine.io-client-java,already_addressed,0.91,matches_js_client,0.04,True,0.88,Routine,0.34
+forkengine16,engine_transport,fork change of tankcong/engine.io-client-java,would_deviate_from_js,0.63,matches_js_client,0.32,False,0.03,Routine,0.23
+forkengine17,engine_transport,fork change of wangwangheng/engine.io-client-java,already_addressed,0.49,affected_fix_within_js,0.34,False,0.03,High,2.22
+forkengine18,engine_transport,fork change of jszczygiel/engine.io-client-java,would_deviate_from_js,0.78,not_applicable,0.13,False,0.02,Routine,0.26
+forkengine2,engine_transport,fork change of N1k1tung/engine.io-client-java,would_deviate_from_js,0.69,matches_js_client,0.23,False,0.09,Routine,0.37
+forkengine4,engine_transport,fork change of sinabolouki/engine.io-client-java,matches_js_client,0.39,would_deviate_from_js,0.35,False,0.02,Routine,0.05
+forkengine5,engine_transport,fork change of sirdx/engine.io-client-java,not_applicable,0.99,already_addressed,0.01,False,0.03,Routine,0.02
+forkengine6,engine_transport,fork change of FLATPAY-DK/engine.io-client-java,not_applicable,0.43,would_deviate_from_js,0.41,False,0.02,Routine,0.26
+forkengine8,engine_transport,fork change of Bandyer/engine.io-client-java,not_applicable,0.44,already_addressed,0.29,False,0.13,Important,0.76
+forkjava10,engine_transport,fork change of mtali/socket.io-client-java,already_addressed,0.74,affected_fix_within_js,0.2,True,0.89,Important,1.28
+forkjava2,engine_transport,fork change of N1k1tung/socket.io-client-java,would_deviate_from_js,1,affected_fix_within_js,0,False,0.04,Routine,0.03
+forkjava8,engine_transport,fork change of phiraphongbenzz/socket.io-client-java,would_deviate_from_js,0.94,already_addressed,0.06,True,0.66,Routine,0.3
+java136,engine_transport,App crashes after recieving `connect` event.,not_applicable,0.86,already_addressed,0.14,False,0.03,Routine,0.2
+java210,engine_transport,socket transports does't upgrade to websocket problem,already_addressed,0.93,matches_js_client,0.03,True,0.79,Routine,0.08
+java211,engine_transport,websocket doesn't work on proxy/some wifi/devices?,not_applicable,0.84,insufficient_evidence,0.11,False,0.04,Important,0.92
+java239,engine_transport,Add information about transports,already_addressed,0.97,affected_fix_within_js,0.01,True,0.71,Routine,0.11
+java271,engine_transport,Support okhttp 3.0?,not_applicable,0.49,already_addressed,0.32,False,0.03,Routine,0.03
+java275,engine_transport,OkHttp connections do not seem to be closed,already_addressed,0.94,insufficient_evidence,0.03,False,0.04,High,1.51
+java28,engine_transport,Accessing Engine.IO transport from Socket.IO,matches_js_client,0.58,would_deviate_from_js,0.3,False,0.04,Routine,0.26
+java306,engine_transport,Rejected Execution exception,not_applicable,0.81,already_addressed,0.17,False,0.03,Important,0.64
+java307,engine_transport,SocketTimeoutException failed to connect to... after 90000ms,not_applicable,0.81,already_addressed,0.19,False,0.06,Routine,0.55
+java312,engine_transport,Compression Support?,already_addressed,1,matches_js_client,0,True,0.8,Routine,0.2
+java320,engine_transport,Support for Deflate extension,already_addressed,1,matches_js_client,0,True,0.74,Routine,0.06
+java321,engine_transport,Support for Deflate extension,already_addressed,0.94,not_applicable,0.05,False,0.07,Routine,0.01
+java33,engine_transport,Handshake Data,already_addressed,1,matches_js_client,0,True,0.74,Routine,0.02
+java360,engine_transport,Getting error using websocket transport,already_addressed,0.6,not_applicable,0.4,True,0.81,Routine,0.13
+java380,engine_transport,socket client did not complete upgrade - transport closed when using aws server,already_addressed,0.41,matches_js_client,0.3,False,0.36,Routine,0.6
+java393,engine_transport,forceWebsockets feature,matches_js_client,0.54,already_addressed,0.43,True,0.88,Routine,0.03
+java399,engine_transport,engine:socket client did not complete upgrade - transport closed,already_addressed,0.46,matches_js_client,0.3,False,0.24,Important,0.99
+java409,engine_transport,Options for inject okhttp Call/WebSocket factory,already_addressed,0.92,not_applicable,0.04,True,0.7,Routine,0.36
+java451,engine_transport,Socket.IO - Hibernate mode,already_addressed,0.91,matches_js_client,0.07,True,0.67,Routine,0.45
+java471,engine_transport,Exception java.lang.StringIndexOutOfBoundsException: length=1; index=48,already_addressed,0.83,affected_fix_within_js,0.09,False,0.12,High,2.19
+java490,engine_transport,"Expected 'Connection' header value 'Upgrade' but was '""null""",matches_js_client,0.55,already_addressed,0.41,False,0.06,Routine,0.43
+java493,engine_transport,SocketIO ThreadPoolExecuter error while unit-testing,not_applicable,0.72,already_addressed,0.28,False,0.06,Routine,0.24
+java506,engine_transport,"extraHeaders, forceWebsockets and connectParams in java client",already_addressed,1,not_applicable,0,False,0.34,Routine,0.14
+java512,engine_transport,Catching the raw data to make socket connection persistent,matches_js_client,0.97,would_deviate_from_js,0.03,False,0.03,Routine,0.01
+java514,engine_transport,Socket disconnecting with transport error in android,already_addressed,0.73,insufficient_evidence,0.14,False,0.06,Important,0.7
+java516,engine_transport,Cannot use HTTPS with websocket only transport,already_addressed,1,would_deviate_from_js,0,True,0.82,Routine,0.45
+java522,engine_transport,Getting too many ClassCastException logs,not_applicable,0.94,already_addressed,0.03,False,0.03,Routine,0.22
+java530,engine_transport,Manager.EVENT_TRANSPORT doesn't work,matches_js_client,0.77,not_applicable,0.14,False,0.03,Routine,0.11
+java533,engine_transport,Socket can not handle more than one transport type,already_addressed,0.69,matches_js_client,0.25,True,0.92,Routine,0.49
+java6,engine_transport,SSLEngine,already_addressed,0.8,matches_js_client,0.1,True,0.69,Routine,0.36
+java645,engine_transport,"Constant ""xhr poll error"" when trying to establish a connection",not_applicable,0.94,matches_js_client,0.03,False,0.04,Routine,0.05
+java68,engine_transport,WebsocketNotConnectedException,not_applicable,0.9,already_addressed,0.1,False,0.03,Routine,0.14
+java72,engine_transport,Java-WebSocketClient loop endless when disconnect,not_applicable,0.94,already_addressed,0.04,False,0.03,Routine,0.01
+java734,engine_transport,Cannot Received Socket Manager EVENT_PING On Android Library,already_addressed,0.52,not_applicable,0.18,False,0.13,Important,1.13
+java778,engine_transport,Virus alert,not_applicable,1,insufficient_evidence,0,False,0.03,Routine,0.06
+java788,engine_transport,WebTransport transport support?,affected_fix_within_js,0.48,already_addressed,0.22,False,0.04,Routine,0.04
+java791,engine_transport,Add WebTransport integration to Socket.IO Java client,would_deviate_from_js,0.77,not_applicable,0.09,False,0.03,Routine,0.04
+java793,engine_transport,Polling and Websocket have different effect in event callback,already_addressed,0.41,not_applicable,0.37,False,0.23,Routine,0.01
+java86,engine_transport,Extra http packets during Ping-Pong?,already_addressed,0.78,matches_js_client,0.21,False,0.49,Routine,0.32
+java88,engine_transport,Websocket Upgrade https,already_addressed,0.99,not_applicable,0.01,True,0.9,High,1.62
+forkjava11,namespace,fork change of zengbiaobiao/socket.io-client-java,affected_fix_within_js,0.39,would_deviate_from_js,0.31,True,0.71,Important,1.34
+forkjava15,namespace,fork change of akashada/socket.io-client-java,would_deviate_from_js,0.85,matches_js_client,0.11,False,0.04,Routine,0.38
+java296,namespace,Room support (join & leave),matches_js_client,0.94,already_addressed,0.05,False,0.04,Routine,0.01
+java30,namespace,can not receive event by room emit,insufficient_evidence,0.58,matches_js_client,0.18,False,0.06,Routine,0.26
+java329,namespace,Leaving a namespace,matches_js_client,0.78,already_addressed,0.19,False,0.13,Routine,0.02
+java472,namespace,Joining multiple namespaces on a single client instance.,already_addressed,0.5,matches_js_client,0.44,True,0.54,Routine,0.16
+java741,namespace,Client creates a new connection when it reconnects to one of the namespaces.,matches_js_client,0.51,would_deviate_from_js,0.29,False,0.04,Routine,0.73
+engine29,other,Change package name,not_applicable,1,matches_js_client,0,False,0.03,Routine,0.09
+engine33,other,"socket with channel, xhr poll error",matches_js_client,0.84,would_deviate_from_js,0.08,False,0.03,Routine,0.53
+engine5,other,State of a socket,matches_js_client,0.81,would_deviate_from_js,0.15,False,0.07,Routine,0.06
+engine55,other,fix close socket exception,would_deviate_from_js,0.6,matches_js_client,0.21,False,0.03,Routine,0.35
+engine6,other,IPv6 URL support,already_addressed,1,matches_js_client,0,True,0.94,Routine,0.84
+engine61,other,Close the web socket after sending a close frame.,already_addressed,0.89,matches_js_client,0.09,False,0.04,Important,0.96
+engine69,other,fixe added onClose,already_addressed,0.43,affected_fix_within_js,0.24,False,0.02,Important,1.23
+forkjava26,other,fork change of VicV/socket.io-client.java,not_applicable,1,insufficient_evidence,0,False,0.02,Routine,0.01
+java141,other,Sockets sending no response on Lollipop,not_applicable,0.89,insufficient_evidence,0.08,False,0.02,Routine,0.06
+java172,other,The manager will create new connections even when it is in Openning state,already_addressed,0.98,affected_fix_within_js,0.01,False,0.02,Important,0.98
+java173,other,[proposal] Merge engine and socket into one library?,matches_js_client,0.51,would_deviate_from_js,0.17,False,0.02,Routine,0.01
+java178,other,How to setup the local unit test?,already_addressed,0.45,not_applicable,0.33,False,0.02,Routine,0.09
+java19,other,Thank you!,not_applicable,0.44,insufficient_evidence,0.33,False,0.03,Routine,0.01
+java217,other,SocketIO stream support,insufficient_evidence,0.6,matches_js_client,0.24,False,0.02,Routine,0.1
+java243,other,"Need to be able to listen to all ""other"" events",already_addressed,1,would_deviate_from_js,0,True,0.88,Important,1.23
+java254,other,Question: Does this support P2P?,insufficient_evidence,0.5,matches_js_client,0.38,False,0.03,Routine,0.01
+java274,other,Support Socket.io 0.9,matches_js_client,0.82,already_addressed,0.13,False,0.03,Routine,0.22
+java301,other,Volatile Messages,already_addressed,1,would_deviate_from_js,0,True,0.95,Routine,0.68
+java303,other,Socket.onevent event value on args always on index 1 [Bug],already_addressed,0.93,matches_js_client,0.05,False,0.04,Routine,0.36
+java305,other,Add missing method.,not_applicable,0.76,already_addressed,0.14,False,0.17,Routine,0.01
+java31,other,id and username attributes,already_addressed,0.75,matches_js_client,0.23,True,0.72,Routine,0.03
+java412,other,Implementing mySocket.sendBuffer,already_addressed,0.46,would_deviate_from_js,0.34,False,0.06,Routine,0.2
+java436,other,make compatible with socket.io-client 1.7.4 (node client),already_addressed,0.85,not_applicable,0.11,True,0.73,Routine,0.12
+java437,other,How to get progress update when emit,matches_js_client,0.92,would_deviate_from_js,0.07,False,0.03,Routine,0.01
+java449,other,Emoji's are not working,already_addressed,0.94,not_applicable,0.03,True,0.69,High,1.57
+java470,other,arabic not work in v 1.0.0 but work fine in v 0.8.3,insufficient_evidence,0.95,not_applicable,0.05,False,0.03,Routine,0.1
+java531,other,Copyright statement missing,already_addressed,0.84,not_applicable,0.07,False,0.02,Routine,0.04
+java559,other,Emitter is called multiple times,already_addressed,0.68,insufficient_evidence,0.2,True,0.55,Important,0.98
+java587,other,Confusing README.md,already_addressed,0.66,affected_fix_within_js,0.17,True,0.69,Routine,0.17
+java598,other,maven support?,not_applicable,0.78,already_addressed,0.13,False,0.03,Routine,0.14
+java604,other,"There is no ""on"" method in socket object",already_addressed,0.98,not_applicable,0.02,True,0.68,Routine,0.1
+java607,other,Ktx support,already_addressed,1,insufficient_evidence,0,True,0.74,Routine,0.01
+java61,other,Change Log,already_addressed,0.53,not_applicable,0.32,False,0.03,Routine,0.02
+java649,other,Document version 1.x.x,not_applicable,0.92,matches_js_client,0.04,False,0.03,Routine,0.05
+java681,other,update to 2.0.1,already_addressed,0.97,not_applicable,0.02,True,0.92,Routine,0.89
+java70,other,Eclipse instructions?,not_applicable,0.63,matches_js_client,0.35,False,0.02,Routine,0
+java728,other,Official Support for Kotlin Client,already_addressed,0.83,not_applicable,0.12,False,0.06,Routine,0.13
+java748,other,issue #727 sovled,already_addressed,0.97,not_applicable,0.02,True,0.71,Routine,1
+java750,other,sendBuffer should be accessible,would_deviate_from_js,0.9,matches_js_client,0.07,False,0.08,Important,0.72
+java9,other,isConnected on Socket,already_addressed,1,not_applicable,0,True,0.94,Routine,0.02
+engine117,parser_binary,use jdk 1.8 base64 for engine.io server 6.x.x,already_addressed,0.96,matches_js_client,0.02,True,0.92,Important,0.83
+engine124,parser_binary,Change HashMap to LinkedHashMap in decode method,already_addressed,0.64,would_deviate_from_js,0.24,False,0.26,Routine,0.13
+engine93,parser_binary,Update to make compatible with engine.io v3,would_deviate_from_js,0.6,matches_js_client,0.25,False,0.3,Routine,0.34
+forkengine13,parser_binary,fork change of keikai/engine.io-client-java,not_applicable,0.97,insufficient_evidence,0.03,False,0.03,Routine,0.18
+forkengine20,parser_binary,fork change of mottx/engine.io-client.java,would_deviate_from_js,0.98,matches_js_client,0.01,False,0.04,Routine,0.33
+forkengine7,parser_binary,fork change of dreamershl/engine.io-client-java,already_addressed,0.8,not_applicable,0.08,True,0.89,Routine,0.74
+forkjava1,parser_binary,fork change of ParadiseDevTeam/socket.io-client-java,already_addressed,0.86,would_deviate_from_js,0.04,True,0.82,High,1.5
+forkjava12,parser_binary,fork change of sudeshim3/socket.io-client-java,matches_js_client,0.34,already_addressed,0.34,False,0.04,Routine,0.01
+forkjava14,parser_binary,fork change of comroid-git/socket.io-client-java,not_applicable,0.83,already_addressed,0.07,False,0.04,Routine,0.03
+forkjava18,parser_binary,fork change of Bandyer/socket.io-client-java,already_addressed,0.4,not_applicable,0.27,False,0.47,Routine,0.43
+forkjava21,parser_binary,fork change of keikai/socket.io-client-java,not_applicable,0.96,matches_js_client,0.02,False,0.04,Routine,0.09
+forkjava22,parser_binary,fork change of kccheung/socket.io-client-java,already_addressed,0.93,matches_js_client,0.03,True,0.88,Routine,0.85
+forkjava23,parser_binary,fork change of AmityApp/socket.io-client-java,would_deviate_from_js,0.55,matches_js_client,0.32,False,0.04,Routine,0.03
+forkjava9,parser_binary,fork change of FLATPAY-DK/socket.io-client-java,not_applicable,0.76,matches_js_client,0.1,False,0.03,Routine,0.05
+java119,parser_binary,StringIndexOutOfBoundsException on Parser$Decoder.decodeString,already_addressed,1,matches_js_client,0,False,0.39,High,1.49
+java120,parser_binary,Enhance Parser decode,already_addressed,1,matches_js_client,0,True,0.77,Important,1.29
+java175,parser_binary,Client sending empty JSONObjects?,not_applicable,0.52,already_addressed,0.42,False,0.05,Routine,0.08
+java184,parser_binary,Switching from org.json to JSON.simple,not_applicable,0.69,matches_js_client,0.16,False,0.03,Routine,0
+java235,parser_binary,Parse JSON into Java objects instead of JSONObject,already_addressed,0.83,matches_js_client,0.07,True,0.74,Routine,0.17
+java268,parser_binary,Socket listeners not working but emit does.,not_applicable,0.92,already_addressed,0.04,False,0.04,Important,1.1
+java333,parser_binary,Have your own encoders and decoders,affected_fix_within_js,0.99,would_deviate_from_js,0.01,False,0.04,Routine,0.12
+java334,parser_binary,Allow for custom encoders and decoders,affected_fix_within_js,0.99,not_applicable,0.01,False,0.04,Routine,0.11
+java342,parser_binary,Fatal Exception: java.util.ConcurrentModificationException,already_addressed,0.83,not_applicable,0.16,False,0.23,Important,1.02
+java430,parser_binary,Unicode decode error for Non-English characters,already_addressed,0.89,matches_js_client,0.05,False,0.05,Routine,0.76
+java439,parser_binary,Make compatible with Socket.IO v2,would_deviate_from_js,0.59,matches_js_client,0.26,True,0.73,Routine,0.27
+java488,parser_binary,Not Found socket.io 0.8.3!,not_applicable,0.88,already_addressed,0.07,False,0.04,Routine,0.05
+java515,parser_binary,cannot send large buffers,already_addressed,0.58,affected_fix_within_js,0.15,True,0.9,Important,1.24
+java536,parser_binary,Sent data to server always as Array,matches_js_client,0.83,already_addressed,0.1,True,0.66,Routine,0.04
+java620,parser_binary,data loss,already_addressed,0.99,not_applicable,0.01,False,0.33,Routine,0.42
+java677,parser_binary,Change `ParsedURI` visibility to public,already_addressed,0.95,not_applicable,0.05,False,0.27,Routine,0.07
+java743,parser_binary,socket.io client sometimes sends arrays wrong,already_addressed,0.99,not_applicable,0.01,True,0.95,High,1.73
+java781,parser_binary,Change auth parameter to JSONObject,already_addressed,0.94,would_deviate_from_js,0.02,True,0.83,Important,0.77
+java792,parser_binary,"Client emit or send, nothing cames to server #790",would_deviate_from_js,0.69,matches_js_client,0.2,False,0.03,Routine,0.23
+java797,parser_binary,Uncaught Error handling,already_addressed,0.9,affected_fix_within_js,0.06,False,0.29,Critical,2.44
+java97,parser_binary,Namespaces aren't managed on reception,already_addressed,0.6799999999999999,matches_js_client,0.26,False,0.13,Routine,0.21
+engine52,reconnect,java.lang.IllegalStateException: Unable to take ownership of connection from okh,already_addressed,0.79,not_applicable,0.21,False,0.23,Routine,0.62
+forkjava16,reconnect,fork change of KushtrimPacaj/socket.io-client-java,would_deviate_from_js,0.61,already_addressed,0.28,False,0.06,Routine,0.44
+forkjava19,reconnect,fork change of gyz21/socket.io-client-java,would_deviate_from_js,0.93,already_addressed,0.04,False,0.04,Routine,0.07
+forkjava24,reconnect,fork change of mottx/socket.io-client.java,already_addressed,0.59,not_applicable,0.23,False,0.32,Routine,0.57
+forkjava25,reconnect,fork change of aforamenta/socket.io-client.java,already_addressed,0.99,matches_js_client,0.01,True,0.51,Routine,0.26
+java109,reconnect,socket is not disconnecting when network is off.,already_addressed,1,insufficient_evidence,0,True,0.91,Important,1.1
+java149,reconnect,Reopen connection,not_applicable,0.63,matches_js_client,0.13,False,0.05,Important,0.98
+java161,reconnect,xhr post error on slow connection (3G mobile network).,matches_js_client,0.76,already_addressed,0.13,False,0.03,Routine,0.23
+java176,reconnect,The ready state for manager OPENING not cleared in error,already_addressed,1,not_applicable,0,True,0.95,Routine,0.8
+java183,reconnect,"listener does not work first, but work after reconnecting",not_applicable,0.38,insufficient_evidence,0.33,False,0.03,Routine,0.07
+java193,reconnect,com.github.nkzawa.engineio.client.EngineIOException: xhr post error,not_applicable,0.5599999999999999,already_addressed,0.21,False,0.03,Routine,0.39
+java197,reconnect,"socket io disconnected, but the client didn't know",already_addressed,1,not_applicable,0,True,0.88,Important,1.34
+java200,reconnect,socket.disconnect doesn't close underlying connetions [0.5.1],already_addressed,0.8,insufficient_evidence,0.11,False,0.04,Important,1.42
+java244,reconnect,Reconnect apparently not honored,insufficient_evidence,0.39,already_addressed,0.36,False,0.05,Important,1.37
+java250,reconnect,"Consistent ""xhr poll error"" is caused by hanging instances of XHRPolling",already_addressed,0.76,insufficient_evidence,0.12,False,0.06,High,1.74
+java286,reconnect,Fix resetting backoff,matches_js_client,0.38,already_addressed,0.38,False,0.31,Routine,0.39
+java288,reconnect,Socket not re-connecting after connection break (Only when app is in background),would_deviate_from_js,0.59,already_addressed,0.29,False,0.05,Important,1.13
+java289,reconnect,connect event is sometimes not called when connect and disconnect repeatedly,matches_js_client,0.3,insufficient_evidence,0.24,False,0.05,Important,1.23
+java294,reconnect,java.lang.IllegalStateException: Unable to take ownership of connection from okh,already_addressed,0.62,not_applicable,0.38,False,0.23,Routine,0.79
+java319,reconnect,after  my  android  socket.io reconnect  ，can not  send message，why?,already_addressed,1,not_applicable,0,True,0.75,Routine,0.56
+java322,reconnect,When does the socket stop to try to emit a message when connection is lost?,already_addressed,0.85,matches_js_client,0.14,False,0.47,Important,0.8
+java359,reconnect,socket disconnect issue,already_addressed,0.95,matches_js_client,0.04,False,0.43,Important,0.63
+java403,reconnect,on emit socket disconnect with transport error,already_addressed,0.82,not_applicable,0.11,True,0.57,Important,0.66
+java44,reconnect,android mobile Lock screen is disconnect,already_addressed,0.76,matches_js_client,0.21,True,0.65,Important,1.09
+java456,reconnect,Can't reconnect after internet connection restablished in current version,already_addressed,0.44,affected_fix_within_js,0.32,False,0.06,High,1.91
+java476,reconnect,Socket is not reconnecting,not_applicable,0.86,insufficient_evidence,0.06,False,0.03,Routine,0.4
+java480,reconnect,Disconnecting Issue on new version (V1.0),insufficient_evidence,0.66,not_applicable,0.14,False,0.04,Important,1.03
+java575,reconnect,"When the phone is in standby, the socket io will be disconnected from the servic",matches_js_client,0.62,already_addressed,0.17,False,0.08,Important,1.07
+java576,reconnect,Don't process socket.connect() if already reconnecting,already_addressed,0.81,affected_fix_within_js,0.11,False,0.04,Important,1.41
+java577,reconnect,Don't process socket.connect() if we are already re-connecting.,already_addressed,0.94,affected_fix_within_js,0.03,False,0.04,Important,1.26
+java763,reconnect,Implement Connection State Recovery,already_addressed,0.98,affected_fix_within_js,0.02,True,0.93,High,1.58
+engine10,threading_memory,Refactor Emitter to remove a ConcurrentHashMap.,not_applicable,0.58,already_addressed,0.35,False,0.04,Routine,0.07
+engine100,threading_memory,Yeast.yeast() is not thread safe,already_addressed,0.86,not_applicable,0.09,False,0.04,Routine,0.35
+engine106,threading_memory,create heartbeat scheduler with named threads and as daemon,matches_js_client,0.53,not_applicable,0.29,False,0.04,Routine,0.34
+engine108,threading_memory,Fixed concurrency issue on EventThread class,not_applicable,0.88,already_addressed,0.11,False,0.03,Routine,0.28
+engine116,threading_memory,Issue with EventThread and class loaders,not_applicable,0.77,already_addressed,0.22,False,0.02,Routine,0.54
+engine54,threading_memory,log exceptions thrown in async tasks,not_applicable,0.96,matches_js_client,0.03,False,0.02,Routine,0.3
+engine70,threading_memory,IndexOutOfBoundsException on decoding payload,not_applicable,0.44,already_addressed,0.38,False,0.05,Important,0.93
+engine8,threading_memory,"When an Android app doesn't have the INTERNET permission, getHeaderFields() retu",not_applicable,0.68,already_addressed,0.26,False,0.03,Routine,0.28
+engine84,threading_memory,JNI ERROR (app bug): weak global reference table overflow (max=51200) io.socket.,not_applicable,0.82,already_addressed,0.12,False,0.03,Routine,0.97
+forkengine9,threading_memory,fork change of valodzka/engine.io-client-java,already_addressed,0.38,not_applicable,0.29,False,0.03,Routine,0.16
+forkjava6,threading_memory,fork change of Harsh5488/socket.io-client-java,already_addressed,0.86,matches_js_client,0.08,True,0.64,Routine,0.23
+forkjava7,threading_memory,fork change of seven4pl/socket.io-client-java,already_addressed,0.95,matches_js_client,0.03,True,0.63,Routine,0.24
+java104,threading_memory,Socket.io thread doesn't kill,matches_js_client,0.74,already_addressed,0.2,False,0.02,Important,0.89
+java106,threading_memory,OutOfMemory when I tried to upload video binary string to server,matches_js_client,0.73,affected_fix_within_js,0.1,False,0.02,Important,0.73
+java107,threading_memory,IllegalArgumentException: delay < 0,already_addressed,0.75,affected_fix_within_js,0.18,False,0.02,High,1.88
+java126,threading_memory,Unhandled exception thrown when the server sends a Long as Event name,already_addressed,0.99,affected_fix_within_js,0.01,False,0.02,Important,1.2
+java148,threading_memory,Fixed issue in com.github.nkzawa.engineio.client.Socket$7.call (Socke…,not_applicable,0.5,already_addressed,0.48,False,0.02,Routine,0.21
+java163,threading_memory,Crash when no connection (Race Condition),already_addressed,0.98,not_applicable,0.01,False,0.02,Important,1.1
+java295,threading_memory,RejectedExecutionException Occured in onMessage.,affected_fix_within_js,0.43,insufficient_evidence,0.28,False,0.03,Important,1.16
+java300,threading_memory,OutOfMemoryError: pthread_create (stack size 16384 bytes) failed: Try again,not_applicable,0.37,insufficient_evidence,0.35,False,0.03,High,1.96
+java313,threading_memory,IllegalStateException: must call close(),affected_fix_within_js,0.66,already_addressed,0.28,False,0.03,Important,1.38
+java324,threading_memory,Creating non Daemon threads,insufficient_evidence,0.42,already_addressed,0.28,False,0.03,Routine,0.54
+java346,threading_memory,java.lang.illegalStateException,affected_fix_within_js,0.68,already_addressed,0.21,False,0.04,Important,1.26
+java376,threading_memory,socket.emit() from the client slows down all threads for 2 milliseconds,insufficient_evidence,0.53,already_addressed,0.17,False,0.07,Important,1.37
+java390,threading_memory,Some error on Transport,already_addressed,0.59,insufficient_evidence,0.23,False,0.04,Routine,0.59
+java398,threading_memory,OutOfMemoryException,already_addressed,0.95,not_applicable,0.03,False,0.05,High,1.99
+java406,threading_memory,Socket.IO Asynchronous Read/Write (Not Working),matches_js_client,0.98,already_addressed,0.01,False,0.05,Routine,0.14
+java410,threading_memory,java.lang.NullPointerException: Attempt to invoke virtual method 'okio.BufferedS,not_applicable,0.84,insufficient_evidence,0.16,False,0.03,Routine,0.1
+java418,threading_memory,RejectedExecutionException,not_applicable,0.72,already_addressed,0.26,False,0.04,Important,1.09
+java423,threading_memory,Add condition to log only if fine level is loggable,already_addressed,1,would_deviate_from_js,0,True,0.86,Routine,0.42
+java425,threading_memory,java.lang.IllegalStateException:    at com.google.android.gms.org.conscrypt.Open,not_applicable,0.78,already_addressed,0.19,False,0.03,Routine,0.35
+java433,threading_memory,Fatal Exception: java.lang.InternalError: Thread starting during runtime shutdow,not_applicable,0.8,already_addressed,0.17,False,0.03,Routine,1.09
+java441,threading_memory,Crash on wifi connecting but not connected,already_addressed,0.68,not_applicable,0.23,False,0.03,Routine,0.4
+java446,threading_memory,Possible Ack leak,already_addressed,0.91,matches_js_client,0.05,False,0.43,Important,1.04
+java505,threading_memory,NullPointerException (io.socket.client.Socket.onevent(Unknown Source)),already_addressed,0.78,not_applicable,0.1,False,0.04,Important,0.9
+java539,threading_memory,RejectedExecutionException after sleep in okhttp3.internal.ws.RealWebSocket.conn,already_addressed,0.71,not_applicable,0.22,False,0.03,Important,1.14
+java593,threading_memory,OutOfMemoryError (Socket.java:492),already_addressed,0.5599999999999999,not_applicable,0.3,False,0.03,Routine,0.56
+java628,threading_memory,This framework is not designed for multi-thread java application?,already_addressed,0.94,matches_js_client,0.04,False,0.43,Routine,0.3
+java668,threading_memory,java.util.concurrent.ConcurrentLinkedQueue$Node cannot be cast to java.util.conc,already_addressed,0.54,not_applicable,0.45,False,0.06,Routine,0.38
+java690,threading_memory,IncompatibleClassChangeError when consuming response from server v4,not_applicable,0.99,already_addressed,0.01,False,0.03,Routine,0.07
+java710,threading_memory,Fatal Exception: java.util.ConcurrentModificationException,already_addressed,0.99,not_applicable,0.01,False,0.27,High,1.68
+java758,threading_memory,Fix: NullPointerException in Socket.java #727;,already_addressed,0.91,not_applicable,0.08,False,0.44,Routine,0.31
+java759,threading_memory,Report: ConcurrentModificationException when use AckWithTimout...,already_addressed,0.96,not_applicable,0.03,False,0.04,Routine,0.76
+java761,threading_memory,NullPointerException: Attempt to invoke virtual method 'java.lang.String java.la,not_applicable,0.7,already_addressed,0.3,False,0.03,Routine,0.22
+java769,threading_memory,"Fixing Issue #727, #710, #759",already_addressed,0.81,matches_js_client,0.1,False,0.04,Routine,0.34
+java773,threading_memory,Transport close when using 2.1.1 client concurrent sending data to 2.0.9 netty-s,already_addressed,0.37,matches_js_client,0.33,False,0.03,Routine,0.21
+java774,threading_memory,Transport close when using 2.1.1 client concurrent sending data to 2.0.9 netty-s,already_addressed,0.34,matches_js_client,0.32,False,0.03,Routine,0.2
+java776,threading_memory,Fixing Crashes related to Concurrency,would_deviate_from_js,0.69,already_addressed,0.27,False,0.06,Routine,0.14
+java779,threading_memory,• Using ConcurrentHashMap for multi-threaded environment,already_addressed,0.97,matches_js_client,0.01,True,0.74,Routine,0.72
+java786,threading_memory,OutOfMemoryError: unable to create new native thread,not_applicable,0.67,already_addressed,0.26,False,0.03,High,2.12
+java93,threading_memory,Socket.io-client using non-daemon threads,already_addressed,0.72,not_applicable,0.21,False,0.03,Routine,0.12
+engine118,tls_security,Update readme to mention more compatibility,already_addressed,0.25,affected_fix_within_js,0.22,False,0.03,Routine,0.04
+engine121,tls_security,Add volatile socket support to SocketIO client,already_addressed,0.98,not_applicable,0.01,True,0.88,Routine,0.62
+forkengine14,tls_security,fork change of xuduo/engine.io-client-java,not_applicable,0.97,insufficient_evidence,0.01,False,0.03,Routine,0.39
+java157,tls_security,Connection successfully established with http but failed on https,already_addressed,0.58,affected_fix_within_js,0.13,False,0.07,Routine,0.34
+java164,tls_security,Making the events hash protected in Socket class,matches_js_client,0.66,would_deviate_from_js,0.18,False,0.03,Routine,0.03
+java188,tls_security,SSL/TLS is 2-3x slower than unsecured connection,not_applicable,0.39,insufficient_evidence,0.25,False,0.03,Routine,0.29
+java201,tls_security,setSSLSocketFactory,matches_js_client,0.38,already_addressed,0.31,False,0.07,Routine,0.41
+java255,tls_security,Code Quality Improvement - Exception handlers should preserve the original excep,not_applicable,0.95,matches_js_client,0.02,False,0.2,Routine,0.27
+java460,tls_security,Library seems not to allow simultanous connections of more than around 5,already_addressed,0.92,not_applicable,0.06,False,0.27,Important,0.9
+java463,tls_security,XHR Poll error,already_addressed,0.83,not_applicable,0.09,False,0.16,Important,0.76
+java65,tls_security,Supporting Stream ?,would_deviate_from_js,0.59,matches_js_client,0.39,False,0.03,Routine,0.01
+java693,tls_security,Events callbacks,already_addressed,0.99,affected_fix_within_js,0.01,True,0.83,Routine,0.15
+java749,tls_security,Issue #727 Solved,already_addressed,0.97,not_applicable,0.02,True,0.93,Routine,0.38
+java785,tls_security,Potential Security Enhancements for socket.io-client-java,affected_fix_within_js,0.36,not_applicable,0.27,False,0.02,Routine,0.11

@@ -28,6 +28,7 @@ start is compiled by CI as an independent Gradle consumer.
 | --- | --- |
 | Move from `io.socket:socket.io-client` (Java) 2.x | [Migration](Guides/Migration.md) |
 | Version history | [Changelog](../CHANGELOG.md) |
+| What the socket.io-client-java issues and forks teach this client | [Java upstream triage](UpstreamIssueTriage-2026-09-25.md) |
 
 ## Library development
 

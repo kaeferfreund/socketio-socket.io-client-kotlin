@@ -1,0 +1,916 @@
+id,repository,number,kind,state,merged,title,jev_top,p_top,jev_second,p_second
+java1,socket.io-client-java,1,issue,closed,False,unhandled socket.io url error,defect_fixed_or_obsolete,0.71,support_question,0.28
+java2,socket.io-client-java,2,issue,closed,False,socket.io compatiblity : unhandled socket.io url,defect_fixed_or_obsolete,0.69,support_question,0.22
+java3,socket.io-client-java,3,issue,closed,False,Emitter Class,support_question,0.66,insufficient_evidence,0.17
+java4,socket.io-client-java,4,issue,closed,False,"Unable to connect, no exception and timeout.",support_question,0.73,defect_fixed_or_obsolete,0.21
+java5,socket.io-client-java,5,issue,closed,False,Error in Android applications,build_packaging_env,0.77,defect_fixed_or_obsolete,0.2
+java6,socket.io-client-java,6,issue,closed,False,SSLEngine,feature_request,0.96,support_question,0.02
+java7,socket.io-client-java,7,issue,closed,False,How to get connection errors,defect_fixed_or_obsolete,0.55,feature_request,0.42
+java8,socket.io-client-java,8,issue,closed,False,Ack without params causes MissingFormatArgumentException,defect_fixed_or_obsolete,0.99,defect_current,0.01
+java9,socket.io-client-java,9,issue,closed,False,isConnected on Socket,feature_request,0.98,docs_gap,0.01
+java10,socket.io-client-java,10,issue,closed,False,JSONArray is incompatible with android 4.3 or lower,defect_fixed_or_obsolete,0.87,defect_current,0.13
+java11,socket.io-client-java,11,issue,closed,False,No data for an ack causes an exception,defect_fixed_or_obsolete,0.52,duplicate_invalid_spam,0.45
+java12,socket.io-client-java,12,pr,closed,True,JSON fixes for Androdi 4.3 and lower,defect_fixed_or_obsolete,0.89,pr_functional,0.11
+java13,socket.io-client-java,13,issue,closed,False,Caused by: java.net.ConnectException: Connection refused: connect,support_question,0.87,defect_fixed_or_obsolete,0.13
+java14,socket.io-client-java,14,issue,closed,False,java.lang.NoSuchMethodError: java.lang.String.isEmpty,defect_fixed_or_obsolete,0.96,defect_current,0.04
+java15,socket.io-client-java,15,issue,closed,False,Secure websockets not working,defect_fixed_or_obsolete,0.83,defect_current,0.16
+java16,socket.io-client-java,16,issue,closed,False,How to implement socket.io 1.0 in android ,support_question,0.45,defect_fixed_or_obsolete,0.38
+java17,socket.io-client-java,17,issue,closed,False,Adding dependency into Android Studio,build_packaging_env,1,defect_fixed_or_obsolete,0
+java18,socket.io-client-java,18,pr,closed,True,Information to add it as gradle dependency for Android Studio,pr_non_functional,0.99,build_packaging_env,0.01
+java19,socket.io-client-java,19,issue,closed,False,Thank you!,feature_request,0.71,duplicate_invalid_spam,0.16
+java20,socket.io-client-java,20,issue,closed,False,Is chatroom namespace supported ?,support_question,0.98,defect_fixed_or_obsolete,0.02
+java21,socket.io-client-java,21,issue,closed,False,Cant reconnect to a socket connected before,defect_fixed_or_obsolete,0.68,defect_current,0.18
+java22,socket.io-client-java,22,issue,closed,False,cant connect whitout any error,support_question,0.92,insufficient_evidence,0.04
+java23,socket.io-client-java,23,issue,closed,False,socket.io and android not connecting a second time,support_question,0.71,defect_fixed_or_obsolete,0.15
+java24,socket.io-client-java,24,issue,closed,False,how to getting message from server,support_question,0.99,defect_fixed_or_obsolete,0.01
+java25,socket.io-client-java,25,issue,closed,False,on ack callback,support_question,0.54,feature_request,0.44
+java26,socket.io-client-java,26,issue,closed,False,Unable to connect using https,support_question,0.67,defect_current,0.22
+java27,socket.io-client-java,27,issue,closed,False,Cant connect to 192.168.0.100:8006,support_question,0.95,docs_gap,0.04
+java28,socket.io-client-java,28,issue,closed,False,Accessing Engine.IO transport from Socket.IO,feature_request,0.88,pr_functional,0.06
+java29,socket.io-client-java,29,issue,closed,False,send and receive stream in android,support_question,0.95,feature_request,0.05
+java30,socket.io-client-java,30,issue,closed,False,can not receive event by room emit,defect_current,0.72,defect_fixed_or_obsolete,0.19
+java31,socket.io-client-java,31,issue,closed,False,id and username attributes,support_question,0.52,feature_request,0.47
+java32,socket.io-client-java,32,issue,closed,False,How can I connect to a server with cookie?,support_question,0.93,feature_request,0.05
+java33,socket.io-client-java,33,issue,closed,False,Handshake Data,feature_request,0.84,support_question,0.08
+java34,socket.io-client-java,34,pr,closed,True,fixed socket destroying if connected is -1,defect_fixed_or_obsolete,0.71,pr_functional,0.26
+java35,socket.io-client-java,35,issue,closed,False,Reconnect problem,defect_fixed_or_obsolete,0.45,support_question,0.42
+java36,socket.io-client-java,36,issue,closed,False,"No possible to connect or get some error, just 1000+ requests",defect_fixed_or_obsolete,0.7,support_question,0.24
+java37,socket.io-client-java,37,issue,closed,False,Listening all events.,feature_request,0.87,support_question,0.12
+java38,socket.io-client-java,38,issue,closed,False,Error in Java Project - imported JAR,build_packaging_env,0.95,defect_fixed_or_obsolete,0.03
+java39,socket.io-client-java,39,issue,closed,False,second connection in child shell,support_question,0.73,defect_fixed_or_obsolete,0.17
+java40,socket.io-client-java,40,issue,closed,False,not support Chinese character  ,defect_fixed_or_obsolete,0.77,defect_current,0.19
+java41,socket.io-client-java,41,issue,closed,False,Parser error is occurred while decoding UTF8 in com.github.nkzawa.engineio.parse,defect_fixed_or_obsolete,0.99,support_question,0.01
+java42,socket.io-client-java,42,issue,closed,False,emit message & callback methods,support_question,0.84,defect_current,0.1
+java43,socket.io-client-java,43,issue,closed,False,Expose socket connection state,duplicate_invalid_spam,0.74,feature_request,0.26
+java44,socket.io-client-java,44,issue,closed,False,android mobile Lock screen is disconnect,defect_current,0.48,support_question,0.41
+java45,socket.io-client-java,45,issue,closed,False,マルチバイト文字が文字化けする(?),defect_fixed_or_obsolete,0.48,defect_current,0.26
+java46,socket.io-client-java,46,issue,closed,False,"Is it possible to execute a callback function in the ""on"" event ?",feature_request,0.7,support_question,0.29
+java47,socket.io-client-java,47,issue,closed,False,Error While debugging:,build_packaging_env,0.95,defect_fixed_or_obsolete,0.05
+java48,socket.io-client-java,48,issue,closed,False,OnReconnect does not set connected to true on Socket and disconnects from that point stop working,defect_fixed_or_obsolete,0.99,defect_current,0.01
+java49,socket.io-client-java,49,issue,closed,False,How to let the client send a callback after receiving a message from the server,support_question,0.72,feature_request,0.25
+java50,socket.io-client-java,50,issue,closed,False,How can I connect if client is behind proxy?,support_question,0.99,defect_current,0.01
+java51,socket.io-client-java,51,issue,closed,False,Socket.io 0.9.x versions,defect_fixed_or_obsolete,0.57,support_question,0.43
+java52,socket.io-client-java,52,issue,closed,False,Handling Connection timeout Error,support_question,0.48,defect_fixed_or_obsolete,0.26
+java53,socket.io-client-java,53,issue,closed,False,送信と受信は特定のスレッドに縛られる?,support_question,0.86,defect_fixed_or_obsolete,0.09
+java54,socket.io-client-java,54,issue,closed,False,"An error when i use the jar,please help me,thank you!",build_packaging_env,0.86,defect_fixed_or_obsolete,0.11
+java55,socket.io-client-java,55,issue,closed,False,"An error when i use the jar in android application,please help me,thank you!",build_packaging_env,0.71,defect_fixed_or_obsolete,0.18000000000000002
+java56,socket.io-client-java,56,issue,closed,False,xhr poll error with Socket.io 1.0,defect_fixed_or_obsolete,0.75,support_question,0.16
+java57,socket.io-client-java,57,issue,closed,False,How you remove listeners?,support_question,0.98,feature_request,0.02
+java58,socket.io-client-java,58,issue,closed,False,Stop trying to reconnect,defect_fixed_or_obsolete,0.99,support_question,0.01
+java59,socket.io-client-java,59,issue,closed,False,"Ack Problems, java.lang.IllegalStateException: Not on the main thread",support_question,0.93,defect_fixed_or_obsolete,0.05
+java60,socket.io-client-java,60,issue,closed,False,PingInterval / Heartbeat ?,support_question,0.66,feature_request,0.23
+java61,socket.io-client-java,61,issue,closed,False,Change Log,docs_gap,0.93,pr_non_functional,0.03
+java62,socket.io-client-java,62,issue,closed,False,Binary arguments using emit function w/ Ack,defect_fixed_or_obsolete,0.73,defect_current,0.26
+java63,socket.io-client-java,63,pr,closed,True,"Fix #62, binary arguments in emit with ack",defect_fixed_or_obsolete,0.6,pr_functional,0.39
+java64,socket.io-client-java,64,issue,closed,False,Implementing Webrtc connection from Chrome to Android,defect_fixed_or_obsolete,0.73,defect_current,0.15000000000000002
+java65,socket.io-client-java,65,issue,closed,False,Supporting Stream ?,feature_request,0.99,defect_fixed_or_obsolete,0.01
+java66,socket.io-client-java,66,issue,closed,False,A question about Socket.IO-client.java,support_question,1,defect_current,0
+java67,socket.io-client-java,67,issue,closed,False,Is possible to get socket identifier?,support_question,0.5,defect_current,0.24
+java68,socket.io-client-java,68,issue,closed,False,WebsocketNotConnectedException,defect_fixed_or_obsolete,0.41000000000000003,defect_current,0.39
+java69,socket.io-client-java,69,issue,closed,False,WebSocketClient: no such method,build_packaging_env,0.88,defect_fixed_or_obsolete,0.08
+java70,socket.io-client-java,70,issue,closed,False,Eclipse instructions?,docs_gap,0.79,build_packaging_env,0.17
+java71,socket.io-client-java,71,issue,closed,False,Working with socket.io 1.0.6 ?,support_question,0.57,defect_fixed_or_obsolete,0.39
+java72,socket.io-client-java,72,issue,closed,False,Java-WebSocketClient loop endless when disconnect,defect_fixed_or_obsolete,0.53,defect_current,0.28
+java73,socket.io-client-java,73,issue,closed,False,Eclipse & JAR import,build_packaging_env,0.85,support_question,0.12
+java74,socket.io-client-java,74,issue,closed,False,How to obtain data from Ack() ?,support_question,1,duplicate_invalid_spam,0
+java75,socket.io-client-java,75,issue,closed,False,Unable to connect to Server,support_question,0.74,defect_fixed_or_obsolete,0.19
+java76,socket.io-client-java,76,issue,closed,False,i want to use this library on windows,build_packaging_env,0.91,support_question,0.05
+java77,socket.io-client-java,77,issue,closed,False,Non of the callback methods getting called with a timeout error,support_question,0.69,defect_fixed_or_obsolete,0.21
+java78,socket.io-client-java,78,issue,closed,False,Memory Leak: keeping a fragment reference when opening/closing it multiple times,defect_fixed_or_obsolete,0.47000000000000003,support_question,0.38
+java79,socket.io-client-java,79,pr,closed,False,ewe,duplicate_invalid_spam,0.95,insufficient_evidence,0.04
+java80,socket.io-client-java,80,issue,closed,False,"I use socket.emit in the socket.on()'s context in the serverside using nodejs, but in this situation, mobile can not receive the message from serverside?",support_question,0.98,defect_fixed_or_obsolete,0.02
+java81,socket.io-client-java,81,issue,closed,False,Unable to create a connection,support_question,0.81,defect_fixed_or_obsolete,0.13
+java82,socket.io-client-java,82,issue,closed,False,"Fatal signal 11 (SIGSEGV), code 1, fault",defect_current,0.68,defect_fixed_or_obsolete,0.2
+java83,socket.io-client-java,83,issue,closed,False,Many Socket references when my activity onResume.,support_question,1,duplicate_invalid_spam,0
+java84,socket.io-client-java,84,issue,closed,False,Socket.IO-client.java disconnect and reconnect repeatedly,defect_fixed_or_obsolete,0.9,support_question,0.06
+java85,socket.io-client-java,85,issue,closed,False,The program not closed after socket.close(),defect_fixed_or_obsolete,1,defect_current,0
+java86,socket.io-client-java,86,issue,closed,False,Extra http packets during Ping-Pong?,defect_fixed_or_obsolete,0.41,defect_current,0.28
+java87,socket.io-client-java,87,issue,closed,False,"Socket time-outs cause ""ghost"" connection on a reconnect.",defect_fixed_or_obsolete,0.99,defect_current,0.01
+java88,socket.io-client-java,88,issue,closed,False,Websocket Upgrade https,defect_current,0.59,defect_fixed_or_obsolete,0.4
+java89,socket.io-client-java,89,issue,closed,False,socket.io-client.java couldn't pass ack to socket.io server (v1.3.2),defect_fixed_or_obsolete,0.69,insufficient_evidence,0.15
+java90,socket.io-client-java,90,issue,closed,False,Not automatically reconnecting,defect_fixed_or_obsolete,0.42,support_question,0.39
+java91,socket.io-client-java,91,issue,closed,False,Emitter.Listener call() async or synchronous? ,support_question,1,defect_current,0
+java92,socket.io-client-java,92,issue,closed,False,"""transport close"" fires immediately after there is no network on device",defect_fixed_or_obsolete,0.68,defect_current,0.32
+java93,socket.io-client-java,93,issue,closed,False,Socket.io-client using non-daemon threads,feature_request,0.92,defect_current,0.04
+java94,socket.io-client-java,94,issue,closed,False,Version change,pr_non_functional,0.4,build_packaging_env,0.3
+java95,socket.io-client-java,95,issue,closed,False,ClassCastException when trying to (string)args received,defect_fixed_or_obsolete,0.64,defect_current,0.26
+java96,socket.io-client-java,96,issue,closed,False,.emit method,support_question,0.6,insufficient_evidence,0.13
+java97,socket.io-client-java,97,issue,closed,False,Namespaces aren't managed on reception,defect_fixed_or_obsolete,0.51,defect_current,0.31
+java98,socket.io-client-java,98,issue,closed,False,Issue: emiting json message create ClassCastException:,defect_fixed_or_obsolete,0.63,defect_current,0.34
+java99,socket.io-client-java,99,issue,closed,False,Reconnect after EVENT_ERROR,support_question,0.96,insufficient_evidence,0.02
+java100,socket.io-client-java,100,issue,closed,False,Socket.io Passport authentication,support_question,0.99,feature_request,0.01
+java101,socket.io-client-java,101,issue,closed,False,com.github.nkzawa.engineio.client.EngineIOException: xhr post error,defect_fixed_or_obsolete,0.6900000000000001,defect_current,0.15
+java102,socket.io-client-java,102,issue,closed,False,Where is the jar files ?,build_packaging_env,0.51,support_question,0.36
+java103,socket.io-client-java,103,issue,closed,False,Could not find method org.java_websocket.client.WebSocketClient,build_packaging_env,0.98,support_question,0.01
+java104,socket.io-client-java,104,issue,closed,False,Socket.io thread doesn't kill,defect_current,0.44,support_question,0.36
+java105,socket.io-client-java,105,issue,closed,False,JWT authorization,support_question,0.94,feature_request,0.04
+java106,socket.io-client-java,106,issue,closed,False,OutOfMemory when I tried to upload video binary string to server,defect_fixed_or_obsolete,0.5,defect_current,0.41
+java107,socket.io-client-java,107,issue,closed,False,IllegalArgumentException: delay < 0,defect_current,0.67,defect_fixed_or_obsolete,0.32
+java108,socket.io-client-java,108,issue,closed,False,Socket socket=IO.socket(url) crashes application,support_question,0.45,defect_fixed_or_obsolete,0.36
+java109,socket.io-client-java,109,issue,closed,False,socket is not disconnecting when network is off.,defect_current,0.9,insufficient_evidence,0.05
+java110,socket.io-client-java,110,issue,closed,False,Fatal error: Delay < 0 during reconnect,duplicate_invalid_spam,0.93,defect_fixed_or_obsolete,0.04
+java111,socket.io-client-java,111,issue,closed,False,"Ignore, sorry wrong issue",duplicate_invalid_spam,1,defect_current,0
+java112,socket.io-client-java,112,issue,closed,False,DexGuard optimization issue,build_packaging_env,0.96,defect_current,0.03
+java113,socket.io-client-java,113,issue,closed,False,I met a problem about useing socket.io-client.java to transfer Chinese,defect_fixed_or_obsolete,0.63,support_question,0.2
+java114,socket.io-client-java,114,issue,closed,False,Does the server can receive an ack from the client ?,support_question,1,defect_current,0
+java115,socket.io-client-java,115,issue,closed,False,client not upgrading to websocket when hitting haproxy(loadbalancer) in front of two socketio servers,defect_fixed_or_obsolete,0.89,defect_current,0.06
+java116,socket.io-client-java,116,issue,closed,False,Use upcoming OkHttp 2.3 WebSocket feature,defect_fixed_or_obsolete,0.78,feature_request,0.19
+java117,socket.io-client-java,117,issue,closed,False,Passport headers ,support_question,0.99,defect_current,0.01
+java118,socket.io-client-java,118,issue,closed,False,How To handle Error for specific emit,support_question,0.74,feature_request,0.21
+java119,socket.io-client-java,119,issue,closed,False,StringIndexOutOfBoundsException on Parser$Decoder.decodeString,defect_current,0.58,defect_fixed_or_obsolete,0.24
+java120,socket.io-client-java,120,pr,closed,True,Enhance Parser decode,pr_functional,0.69,defect_fixed_or_obsolete,0.27
+java121,socket.io-client-java,121,issue,closed,False,Broadcast Messages,support_question,0.81,defect_fixed_or_obsolete,0.13
+java122,socket.io-client-java,122,issue,closed,False,It takes client very long time to get connected when using 3G network,defect_current,0.54,support_question,0.2
+java123,socket.io-client-java,123,issue,closed,False,disconnecting unexpectedly,duplicate_invalid_spam,0.73,defect_current,0.16
+java124,socket.io-client-java,124,issue,closed,False,Use WebSocket transport all times?,support_question,1,defect_current,0
+java125,socket.io-client-java,125,issue,closed,False,localhost:port as URI,support_question,0.91,feature_request,0.08
+java126,socket.io-client-java,126,issue,closed,False,Unhandled exception thrown when the server sends a Long as Event name,defect_fixed_or_obsolete,0.55,defect_current,0.4
+java127,socket.io-client-java,127,issue,closed,False,java.lang.NullPointerException at com.github.nkzawa.socketio.client.Manager$6.call,defect_fixed_or_obsolete,0.71,defect_current,0.25
+java128,socket.io-client-java,128,issue,closed,False,Each time connecting socket after disconnects causes incremental instance in socket stack.,support_question,0.47000000000000003,defect_fixed_or_obsolete,0.4
+java129,socket.io-client-java,129,issue,closed,False,i can't send(socket.emit) json object android to server side this is my code..,support_question,0.89,defect_fixed_or_obsolete,0.09
+java130,socket.io-client-java,130,issue,closed,False,how to used in client side for get and send message ,support_question,1,feature_request,0
+java131,socket.io-client-java,131,issue,closed,False,How to destroy socket object,support_question,0.7,defect_fixed_or_obsolete,0.16
+java132,socket.io-client-java,132,issue,closed,False,How to fully disconnect from the server?,defect_fixed_or_obsolete,0.72,support_question,0.2
+java133,socket.io-client-java,133,issue,closed,False,Socket not connected after RECONNECT,support_question,0.83,defect_fixed_or_obsolete,0.15
+java134,socket.io-client-java,134,issue,closed,False,readme needs updated,docs_gap,0.97,duplicate_invalid_spam,0.02
+java135,socket.io-client-java,135,issue,closed,False,How can I send extra data while making Socket.connect ?,support_question,1,duplicate_invalid_spam,0
+java136,socket.io-client-java,136,issue,closed,False,App crashes after recieving `connect` event.,defect_current,0.58,defect_fixed_or_obsolete,0.29
+java137,socket.io-client-java,137,issue,closed,False,Version of Java_Websocket to use,build_packaging_env,0.65,support_question,0.23
+java138,socket.io-client-java,138,issue,closed,False,why i can't get the getActivity.runOnUiThread?,support_question,0.93,build_packaging_env,0.05
+java139,socket.io-client-java,139,issue,closed,False,socket.connected() method return false even when socket is connected..?,support_question,0.84,docs_gap,0.11
+java140,socket.io-client-java,140,issue,closed,False,Emitter listener force close,support_question,0.96,defect_current,0.03
+java141,socket.io-client-java,141,issue,closed,False,Sockets sending no response on Lollipop,defect_fixed_or_obsolete,0.32,defect_current,0.31
+java142,socket.io-client-java,142,pr,closed,True,add a note about query and forceNew in options,pr_non_functional,0.98,docs_gap,0.02
+java143,socket.io-client-java,143,issue,closed,False,Connection timeout,support_question,0.97,defect_fixed_or_obsolete,0.02
+java144,socket.io-client-java,144,issue,closed,False,Offical website is OK but localhost not OK,support_question,0.97,defect_fixed_or_obsolete,0.03
+java145,socket.io-client-java,145,issue,closed,False,Ping pong question,support_question,0.58,defect_fixed_or_obsolete,0.34
+java146,socket.io-client-java,146,issue,closed,False,Question: how to unit test interaction with the socket based on Robolectric?,support_question,1,defect_current,0
+java147,socket.io-client-java,147,issue,closed,False,"When Idle for long time, socket gets disconnected but event not received.",defect_fixed_or_obsolete,0.96,defect_current,0.04
+java148,socket.io-client-java,148,pr,closed,False,Fixed issue in com.github.nkzawa.engineio.client.Socket$7.call (Socke…,defect_current,0.52,pr_functional,0.27
+java149,socket.io-client-java,149,issue,closed,False,Reopen connection,defect_current,0.77,defect_fixed_or_obsolete,0.19
+java150,socket.io-client-java,150,issue,closed,False,Not work with okhttp 2.4.0-RC1,defect_fixed_or_obsolete,0.65,defect_current,0.26
+java151,socket.io-client-java,151,issue,closed,False,On method is not included,build_packaging_env,0.84,support_question,0.15
+java152,socket.io-client-java,152,issue,closed,False,App crash,defect_fixed_or_obsolete,0.87,defect_current,0.13
+java153,socket.io-client-java,153,issue,closed,False,NullPointerException: Attempt to invoke interface method 'void com.github.nkzawa.socketio.client.Ack.call(java.lang.Object[])' on a null object reference,defect_current,0.61,defect_fixed_or_obsolete,0.27
+java154,socket.io-client-java,154,issue,closed,False,Android: socket.io-client.java version 0.5.0,build_packaging_env,0.92,defect_fixed_or_obsolete,0.04
+java155,socket.io-client-java,155,issue,closed,False, App crash onCreate() socket.io-client-0.5.0,build_packaging_env,0.84,defect_fixed_or_obsolete,0.14
+java156,socket.io-client-java,156,issue,closed,False,Fix the slowness websocket transport,defect_fixed_or_obsolete,1,defect_current,0
+java157,socket.io-client-java,157,issue,closed,False,Connection successfully established with http but failed on https,support_question,0.56,defect_current,0.2
+java158,socket.io-client-java,158,issue,closed,False,Socket IO with a sub-directory,support_question,0.92,defect_fixed_or_obsolete,0.08
+java159,socket.io-client-java,159,issue,closed,False,NoClassDefFoundError OkHttpClient,build_packaging_env,0.93,defect_fixed_or_obsolete,0.07
+java160,socket.io-client-java,160,issue,closed,False,v 0.5.1 not available at mvn repository,defect_fixed_or_obsolete,0.43,support_question,0.26
+java161,socket.io-client-java,161,issue,closed,False,xhr post error on slow connection (3G mobile network).,support_question,0.43,defect_current,0.26
+java162,socket.io-client-java,162,issue,closed,False,How to produce messages with packet type id like 420,support_question,0.75,defect_fixed_or_obsolete,0.12
+java163,socket.io-client-java,163,issue,closed,False,Crash when no connection (Race Condition),defect_fixed_or_obsolete,0.51,defect_current,0.43
+java164,socket.io-client-java,164,pr,closed,True,Making the events hash protected in Socket class,pr_functional,0.92,feature_request,0.07
+java165,socket.io-client-java,165,issue,closed,False,Instant Crash,support_question,0.5,insufficient_evidence,0.19
+java166,socket.io-client-java,166,issue,closed,False,Socket.connect() very slow,support_question,0.9400000000000001,defect_fixed_or_obsolete,0.06
+java167,socket.io-client-java,167,issue,closed,False,CPU usage over 40% in service,support_question,0.71,duplicate_invalid_spam,0.18
+java168,socket.io-client-java,168,issue,closed,False,How do I retrieve a byte array from a buffer I emitted using socket.io with node.js?,support_question,0.98,insufficient_evidence,0.01
+java169,socket.io-client-java,169,issue,closed,False,Cant get any response while running inside AsyncTask,support_question,0.93,insufficient_evidence,0.04
+java170,socket.io-client-java,170,issue,closed,False,Socket Connection error,defect_current,0.44,support_question,0.38
+java171,socket.io-client-java,171,issue,closed,False,Three connections opened,support_question,0.71,defect_fixed_or_obsolete,0.23
+java172,socket.io-client-java,172,issue,closed,False,The manager will create new connections even when it is in Openning state,defect_current,0.57,defect_fixed_or_obsolete,0.41
+java173,socket.io-client-java,173,issue,closed,False,[proposal] Merge engine and socket into one library?,feature_request,0.89,insufficient_evidence,0.05
+java174,socket.io-client-java,174,issue,closed,False,Why does IO.socket(URI) throw URISyntaxException?,defect_fixed_or_obsolete,0.99,support_question,0.01
+java175,socket.io-client-java,175,issue,closed,False,Client sending empty JSONObjects?,support_question,0.52,defect_current,0.41
+java176,socket.io-client-java,176,issue,closed,False,The ready state for manager OPENING not cleared in error,defect_current,0.95,defect_fixed_or_obsolete,0.04
+java177,socket.io-client-java,177,issue,closed,False,How to enable verbose log for client? ,support_question,1,pr_non_functional,0
+java178,socket.io-client-java,178,issue,closed,False,How to setup the local unit test?,docs_gap,0.68,support_question,0.22
+java179,socket.io-client-java,179,issue,closed,False,Reconnect,support_question,1,pr_non_functional,0
+java180,socket.io-client-java,180,issue,closed,False,java.net.ProtocolException: Expected HTTP 101 response but was '200 OK',support_question,0.94,docs_gap,0.04
+java181,socket.io-client-java,181,issue,closed,False,[Question] Does this porting supports room ?,support_question,0.95,feature_request,0.05
+java182,socket.io-client-java,182,issue,closed,False,EventThread.exec() run delay problem?,support_question,0.52,duplicate_invalid_spam,0.28
+java183,socket.io-client-java,183,issue,closed,False,"listener does not work first, but work after reconnecting",defect_current,0.68,insufficient_evidence,0.19
+java184,socket.io-client-java,184,issue,closed,False,Switching from org.json to JSON.simple,build_packaging_env,0.54,feature_request,0.24
+java185,socket.io-client-java,185,issue,closed,False,get set-cookie head from 'EVENT_RESPONSE_HEADERS' event,defect_fixed_or_obsolete,1,pr_non_functional,0
+java186,socket.io-client-java,186,issue,closed,False,No listening on event,support_question,0.68,defect_current,0.23
+java187,socket.io-client-java,187,issue,closed,False,possibility to send cookies,support_question,0.98,feature_request,0.02
+java188,socket.io-client-java,188,issue,closed,False,SSL/TLS is 2-3x slower than unsecured connection,defect_current,0.47,support_question,0.42
+java189,socket.io-client-java,189,issue,closed,False,Reconnect,support_question,0.61,insufficient_evidence,0.24
+java190,socket.io-client-java,190,issue,closed,False,usage with netty-socket-io,support_question,1,pr_non_functional,0
+java191,socket.io-client-java,191,issue,closed,False,java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.Exception,defect_fixed_or_obsolete,0.66,defect_current,0.21
+java192,socket.io-client-java,192,issue,closed,False,Issue with com.github.nkzawa.emitter.Emitter ,duplicate_invalid_spam,0.84,defect_fixed_or_obsolete,0.12
+java193,socket.io-client-java,193,issue,closed,False,com.github.nkzawa.engineio.client.EngineIOException: xhr post error,defect_current,0.43,defect_fixed_or_obsolete,0.24
+java194,socket.io-client-java,194,issue,closed,False, java.lang.NoClassDefFoundError: com.squareup.okhttp.OkHttpClient,build_packaging_env,0.82,defect_fixed_or_obsolete,0.17
+java195,socket.io-client-java,195,issue,closed,False,socket.io LINUX TCP,support_question,0.72,defect_current,0.13
+java196,socket.io-client-java,196,issue,closed,False,Problems to receive ,support_question,0.88,defect_current,0.07
+java197,socket.io-client-java,197,issue,closed,False,"socket io disconnected, but the client didn't know",support_question,0.53,defect_current,0.39
+java198,socket.io-client-java,198,issue,closed,False,Initialize socket.io in AndroidStudio,support_question,0.98,docs_gap,0.01
+java199,socket.io-client-java,199,issue,closed,False,Can this be used with any implementation of java?,support_question,0.99,defect_fixed_or_obsolete,0.01
+java200,socket.io-client-java,200,issue,closed,False,socket.disconnect doesn't close underlying connetions [0.5.1],defect_current,0.53,defect_fixed_or_obsolete,0.45
+java201,socket.io-client-java,201,issue,closed,False,setSSLSocketFactory ,feature_request,0.89,support_question,0.09
+java202,socket.io-client-java,202,issue,closed,False,How to join a room?,support_question,0.86,feature_request,0.07
+java203,socket.io-client-java,203,issue,closed,False,Android App Unable to Connect Node.js server that uses Socket.io,support_question,0.62,insufficient_evidence,0.21
+java204,socket.io-client-java,204,issue,closed,False,Send ack message to socket.io server and timeout,feature_request,0.7,support_question,0.27
+java205,socket.io-client-java,205,issue,closed,False,Connecting to Socket.IO on a Service,support_question,0.95,docs_gap,0.05
+java206,socket.io-client-java,206,pr,closed,True,Change package name,pr_non_functional,0.43,build_packaging_env,0.26
+java207,socket.io-client-java,207,issue,closed,False,QUESTION: How to join a room?,support_question,0.97,duplicate_invalid_spam,0.03
+java208,socket.io-client-java,208,issue,closed,False,The application may be doing too much work on its main thread.,support_question,0.81,defect_current,0.09
+java209,socket.io-client-java,209,issue,closed,False,Socket connection disconnect when running in background service,insufficient_evidence,0.56,support_question,0.2
+java210,socket.io-client-java,210,issue,closed,False,socket transports does't upgrade to websocket problem,defect_fixed_or_obsolete,0.45,defect_current,0.39
+java211,socket.io-client-java,211,issue,closed,False,websocket doesn't work on proxy/some wifi/devices?,defect_current,0.74,insufficient_evidence,0.13
+java212,socket.io-client-java,212,issue,closed,False,updating to 0.6.1 causing 'websocket error' -- SocketTimeoutException,defect_fixed_or_obsolete,0.67,defect_current,0.24
+java213,socket.io-client-java,213,issue,closed,False,'disconnect' is not called,support_question,0.62,defect_current,0.31
+java214,socket.io-client-java,214,issue,closed,False,Buffer option,feature_request,1,pr_functional,0
+java215,socket.io-client-java,215,issue,closed,False,RoboVM java.lang.IllegalArgumentException: unexpected url.,defect_fixed_or_obsolete,0.4,support_question,0.2
+java216,socket.io-client-java,216,issue,closed,False,Using socket.io client cause picasso not downloading images,build_packaging_env,0.32,defect_fixed_or_obsolete,0.27
+java217,socket.io-client-java,217,issue,closed,False,SocketIO stream support,feature_request,0.99,support_question,0.01
+java218,socket.io-client-java,218,issue,closed,False,Send file from Android Device to NodeJs Server,support_question,0.99,feature_request,0.01
+java219,socket.io-client-java,219,issue,closed,False,How can i pass my socket object to another activity in android?,support_question,1,duplicate_invalid_spam,0
+java220,socket.io-client-java,220,issue,closed,False,Emitter and EventThread not found,build_packaging_env,0.55,support_question,0.34
+java221,socket.io-client-java,221,issue,closed,False,QUESTION: have to authenticate socket in every activity?,support_question,0.99,defect_fixed_or_obsolete,0.01
+java222,socket.io-client-java,222,issue,closed,False,There's no ability to change conneting url to server(or option value),support_question,0.81,defect_fixed_or_obsolete,0.14
+java223,socket.io-client-java,223,issue,closed,False,auto reconnecting fails when socket.connect() is called 2nd time in a background service,support_question,0.59,defect_fixed_or_obsolete,0.32
+java224,socket.io-client-java,224,issue,closed,False,0.6.2 unavailable on maven,build_packaging_env,0.72,defect_fixed_or_obsolete,0.25
+java225,socket.io-client-java,225,issue,closed,False,Proguard Obfuscation Problem,build_packaging_env,0.93,support_question,0.03
+java226,socket.io-client-java,226,issue,closed,False,Headers Authentification,support_question,0.99,docs_gap,0.01
+java227,socket.io-client-java,227,issue,closed,False,Socket is automatically disconnected and reconnect repeatedly,build_packaging_env,0.68,defect_current,0.15
+java228,socket.io-client-java,228,issue,closed,False,Still frequent disconnects on 0.6.2,defect_fixed_or_obsolete,0.65,defect_current,0.19
+java229,socket.io-client-java,229,issue,closed,False,"still frequently reconnection in my first connection， wait on line...., my log is here",defect_fixed_or_obsolete,0.8,support_question,0.14
+java230,socket.io-client-java,230,issue,closed,False,socket.io timeout problem Android,support_question,0.58,defect_current,0.36
+java231,socket.io-client-java,231,pr,closed,False,Merge pull request #1 from socketio/master,duplicate_invalid_spam,0.62,insufficient_evidence,0.34
+java232,socket.io-client-java,232,issue,closed,False,sending emit with callback inside a thread,support_question,0.97,defect_current,0.02
+java233,socket.io-client-java,233,issue,closed,False,java.net.MalformedURLException: Unknown protocol: ws,defect_fixed_or_obsolete,1,insufficient_evidence,0
+java234,socket.io-client-java,234,issue,closed,False,emit callback sometimes not getting fired,feature_request,0.86,support_question,0.1
+java235,socket.io-client-java,235,issue,closed,False,Parse JSON into Java objects instead of JSONObject,feature_request,1,defect_fixed_or_obsolete,0
+java236,socket.io-client-java,236,issue,closed,False,Want to create multiple socket connections with socket.io server,support_question,0.84,defect_fixed_or_obsolete,0.14
+java237,socket.io-client-java,237,issue,closed,False,"Map<String, List<String>> for header?",feature_request,0.79,support_question,0.11
+java238,socket.io-client-java,238,issue,closed,False,Warning:Dependency org.json:json:20090211 is ignored for debug as it may be conflicting with the internal version provided by Android.,build_packaging_env,0.99,defect_fixed_or_obsolete,0.01
+java239,socket.io-client-java,239,issue,closed,False,Add information about transports,docs_gap,0.97,support_question,0.03
+java240,socket.io-client-java,240,issue,closed,False,parameter in opts.query became null to server,defect_current,0.51,support_question,0.34
+java241,socket.io-client-java,241,issue,closed,False,Consistent XHR Post Error,defect_current,0.39,defect_fixed_or_obsolete,0.32
+java242,socket.io-client-java,242,issue,closed,False,How can I see the socket IO logs Android,support_question,0.76,feature_request,0.24
+java243,socket.io-client-java,243,issue,closed,False,"Need to be able to listen to all ""other"" events ",feature_request,0.81,defect_fixed_or_obsolete,0.19
+java244,socket.io-client-java,244,issue,closed,False,Reconnect apparently not honored,defect_current,0.89,defect_fixed_or_obsolete,0.09
+java245,socket.io-client-java,245,issue,closed,False,jitter not correctly calculated during backoff,defect_fixed_or_obsolete,0.98,defect_current,0.02
+java246,socket.io-client-java,246,pr,closed,False,Fixed #245,defect_fixed_or_obsolete,0.79,pr_functional,0.2
+java247,socket.io-client-java,247,issue,closed,False,gradle build error,build_packaging_env,0.93,duplicate_invalid_spam,0.05
+java248,socket.io-client-java,248,issue,closed,False,"""xhr poll error"" after ""too many open files"" on Android 4.2",defect_fixed_or_obsolete,0.87,defect_current,0.13
+java249,socket.io-client-java,249,issue,closed,False,How to use options.query in android socket.io?,support_question,0.97,docs_gap,0.03
+java250,socket.io-client-java,250,issue,closed,False,"Consistent ""xhr poll error"" is caused by hanging instances of XHRPolling",defect_current,0.9,defect_fixed_or_obsolete,0.09
+java251,socket.io-client-java,251,issue,closed,False,"Question: When there is no internet connection, try to reconnect immidiately",support_question,0.97,defect_current,0.02
+java252,socket.io-client-java,252,issue,closed,False,Websocket error ,support_question,0.71,defect_fixed_or_obsolete,0.18
+java253,socket.io-client-java,253,issue,closed,False,frequently reconnect problem,defect_fixed_or_obsolete,0.61,defect_current,0.2
+java254,socket.io-client-java,254,issue,closed,False,Question: Does this support P2P?,feature_request,0.66,support_question,0.34
+java255,socket.io-client-java,255,pr,closed,True,Code Quality Improvement - Exception handlers should preserve the original exception ,pr_non_functional,0.49,pr_functional,0.45
+java256,socket.io-client-java,256,pr,closed,True,"Code Quality Improvement - Objects should be compared with ""equals()""",pr_non_functional,0.76,pr_functional,0.21
+java257,socket.io-client-java,257,pr,closed,True,Code Quality Improvement - Constructors should only call non-overridable methods,pr_non_functional,0.66,pr_functional,0.3
+java258,socket.io-client-java,258,pr,closed,True,Code Quality Improvement - Redundant Field Initializer,pr_non_functional,0.93,pr_functional,0.06
+java259,socket.io-client-java,259,pr,closed,True,Code Quality Improvement - Collection.isEmpty() should be used to test for emptiness,pr_non_functional,0.91,pr_functional,0.07
+java260,socket.io-client-java,260,issue,closed,False,EngineIOException: server error,support_question,0.94,defect_fixed_or_obsolete,0.06
+java261,socket.io-client-java,261,issue,closed,False,Consider when upgrade okhttp version to 2.6.0?,defect_fixed_or_obsolete,0.43,build_packaging_env,0.16
+java262,socket.io-client-java,262,issue,closed,False,Change Buffer Size,feature_request,0.8200000000000001,defect_current,0.11
+java263,socket.io-client-java,263,issue,closed,False,[question]about namespace,support_question,1,build_packaging_env,0
+java264,socket.io-client-java,264,issue,closed,False,java.lang.NoClassDefFoundError: com/squareup/okhttp/ws/WebSocketListener,build_packaging_env,0.81,defect_fixed_or_obsolete,0.11
+java265,socket.io-client-java,265,issue,closed,False,I fixed a s,insufficient_evidence,1,pr_non_functional,0
+java266,socket.io-client-java,266,issue,closed,False,Inner Emit is not working,support_question,0.76,defect_fixed_or_obsolete,0.19
+java267,socket.io-client-java,267,issue,closed,False,Battery Worries,support_question,1,pr_non_functional,0
+java268,socket.io-client-java,268,issue,closed,False,Socket listeners not working but emit does.,defect_current,0.61,defect_fixed_or_obsolete,0.25
+java269,socket.io-client-java,269,issue,closed,False,How do i send File object while emit using socket.io with node.js in android?,support_question,0.91,feature_request,0.09
+java270,socket.io-client-java,270,issue,closed,False,0.6.3: Android with Proguard build: SimException: CstInterfaceMethodRef cannot be cast to CstMethodRef,build_packaging_env,0.78,defect_fixed_or_obsolete,0.2
+java271,socket.io-client-java,271,issue,closed,False,Support okhttp 3.0?,feature_request,0.76,defect_fixed_or_obsolete,0.2
+java272,socket.io-client-java,272,issue,closed,False,latency in receiving socket.on message on android client,support_question,0.54,defect_current,0.41
+java273,socket.io-client-java,273,issue,closed,False,how to config this lib with https address,support_question,0.96,docs_gap,0.04
+java274,socket.io-client-java,274,issue,closed,False,Support Socket.io 0.9,feature_request,0.54,defect_fixed_or_obsolete,0.42
+java275,socket.io-client-java,275,issue,closed,False,OkHttp connections do not seem to be closed,defect_current,0.89,defect_fixed_or_obsolete,0.1
+java276,socket.io-client-java,276,issue,closed,False,NoClassDefFoundError io.socket.client.IO$Options,build_packaging_env,0.48,defect_fixed_or_obsolete,0.3
+java277,socket.io-client-java,277,pr,closed,True,Fixes event type when emitting binary_ack,defect_fixed_or_obsolete,0.63,pr_functional,0.32
+java278,socket.io-client-java,278,issue,closed,False,Why minSdkVersion is 15?,support_question,0.6,build_packaging_env,0.36
+java279,socket.io-client-java,279,issue,closed,False,Cant get it working,support_question,0.98,duplicate_invalid_spam,0.01
+java280,socket.io-client-java,280,issue,closed,False,Transport upgrading failure and 2 connections.,defect_fixed_or_obsolete,0.73,defect_current,0.17
+java281,socket.io-client-java,281,issue,closed,False,Multiple connections from a single client,support_question,0.41000000000000003,defect_fixed_or_obsolete,0.37
+java282,socket.io-client-java,282,issue,closed,False,Ability to query socket status?,feature_request,0.5,support_question,0.41
+java283,socket.io-client-java,283,issue,closed,False,JSONArray,support_question,0.99,insufficient_evidence,0.01
+java284,socket.io-client-java,284,issue,closed,False,Emit doesn't call the API route,support_question,0.93,defect_fixed_or_obsolete,0.05
+java285,socket.io-client-java,285,issue,closed,False,socket is connected after closing android app?,support_question,0.87,defect_current,0.08
+java286,socket.io-client-java,286,pr,closed,False,Fix resetting backoff,pr_functional,0.51,defect_fixed_or_obsolete,0.28
+java287,socket.io-client-java,287,issue,closed,False,Exception on server disconnect via disconnect(true),defect_fixed_or_obsolete,0.89,defect_current,0.1
+java288,socket.io-client-java,288,issue,closed,False,Socket not re-connecting after connection break (Only when app is in background),defect_current,0.41000000000000003,defect_fixed_or_obsolete,0.38
+java289,socket.io-client-java,289,issue,closed,False,connect event is sometimes not called when connect and disconnect repeatedly,defect_current,0.87,support_question,0.05
+java290,socket.io-client-java,290,issue,closed,False,"Unable to connect socket.io using socket.io client, engine.io-client & Java-Websocket.",support_question,0.96,defect_fixed_or_obsolete,0.04
+java291,socket.io-client-java,291,pr,closed,True,fix typo in readme example,pr_non_functional,1,feature_request,0
+java292,socket.io-client-java,292,issue,closed,False,Chat History maintenance in app ,support_question,1,feature_request,0
+java293,socket.io-client-java,293,issue,closed,False,Android SSL (self signed certificate) implementation,support_question,0.97,docs_gap,0.03
+java294,socket.io-client-java,294,issue,closed,False,java.lang.IllegalStateException: Unable to take ownership of connection from okhttp when .connect fails.,defect_current,0.77,defect_fixed_or_obsolete,0.22
+java295,socket.io-client-java,295,issue,closed,False,RejectedExecutionException Occured in onMessage.,defect_current,0.88,defect_fixed_or_obsolete,0.09
+java296,socket.io-client-java,296,issue,closed,False,Room support (join & leave),support_question,0.51,feature_request,0.48
+java297,socket.io-client-java,297,issue,closed,False,socket java.lang.NullPointerException,support_question,0.84,defect_fixed_or_obsolete,0.15
+java298,socket.io-client-java,298,issue,closed,False,Force SSLContext to TLSv1.2 or TLSv1.1,support_question,0.79,docs_gap,0.11
+java299,socket.io-client-java,299,issue,closed,False,Send String[] array to the server,support_question,0.92,defect_current,0.060000000000000005
+java300,socket.io-client-java,300,issue,closed,False,OutOfMemoryError: pthread_create (stack size 16384 bytes) failed: Try again,defect_current,0.72,defect_fixed_or_obsolete,0.26
+java301,socket.io-client-java,301,issue,open,False,Volatile Messages,feature_request,1,pr_functional,0
+java302,socket.io-client-java,302,issue,closed,False,Timeout for emit.,support_question,0.43,duplicate_invalid_spam,0.26
+java303,socket.io-client-java,303,issue,closed,False,Socket.onevent event value on args always on index 1 [Bug],defect_current,0.86,defect_fixed_or_obsolete,0.11
+java304,socket.io-client-java,304,pr,closed,False,Add new SocketOptionBuilder which helps creating IO.Option as builder…,pr_functional,0.99,feature_request,0.01
+java305,socket.io-client-java,305,pr,closed,False,Add missing method.,pr_functional,0.83,duplicate_invalid_spam,0.12
+java306,socket.io-client-java,306,issue,closed,False,Rejected Execution exception,defect_current,0.56,insufficient_evidence,0.38
+java307,socket.io-client-java,307,issue,closed,False,SocketTimeoutException failed to connect to... after 90000ms,defect_current,0.52,support_question,0.3
+java308,socket.io-client-java,308,issue,closed,False,https problem,support_question,1,pr_functional,0
+java309,socket.io-client-java,309,issue,closed,False,Emit or Ack timeout handling?,feature_request,0.7,defect_fixed_or_obsolete,0.25
+java310,socket.io-client-java,310,issue,closed,False,Integrating socket.io-client-java lib into another lib.,support_question,0.95,docs_gap,0.05
+java311,socket.io-client-java,311,issue,closed,False,30 FPS socket receiving fails with Out of memory error,support_question,0.46,duplicate_invalid_spam,0.45
+java312,socket.io-client-java,312,issue,open,False,Compression Support?,feature_request,1,pr_functional,0
+java313,socket.io-client-java,313,issue,closed,False,IllegalStateException: must call close(),defect_current,0.62,defect_fixed_or_obsolete,0.29
+java314,socket.io-client-java,314,issue,closed,False,Sending data through connection,support_question,0.85,feature_request,0.13
+java315,socket.io-client-java,315,issue,closed,False,OutOfMemoryError: pthread_create,defect_fixed_or_obsolete,0.92,defect_current,0.08
+java316,socket.io-client-java,316,issue,closed,False,Transport error,support_question,0.73,docs_gap,0.24
+java317,socket.io-client-java,317,issue,closed,False,How do I stop listening for an event,support_question,0.88,feature_request,0.07
+java318,socket.io-client-java,318,issue,closed,False,Wrong default namespace?,support_question,0.59,defect_fixed_or_obsolete,0.3
+java319,socket.io-client-java,319,issue,closed,False,after  my  android  socket.io reconnect  ，can not  send message，why?,support_question,0.54,defect_current,0.36
+java320,socket.io-client-java,320,issue,closed,False,Support for Deflate extension,feature_request,0.93,pr_functional,0.04
+java321,socket.io-client-java,321,pr,closed,False,Support for Deflate extension,pr_functional,0.73,pr_non_functional,0.15
+java322,socket.io-client-java,322,issue,open,False,When does the socket stop to try to emit a message when connection is lost?,support_question,0.56,docs_gap,0.39
+java323,socket.io-client-java,323,issue,closed,False,Not found ACK class in arguments of Emitter.Listener,support_question,0.73,defect_fixed_or_obsolete,0.21
+java324,socket.io-client-java,324,issue,closed,False,Creating non Daemon threads,defect_fixed_or_obsolete,0.54,feature_request,0.42
+java325,socket.io-client-java,325,issue,closed,False,Socket connect callback  socket.id() returns null,defect_current,0.79,insufficient_evidence,0.1
+java326,socket.io-client-java,326,pr,closed,True,Fix a typo,pr_non_functional,1,build_packaging_env,0
+java327,socket.io-client-java,327,issue,closed,False,Socket.io Android Client not working but iOS Client Working,support_question,0.81,insufficient_evidence,0.1
+java328,socket.io-client-java,328,issue,open,False,"Consistent ""xhr poll error"" caused by poor network",defect_current,0.9,support_question,0.08
+java329,socket.io-client-java,329,issue,closed,False,Leaving a namespace,feature_request,0.95,support_question,0.05
+java330,socket.io-client-java,330,issue,closed,False,Web socket with port number not working,support_question,0.74,defect_current,0.14
+java331,socket.io-client-java,331,issue,closed,False,Working with Events ,support_question,0.95,defect_fixed_or_obsolete,0.03
+java332,socket.io-client-java,332,issue,closed,False,Unable to trigger acknowledgement function,defect_current,0.51,support_question,0.37
+java333,socket.io-client-java,333,issue,closed,False,Have your own encoders and decoders,feature_request,1,build_packaging_env,0
+java334,socket.io-client-java,334,pr,closed,False,Allow for custom encoders and decoders,pr_functional,0.71,feature_request,0.17
+java335,socket.io-client-java,335,issue,closed,False,getting WebsocketNotConnectedException exception after socket connected,defect_fixed_or_obsolete,0.79,defect_current,0.18
+java336,socket.io-client-java,336,issue,closed,False,Send message to specific user doesn't work correctly on android,support_question,0.9,defect_fixed_or_obsolete,0.1
+java337,socket.io-client-java,337,issue,closed,False,java.lang.NoSuchMethodError,build_packaging_env,0.8200000000000001,defect_fixed_or_obsolete,0.18
+java338,socket.io-client-java,338,issue,closed,False,How to set Origin request header?,support_question,0.99,docs_gap,0.01
+java339,socket.io-client-java,339,issue,closed,False,Support okhttp 3.4.1?,defect_fixed_or_obsolete,0.87,feature_request,0.06
+java340,socket.io-client-java,340,issue,closed,False,Is the repo being mantained?,support_question,0.93,insufficient_evidence,0.03
+java341,socket.io-client-java,341,issue,closed,False,how to send an ack from android to server,support_question,0.99,docs_gap,0.01
+java342,socket.io-client-java,342,issue,closed,False,Fatal Exception: java.util.ConcurrentModificationException,defect_current,0.69,defect_fixed_or_obsolete,0.29
+java343,socket.io-client-java,343,issue,closed,False,NullPointerException from 0.8.0,defect_fixed_or_obsolete,0.97,defect_current,0.02
+java344,socket.io-client-java,344,issue,closed,False,Nullpointer in .call in 0.8.0 version,duplicate_invalid_spam,0.85,defect_fixed_or_obsolete,0.14
+java345,socket.io-client-java,345,issue,closed,False,[v0.8.0] Null Pointer Exception in  io.socket.engineio.client.Socket$7.call,duplicate_invalid_spam,0.85,defect_fixed_or_obsolete,0.13
+java346,socket.io-client-java,346,issue,closed,False,java.lang.illegalStateException,defect_current,0.7,defect_fixed_or_obsolete,0.25
+java347,socket.io-client-java,347,issue,closed,False,whats the latest android release ?,support_question,0.81,defect_fixed_or_obsolete,0.08
+java348,socket.io-client-java,348,issue,closed,False,Java NullPointerException.,defect_fixed_or_obsolete,0.37,support_question,0.29
+java349,socket.io-client-java,349,issue,closed,False,java.lang.IllegalArgumentException: delay < 0,defect_fixed_or_obsolete,0.91,defect_current,0.08
+java350,socket.io-client-java,350,issue,closed,False,Unable to emitt an event from TimerRunnable,insufficient_evidence,0.58,support_question,0.19
+java351,socket.io-client-java,351,issue,closed,False,io.Socket.id() return null,support_question,0.97,defect_fixed_or_obsolete,0.03
+java352,socket.io-client-java,352,issue,closed,False,Connecting does not work after v0.6.3,support_question,0.48,defect_fixed_or_obsolete,0.36
+java353,socket.io-client-java,353,issue,closed,False,Fatal Exception: java.lang.IllegalArgumentException Unexpected char 0x633,defect_fixed_or_obsolete,0.99,defect_current,0.01
+java354,socket.io-client-java,354,issue,closed,False,Custom socket id from android side,support_question,0.86,feature_request,0.14
+java355,socket.io-client-java,355,issue,closed,False,Rooms and namespaces,support_question,0.9,feature_request,0.05
+java356,socket.io-client-java,356,issue,closed,False,Emit doesn't send event to the server,support_question,0.9,defect_fixed_or_obsolete,0.09
+java357,socket.io-client-java,357,issue,closed,False,"Connection connect , dissconnect Repeating",support_question,0.77,defect_current,0.16
+java358,socket.io-client-java,358,issue,closed,False,Library making lots of peristent connections with the server,support_question,0.43,insufficient_evidence,0.29
+java359,socket.io-client-java,359,issue,closed,False,socket disconnect issue,defect_current,0.73,insufficient_evidence,0.19
+java360,socket.io-client-java,360,issue,closed,False,Getting error using websocket transport,defect_current,0.66,defect_fixed_or_obsolete,0.22
+java361,socket.io-client-java,361,issue,closed,False,Can this be used on Primus?,support_question,0.93,duplicate_invalid_spam,0.05
+java362,socket.io-client-java,362,issue,closed,False,how can i write server code?,support_question,0.99,duplicate_invalid_spam,0.01
+java363,socket.io-client-java,363,issue,closed,False,how can i create room,support_question,0.9400000000000001,duplicate_invalid_spam,0.03
+java364,socket.io-client-java,364,issue,closed,False,how to solve connect error,support_question,0.86,insufficient_evidence,0.09
+java365,socket.io-client-java,365,issue,closed,False,IO not resolvable using gradle,build_packaging_env,0.94,support_question,0.03
+java366,socket.io-client-java,366,issue,closed,False,"IO.opts missing settings for ""rejectUnauthorized""",feature_request,0.46,support_question,0.25
+java367,socket.io-client-java,367,issue,closed,False,ClassCastException: java.lang.Integer cannot be cast to io.socket.client.Ack,support_question,0.55,defect_current,0.36
+java368,socket.io-client-java,368,issue,closed,False,run on server side but not run android side,support_question,0.86,insufficient_evidence,0.12
+java369,socket.io-client-java,369,issue,closed,False,Error java.lang.NoClassDefFoundError: Failed resolution of: Lokhttp3/internal/Platform;,build_packaging_env,0.88,defect_current,0.04
+java370,socket.io-client-java,370,issue,closed,False,IllegalStateException: closed >> RealWebSocket.sendMessage(RealWebSocket.java:107),defect_fixed_or_obsolete,0.99,defect_current,0.01
+java371,socket.io-client-java,371,issue,closed,False,complex event name not working. eg: c86471fb-4df0-4fa4-bf92-a74a5101b665:CaptureBioData,support_question,0.71,defect_fixed_or_obsolete,0.25
+java372,socket.io-client-java,372,issue,closed,False,XHR Pull Error and custom namespaces,support_question,0.99,defect_fixed_or_obsolete,0.01
+java373,socket.io-client-java,373,issue,closed,False,Upgrade to okhttp 3.5.0 there is no ws dependency.,defect_fixed_or_obsolete,0.77,build_packaging_env,0.13
+java374,socket.io-client-java,374,issue,open,False,Can this library be used in Processing 3 ?,support_question,0.94,docs_gap,0.06
+java375,socket.io-client-java,375,issue,closed,False,Android - add listener after socket.connected,support_question,0.84,defect_current,0.1
+java376,socket.io-client-java,376,issue,open,False,socket.emit() from the client slows down all threads for 2 milliseconds,defect_current,1,build_packaging_env,0
+java377,socket.io-client-java,377,issue,closed,False,react native and socket.io-client 0.8.3,build_packaging_env,0.92,defect_fixed_or_obsolete,0.08
+java378,socket.io-client-java,378,issue,closed,False,android io.socket.engineio.client.EngineIOException: websocket error,support_question,0.88,defect_fixed_or_obsolete,0.09
+java379,socket.io-client-java,379,issue,closed,False," java.lang.NullPointerException: Attempt to invoke virtual method 'io.socket.emitter.Emitter io.socket.client.Socket.on(java.lang.String, io.socket.emitter.Emitter$Listener)' on a null object reference",support_question,0.84,defect_fixed_or_obsolete,0.16
+java380,socket.io-client-java,380,issue,closed,False,socket client did not complete upgrade - transport closed when using aws server,support_question,0.41000000000000003,defect_current,0.32
+java381,socket.io-client-java,381,issue,closed,False,socket listener off,support_question,0.93,defect_current,0.05
+java382,socket.io-client-java,382,issue,closed,False,Custom listeners not working,support_question,0.63,defect_fixed_or_obsolete,0.24
+java383,socket.io-client-java,383,issue,open,False,how can I send audio file from android client to node.js server when stream is not supported?,support_question,0.53,feature_request,0.44
+java384,socket.io-client-java,384,issue,closed,False,I can't use “ws://localhost:8080”,defect_fixed_or_obsolete,1,build_packaging_env,0
+java385,socket.io-client-java,385,issue,closed,False,Flawed package encoding and decoding,support_question,0.58,defect_fixed_or_obsolete,0.41
+java386,socket.io-client-java,386,issue,closed,False,Connection to the server successful but can not get an answer for emmit,support_question,0.78,defect_fixed_or_obsolete,0.12
+java387,socket.io-client-java,387,issue,closed,False,Nodejs - Android - socket.emit not working,support_question,0.85,defect_current,0.1
+java388,socket.io-client-java,388,issue,closed,False,How to contribute or create my own package?,support_question,0.76,build_packaging_env,0.15
+java389,socket.io-client-java,389,issue,closed,False,Conflict with okhttp3,build_packaging_env,0.9,defect_fixed_or_obsolete,0.09
+java390,socket.io-client-java,390,issue,closed,False,Some error on Transport,defect_current,0.53,insufficient_evidence,0.26
+java391,socket.io-client-java,391,issue,closed,False,Conflict with okHttp3,defect_fixed_or_obsolete,0.6,build_packaging_env,0.39
+java392,socket.io-client-java,392,issue,open,False,Android Memory Usage increase with every Socket.emit Call,defect_current,0.97,defect_fixed_or_obsolete,0.02
+java393,socket.io-client-java,393,issue,closed,False,forceWebsockets feature,feature_request,0.81,support_question,0.18
+java394,socket.io-client-java,394,issue,closed,False,How change query parameter (token) in Socket before connect,support_question,0.9,defect_fixed_or_obsolete,0.05
+java395,socket.io-client-java,395,issue,closed,False,Connect to a server running socket.io version 0.9.16,defect_fixed_or_obsolete,0.67,support_question,0.28
+java396,socket.io-client-java,396,issue,open,False,Problem with socket listeners when the internet connection is turned off / turned on,support_question,0.62,defect_current,0.18
+java397,socket.io-client-java,397,issue,closed,False,Connection problem ,support_question,0.63,insufficient_evidence,0.22
+java398,socket.io-client-java,398,issue,open,False,OutOfMemoryException,defect_current,0.88,defect_fixed_or_obsolete,0.12
+java399,socket.io-client-java,399,issue,open,False,engine:socket client did not complete upgrade - transport closed,defect_current,0.48,defect_fixed_or_obsolete,0.44
+java400,socket.io-client-java,400,issue,open,False,setSocket connection from BroadcastReceiver,support_question,0.95,docs_gap,0.04
+java401,socket.io-client-java,401,issue,closed,False,Identify socket from Emitter.Listener callback,support_question,0.55,feature_request,0.43
+java402,socket.io-client-java,402,issue,closed,False,Unable to connect on Https ,support_question,0.85,docs_gap,0.11
+java403,socket.io-client-java,403,issue,closed,False,on emit socket disconnect with transport error,defect_current,0.58,insufficient_evidence,0.22
+java404,socket.io-client-java,404,issue,closed,False,I want to check whether the user is online or not .,support_question,0.75,defect_fixed_or_obsolete,0.25
+java405,socket.io-client-java,405,issue,closed,False,About acknowledgement,insufficient_evidence,0.96,support_question,0.02
+java406,socket.io-client-java,406,issue,closed,False,Socket.IO Asynchronous Read/Write (Not Working),defect_current,0.49,support_question,0.29
+java407,socket.io-client-java,407,issue,closed,False,"send message in handler ""client error"" ?",defect_current,0.48,support_question,0.38
+java408,socket.io-client-java,408,issue,closed,False,No options for Origin-Header,feature_request,0.66,defect_fixed_or_obsolete,0.33
+java409,socket.io-client-java,409,pr,closed,False,Options for inject okhttp Call/WebSocket factory,pr_functional,0.69,duplicate_invalid_spam,0.17
+java410,socket.io-client-java,410,issue,closed,False,java.lang.NullPointerException: Attempt to invoke virtual method 'okio.BufferedSource okhttp3.ResponseBody.source()' on a null object reference,insufficient_evidence,0.5599999999999999,defect_current,0.32
+java411,socket.io-client-java,411,issue,closed,False,clear stack after connec to server,support_question,0.66,feature_request,0.33
+java412,socket.io-client-java,412,issue,open,False,Implementing mySocket.sendBuffer,feature_request,0.94,support_question,0.06
+java413,socket.io-client-java,413,issue,open,False,Timeout over 10000 ms not being handled properly (Android 7.1.1),defect_current,1,pr_non_functional,0
+java414,socket.io-client-java,414,issue,open,False,Client timeout also triggers Socket.EVENT_CONNECT_ERROR event (Android 7.1.1),defect_current,0.85,duplicate_invalid_spam,0.14
+java415,socket.io-client-java,415,issue,closed,False,Redundant Socket.EVENT_CONNECT_ERROR event being fired for connection timeout  (Android 7.1.1),duplicate_invalid_spam,0.4,defect_current,0.37
+java416,socket.io-client-java,416,issue,open,False,socket-io-client-java should support option changes after instantiation,feature_request,1,pr_non_functional,0
+java417,socket.io-client-java,417,issue,closed,False,How do I know in Application connecting socket?,support_question,0.99,docs_gap,0.01
+java418,socket.io-client-java,418,issue,open,False,RejectedExecutionException,defect_current,0.91,support_question,0.09
+java419,socket.io-client-java,419,issue,open,False,Issue 3g and 4g connections,support_question,0.99,defect_current,0.01
+java420,socket.io-client-java,420,issue,closed,False,Problem using transport,defect_fixed_or_obsolete,0.58,support_question,0.37
+java421,socket.io-client-java,421,issue,closed,False,v2.0 support?,support_question,0.72,defect_fixed_or_obsolete,0.17
+java422,socket.io-client-java,422,issue,closed,False,Question: Sending compressed data in an Array from Nodejs to Java,support_question,0.91,defect_fixed_or_obsolete,0.08
+java423,socket.io-client-java,423,pr,closed,True,Add condition to log only if fine level is loggable,pr_functional,0.79,defect_fixed_or_obsolete,0.18
+java424,socket.io-client-java,424,issue,closed,False,OkHTTP3 + SocketIO: Socket connects and emits but is not listening to custom events,support_question,0.83,defect_fixed_or_obsolete,0.17
+java425,socket.io-client-java,425,issue,open,False,java.lang.IllegalStateException:    at com.google.android.gms.org.conscrypt.OpenSSLContextImpl.engineGetSocketFactory(OpenSSLContextImpl.java:0),defect_current,0.92,insufficient_evidence,0.04
+java426,socket.io-client-java,426,issue,closed,False,Task threw exception - java.lang.InstantiationError When listening for events on Socket,defect_fixed_or_obsolete,0.65,defect_current,0.2
+java427,socket.io-client-java,427,issue,closed,False,Session ID unknown?,support_question,0.96,docs_gap,0.02
+java428,socket.io-client-java,428,issue,closed,False,Room Question,support_question,1,pr_non_functional,0
+java429,socket.io-client-java,429,issue,closed,False,I can't use Socket.setDefaultOkHttpWebSocketFactory(XXX),defect_fixed_or_obsolete,0.43,support_question,0.37
+java430,socket.io-client-java,430,issue,closed,False,Unicode decode error for Non-English characters,defect_fixed_or_obsolete,0.53,defect_current,0.44
+java431,socket.io-client-java,431,issue,closed,False,socket.emit() no working in android,support_question,0.87,defect_fixed_or_obsolete,0.06
+java432,socket.io-client-java,432,issue,closed,False,Is this project still maintained?,support_question,0.93,insufficient_evidence,0.03
+java433,socket.io-client-java,433,issue,open,False,Fatal Exception: java.lang.InternalError: Thread starting during runtime shutdown,defect_current,0.98,defect_fixed_or_obsolete,0.02
+java434,socket.io-client-java,434,issue,closed,False,How to update options's query before socket reconnect?,support_question,1,defect_current,0
+java435,socket.io-client-java,435,issue,closed,False,Battery drain issue,support_question,0.89,docs_gap,0.1
+java436,socket.io-client-java,436,pr,closed,True,make compatible with socket.io-client 1.7.4 (node client),pr_functional,0.8,defect_fixed_or_obsolete,0.18
+java437,socket.io-client-java,437,issue,closed,False,How to get progress update when emit,feature_request,0.9400000000000001,support_question,0.06
+java438,socket.io-client-java,438,pr,closed,True,Updated README.md,pr_non_functional,1,defect_current,0
+java439,socket.io-client-java,439,pr,closed,True,Make compatible with Socket.IO v2,pr_functional,0.87,defect_fixed_or_obsolete,0.13
+java440,socket.io-client-java,440,issue,closed,False,Compatibility of socket.io-client-java with socket.io-client on server,support_question,0.6,defect_fixed_or_obsolete,0.35
+java441,socket.io-client-java,441,issue,closed,False,Crash on wifi connecting but not connected,defect_current,0.81,defect_fixed_or_obsolete,0.15
+java442,socket.io-client-java,442,issue,closed,False,How to set header in event transport ,support_question,1,defect_current,0
+java443,socket.io-client-java,443,issue,closed,False,How to send extraheaders as options parameter?,support_question,0.88,defect_fixed_or_obsolete,0.08
+java444,socket.io-client-java,444,issue,closed,False,Hey Just a suggestion,duplicate_invalid_spam,0.89,feature_request,0.11
+java445,socket.io-client-java,445,issue,closed,False,版本不协调导致的问题,defect_fixed_or_obsolete,1,duplicate_invalid_spam,0
+java446,socket.io-client-java,446,issue,open,False,Possible Ack leak,defect_current,0.89,defect_fixed_or_obsolete,0.09
+java447,socket.io-client-java,447,issue,closed,False,How to Reconnect to Socket Server ?,support_question,0.95,defect_fixed_or_obsolete,0.03
+java448,socket.io-client-java,448,issue,closed,False,1,insufficient_evidence,0.94,duplicate_invalid_spam,0.06
+java449,socket.io-client-java,449,issue,open,False,Emoji's are not working,defect_current,0.86,support_question,0.09
+java450,socket.io-client-java,450,issue,closed,False,Download source code for GWT,build_packaging_env,0.57,support_question,0.32
+java451,socket.io-client-java,451,issue,closed,False,Socket.IO - Hibernate mode,defect_current,0.6,support_question,0.23
+java452,socket.io-client-java,452,issue,closed,False,java.lang.NoSuchFieldError: No instance field sslContext of type Ljavax/net/ssl/SSLContext; in class Lio/socket/client/Manager$Options,insufficient_evidence,0.52,defect_fixed_or_obsolete,0.23
+java453,socket.io-client-java,453,issue,closed,False,strange exception ,defect_fixed_or_obsolete,0.6,defect_current,0.18000000000000002
+java454,socket.io-client-java,454,issue,closed,False,Is socket.io-client-java(version 1.0.0) compatible with socket.io 2.0 and later?,support_question,0.92,defect_fixed_or_obsolete,0.07
+java455,socket.io-client-java,455,issue,closed,False,Android Socket io multiple event,support_question,0.64,defect_fixed_or_obsolete,0.22
+java456,socket.io-client-java,456,issue,open,False,Can't reconnect after internet connection restablished in current version,defect_current,0.93,defect_fixed_or_obsolete,0.07
+java457,socket.io-client-java,457,issue,closed,False,How to send message with multi listener,support_question,1,pr_non_functional,0
+java458,socket.io-client-java,458,issue,closed,False,"Android 6.0 cannot connect to socket.io server, returning ""xhl poll error""",support_question,0.71,defect_current,0.12
+java459,socket.io-client-java,459,issue,closed,False,Emitter.Listener sometime don't download all messages chat,defect_current,0.74,support_question,0.11
+java460,socket.io-client-java,460,issue,closed,False,Library seems not to allow simultanous connections of more than around 5,support_question,0.47,docs_gap,0.42
+java461,socket.io-client-java,461,issue,closed,False,Close Threads poll,support_question,0.87,docs_gap,0.12
+java462,socket.io-client-java,462,issue,closed,False,Connecting to flask-socketio with authentication,support_question,1,pr_non_functional,0
+java463,socket.io-client-java,463,issue,closed,False,XHR Poll error ,support_question,0.53,docs_gap,0.24
+java464,socket.io-client-java,464,issue,open,False,Disconnection issue,defect_fixed_or_obsolete,0.92,defect_current,0.08
+java465,socket.io-client-java,465,issue,closed,False,net::ERR_INSECURE_RESPONSE,support_question,0.8,defect_fixed_or_obsolete,0.1
+java466,socket.io-client-java,466,issue,closed,False,Socket.io-client - Streaming from server.,support_question,0.94,docs_gap,0.03
+java467,socket.io-client-java,467,issue,closed,False,SocketIO-client not responding on https,support_question,0.71,defect_fixed_or_obsolete,0.15
+java468,socket.io-client-java,468,issue,closed,False,AWS App Load balancer Cookie-based sticky sessions,support_question,0.67,defect_fixed_or_obsolete,0.25
+java469,socket.io-client-java,469,issue,closed,False,unable to emit ,support_question,0.8,insufficient_evidence,0.09
+java470,socket.io-client-java,470,issue,closed,False,arabic not work in v 1.0.0 but work fine in v 0.8.3,docs_gap,0.32,insufficient_evidence,0.27
+java471,socket.io-client-java,471,issue,open,False,Exception java.lang.StringIndexOutOfBoundsException: length=1; index=48,defect_current,0.99,defect_fixed_or_obsolete,0.01
+java472,socket.io-client-java,472,issue,closed,False,Joining multiple namespaces on a single client instance.,support_question,0.37,feature_request,0.31
+java473,socket.io-client-java,473,issue,closed,False,Fatal Exception: java.lang.ArrayIndexOutOfBoundsException,build_packaging_env,0.45,defect_fixed_or_obsolete,0.33
+java474,socket.io-client-java,474,issue,open,False,Stop reconnection,support_question,0.88,defect_current,0.1
+java475,socket.io-client-java,475,issue,closed,False,"No ""Socket.onAny(Event)"" function in Java",feature_request,0.85,defect_fixed_or_obsolete,0.14
+java476,socket.io-client-java,476,issue,open,False,Socket is not reconnecting,defect_current,0.65,support_question,0.34
+java477,socket.io-client-java,477,issue,closed,False,StopIteration error on connection [Wrong Place],duplicate_invalid_spam,1,support_question,0
+java478,socket.io-client-java,478,pr,closed,False,Update Uri.java,duplicate_invalid_spam,0.79,pr_functional,0.17
+java479,socket.io-client-java,479,issue,closed,False,Using Whisper in Socket IO Android,support_question,0.8200000000000001,feature_request,0.18
+java480,socket.io-client-java,480,issue,open,False,Disconnecting Issue on new version (V1.0),defect_current,0.78,defect_fixed_or_obsolete,0.17
+java481,socket.io-client-java,481,issue,closed,False,no able to connect from a cross origin client,insufficient_evidence,0.79,support_question,0.15
+java482,socket.io-client-java,482,pr,closed,False,Update Uri.java,duplicate_invalid_spam,0.87,pr_functional,0.08
+java483,socket.io-client-java,483,pr,closed,False,Uri.java,duplicate_invalid_spam,0.85,pr_functional,0.1
+java484,socket.io-client-java,484,pr,closed,False,Update Uri.java,defect_fixed_or_obsolete,0.6,pr_functional,0.37
+java485,socket.io-client-java,485,issue,open,False,android socket.io native heap leak,defect_current,0.92,defect_fixed_or_obsolete,0.06
+java486,socket.io-client-java,486,issue,closed,False,Android Client doesnt receive broadcast.emit message from node server,support_question,0.75,insufficient_evidence,0.14
+java487,socket.io-client-java,487,issue,closed,False,Bug in SDK10!,defect_fixed_or_obsolete,0.83,build_packaging_env,0.11
+java488,socket.io-client-java,488,issue,closed,False,Not Found socket.io 0.8.3!,build_packaging_env,0.36,docs_gap,0.27
+java489,socket.io-client-java,489,issue,closed,False,i cant send message to the server and data not receving?,support_question,0.83,defect_fixed_or_obsolete,0.1
+java490,socket.io-client-java,490,issue,closed,False,"Expected 'Connection' header value 'Upgrade' but was '""null""",defect_current,0.64,support_question,0.19
+java491,socket.io-client-java,491,issue,open,False,android socketio aways disconnect transport error,support_question,0.74,defect_current,0.17
+java492,socket.io-client-java,492,issue,closed,False,RxJava,support_question,0.97,feature_request,0.02
+java493,socket.io-client-java,493,issue,open,False,SocketIO ThreadPoolExecuter error while unit-testing,defect_current,0.38,support_question,0.26
+java494,socket.io-client-java,494,issue,closed,False,Kotlin Socket.io not connecting,support_question,0.97,defect_fixed_or_obsolete,0.02
+java495,socket.io-client-java,495,issue,closed,False,JWT Authorization Error Handling,support_question,0.99,docs_gap,0.01
+java496,socket.io-client-java,496,issue,closed,False,Battery saving practices,support_question,1,feature_request,0
+java497,socket.io-client-java,497,issue,open,False,send file,support_question,0.96,feature_request,0.04
+java498,socket.io-client-java,498,issue,closed,False,can't configure logging framework,feature_request,0.49,docs_gap,0.42
+java499,socket.io-client-java,499,issue,closed,False,de-couple json framework from the client,duplicate_invalid_spam,0.92,feature_request,0.08
+java500,socket.io-client-java,500,issue,closed,False,Can't work at socket.io 2.0 server???,defect_fixed_or_obsolete,0.67,support_question,0.26
+java501,socket.io-client-java,501,issue,closed,False,Doze mode,support_question,0.61,docs_gap,0.39
+java502,socket.io-client-java,502,issue,closed,False,How to check if the node js server is running ?,support_question,1,feature_request,0
+java503,socket.io-client-java,503,issue,closed,False, not working with AWS sticky session,support_question,0.72,docs_gap,0.19
+java504,socket.io-client-java,504,issue,closed,False,Suggest me good practices for keep socket-io connected in Android oreo ,support_question,0.96,docs_gap,0.04
+java505,socket.io-client-java,505,issue,closed,False,NullPointerException (io.socket.client.Socket.onevent(Unknown Source)),defect_fixed_or_obsolete,0.56,defect_current,0.44
+java506,socket.io-client-java,506,issue,closed,False,"extraHeaders, forceWebsockets and connectParams in java client",feature_request,0.6900000000000001,defect_fixed_or_obsolete,0.21
+java507,socket.io-client-java,507,issue,closed,False,Cannot Read data from the server,support_question,0.96,defect_fixed_or_obsolete,0.02
+java508,socket.io-client-java,508,issue,closed,False,Crash socket-io-client,defect_fixed_or_obsolete,0.99,defect_current,0.01
+java509,socket.io-client-java,509,issue,closed,False,Socket java client disconnects and connects repeatedly,support_question,0.9,defect_fixed_or_obsolete,0.08
+java510,socket.io-client-java,510,issue,open,False,cache messages to be sent after device goes online,support_question,0.85,feature_request,0.12
+java511,socket.io-client-java,511,issue,open,False,Socket io is randomly corrupting the data in other font ,defect_current,0.9,insufficient_evidence,0.05
+java512,socket.io-client-java,512,issue,closed,False,Catching the raw data to make socket connection persistent,feature_request,0.39,support_question,0.35
+java513,socket.io-client-java,513,issue,open,False,Cant send query string ,support_question,0.52,defect_current,0.47
+java514,socket.io-client-java,514,issue,closed,False,Socket disconnecting with transport error in android,support_question,0.5,defect_current,0.33
+java515,socket.io-client-java,515,issue,open,False,cannot send large buffers,defect_current,0.99,insufficient_evidence,0.01
+java516,socket.io-client-java,516,issue,closed,False,Cannot use HTTPS with websocket only transport,docs_gap,0.62,support_question,0.32
+java517,socket.io-client-java,517,pr,closed,False,Emit with timeout,pr_functional,0.56,feature_request,0.43
+java518,socket.io-client-java,518,pr,open,False,update maven plugins versions and fix javadoc-plugin to work with jdk10,build_packaging_env,0.51,pr_non_functional,0.49
+java519,socket.io-client-java,519,issue,closed,False,Socket auto send storage message,defect_fixed_or_obsolete,0.47,support_question,0.27
+java520,socket.io-client-java,520,issue,closed,False,Can't add extra headers like it is implemented on js or swift,defect_fixed_or_obsolete,0.73,feature_request,0.26
+java521,socket.io-client-java,521,issue,closed,False,Always getting 401~BADFORMAT exception,support_question,0.81,defect_fixed_or_obsolete,0.15
+java522,socket.io-client-java,522,issue,closed,False,Getting too many ClassCastException logs,defect_current,0.67,insufficient_evidence,0.2
+java523,socket.io-client-java,523,issue,open,False,socket.io disconnected after 7 minutes.,support_question,0.56,defect_fixed_or_obsolete,0.34
+java524,socket.io-client-java,524,issue,closed,False,unable to implement sticket sessions with aws load balancer ,support_question,0.87,docs_gap,0.12
+java525,socket.io-client-java,525,issue,closed,False,Fatal Exception: java.lang.ClassCastException android.system.UnixSocketAddress cannot be cast to java.net.InetSocketAddress,defect_fixed_or_obsolete,1,defect_current,0
+java526,socket.io-client-java,526,issue,closed,False, onError: io.socket.engineio.client.EngineIOException: xhr post error,support_question,0.7,insufficient_evidence,0.11
+java527,socket.io-client-java,527,issue,closed,False,'void io.github.sac.Socket$Channel.publish(java.lang.Object)' on a null object reference,insufficient_evidence,0.65,defect_current,0.17
+java528,socket.io-client-java,528,issue,closed,False,Connect is OK | Authentification is OK | But cookie seems to make fail create the room.,support_question,0.93,docs_gap,0.05
+java529,socket.io-client-java,529,issue,closed,False,Add the ability to set Options without recreating socket object,feature_request,0.68,defect_fixed_or_obsolete,0.18
+java530,socket.io-client-java,530,issue,closed,False,Manager.EVENT_TRANSPORT doesn't work,defect_current,0.38,support_question,0.35
+java531,socket.io-client-java,531,issue,closed,False,Copyright statement missing,docs_gap,0.42,defect_fixed_or_obsolete,0.3
+java532,socket.io-client-java,532,issue,closed,False,Cannot connect socketio and always get errors,build_packaging_env,0.94,defect_fixed_or_obsolete,0.05
+java533,socket.io-client-java,533,issue,closed,False,Socket can not handle more than one transport type,defect_current,0.8,support_question,0.14
+java534,socket.io-client-java,534,issue,closed,False,Is there any socket.io-java for server side?,support_question,0.97,docs_gap,0.01
+java535,socket.io-client-java,535,issue,closed,False,connect socket.io android client through a reverse proxy server to socket server,support_question,0.98,defect_fixed_or_obsolete,0.02
+java536,socket.io-client-java,536,issue,closed,False,Sent data to server always as Array,feature_request,0.42,support_question,0.28
+java537,socket.io-client-java,537,issue,open,False,subscribe to channel ,support_question,0.98,feature_request,0.01
+java538,socket.io-client-java,538,issue,closed,False,Unable to use Transport Header,support_question,0.66,defect_fixed_or_obsolete,0.29
+java539,socket.io-client-java,539,issue,open,False,RejectedExecutionException after sleep in okhttp3.internal.ws.RealWebSocket.connect,defect_current,0.93,defect_fixed_or_obsolete,0.05
+java540,socket.io-client-java,540,pr,closed,True,Fix broken link in README,pr_non_functional,1,defect_current,0
+java541,socket.io-client-java,541,pr,closed,False,add timeout,pr_functional,0.81,feature_request,0.09
+java542,socket.io-client-java,542,issue,closed,False,CloudFront blocks my socket io requests from Android app,support_question,0.87,insufficient_evidence,0.11
+java543,socket.io-client-java,543,issue,closed,False,(HTTPLog)-Static: isSBSettingEnabled false Makes com.github.nkzawa.socketio.client.Socket Unable to Emit Successfully,defect_fixed_or_obsolete,0.38,defect_current,0.31
+java544,socket.io-client-java,544,issue,closed,False,Emitter.Listener not found,support_question,0.89,docs_gap,0.06
+java545,socket.io-client-java,545,issue,open,False,Question: How to import as module?,support_question,0.81,build_packaging_env,0.12
+java546,socket.io-client-java,546,issue,closed,False,Conflict with Retrofit,defect_current,0.42,support_question,0.31
+java547,socket.io-client-java,547,issue,closed,False,OkHttp Threads hang after disconnect ,support_question,0.66,docs_gap,0.22
+java548,socket.io-client-java,548,issue,closed,False,Socket IO Android Client Not Working In Android 8.0 Oreo Above,support_question,0.93,docs_gap,0.06
+java549,socket.io-client-java,549,issue,closed,False,Sockets get connect disconnect on every 10 seconds. ,support_question,0.86,defect_fixed_or_obsolete,0.1
+java550,socket.io-client-java,550,issue,closed,False,Upload and download size are the same,support_question,0.93,defect_current,0.05
+java551,socket.io-client-java,551,issue,closed,False,ClassException: java.lang.ClassCastException: com.github.nkzawa.socketio.client.Socket$7 ,support_question,0.54,defect_fixed_or_obsolete,0.15
+java552,socket.io-client-java,552,issue,closed,False,Connect to a server with a specific ip and port,support_question,1,duplicate_invalid_spam,0
+java553,socket.io-client-java,553,issue,closed,False,Is this project discontinued ?,support_question,0.94,insufficient_evidence,0.04
+java554,socket.io-client-java,554,issue,closed,False,Not working on Android 8.0+ due to SELinux issues,support_question,0.79,docs_gap,0.18
+java555,socket.io-client-java,555,issue,closed,False,"Exception while connecting ""java.net.MalformedURLException: unknown protocol: wss""",defect_fixed_or_obsolete,0.97,support_question,0.03
+java556,socket.io-client-java,556,issue,closed,False,new connection problem,support_question,0.95,defect_current,0.04
+java557,socket.io-client-java,557,issue,closed,False,Version,support_question,0.97,docs_gap,0.03
+java558,socket.io-client-java,558,issue,closed,False,The requested item could not be loaded on Android 9,support_question,0.3,defect_fixed_or_obsolete,0.27
+java559,socket.io-client-java,559,issue,closed,False,Emitter is called multiple times,defect_current,0.83,insufficient_evidence,0.16
+java560,socket.io-client-java,560,issue,closed,False,"Socket IO wont connect on Oreo, even when my background service is running",support_question,0.68,docs_gap,0.32
+java561,socket.io-client-java,561,issue,closed,False,Invalid namespace,defect_fixed_or_obsolete,0.59,support_question,0.32
+java562,socket.io-client-java,562,issue,closed,False,io.socket.engineio.client.EngineIOException: server error,support_question,0.48,defect_fixed_or_obsolete,0.47
+java563,socket.io-client-java,563,issue,closed,False,Error: websocket error,support_question,0.96,defect_fixed_or_obsolete,0.03
+java564,socket.io-client-java,564,issue,closed,False,java.io.IOException: 400,support_question,0.69,feature_request,0.12
+java565,socket.io-client-java,565,issue,open,False,how to send image? and how to server receive the image?,support_question,0.99,docs_gap,0.01
+java566,socket.io-client-java,566,issue,closed,False,Caused by: javax.net.ssl.SSLHandshakeException: java,insufficient_evidence,0.97,defect_current,0.02
+java567,socket.io-client-java,567,issue,closed,False,Sending a String Ack which looks like a JSON is stringified,defect_current,0.64,support_question,0.25
+java568,socket.io-client-java,568,issue,closed,False,Please help me out asap . java.lang.NullPointerException: ,defect_fixed_or_obsolete,0.7,defect_current,0.21
+java569,socket.io-client-java,569,issue,closed,False,Add Window level ( change contrast / Brightness of view )effect on image (JPEG) in flutter development,duplicate_invalid_spam,0.91,support_question,0.05
+java570,socket.io-client-java,570,issue,closed,False,Please don't give up!,duplicate_invalid_spam,0.34,support_question,0.29
+java571,socket.io-client-java,571,issue,closed,False,连接时怎么选择NameSpace,support_question,0.83,defect_current,0.12
+java572,socket.io-client-java,572,issue,closed,False,Use websocket only on android,support_question,0.99,docs_gap,0.01
+java573,socket.io-client-java,573,issue,closed,False,ca parameters on ack.call(),support_question,0.96,docs_gap,0.04
+java574,socket.io-client-java,574,issue,closed,False,Issues with AWS Load balancing and sticky sessions,support_question,0.94,docs_gap,0.06
+java575,socket.io-client-java,575,issue,open,False,"When the phone is in standby, the socket io will be disconnected from the service and cannot be reconnected in the background. The service is alive and can access the normal network, but the socket io cannot establish a connection with the server.",defect_current,0.58,support_question,0.4
+java576,socket.io-client-java,576,issue,closed,False,Don't process socket.connect() if already reconnecting,defect_current,0.66,pr_functional,0.21000000000000002
+java577,socket.io-client-java,577,pr,closed,True,Don't process socket.connect() if we are already re-connecting.,pr_functional,0.81,defect_fixed_or_obsolete,0.17
+java578,socket.io-client-java,578,issue,closed,False,problem with com.github.nkzawa.emitter.Emitter,build_packaging_env,0.51,defect_fixed_or_obsolete,0.48
+java579,socket.io-client-java,579,issue,closed,False,"做socket链接的时候,只能链接5个",support_question,0.98,docs_gap,0.01
+java580,socket.io-client-java,580,issue,open,False,TextView.setText() giving an error about thread in socket.io java client,support_question,0.99,defect_current,0.01
+java581,socket.io-client-java,581,issue,closed,False,How to add Headers  when connect Socket Server?,support_question,0.98,defect_fixed_or_obsolete,0.02
+java582,socket.io-client-java,582,issue,closed,False,xhr poll error or websocket error solution in android9,support_question,0.7,build_packaging_env,0.16
+java583,socket.io-client-java,583,issue,closed,False,all sockets of mine 's socket.id are the same one,insufficient_evidence,0.54,support_question,0.28
+java584,socket.io-client-java,584,issue,closed,False,is it possible to transfer custom object instead of json object?,insufficient_evidence,0.54,support_question,0.26
+java585,socket.io-client-java,585,issue,open,False,Socket reuse,support_question,1,feature_request,0
+java586,socket.io-client-java,586,pr,closed,True,Add Import hints to readme,pr_non_functional,0.99,docs_gap,0.01
+java587,socket.io-client-java,587,issue,closed,False,Confusing README.md,docs_gap,0.98,defect_fixed_or_obsolete,0.02
+java588,socket.io-client-java,588,issue,closed,False,I am using this socket io library in my project but i dont know where and how this crash on my app?,defect_fixed_or_obsolete,0.88,build_packaging_env,0.07
+java589,socket.io-client-java,589,issue,closed,False,Variable length of args.length ,support_question,0.75,defect_current,0.21
+java590,socket.io-client-java,590,issue,closed,False,threw an exception for android,build_packaging_env,0.68,defect_fixed_or_obsolete,0.13
+java591,socket.io-client-java,591,issue,closed,False,Is this plugin still active?,support_question,0.81,insufficient_evidence,0.09
+java592,socket.io-client-java,592,issue,closed,False,"Multiple events will be queued, how to solve",support_question,0.69,defect_current,0.15
+java593,socket.io-client-java,593,issue,open,False,OutOfMemoryError (Socket.java:492),defect_current,0.97,defect_fixed_or_obsolete,0.02
+java594,socket.io-client-java,594,issue,closed,False,java.lang.IllegalStateException: null (when connecting server with namespace),defect_fixed_or_obsolete,0.93,duplicate_invalid_spam,0.03
+java595,socket.io-client-java,595,issue,open,False,Great latence when doing performance test,support_question,0.66,feature_request,0.13
+java596,socket.io-client-java,596,issue,closed,False,Pass in namespace when the client connects，server error: `Error during data processing`,defect_fixed_or_obsolete,0.49,duplicate_invalid_spam,0.47
+java597,socket.io-client-java,597,issue,closed,False,set proxy ,support_question,0.93,defect_fixed_or_obsolete,0.06
+java598,socket.io-client-java,598,issue,closed,False,maven support?,support_question,0.54,docs_gap,0.3
+java599,socket.io-client-java,599,issue,closed,False,toString result from org.json is not reliable,defect_current,0.84,defect_fixed_or_obsolete,0.15
+java600,socket.io-client-java,600,issue,closed,False,Can't receive data if data contain non-English characters,defect_fixed_or_obsolete,0.76,support_question,0.22
+java601,socket.io-client-java,601,issue,open,False,Socket getting disconnect after some time.,support_question,0.97,insufficient_evidence,0.01
+java602,socket.io-client-java,602,issue,closed,False,Did not emit after socket.io reconnect ?,insufficient_evidence,0.91,defect_current,0.08
+java603,socket.io-client-java,603,issue,closed,False,Sub directory can not connect，help me,support_question,0.78,defect_current,0.09
+java604,socket.io-client-java,604,issue,closed,False,"There is no ""on"" method in socket object",docs_gap,0.86,defect_fixed_or_obsolete,0.1
+java605,socket.io-client-java,605,issue,closed,False,ack.call( byte[] ); Can you support it? Thanks!,support_question,0.42,feature_request,0.32
+java606,socket.io-client-java,606,issue,closed,False,Cleartext HTTP traffic not permitted on android 9,support_question,0.59,docs_gap,0.39
+java607,socket.io-client-java,607,issue,open,False,Ktx support,feature_request,1,duplicate_invalid_spam,0
+java608,socket.io-client-java,608,issue,closed,False,Unknown protocol: ws,support_question,0.99,docs_gap,0.01
+java609,socket.io-client-java,609,issue,closed,False,java.lang.NullPointerException: Attempt to invoke virtual method 'int org.json.JSONArray.length()' on a null object reference,defect_fixed_or_obsolete,1,duplicate_invalid_spam,0
+java610,socket.io-client-java,610,issue,closed,False,Query encoding problem when receiving on server,support_question,0.99,defect_fixed_or_obsolete,0.01
+java611,socket.io-client-java,611,issue,open,False,kotlin.KotlinNullPointerException while using okhttp version 3.12.1,defect_fixed_or_obsolete,0.72,build_packaging_env,0.15
+java612,socket.io-client-java,612,issue,open,False,Kotlin: No connection between my server and my client when i try to connect,support_question,0.83,defect_fixed_or_obsolete,0.14
+java613,socket.io-client-java,613,pr,closed,False,Add headers to sending pockets,feature_request,0.52,pr_functional,0.28
+java614,socket.io-client-java,614,issue,open,False,socket.io connection timeout does not working,defect_current,0.93,support_question,0.06
+java615,socket.io-client-java,615,issue,closed,False,Cannot connect to socket-io flask server from my Android Application,support_question,0.61,docs_gap,0.22
+java616,socket.io-client-java,616,issue,closed,False,How to select channel in connection?,support_question,0.93,insufficient_evidence,0.03
+java617,socket.io-client-java,617,issue,closed,False,socket.emit and CountDownLatch,support_question,0.94,defect_current,0.05
+java618,socket.io-client-java,618,issue,closed,False,Disconnect problems when running more than 4 Java clients on same JVM,support_question,0.73,docs_gap,0.21
+java619,socket.io-client-java,619,issue,closed,False,"socket.io client can disconnect  immediatetly, it takes 2min to disconenct",duplicate_invalid_spam,0.81,insufficient_evidence,0.15
+java620,socket.io-client-java,620,issue,closed,False,data loss,defect_current,0.65,insufficient_evidence,0.27
+java621,socket.io-client-java,621,issue,closed,False,java.net.URISyntaxException: Illegal character in scheme name at index 0: 10.0.0.42:65432,support_question,0.99,docs_gap,0.01
+java622,socket.io-client-java,622,issue,open,False,"""io.socket.client.SocketIOException: timeout"" (goes away after jvm restart)",defect_current,0.96,support_question,0.03
+java623,socket.io-client-java,623,issue,closed,False,解决了,insufficient_evidence,0.73,duplicate_invalid_spam,0.27
+java624,socket.io-client-java,624,issue,closed,False,Disconnect - transport error,support_question,0.89,defect_fixed_or_obsolete,0.06
+java625,socket.io-client-java,625,issue,closed,False,Connection not established,support_question,0.54,defect_fixed_or_obsolete,0.37
+java626,socket.io-client-java,626,issue,closed,False,[Android] .so file is not found when trying to use the socket.io-client library in Android app,duplicate_invalid_spam,0.85,build_packaging_env,0.13
+java627,socket.io-client-java,627,pr,closed,True,docs: readme should state socket.io 2.x support,pr_non_functional,0.84,docs_gap,0.16
+java628,socket.io-client-java,628,issue,open,False,This framework is not designed for multi-thread java application?,feature_request,0.57,support_question,0.23
+java629,socket.io-client-java,629,issue,closed,False,OkHttp Dispatcher java.lang.NoSuchMethodError: No virtual method callEngineGetConnection,defect_fixed_or_obsolete,0.76,build_packaging_env,0.24
+java630,socket.io-client-java,630,issue,closed,False,how to change query parameter in socket?,defect_fixed_or_obsolete,0.55,support_question,0.28
+java631,socket.io-client-java,631,issue,closed,False,How to emit multiple arguments in a single emit?,support_question,0.98,defect_fixed_or_obsolete,0.01
+java632,socket.io-client-java,632,issue,closed,False,Client close with reason ping timeout,defect_fixed_or_obsolete,0.86,support_question,0.13
+java633,socket.io-client-java,633,issue,closed,False,"If you use node js and this library, this may help you",defect_fixed_or_obsolete,0.62,support_question,0.22
+java634,socket.io-client-java,634,issue,closed,False,Ping Timeout - socket.io-client-java no longer working with latest socket.IO,defect_fixed_or_obsolete,0.81,support_question,0.18
+java635,socket.io-client-java,635,issue,closed,False,Special characters in query,support_question,0.78,defect_fixed_or_obsolete,0.21
+java636,socket.io-client-java,636,issue,closed,False,Repository supporting and development,support_question,0.98,insufficient_evidence,0.01
+java637,socket.io-client-java,637,issue,closed,False,Connecting in Java to a Javascript server,support_question,0.96,defect_fixed_or_obsolete,0.02
+java638,socket.io-client-java,638,issue,closed,False,Socket.io doesn't work when running in old Android device API 19,defect_fixed_or_obsolete,0.84,support_question,0.16
+java639,socket.io-client-java,639,pr,closed,True,Update Readme - socket.io 3.x support notice,pr_non_functional,0.97,docs_gap,0.03
+java640,socket.io-client-java,640,pr,closed,True,Update README.md,pr_non_functional,0.95,docs_gap,0.03
+java642,socket.io-client-java,642,issue,closed,False,Always Crash on Connect,defect_fixed_or_obsolete,1,defect_current,0
+java643,socket.io-client-java,643,issue,closed,False,Why some EVENTs are removed in v2?,support_question,0.8099999999999999,docs_gap,0.16
+java644,socket.io-client-java,644,issue,closed,False,Not Getting chat list When we send emoji,defect_fixed_or_obsolete,0.46,support_question,0.45
+java645,socket.io-client-java,645,issue,closed,False,"Constant ""xhr poll error"" when trying to establish a connection",defect_current,0.41,support_question,0.36
+java646,socket.io-client-java,646,issue,closed,False,Client v.2.0.0 doesn't authorize on socket.io server v.2,support_question,0.86,defect_fixed_or_obsolete,0.09
+java647,socket.io-client-java,647,issue,closed,False,Failed to connect - in android sample app,support_question,0.93,defect_fixed_or_obsolete,0.05
+java648,socket.io-client-java,648,issue,closed,False,Unable to connect android Kotlin with python-socketio,support_question,0.87,defect_fixed_or_obsolete,0.1
+java649,socket.io-client-java,649,issue,open,False,Document version 1.x.x,docs_gap,0.85,support_question,0.15
+java650,socket.io-client-java,650,issue,closed,False,java.net.MalformedURLException: unknown protocol: wss,defect_fixed_or_obsolete,1,insufficient_evidence,0
+java651,socket.io-client-java,651,issue,closed,False,It connect to server but cannot send or receive data,defect_fixed_or_obsolete,0.76,support_question,0.18
+java652,socket.io-client-java,652,issue,closed,False,Recconnect event never fired,support_question,0.61,defect_fixed_or_obsolete,0.34
+java653,socket.io-client-java,653,issue,closed,False,Android connection error (io.socket.engineio.client.EngineIOException: xhr poll),support_question,0.83,defect_current,0.1
+java654,socket.io-client-java,654,issue,open,False,How to use a socket offline?,support_question,1,defect_fixed_or_obsolete,0
+java655,socket.io-client-java,655,issue,open,False,use EVENT_CONNECTING in v2,support_question,0.97,feature_request,0.02
+java656,socket.io-client-java,656,issue,open,False,Can I set Socket.id during connection If i remember previous socket id returned by server?,support_question,0.92,feature_request,0.08
+java657,socket.io-client-java,657,issue,closed,False,io.socket.engineio.client.EngineIOException: server error,support_question,0.61,defect_fixed_or_obsolete,0.34
+java658,socket.io-client-java,658,issue,closed,False,Socket.IO server in v2.x with a v3.x client,support_question,0.72,docs_gap,0.13
+java659,socket.io-client-java,659,issue,closed,False,"Please help me, Socket not connecting to server",support_question,0.99,defect_fixed_or_obsolete,0.01
+java660,socket.io-client-java,660,issue,closed,False,Is it possible to connect to a server that does not have the websocket transport?,defect_fixed_or_obsolete,0.36,support_question,0.35
+java661,socket.io-client-java,661,issue,closed,False,How to customize the default URL(/socket.io/?EIO=...) in client and server?,support_question,1,defect_fixed_or_obsolete,0
+java662,socket.io-client-java,662,issue,closed,False,Connection error,support_question,0.63,insufficient_evidence,0.22
+java663,socket.io-client-java,663,issue,closed,False,Having emit issues,support_question,0.89,defect_current,0.08
+java664,socket.io-client-java,664,issue,closed,False,why not merge this PR #517 ?,pr_functional,0.54,feature_request,0.42
+java665,socket.io-client-java,665,issue,closed,False,EngineIOException: websocket error,support_question,0.85,defect_fixed_or_obsolete,0.13
+java666,socket.io-client-java,666,issue,closed,False,Connection handshake is not completed,support_question,0.91,defect_fixed_or_obsolete,0.05
+java667,socket.io-client-java,667,issue,closed,False,Problem with importing jars,build_packaging_env,0.8,support_question,0.2
+java668,socket.io-client-java,668,issue,open,False,java.util.concurrent.ConcurrentLinkedQueue$Node cannot be cast to java.util.concurrent.ConcurrentHashMap$Node,defect_current,0.6,defect_fixed_or_obsolete,0.4
+java669,socket.io-client-java,669,issue,open,False,Java 6,support_question,0.66,defect_fixed_or_obsolete,0.3
+java670,socket.io-client-java,670,issue,closed,False,I have problem for receiving events,support_question,1,defect_current,0
+java671,socket.io-client-java,671,issue,closed,False,Can't receive emit from server,support_question,0.98,defect_current,0.01
+java672,socket.io-client-java,672,issue,open,False,when the internet connection is turned off / turned on,defect_current,0.6799999999999999,support_question,0.29
+java673,socket.io-client-java,673,issue,open,False,Docmentation for v1,docs_gap,0.92,support_question,0.05
+java674,socket.io-client-java,674,issue,closed,False,Calling the IO.Options.builder() kill the current thread,insufficient_evidence,0.58,support_question,0.28
+java675,socket.io-client-java,675,issue,closed,False,How to select a netty-socketio version?,support_question,0.99,build_packaging_env,0.01
+java676,socket.io-client-java,676,issue,closed,False,Spring Boot socket-io-client v1 does not emit to the socket.io server with ssl,support_question,0.66,defect_fixed_or_obsolete,0.31
+java677,socket.io-client-java,677,pr,open,False,Change `ParsedURI` visibility to public,pr_functional,0.52,feature_request,0.45
+java678,socket.io-client-java,678,issue,closed,False,Socket.io Server Url For Testing,support_question,1,defect_fixed_or_obsolete,0
+java679,socket.io-client-java,679,issue,open,False,compile issues,build_packaging_env,0.9,insufficient_evidence,0.1
+java680,socket.io-client-java,680,issue,open,False,Do you know any v3 or higher server?,support_question,0.97,duplicate_invalid_spam,0.03
+java681,socket.io-client-java,681,pr,closed,False,update to 2.0.1,pr_functional,0.52,pr_non_functional,0.37
+java682,socket.io-client-java,682,issue,open,False,EngineIOException: websocket error,support_question,0.93,defect_current,0.07
+java683,socket.io-client-java,683,issue,closed,False,unable to connect with netty-socketio,defect_fixed_or_obsolete,0.56,support_question,0.4
+java684,socket.io-client-java,684,pr,closed,False,compile to implementation,pr_non_functional,0.83,build_packaging_env,0.11
+java685,socket.io-client-java,685,issue,open,False,[Crash] I have a crash in EventThread when using R8,build_packaging_env,0.85,defect_fixed_or_obsolete,0.11
+java686,socket.io-client-java,686,issue,open,False,Socket not listen in random cases,support_question,0.64,defect_current,0.18
+java687,socket.io-client-java,687,issue,closed,False,io.socket.engineio.client.EngineIOException: server error,support_question,0.8,defect_fixed_or_obsolete,0.13
+java688,socket.io-client-java,688,issue,closed,False,cant set HandShake message,defect_fixed_or_obsolete,0.56,support_question,0.33
+java689,socket.io-client-java,689,issue,open,False,How to get multiple parameters in server response.,support_question,0.87,defect_current,0.11
+java690,socket.io-client-java,690,issue,closed,False,IncompatibleClassChangeError when consuming response from server v4,defect_current,0.7,defect_fixed_or_obsolete,0.21
+java691,socket.io-client-java,691,issue,open,False,okio.AsyncTimeout Caused by java.lang.IllegalStateException Unbalanced enter/exit,defect_current,0.58,defect_fixed_or_obsolete,0.27
+java692,socket.io-client-java,692,issue,closed,False,Whether to support Android 11?,docs_gap,0.75,support_question,0.21
+java693,socket.io-client-java,693,issue,closed,False,Events callbacks,docs_gap,0.91,feature_request,0.07
+java694,socket.io-client-java,694,issue,closed,False,Is there a version compatibility,support_question,0.61,docs_gap,0.38
+java695,socket.io-client-java,695,pr,closed,True,fix: fix emitting of events received during connection establishment,pr_functional,0.66,defect_fixed_or_obsolete,0.3
+java696,socket.io-client-java,696,issue,closed,False,The listener cannot be removed by calling the `off('EVENT')` method,defect_current,0.86,insufficient_evidence,0.09
+java697,socket.io-client-java,697,issue,closed,False,Map,duplicate_invalid_spam,0.83,feature_request,0.13
+java698,socket.io-client-java,698,issue,closed,False,Map,duplicate_invalid_spam,0.97,insufficient_evidence,0.03
+java699,socket.io-client-java,699,issue,closed,False,Unresponsive CDN,build_packaging_env,0.77,defect_fixed_or_obsolete,0.13
+java701,socket.io-client-java,701,issue,closed,False,Missing option in the IO.Options,support_question,0.39,docs_gap,0.31
+java702,socket.io-client-java,702,issue,open,False,Android auto disconnect,support_question,0.78,defect_current,0.15
+java703,socket.io-client-java,703,issue,closed,False,sslContext is missing from the options ,docs_gap,0.64,support_question,0.28
+java704,socket.io-client-java,704,issue,closed,False,how to disconnect socket.io client from server properly?,support_question,0.91,docs_gap,0.09
+java705,socket.io-client-java,705,issue,closed,False,1.0.2 removed from mavenCentral?,duplicate_invalid_spam,0.58,build_packaging_env,0.16
+java706,socket.io-client-java,706,issue,open,False,java.lang.IllegalStateException,defect_fixed_or_obsolete,0.66,insufficient_evidence,0.16
+java707,socket.io-client-java,707,issue,closed,False,Upgrading the version from 0.8.3 to 2.0.1 not work,support_question,0.72,defect_fixed_or_obsolete,0.28
+java708,socket.io-client-java,708,issue,open,False,Different data formats sent by `emit`,support_question,0.56,defect_current,0.39
+java709,socket.io-client-java,709,issue,open,False,Failed to Connect to socket.io implemented simple server - No Specific Reason Given,support_question,0.95,defect_current,0.04
+java710,socket.io-client-java,710,issue,open,False,Fatal Exception: java.util.ConcurrentModificationException,defect_current,0.99,defect_fixed_or_obsolete,0.01
+java711,socket.io-client-java,711,issue,closed,False,How to get all messages from socket.on() listeners into a arraylist,defect_fixed_or_obsolete,0.76,support_question,0.13
+java712,socket.io-client-java,712,issue,open,False,How to get all messages from socket.on() listeners into a arraylist,support_question,0.38,duplicate_invalid_spam,0.3
+java713,socket.io-client-java,713,issue,open,False,Client socket.io doesn't receive any messages,defect_current,0.8,support_question,0.12
+java714,socket.io-client-java,714,issue,closed,False,gỡ lỗi,duplicate_invalid_spam,0.79,insufficient_evidence,0.2
+java715,socket.io-client-java,715,issue,open,False,socket.io-client-java repeatedly disconnecting and connecting to my nodeJs backend server with nginx,support_question,0.99,defect_fixed_or_obsolete,0.01
+java716,socket.io-client-java,716,pr,closed,False,Update README.md,pr_non_functional,0.74,docs_gap,0.24000000000000002
+java717,socket.io-client-java,717,issue,closed,False,"How to get the args of the method request onSuccess(Object...args) of the AckWithTimeout class,",support_question,0.99,defect_fixed_or_obsolete,0.01
+java718,socket.io-client-java,718,issue,closed,False,Why can I only create 64 successful socket connections in version 1.0.2,support_question,0.78,defect_fixed_or_obsolete,0.21
+java719,socket.io-client-java,719,pr,open,False,fix(sec): upgrade json to 20180130,pr_non_functional,0.85,build_packaging_env,0.15
+java720,socket.io-client-java,720,issue,open,False,Android 11.0 (API30 ) app crashing with error:  java.lang.ArrayIndexOutOfBoundsException: length=0; index=0         at com.arriyam.countersocketandroid.MainActivity.onCreate$lambda-0(MainActivity.kt:17),defect_current,0.93,insufficient_evidence,0.06
+java721,socket.io-client-java,721,issue,open,False,How the retry/reconnect life cycle works on the newest version,support_question,0.97,docs_gap,0.02
+java722,socket.io-client-java,722,issue,open,False,OkHttp vulnerability issues in Socket.io client dependency,build_packaging_env,0.88,support_question,0.05
+java723,socket.io-client-java,723,issue,open,False,Java socket io client connection disconnects,support_question,0.97,defect_current,0.02
+java724,socket.io-client-java,724,pr,open,False,fix(sec): upgrade org.json:json to 20180130,pr_non_functional,0.93,build_packaging_env,0.07
+java725,socket.io-client-java,725,issue,open,False,"2.1.0 client doesn't connect to 4.5.2 node server, no errors [kotlin]",support_question,0.9299999999999999,docs_gap,0.04
+java726,socket.io-client-java,726,issue,open,False,Transport close when using 2.1.0 client send big message to 4.5.2 NodeJS server,defect_current,0.99,support_question,0.01
+java727,socket.io-client-java,727,issue,closed,False,NullPointerException in Socket.java,defect_fixed_or_obsolete,1,pr_functional,0
+java728,socket.io-client-java,728,issue,open,False,Official Support for Kotlin Client,feature_request,1,pr_functional,0
+java729,socket.io-client-java,729,issue,open,False,Server Error after SDK upgrade,support_question,0.86,insufficient_evidence,0.07
+java730,socket.io-client-java,730,issue,open,False,Required onAny Function in Version 1x,feature_request,0.74,defect_fixed_or_obsolete,0.14
+java731,socket.io-client-java,731,issue,closed,False,My phone is not connecting to the server.,support_question,0.51,defect_fixed_or_obsolete,0.47
+java732,socket.io-client-java,732,pr,closed,False,Adds `socket.open()` to initialization.md,pr_non_functional,0.67,docs_gap,0.23
+java733,socket.io-client-java,733,pr,closed,False,Add `socket.open()` to emitting_events.md,pr_non_functional,0.65,docs_gap,0.22
+java734,socket.io-client-java,734,issue,open,False,Cannot Received Socket Manager EVENT_PING On Android Library,defect_current,1,pr_functional,0
+java735,socket.io-client-java,735,issue,open,False,How to send auth parameter while connecting with socket?,support_question,0.97,duplicate_invalid_spam,0.03
+java736,socket.io-client-java,736,pr,open,False,ignoring unnecessarily generated surefire report,pr_non_functional,0.99,build_packaging_env,0.01
+java737,socket.io-client-java,737,issue,open,False,Cannot interop with server implemented in 'io.socket:socket.io-server:4.0.1',defect_current,0.97,insufficient_evidence,0.01
+java738,socket.io-client-java,738,issue,open,False,how to get session id to send messages,support_question,1,pr_functional,0
+java739,socket.io-client-java,739,pr,closed,False,[1.x] Updated all dependencies to latest versions,pr_non_functional,0.9,build_packaging_env,0.09
+java740,socket.io-client-java,740,pr,closed,False,Remove error-causing exclude,pr_non_functional,0.8,docs_gap,0.13
+java741,socket.io-client-java,741,issue,open,False,Client creates a new connection when it reconnects to one of the namespaces.,defect_fixed_or_obsolete,0.51,defect_current,0.46
+java743,socket.io-client-java,743,issue,open,False,socket.io client sometimes sends arrays wrong,defect_current,0.95,support_question,0.05
+java745,socket.io-client-java,745,issue,open,False,can i use multiple socket connection ? ,support_question,1,pr_functional,0
+java746,socket.io-client-java,746,issue,open,False,Android 13 not available ,defect_current,0.62,defect_fixed_or_obsolete,0.19
+java748,socket.io-client-java,748,pr,closed,False,issue #727 sovled,pr_functional,0.5,insufficient_evidence,0.22
+java749,socket.io-client-java,749,pr,closed,False,Issue #727 Solved,pr_functional,0.52,insufficient_evidence,0.26
+java750,socket.io-client-java,750,issue,open,False,sendBuffer should be accessible,feature_request,0.99,defect_current,0.01
+java751,socket.io-client-java,751,issue,closed,False,Getting EVENT_CONNECT_ERROR from Android to Node,support_question,0.98,duplicate_invalid_spam,0.01
+java752,socket.io-client-java,752,issue,closed,False,Change/update auth or query or extraheaders containing token after connection,support_question,0.99,docs_gap,0.01
+java753,socket.io-client-java,753,issue,closed,False,Is this project Still Alive?,support_question,0.8,duplicate_invalid_spam,0.16
+java754,socket.io-client-java,754,issue,closed,False,How to listen to Manager events? (Socket events are working),support_question,0.99,defect_fixed_or_obsolete,0.01
+java755,socket.io-client-java,755,issue,open,False,Straightforward logging option for Android,feature_request,1,duplicate_invalid_spam,0
+java756,socket.io-client-java,756,issue,open,False,testDecodeError function in Helpers.java error message clean up,pr_non_functional,0.63,feature_request,0.3
+java757,socket.io-client-java,757,pr,closed,True,Changed test logger behavior to avoid expected error logging,pr_non_functional,0.99,defect_fixed_or_obsolete,0.01
+java758,socket.io-client-java,758,pr,open,False,Fix: NullPointerException in Socket.java #727;,defect_current,0.49,pr_functional,0.23
+java759,socket.io-client-java,759,issue,closed,False,Report: ConcurrentModificationException when use AckWithTimout...,defect_fixed_or_obsolete,0.58,defect_current,0.42
+java760,socket.io-client-java,760,issue,open,False,Connection state recovery,feature_request,0.99,support_question,0.01
+java761,socket.io-client-java,761,issue,open,False,NullPointerException: Attempt to invoke virtual method 'java.lang.String java.lang.Object.toString()' on a null object reference ,defect_current,0.95,support_question,0.04
+java762,socket.io-client-java,762,issue,closed,False,Unable to emit JSON object instead it is emitting Stringified Json in Client Version - 1.0.2,defect_fixed_or_obsolete,0.63,support_question,0.3
+java763,socket.io-client-java,763,issue,open,False,Implement Connection State Recovery,feature_request,1,pr_functional,0
+java764,socket.io-client-java,764,issue,closed,False,it throws java.lang.ClassCastException when sending nested json data.,support_question,0.94,defect_fixed_or_obsolete,0.04
+java765,socket.io-client-java,765,issue,closed,False,in the this one the depencies are not dwonloading for me,build_packaging_env,0.68,insufficient_evidence,0.27
+java766,socket.io-client-java,766,issue,open,False,Android 14 not compatible with version 2.1.0,defect_current,0.95,insufficient_evidence,0.04
+java767,socket.io-client-java,767,issue,open,False,received disconnect event. and socket closed.,support_question,0.67,defect_current,0.28
+java769,socket.io-client-java,769,pr,closed,True,"Fixing Issue #727, #710, #759",pr_functional,0.84,defect_fixed_or_obsolete,0.12
+java770,socket.io-client-java,770,pr,closed,False,Fixing the Concurrent Modification and clearAcks() logic,pr_functional,0.54,defect_current,0.44
+java771,socket.io-client-java,771,pr,closed,False,feat: updated packages and added workflow runner,pr_non_functional,0.99,build_packaging_env,0.01
+java772,socket.io-client-java,772,issue,open,False,Connection Error : xhr poll error,support_question,0.97,insufficient_evidence,0.02
+java773,socket.io-client-java,773,issue,closed,False,Transport close when using 2.1.1 client concurrent sending data to 2.0.9 netty-socketio,defect_current,0.63,defect_fixed_or_obsolete,0.25
+java774,socket.io-client-java,774,issue,open,False,Transport close when using 2.1.1 client concurrent sending data to 2.0.9 netty-socketio,defect_current,0.88,duplicate_invalid_spam,0.09
+java775,socket.io-client-java,775,issue,open,False,args[1] is received as null instead of socket acknowledgment callback,support_question,0.58,defect_current,0.32
+java776,socket.io-client-java,776,pr,closed,False,Fixing Crashes related to Concurrency,pr_functional,0.48,defect_current,0.4
+java777,socket.io-client-java,777,issue,closed,False,io.socket.emitter not found inside .jar,build_packaging_env,0.46,support_question,0.41
+java778,socket.io-client-java,778,issue,open,False,Virus alert,build_packaging_env,0.57,defect_current,0.16
+java779,socket.io-client-java,779,pr,closed,True,• Using ConcurrentHashMap for multi-threaded environment,pr_functional,0.61,defect_fixed_or_obsolete,0.32
+java780,socket.io-client-java,780,issue,open,False,More control over auth property,feature_request,1,duplicate_invalid_spam,0
+java781,socket.io-client-java,781,pr,open,False,Change auth parameter to JSONObject,pr_functional,0.68,feature_request,0.32
+java782,socket.io-client-java,782,issue,closed,False,How to clear emit from sendBuffer queue ?,support_question,0.91,feature_request,0.09
+java783,socket.io-client-java,783,issue,open,False,Failed to resolve: io.isRooted:socket.io-client:2.1.2,build_packaging_env,0.93,duplicate_invalid_spam,0.07
+java784,socket.io-client-java,784,issue,closed,False,Build Issue: Linker errors when building with shared library option,duplicate_invalid_spam,0.94,build_packaging_env,0.03
+java785,socket.io-client-java,785,issue,open,False,Potential Security Enhancements for socket.io-client-java,pr_non_functional,0.48,feature_request,0.31
+java786,socket.io-client-java,786,issue,open,False,OutOfMemoryError: unable to create new native thread,defect_current,1,duplicate_invalid_spam,0
+java787,socket.io-client-java,787,issue,open,False,"Some socket events after some times stops being received at all in the app side, even on subscribing to those events they are not received.",support_question,0.67,defect_current,0.29
+java788,socket.io-client-java,788,issue,open,False,WebTransport transport support?,feature_request,1,build_packaging_env,0
+java789,socket.io-client-java,789,pr,open,False,feat: auth callback function,pr_functional,0.92,feature_request,0.08
+java790,socket.io-client-java,790,issue,open,False,"Client emit or send, nothing cames to server",support_question,0.97,defect_current,0.03
+java791,socket.io-client-java,791,pr,open,False,Add WebTransport integration to Socket.IO Java client,pr_functional,0.86,pr_non_functional,0.09
+java792,socket.io-client-java,792,pr,open,False,"Client emit or send, nothing cames to server #790",pr_functional,0.67,support_question,0.21000000000000002
+java793,socket.io-client-java,793,issue,open,False,Polling and Websocket have different effect in event callback,defect_current,0.64,support_question,0.27
+java794,socket.io-client-java,794,pr,open,False,feat: add connection state recovery and flexible auth,pr_functional,0.98,feature_request,0.02
+java795,socket.io-client-java,795,issue,open,False,Sudden Disconnection Issue for Some Users on Java Client 1.0.1,defect_fixed_or_obsolete,0.6,support_question,0.36
+java796,socket.io-client-java,796,issue,open,False,Dependencies have open security issues,build_packaging_env,0.89,pr_non_functional,0.06
+java797,socket.io-client-java,797,issue,open,False,Uncaught Error handling,defect_current,1,build_packaging_env,0
+java798,socket.io-client-java,798,issue,closed,False,org.json:json version,duplicate_invalid_spam,0.73,build_packaging_env,0.22
+engine2,engine.io-client-java,2,issue,closed,False,Establishing connection - problems,support_question,0.46,insufficient_evidence,0.28
+engine3,engine.io-client-java,3,issue,closed,False,SSLEngine,support_question,0.69,feature_request,0.27
+engine4,engine.io-client-java,4,issue,closed,False,Hang-up on application close,defect_fixed_or_obsolete,0.79,defect_current,0.16
+engine5,engine.io-client-java,5,issue,closed,False,State of a socket,feature_request,0.99,defect_fixed_or_obsolete,0.01
+engine6,engine.io-client-java,6,pr,closed,True,IPv6 URL support,pr_functional,0.93,insufficient_evidence,0.03
+engine7,engine.io-client-java,7,pr,closed,True,Fix a typo in README,pr_non_functional,0.99,docs_gap,0.01
+engine8,engine.io-client-java,8,pr,closed,True,"When an Android app doesn't have the INTERNET permission, getHeaderFields() returns null resulting in NPE",defect_fixed_or_obsolete,0.59,pr_functional,0.4
+engine9,engine.io-client-java,9,issue,closed,False,socket can not parse query parameter in URL,support_question,0.45,defect_fixed_or_obsolete,0.39
+engine10,engine.io-client-java,10,pr,closed,True,Refactor Emitter to remove a ConcurrentHashMap.,pr_functional,0.97,insufficient_evidence,0.02
+engine11,engine.io-client-java,11,issue,closed,False,setWebSocketFactory no longer exists in java-websockets,defect_fixed_or_obsolete,0.7,defect_current,0.2
+engine12,engine.io-client-java,12,pr,closed,False,Change WebSocket to use new Java-Websocket factory methods,defect_fixed_or_obsolete,0.76,pr_functional,0.18
+engine13,engine.io-client-java,13,issue,closed,False,WARNING: Dependency org.json:json:20090211 is ignored for debug,build_packaging_env,0.99,defect_fixed_or_obsolete,0.01
+engine14,engine.io-client-java,14,pr,closed,True,Replace Java-WebSocket to OkHttp WebSocket,pr_functional,0.92,defect_fixed_or_obsolete,0.04
+engine15,engine.io-client-java,15,pr,closed,False,Switch to OkHttp 2.3,pr_functional,0.52,duplicate_invalid_spam,0.24
+engine16,engine.io-client-java,16,issue,closed,False,crash when there's error connecting to server,defect_fixed_or_obsolete,0.99,defect_current,0.01
+engine17,engine.io-client-java,17,pr,closed,False,tries to fix usage with load balancer,defect_fixed_or_obsolete,0.93,pr_functional,0.04
+engine18,engine.io-client-java,18,pr,closed,False,Replace UrlConnection to OkHttpClient,pr_functional,0.76,insufficient_evidence,0.1
+engine19,engine.io-client-java,19,issue,closed,False,Socket transports now throw IllegalArgumentException due to new OkHttp changes (ws/wss not allowd),defect_fixed_or_obsolete,0.9,defect_current,0.060000000000000005
+engine20,engine.io-client-java,20,pr,closed,True,upgrade okhttp_ws to 2.4.0,pr_non_functional,0.53,defect_fixed_or_obsolete,0.34
+engine21,engine.io-client-java,21,issue,closed,False,Please release one version to maven,build_packaging_env,0.51,defect_fixed_or_obsolete,0.24
+engine22,engine.io-client-java,22,issue,closed,False,NullPointerException in Websocket.java,defect_fixed_or_obsolete,0.98,defect_current,0.02
+engine23,engine.io-client-java,23,issue,closed,False,Invalid continuation byte,defect_fixed_or_obsolete,0.86,defect_current,0.07
+engine24,engine.io-client-java,24,pr,closed,True,Fix http headers type,pr_functional,0.66,defect_fixed_or_obsolete,0.28
+engine25,engine.io-client-java,25,issue,closed,False,Issue with checksum generated by Artifactory for engine.io pom,build_packaging_env,0.65,support_question,0.23
+engine26,engine.io-client-java,26,issue,closed,False,hopefully fix NullPointerException when upgrading - please commit it to a new release ...,insufficient_evidence,0.59,defect_fixed_or_obsolete,0.28
+engine27,engine.io-client-java,27,issue,closed,False,NullPointerException in engineio parser callback,defect_fixed_or_obsolete,0.99,defect_current,0.01
+engine28,engine.io-client-java,28,issue,closed,False,java.lang.ClassCastException: java.lang.String cannot be cast to java.util.List,defect_fixed_or_obsolete,0.78,support_question,0.18
+engine29,engine.io-client-java,29,pr,closed,True,Change package name,pr_functional,0.41000000000000003,pr_non_functional,0.39
+engine30,engine.io-client-java,30,pr,closed,True,upgrade okhttp to 2.5.0,pr_non_functional,0.92,build_packaging_env,0.03
+engine31,engine.io-client-java,31,issue,closed,False,EngineIOException: xhr poll error,support_question,0.49,defect_fixed_or_obsolete,0.43
+engine32,engine.io-client-java,32,issue,closed,False,engine.io-client-java 0.6.1 -> 'websocket error' -- SocketTimeoutException,defect_fixed_or_obsolete,0.72,defect_current,0.23
+engine33,engine.io-client-java,33,issue,closed,False,"socket with channel, xhr poll error",defect_current,0.53,support_question,0.36
+engine34,engine.io-client-java,34,issue,closed,False,No action in Desktop client,support_question,0.62,defect_fixed_or_obsolete,0.3
+engine35,engine.io-client-java,35,issue,closed,False,Disconnect in  a few seconds!,defect_fixed_or_obsolete,0.71,support_question,0.2
+engine36,engine.io-client-java,36,pr,closed,True,"NullPointException, in PollingXHR$Request.create()",defect_fixed_or_obsolete,0.87,pr_functional,0.11
+engine37,engine.io-client-java,37,issue,closed,False,Problem with connections through proxy,defect_fixed_or_obsolete,0.46,defect_current,0.33
+engine38,engine.io-client-java,38,issue,closed,False,pingInterval and pingTimeout calculated wrong,defect_current,0.43,defect_fixed_or_obsolete,0.27
+engine39,engine.io-client-java,39,pr,closed,False,fixed wrong pingInterval and pingTimeout,defect_current,0.59,pr_functional,0.28
+engine40,engine.io-client-java,40,pr,closed,True,okhttp 2.7.0,build_packaging_env,0.54,pr_functional,0.17
+engine41,engine.io-client-java,41,issue,closed,False,0.6.2 still requires OkHttp 2.5.0,build_packaging_env,0.81,defect_fixed_or_obsolete,0.19
+engine42,engine.io-client-java,42,pr,closed,True,okhttp 3,build_packaging_env,0.55,pr_functional,0.25
+engine43,engine.io-client-java,43,pr,closed,True,multiple code improvements fix 2,pr_non_functional,0.98,pr_functional,0.02
+engine44,engine.io-client-java,44,issue,closed,False,Issue in receiving Uni cast  ,support_question,1,duplicate_invalid_spam,0
+engine45,engine.io-client-java,45,pr,closed,True,squid:S00117 - Local variable and method parameter names should comply with a naming convention,pr_non_functional,0.99,pr_functional,0.01
+engine46,engine.io-client-java,46,pr,closed,False,squid:S00122 - Statements should be on separate lines,pr_non_functional,0.99,duplicate_invalid_spam,0.01
+engine47,engine.io-client-java,47,pr,closed,True,"Multiple code improvements: squid:S1118, squid:S1068",pr_non_functional,0.88,pr_functional,0.11
+engine48,engine.io-client-java,48,pr,closed,True,"multiple code improvements: squid:S2293, squid:S1213, squid:S2185, squid:S1905, squid:S1226",pr_non_functional,0.85,pr_functional,0.13
+engine49,engine.io-client-java,49,pr,closed,False,"multiple code improvements: squid:S2293, squid:ClassVariableVisibilityCheck",pr_non_functional,0.89,pr_functional,0.04
+engine50,engine.io-client-java,50,issue,closed,False,Is there an API upgrade guide?,docs_gap,0.64,support_question,0.35
+engine51,engine.io-client-java,51,pr,closed,True,proxy support,pr_functional,0.99,feature_request,0.01
+engine52,engine.io-client-java,52,issue,closed,False,java.lang.IllegalStateException: Unable to take ownership of connection from okhttp when .connect fails.,defect_current,0.56,defect_fixed_or_obsolete,0.35
+engine53,engine.io-client-java,53,issue,closed,False,RejectedExecutionException Occured in onMessage.,support_question,0.67,defect_current,0.17
+engine54,engine.io-client-java,54,pr,closed,True,log exceptions thrown in async tasks,pr_functional,0.91,defect_fixed_or_obsolete,0.05
+engine55,engine.io-client-java,55,pr,closed,False,fix close socket exception,insufficient_evidence,0.44,defect_current,0.34
+engine56,engine.io-client-java,56,issue,closed,False,WebSocket not correctly closed in case of exceptions from okhttp3 web socket,defect_fixed_or_obsolete,0.61,defect_current,0.38
+engine57,engine.io-client-java,57,pr,closed,True,Act on the same number.,defect_fixed_or_obsolete,0.64,pr_functional,0.29
+engine58,engine.io-client-java,58,issue,closed,False,what different engine.io-client-java with socket.io-client-java ?,support_question,1,duplicate_invalid_spam,0
+engine59,engine.io-client-java,59,pr,closed,False,Added permessage defalte comperssion,pr_functional,0.92,feature_request,0.06
+engine61,engine.io-client-java,61,pr,closed,True,Close the web socket after sending a close frame.,defect_fixed_or_obsolete,0.51,pr_functional,0.43
+engine62,engine.io-client-java,62,pr,closed,True,"[Fix] ""must call close()"" crash",defect_fixed_or_obsolete,0.73,pr_functional,0.23
+engine63,engine.io-client-java,63,issue,closed,False,Update okhttp version,pr_non_functional,0.35000000000000003,build_packaging_env,0.33
+engine64,engine.io-client-java,64,pr,closed,True,Update OkHttp-ws dependency to 3.4.1,pr_non_functional,0.97,build_packaging_env,0.03
+engine65,engine.io-client-java,65,issue,closed,False,The Polling XHR class is disconecting from the HttpURLConnection before closing the streams,defect_fixed_or_obsolete,0.64,defect_current,0.34
+engine66,engine.io-client-java,66,pr,closed,True,Disconnecting after closing the stream/ reader. ,defect_fixed_or_obsolete,0.8,pr_functional,0.19
+engine67,engine.io-client-java,67,issue,closed,False,Publish new release with updated OkHttp3 version,build_packaging_env,0.61,defect_fixed_or_obsolete,0.25
+engine68,engine.io-client-java,68,issue,closed,False,0.8.0 not available on Maven,defect_fixed_or_obsolete,0.66,build_packaging_env,0.32
+engine69,engine.io-client-java,69,pr,closed,True,fixe added onClose,pr_functional,0.44,defect_fixed_or_obsolete,0.29
+engine70,engine.io-client-java,70,issue,closed,False,IndexOutOfBoundsException on decoding payload,defect_fixed_or_obsolete,0.52,defect_current,0.41
+engine71,engine.io-client-java,71,issue,closed,False,"IllegalStateException ""closed"" on sending Message",defect_fixed_or_obsolete,0.95,defect_current,0.05
+engine72,engine.io-client-java,72,issue,closed,False,Android connection close every double 'pingInterval' seconds,defect_current,0.6900000000000001,defect_fixed_or_obsolete,0.3
+engine73,engine.io-client-java,73,pr,closed,True,fix added to fix following crash,defect_fixed_or_obsolete,0.92,pr_functional,0.06
+engine74,engine.io-client-java,74,pr,closed,True,Upgrade OkHttp-ws to newest version (3.4.2),pr_non_functional,0.97,build_packaging_env,0.03
+engine75,engine.io-client-java,75,pr,closed,False,add websocket transport ping.,duplicate_invalid_spam,0.45,defect_fixed_or_obsolete,0.31
+engine76,engine.io-client-java,76,issue,closed,False,Failed polling transport kills websocket transport,defect_current,0.93,insufficient_evidence,0.03
+engine77,engine.io-client-java,77,issue,closed,False,Upgrade to okhttp 3.5.0 there is no ws dependency.,build_packaging_env,0.45,defect_fixed_or_obsolete,0.41
+engine78,engine.io-client-java,78,pr,closed,True,okhttp-ws into okhttp,pr_functional,0.52,build_packaging_env,0.27
+engine79,engine.io-client-java,79,pr,closed,False,add a keepCookies option to presever cookies across XHR requests,feature_request,0.74,pr_functional,0.26
+engine80,engine.io-client-java,80,pr,closed,False,fix https://github.com/square/okhttp/issues/2283 SecurityException,defect_current,0.79,pr_functional,0.16
+engine81,engine.io-client-java,81,issue,closed,False,Improper creation of OkHttpClient in Websocket.java probably causing Out Of Memory exceptions ,defect_current,0.91,defect_fixed_or_obsolete,0.09
+engine82,engine.io-client-java,82,pr,closed,False,Add option to share OkHttpClient,pr_functional,0.66,feature_request,0.23
+engine83,engine.io-client-java,83,issue,closed,False,Connection will lost soon on Android 5.1 in battery mode,defect_current,0.92,defect_fixed_or_obsolete,0.05
+engine84,engine.io-client-java,84,issue,closed,False,JNI ERROR (app bug): weak global reference table overflow (max=51200) io.socket.thread.EventThread??,defect_current,0.88,insufficient_evidence,0.09
+engine85,engine.io-client-java,85,pr,closed,True,Options for inject okhttp Call/WebSocket factory,pr_functional,0.93,feature_request,0.06
+engine86,engine.io-client-java,86,issue,closed,False,Websocket connection closed with 1001 when high loading (1M messaging),feature_request,0.82,defect_current,0.11
+engine87,engine.io-client-java,87,issue,closed,False,allowRequest Error code read from android,defect_current,0.66,defect_fixed_or_obsolete,0.23
+engine88,engine.io-client-java,88,issue,closed,False,Polling broken with android 0.8.3 and server >= 2.1.0,defect_fixed_or_obsolete,0.85,defect_current,0.14
+engine89,engine.io-client-java,89,issue,closed,False,Send custom headers,support_question,0.92,feature_request,0.07
+engine90,engine.io-client-java,90,issue,closed,False,Cant find some fields in ,defect_fixed_or_obsolete,0.27,duplicate_invalid_spam,0.26
+engine91,engine.io-client-java,91,issue,closed,False,Cant find some fields in io.socket.engineio.client$Transport,defect_fixed_or_obsolete,0.38,duplicate_invalid_spam,0.32
+engine92,engine.io-client-java,92,pr,closed,True,update for engine.io-client 1.8.4,pr_functional,0.69,defect_fixed_or_obsolete,0.29
+engine93,engine.io-client-java,93,pr,closed,True,Update to make compatible with engine.io v3,pr_functional,0.94,defect_fixed_or_obsolete,0.05
+engine94,engine.io-client-java,94,issue,closed,False,Attempt to invoke virtual method 'java.lang.String okhttp3.MediaType.toString()' on a null object reference,defect_fixed_or_obsolete,0.98,defect_current,0.02
+engine95,engine.io-client-java,95,issue,closed,False,Cannot use a custom path,defect_current,0.89,defect_fixed_or_obsolete,0.11
+engine96,engine.io-client-java,96,issue,closed,False,test,insufficient_evidence,0.65,duplicate_invalid_spam,0.35
+engine97,engine.io-client-java,97,issue,closed,False,How to Send Custom Header in Android,support_question,0.76,defect_fixed_or_obsolete,0.14
+engine98,engine.io-client-java,98,issue,closed,False,Engine.IO Java Server,support_question,0.64,duplicate_invalid_spam,0.34
+engine99,engine.io-client-java,99,issue,open,False,Add allEvent listener to emitter,feature_request,1,support_question,0
+engine100,engine.io-client-java,100,issue,closed,False,Yeast.yeast() is not thread safe,defect_current,0.89,defect_fixed_or_obsolete,0.09
+engine101,engine.io-client-java,101,pr,closed,False,fix NullPointerException when response doesn't have content type,defect_fixed_or_obsolete,0.78,pr_functional,0.17
+engine102,engine.io-client-java,102,issue,closed,False,Can i use this client to connect Engine.IO Java Server,support_question,0.84,defect_fixed_or_obsolete,0.16
+engine103,engine.io-client-java,103,issue,closed,False,io.socket.engineio.client.EngineIOException: websocket error,insufficient_evidence,0.91,defect_current,0.03
+engine104,engine.io-client-java,104,issue,closed,False,Messages beyond first one are serialized but not flushed,support_question,0.68,defect_fixed_or_obsolete,0.29
+engine105,engine.io-client-java,105,pr,closed,False,Bump junit from 4.12 to 4.13.1,pr_non_functional,0.98,duplicate_invalid_spam,0.01
+engine106,engine.io-client-java,106,pr,closed,True,create heartbeat scheduler with named threads and as daemon,pr_functional,0.79,defect_fixed_or_obsolete,0.13
+engine107,engine.io-client-java,107,issue,closed,False,Ping timeout from server,support_question,0.81,defect_fixed_or_obsolete,0.17
+engine108,engine.io-client-java,108,pr,closed,False,Fixed concurrency issue on EventThread class,defect_current,0.67,defect_fixed_or_obsolete,0.22
+engine109,engine.io-client-java,109,pr,closed,False,Bump ws from 7.4.1 to 7.4.6 in /src/test/resources,pr_non_functional,0.96,defect_fixed_or_obsolete,0.03
+engine110,engine.io-client-java,110,pr,closed,True,Bump engine.io from 4.0.5 to 4.1.2 in /src/test/resources,pr_non_functional,1,support_question,0
+engine112,engine.io-client-java,112,issue,open,False,Upgrade to OkHttp 4.x?,build_packaging_env,0.88,feature_request,0.08
+engine113,engine.io-client-java,113,pr,open,False,"Upgrade to OkHttp 4.10.0, fixes #112",pr_non_functional,0.68,build_packaging_env,0.31
+engine114,engine.io-client-java,114,pr,open,False,chore: bump engine.io from 4.1.2 to 6.2.1 in /src/test/resources,pr_non_functional,1,support_question,0
+engine115,engine.io-client-java,115,pr,open,False,chore: bump json from 20090211 to 20230227,pr_non_functional,0.96,build_packaging_env,0.04
+engine116,engine.io-client-java,116,issue,open,False,Issue with EventThread and class loaders,defect_current,0.99,support_question,0.01
+engine117,engine.io-client-java,117,pr,open,False,use jdk 1.8 base64 for engine.io server 6.x.x,pr_functional,0.58,insufficient_evidence,0.21
+engine118,engine.io-client-java,118,issue,open,False,Update readme to mention more compatibility,docs_gap,1,support_question,0
+engine119,engine.io-client-java,119,issue,open,False,Questions about Socket's sendPacket and flush implementation,support_question,0.98,insufficient_evidence,0.01
+engine120,engine.io-client-java,120,issue,open,False,Question about Polling transport's close implementation.,support_question,0.96,insufficient_evidence,0.02
+engine121,engine.io-client-java,121,pr,open,False,Add volatile socket support to SocketIO client,pr_functional,0.76,feature_request,0.24
+engine122,engine.io-client-java,122,issue,open,False,Please enable the heartbeat scheduler to run on daemon thread in version 1.0.2,defect_fixed_or_obsolete,0.67,defect_current,0.2
+engine123,engine.io-client-java,123,pr,open,False,Add WebTransport support to Engine.IO Java client,pr_functional,0.97,feature_request,0.03
+engine124,engine.io-client-java,124,pr,closed,False,Change HashMap to LinkedHashMap in decode method,pr_functional,0.8,duplicate_invalid_spam,0.11
+engine125,engine.io-client-java,125,pr,closed,False,Change HashMap to LinkedHashMap for query parameters,duplicate_invalid_spam,0.5,pr_functional,0.4
+engine126,engine.io-client-java,126,pr,open,False,fix: query reorder on WebSocket Transport,defect_current,0.71,pr_functional,0.23

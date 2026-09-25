@@ -63,6 +63,10 @@ link new pages from the [documentation index](Documentation/README.md). Update t
 guide that describes an API or default you change. The marked README quick start
 is compiled by CI in an independent consumer build.
 
+## Security
+
+Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
+
 ## Pull requests and bug reports
 
 Describe the change, its compatibility impact and the checks you actually ran.

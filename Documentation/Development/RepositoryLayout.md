@@ -21,6 +21,7 @@
 | `Documentation/JavaScriptTestInventory.csv`, `Documentation/JavaScriptParityContracts.json` | Parity inputs of `scripts/check-parity-contracts.py`; paths are stable |
 | `Documentation/ReviewEvidence/` | Recorded outputs ([index](../ReviewEvidence/README.md)) |
 | `.github/workflows/ci.yml` | All CI jobs |
+| `.github/dependabot.yml`, `SECURITY.md` | Dependency updates and the vulnerability reporting policy |
 
 Test file paths, class and method names are referenced by the parity contracts.
 Renaming a test means updating its contract in the same change; the validator
