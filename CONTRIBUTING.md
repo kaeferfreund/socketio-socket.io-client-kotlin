@@ -47,7 +47,8 @@ a full run.
 
 Write the test first and watch it fail. Test failure, reconnect and cancellation
 paths, not only the successful one. Wait for events with deadlines or use virtual
-time; never `sleep` to prove something. A disabled, skipped or flaky test is not
+time; never `sleep` to prove that something happened. Only end-to-end ports of
+upstream checks that something does *not* happen keep upstream's time window. A disabled, skipped or flaky test is not
 acceptable: fix the cause.
 
 Parity contracts refer to exact test files, classes and methods. Renaming a test

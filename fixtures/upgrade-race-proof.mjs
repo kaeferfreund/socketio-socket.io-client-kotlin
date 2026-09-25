@@ -27,6 +27,8 @@ import { fileURLToPath } from "node:url"
 const server = spawn("node", ["server.js"], {
   cwd: fileURLToPath(new URL(".", import.meta.url)),
 })
+// Also when a step throws: the fixture server has no watchdog of its own.
+process.on("exit", () => server.kill())
 const port = await new Promise((resolve, reject) => {
   let buf = ""
   const t = setTimeout(() => reject(new Error("server did not start")), 15000)

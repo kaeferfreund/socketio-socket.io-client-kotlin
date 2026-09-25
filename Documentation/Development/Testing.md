@@ -44,8 +44,11 @@ unit tests run on SDK 34 there and on SDK 34 and 36 elsewhere.
 | Upstream suites | `scripts/test-upstream-clients.sh` | The inventoried upstream tests exist and pass on the reference implementation |
 | Consumer | `scripts/test-consumer.sh` | The README quick start compiles against the published artifacts with the Kotlin that AGP bundles |
 
-Tests never sleep to prove something: they wait for an event with a deadline or
-drive virtual time. A skipped test fails the parity gate. Name parameterized tests
+Tests never sleep to prove that something happened: they wait for an event with
+a deadline or drive virtual time. Where the upstream suite proves that something
+does *not* happen within a window (its `setTimeout` checks), the end-to-end port
+keeps that window; unit tests prove such absences deterministically on virtual
+time. A skipped test fails the parity gate. Name parameterized tests
 `@ParameterizedTest(name = "{displayName} [{index}] {0}")`: the gate matches JUnit
 reports to contracts by method name, and JUnit's default name is only the index.
 

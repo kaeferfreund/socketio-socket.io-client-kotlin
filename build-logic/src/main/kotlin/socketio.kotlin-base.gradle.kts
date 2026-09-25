@@ -48,8 +48,10 @@ tasks.withType<Test>().configureEach {
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         showStandardStreams = providers.gradleProperty("showTestOutput").isPresent
     }
-    // A skipped test is never evidence; the parity gate reads JUnit XML and
-    // requires "passed". Failing fast on a disabled test keeps that honest.
+    // A skipped test is never evidence: the parity gate (CI, or
+    // check-parity-contracts.py --strict --junit) rejects any skipped or failed
+    // test in the JUnit XML. With extension autodetection off, no extension on
+    // the classpath can switch tests off unnoticed.
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "false")
 }
 

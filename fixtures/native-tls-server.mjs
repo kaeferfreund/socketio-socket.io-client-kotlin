@@ -21,7 +21,7 @@ io.on('connection', socket => {
   socket.on('echo', (value, ack) => ack(value));
   socket.on('echoTwo', (first, second, ack) => ack(first, second));
 });
-server.listen(0, () => {
+server.listen(0, '127.0.0.1', () => {
   console.log(`READY port=${server.address().port} secret=0123456789abcdef`);
 });
 process.on('SIGTERM', () => io.close(() => process.exit(0)));
