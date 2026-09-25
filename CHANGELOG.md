@@ -118,6 +118,12 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   the executor stops only after the connection sent its last packets (at most
   10 s), and `SocketIO.io()` never hands out a closed manager again.
   `open(callback)` on a paused manager reports an error.
+- Errors thrown by listeners (`TODO()`, failed assertions) and a throwing
+  `listenerErrorHandler` no longer escape into protocol code, where they could
+  stall the retry queue or skip a reconnection. Reconnection settings read or set
+  in the manager's `setup` block are no longer lost, a rejected emit (buffer
+  limit) no longer appears as `connect_error` on every socket, and an auth
+  provider still running for an attempt that ended is cancelled.
 
 ### Validation
 

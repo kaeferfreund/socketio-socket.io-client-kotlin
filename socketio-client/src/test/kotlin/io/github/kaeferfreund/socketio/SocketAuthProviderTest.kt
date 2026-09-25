@@ -69,6 +69,33 @@ class SocketAuthProviderTest {
         }
 
     @Test
+    fun disconnectingCancelsAProviderThatIsStillRunning() =
+        runClientTest {
+            val h = clientHarness()
+            var cancelled = false
+            val socket =
+                h.manager().socket(
+                    options =
+                    SocketOptions {
+                        authProvider =
+                            AuthProvider {
+                                try {
+                                    awaitCancellation()
+                                } finally {
+                                    cancelled = true
+                                }
+                            }
+                    },
+                )
+            h.settle()
+            assertTrue(!cancelled)
+            socket.disconnect()
+            h.settle()
+            assertTrue(cancelled)
+            h.close()
+        }
+
+    @Test
     fun aThrowingProviderFailsTheAttemptWithConnectError() =
         runClientTest {
             val h = clientHarness()

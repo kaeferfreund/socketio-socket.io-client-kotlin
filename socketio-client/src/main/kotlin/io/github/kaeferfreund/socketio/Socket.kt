@@ -8,6 +8,7 @@ import io.github.kaeferfreund.socketio.parser.SocketIOPacket
 import io.github.kaeferfreund.socketio.parser.SocketIOPacketType
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -63,6 +64,7 @@ public class Socket internal constructor(
     private val acks = LinkedHashMap<Long, AckEntry>()
     private var subs: List<Cancellable>? = null
     private var connectGeneration = 0
+    private var providerJob: Job? = null
 
     /** `true` while subscribed to the manager, i.e. connected or trying to (`socket.active`). Executor only. */
     internal val isActive: Boolean get() = subs != null
@@ -228,6 +230,8 @@ public class Socket internal constructor(
         subs = null
         activeView = false
         connectGeneration++
+        providerJob?.cancel()
+        providerJob = null
         manager.destroy()
     }
 
@@ -239,27 +243,30 @@ public class Socket internal constructor(
         }
         val generation = ++connectGeneration
         val attempt = manager.currentAttempt()
-        manager.executor.scope.launch {
-            val payload =
-                try {
-                    Result.success(provider.provide(attempt))
-                } catch (e: kotlinx.coroutines.CancellationException) {
-                    // Only the cancellation of this attempt stops here; the provider's own timeout
-                    // (withTimeout inside it) is a failure of the provider like any other.
-                    ensureActive()
-                    Result.failure(e)
-                } catch (
-                    @Suppress("TooGenericExceptionCaught") e: Exception,
-                ) {
-                    Result.failure(e)
-                }
-            // Resumed on the executor; drop the result if the socket moved on meanwhile.
-            if (generation != connectGeneration || !isActive || manager.readyState != SocketManager.ManagerState.OPEN) return@launch
-            payload.fold(
-                onSuccess = { sendConnectPacket(it) },
-                onFailure = { emitConnectError(AuthProviderException(it)) },
-            )
-        }
+        // A provider still running for an earlier attempt is not needed any more.
+        providerJob?.cancel()
+        providerJob =
+            manager.executor.scope.launch {
+                val payload =
+                    try {
+                        Result.success(provider.provide(attempt))
+                    } catch (e: kotlinx.coroutines.CancellationException) {
+                        // Only the cancellation of this attempt stops here; the provider's own timeout
+                        // (withTimeout inside it) is a failure of the provider like any other.
+                        ensureActive()
+                        Result.failure(e)
+                    } catch (
+                        @Suppress("TooGenericExceptionCaught") e: Exception,
+                    ) {
+                        Result.failure(e)
+                    }
+                // Resumed on the executor; drop the result if the socket moved on meanwhile.
+                if (generation != connectGeneration || !isActive || manager.readyState != SocketManager.ManagerState.OPEN) return@launch
+                payload.fold(
+                    onSuccess = { sendConnectPacket(it) },
+                    onFailure = { emitConnectError(AuthProviderException(it)) },
+                )
+            }
     }
 
     private fun sendConnectPacket(auth: Any?) {
@@ -656,7 +663,8 @@ public class Socket internal constructor(
         error: SocketBufferLimitException,
     ) {
         intercept { it.onDropped(outgoing, error) }
-        manager.emit(ManagerEvent.Error(error))
+        // Not a connection error: the manager reports it, sockets do not turn it into connect_error.
+        manager.emitToApplication(ManagerEvent.Error(error))
         val entry = id?.let { acks.remove(it) } ?: return
         entry.timer?.cancel()
         updatePending()
@@ -740,7 +748,7 @@ public class Socket internal constructor(
             }
         if (error != null) {
             intercept { it.onDropped(OutgoingEvent(name, args), error) }
-            manager.emit(ManagerEvent.Error(error))
+            manager.emitToApplication(ManagerEvent.Error(error))
             ack?.invoke(error, emptyList())
             return
         }
@@ -808,8 +816,10 @@ public class Socket internal constructor(
         try {
             block(interceptor)
         } catch (
-            @Suppress("TooGenericExceptionCaught") e: Exception,
+            // Errors too, as for listeners: application code must never break the protocol.
+            @Suppress("TooGenericExceptionCaught") e: Throwable,
         ) {
+            if (e is VirtualMachineError && e !is StackOverflowError) throw e
             manager.reportListenerError(e)
         }
     }

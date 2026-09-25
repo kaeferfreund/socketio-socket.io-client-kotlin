@@ -122,6 +122,22 @@ public class SocketManager(
     /** Whether [close] was called. */
     internal val isClosed: Boolean get() = closed
 
+    // Declared before the plugins attach and [setup] runs: property initializers run in
+    // declaration order, so anything declared below `init` would still be unset there.
+    @Volatile private var backoffMin: Duration = options.reconnectionDelay
+
+    @Volatile private var backoffMax: Duration = options.reconnectionDelayMax
+
+    @Volatile private var backoffJitter: Double = options.randomizationFactor
+
+    @Volatile private var pausedView = false
+
+    private var paused: Boolean = false
+        set(value) {
+            field = value
+            pausedView = value
+        }
+
     private val pluginHandles: List<Cancellable> = options.plugins.map { it.attach(this) }
 
     init {
@@ -152,12 +168,6 @@ public class SocketManager(
             backoffMin = value
             executor.execute { backoff.min = value }
         }
-
-    @Volatile private var backoffMin: Duration = options.reconnectionDelay
-
-    @Volatile private var backoffMax: Duration = options.reconnectionDelayMax
-
-    @Volatile private var backoffJitter: Double = options.randomizationFactor
 
     /** Maximum reconnection delay (`reconnectionDelayMax()`). */
     public var reconnectionDelayMax: Duration
@@ -306,14 +316,6 @@ public class SocketManager(
 
     /** Whether [pause] is in effect. Protocol state, published for diagnostics. */
     public val isPaused: Boolean get() = pausedView
-
-    @Volatile private var pausedView = false
-
-    private var paused: Boolean = false
-        set(value) {
-            field = value
-            pausedView = value
-        }
 
     /**
      * Disconnects and releases the executor; the manager cannot be used afterwards.
@@ -610,8 +612,16 @@ public class SocketManager(
 
     /** Emits to sockets synchronously, then to the public listeners and flow. */
     internal fun emit(event: ManagerEvent) {
-        if (event is ManagerEvent.Error) options.logger.let { if (it.isLoggable(LogLevel.DEBUG)) it.log(LogLevel.DEBUG, "manager", "error", event.error) }
         internalEvents.emit(event)
+        emitToApplication(event)
+    }
+
+    /**
+     * Emits to the public listeners and flow only. For errors that are not about
+     * the connection (a rejected emit), which sockets must not report as `connect_error`.
+     */
+    internal fun emitToApplication(event: ManagerEvent) {
+        if (event is ManagerEvent.Error) options.logger.let { if (it.isLoggable(LogLevel.DEBUG)) it.log(LogLevel.DEBUG, "manager", "error", event.error) }
         eventFlow.tryEmit(event)
         eventListeners.dispatch(event, this)
     }
@@ -630,23 +640,37 @@ public class SocketManager(
         try {
             block()
         } catch (
-            @Suppress("TooGenericExceptionCaught") e: Exception,
+            // Errors too (TODO(), a failed assertion): application code must never break the protocol.
+            @Suppress("TooGenericExceptionCaught") e: Throwable,
         ) {
-            reportListenerError(e)
+            reportListenerError(rethrowUnrecoverable(e))
         }
     }
 
     internal fun reportListenerError(error: Throwable) {
         val handler = options.listenerErrorHandler
         if (handler != null) {
-            handler(error)
-        } else {
-            options.logger.log(LogLevel.ERROR, "listener", "a listener threw", error)
-            if (!options.logger.isLoggable(LogLevel.ERROR)) {
-                System.err.println("socket.io listener threw: $error")
-                error.printStackTrace()
+            try {
+                handler(error)
+                return
+            } catch (
+                // A throwing handler must not escape into protocol code either: log both.
+                @Suppress("TooGenericExceptionCaught") e: Throwable,
+            ) {
+                error.addSuppressed(rethrowUnrecoverable(e))
             }
         }
+        options.logger.log(LogLevel.ERROR, "listener", "a listener threw", error)
+        if (!options.logger.isLoggable(LogLevel.ERROR)) {
+            System.err.println("socket.io listener threw: $error")
+            error.printStackTrace()
+        }
+    }
+
+    /** Out of memory and similar: nothing to isolate, the JVM is in trouble. A stack overflow is recoverable. */
+    private fun rethrowUnrecoverable(e: Throwable): Throwable {
+        if (e is VirtualMachineError && e !is StackOverflowError) throw e
+        return e
     }
 
     internal enum class ManagerState { OPENING, OPEN, CLOSED }

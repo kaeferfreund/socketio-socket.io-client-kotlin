@@ -33,7 +33,8 @@ public object Transport {
  *
  * - Outgoing (send buffer, retry queue): the *new* emit fails with
  *   [SocketBufferLimitException] through its acknowledgement callback and the
- *   manager's error event; nothing already accepted is evicted.
+ *   manager's error event (sockets do not report it as `connect_error`); nothing
+ *   already accepted is evicted.
  * - Incoming (receive buffer before CONNECT): the connection closes with
  *   `"transport error"` and reconnects normally.
  * - [binaryReconstructionTimeout]: a binary packet still missing attachments

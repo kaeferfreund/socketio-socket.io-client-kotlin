@@ -255,7 +255,9 @@ In both cases: **never block in a listener** — no network or disk I/O, no
 `runBlocking`, no waiting on an acknowledgement. Launch a coroutine instead.
 
 An exception thrown by a listener never corrupts protocol state; it is passed to
-`listenerErrorHandler`, or logged when no handler is set.
+`listenerErrorHandler`, or logged when no handler is set. This covers errors such
+as `NotImplementedError` from `TODO()` too (out-of-memory errors excepted), and a
+handler that throws itself is logged with the original exception.
 
 `Flow`s (`socket.events`, `socket.state`, `manager.events`) are delivered in the
 collector's context, independent of `callbackDispatcher`. `logger`,
@@ -317,8 +319,8 @@ manager reconnects.
 `maxSendBufferPackets`/`Bytes`, `maxRetryQueuePackets`/`Bytes`,
 `maxReceiveBufferPackets`/`Bytes` and `binaryReconstructionTimeout`. An emit over
 an outgoing limit fails with `SocketBufferLimitException` through its
-acknowledgement callback and `ManagerEvent.Error`; nothing already accepted is
-evicted. A receive-buffer overflow closes the connection with `"transport error"`;
+acknowledgement callback and `ManagerEvent.Error` (not as `connect_error`); nothing
+already accepted is evicted. A receive-buffer overflow closes the connection with `"transport error"`;
 a binary packet still missing attachments after `binaryReconstructionTimeout`
 closes it with `"parse error"`. The manager reconnects in both cases.
 

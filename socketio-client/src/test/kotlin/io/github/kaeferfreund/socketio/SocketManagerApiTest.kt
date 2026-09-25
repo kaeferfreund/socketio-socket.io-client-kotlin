@@ -9,6 +9,8 @@ import io.github.kaeferfreund.socketio.engineio.EngineHttpResponse
 import io.github.kaeferfreund.socketio.engineio.LogLevel
 import io.github.kaeferfreund.socketio.engineio.SocketLogger
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceTimeBy
@@ -333,7 +335,74 @@ class SocketManagerApiTest {
             val socket = manager.socket("/")
             h.settle()
             assertTrue(socket.connected)
-            assertEquals(2, manager.options.eventFlowCapacity)
+            val seen = ArrayList<Int>()
+            // A slow collector: while it waits, only the two newest events stay buffered.
+            backgroundScope.launch {
+                socket.events.filterIsInstance<SocketEvent.Received>().collect {
+                    seen += it.event[0]!!.int!!
+                    delay(1.seconds)
+                }
+            }
+            h.settle()
+            repeat(5) { h.server.namespace("/").emit("n", it + 1) }
+            h.settle()
+            advanceTimeBy(10.seconds)
+            h.settle()
+            assertEquals(listOf(4, 5), seen.takeLast(2), "$seen")
+            assertTrue(2 !in seen && 3 !in seen, "$seen")
+            h.close()
+        }
+
+    @Test
+    fun theSetupBlockSeesAndKeepsTheReconnectionSettings() =
+        runClientTest {
+            val h = clientHarness()
+            var seen: kotlin.time.Duration? = null
+            val manager =
+                h.manager({
+                    seen = reconnectionDelay
+                    reconnectionDelayMax = 7.seconds
+                }) {
+                    autoConnect = false
+                    reconnectionDelay = 3.seconds
+                }
+            assertEquals(3.seconds, seen)
+            assertEquals(7.seconds, manager.reconnectionDelayMax)
+            h.close()
+        }
+
+    @Test
+    fun anErrorFromAListenerOrAThrowingHandlerDoesNotBreakTheProtocol() =
+        runClientTest {
+            val h = clientHarness()
+            val reported = ArrayList<Throwable>()
+            val manager =
+                h.manager {
+                    listenerErrorHandler = {
+                        reported += it
+                        throw IllegalStateException("the handler fails too")
+                    }
+                }
+            val socket =
+                manager.socket("/", SocketOptions { retries = 1 }) {
+                    on("hi") { TODO("listener bug") }
+                }
+            h.settle()
+            h.server.namespace("/").emit("hi")
+            // The first acknowledgement callback fails; the retry queue must still move on.
+            socket.emit("echo", 1) { throw AssertionError("callback bug") }
+            var second: Long? = null
+            socket.emit("echo", 2) { second = it.getOrThrow()[0].long }
+            val original = System.err
+            System.setErr(PrintStream(ByteArrayOutputStream()))
+            try {
+                h.settle()
+            } finally {
+                System.setErr(original)
+            }
+            assertEquals(2L, second)
+            assertTrue(socket.connected)
+            assertTrue(reported.any { it is NotImplementedError } && reported.any { it is AssertionError }, "$reported")
             h.close()
         }
 

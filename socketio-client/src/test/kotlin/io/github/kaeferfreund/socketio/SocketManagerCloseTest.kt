@@ -1,6 +1,10 @@
 package io.github.kaeferfreund.socketio
 
+import io.github.kaeferfreund.socketio.engineio.Cancellable
 import io.github.kaeferfreund.socketio.engineio.EngineClients
+import io.github.kaeferfreund.socketio.engineio.EngineHttpCallback
+import io.github.kaeferfreund.socketio.engineio.EngineHttpClient
+import io.github.kaeferfreund.socketio.engineio.EngineHttpRequest
 import io.github.kaeferfreund.socketio.engineio.parser.EngineIOPacketType
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import kotlinx.coroutines.Job
@@ -109,7 +113,8 @@ class SocketManagerCloseTest {
                     autoConnect = false
                     reconnection = false
                     callbackDispatcher = callbacks.asCoroutineDispatcher()
-                    clients = EngineClients(null, null)
+                    // The handshake never answers, so the manager is still opening when it is closed.
+                    clients = EngineClients(SilentHttp, null)
                 },
             )
         try {
@@ -126,6 +131,14 @@ class SocketManagerCloseTest {
             gate.countDown()
             callbacks.shutdown()
         }
+    }
+
+    /** Accepts every request and never answers. */
+    private object SilentHttp : EngineHttpClient {
+        override fun execute(
+            request: EngineHttpRequest,
+            callback: EngineHttpCallback,
+        ): Cancellable = Cancellable.NONE
     }
 
     @Test

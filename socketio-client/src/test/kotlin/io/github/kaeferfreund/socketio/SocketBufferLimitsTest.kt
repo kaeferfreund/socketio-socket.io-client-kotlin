@@ -35,6 +35,29 @@ class SocketBufferLimitsTest {
         }
 
     @Test
+    fun aRejectedEmitIsNotAConnectErrorOfAnySocket() =
+        runClientTest {
+            val h = clientHarness()
+            val manager =
+                h.manager {
+                    autoConnect = false
+                    bufferLimits = SocketBufferLimits(maxSendBufferPackets = 1)
+                }
+            val connectErrors = ArrayList<Throwable>()
+            val managerErrors = ArrayList<Throwable>()
+            manager.on<ManagerEvent.Error> { managerErrors += it.error }
+            val chat = manager.socket("/chat") { onConnectError { connectErrors += it } }
+            manager.socket("/news") { onConnectError { connectErrors += it } }.connect()
+            chat.connect()
+            chat.emit("a")
+            chat.emit("b")
+            h.settle()
+            assertTrue(managerErrors.any { it is SocketBufferLimitException }, "$managerErrors")
+            assertTrue(connectErrors.none { it is SocketBufferLimitException }, "$connectErrors")
+            h.close()
+        }
+
+    @Test
     fun theRetryQueueLimitRejectsTheNewEmit() =
         runClientTest {
             val h = clientHarness()
