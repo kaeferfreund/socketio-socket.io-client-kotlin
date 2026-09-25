@@ -169,8 +169,8 @@ io.of("/orders").on("connection", (socket) => {
 });
 ```
 
-Volatile emits bypass the queue. Cancelling an `emitWithAck` does not remove an
-event from the retry queue.
+Volatile emits bypass the queue. Cancelling an `emitWithAck` removes its event from
+the retry queue; the acknowledgement of a try already sent is ignored.
 
 ## Acknowledging server requests
 

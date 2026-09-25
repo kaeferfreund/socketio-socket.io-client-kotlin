@@ -22,8 +22,8 @@ val notifications = manager.socket("/notifications") {
 ```
 
 - `manager.socket(nsp)` returns the same socket for the same namespace. Its
-  `SocketOptions` apply only when the socket is first created; the setup block runs
-  on every call.
+  `SocketOptions` and the setup block apply only when the socket is first created;
+  add listeners to an existing socket directly.
 - The path of the manager URL does **not** select a namespace: only scheme, host,
   port and query are used. The request path is the `path` option (`/socket.io` by
   default).

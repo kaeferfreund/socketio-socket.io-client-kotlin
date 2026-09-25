@@ -68,7 +68,7 @@ reach protocol state. Transport I/O happens on OkHttp's threads; results are
 posted back to the executor together with a transport generation, so a retired
 transport cannot change the state of a newer one.
 
-Suspending APIs (`emitWithAck`, `awaitConnect`, auth providers) are cancellable:
+Suspending APIs (`emitWithAck`, the buffer snapshots, auth providers) are cancellable:
 cancelling `emitWithAck` withdraws the acknowledgement, the buffered packet and
 the retry entry on the executor.
 

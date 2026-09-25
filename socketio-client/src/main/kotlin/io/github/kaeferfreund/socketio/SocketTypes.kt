@@ -134,7 +134,11 @@ public sealed class ConnectionState {
         override fun toString(): String = "Disconnected(${reason?.wireValue})"
     }
 
-    /** Connecting or waiting to reconnect. */
+    /**
+     * Connecting: the first connection or a reconnection attempt in progress. While
+     * the manager waits for its next attempt, the state is [Disconnected] with the
+     * reason of the last disconnection.
+     */
     public object Connecting : ConnectionState() {
         override fun toString(): String = "Connecting"
     }
