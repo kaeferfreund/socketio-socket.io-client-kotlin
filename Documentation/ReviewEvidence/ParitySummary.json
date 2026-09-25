@@ -21,8 +21,8 @@
   "uncertified_supported_rows": [],
   "contracts": 262,
   "kotlin_extension_contracts": 10,
-  "contract_tests": 431,
+  "contract_tests": 471,
   "junit_evidence": true,
-  "junit_passed_tests": 444,
+  "junit_passed_tests": 484,
   "junit_failed_or_skipped_tests": 0
 }
