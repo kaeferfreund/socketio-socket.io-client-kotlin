@@ -146,6 +146,10 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   values. The JSON reader and `javaScriptNumber` accept only ASCII digits, as
   `JSON.parse` and `Number()` do; a `null` map key converts to `"null"`
   instead of throwing.
+- `emitSerializableWithAck` and `serializableAck` decode an acknowledgement
+  without arguments as `null` (JavaScript resolves `undefined`) instead of
+  throwing `NoSuchElementException`; `NaN` and infinities from
+  `Json { allowSpecialFloatingPointValues = true }` convert instead of failing.
 
 ### Validation
 

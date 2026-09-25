@@ -7,6 +7,7 @@ import io.github.kaeferfreund.socketio.SocketManager
 import io.github.kaeferfreund.socketio.SocketManagerOptions
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import io.github.kaeferfreund.socketio.testing.FakeSocketIOServer
+import kotlinx.coroutines.async
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
@@ -50,6 +51,7 @@ class SocketSerializationTest {
             client.on("echo") { args, ack -> ack?.invoke(args) }
             client.on("receipt") { _, ack -> ack?.invoke(listOf(mapOf("id" to 7))) }
             client.on("silent") { _, _ -> }
+            client.on("empty") { _, ack -> ack?.invoke(emptyList()) }
         }
         val errors = ArrayList<Throwable>()
         val manager =
@@ -77,6 +79,16 @@ class SocketSerializationTest {
                 managers.forEach(SocketManager::close)
                 runCurrent()
             }
+        }
+
+    // JavaScript's emitWithAck resolves with undefined for an acknowledgement without arguments.
+    @Test
+    fun anAcknowledgementWithoutArgumentsDecodesAsNull() =
+        serializationTest { managers ->
+            val h = connected().also { managers += it.manager }
+            val reply = async { h.socket.emitSerializableWithAck<String, Receipt?>("empty", "x") }
+            runCurrent()
+            assertEquals(null, reply.await())
         }
 
     @Test

@@ -5,9 +5,11 @@ import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.encodeToJsonElement
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -58,6 +60,14 @@ class SocketIOSerializationTest {
         assertEquals(value, SocketIOSerialization.fromJsonElement(element))
         // JsonElement's own equals is recursive; the decoded tree is checked by type only.
         assertTrue(value.decodeAs<JsonElement>() is JsonArray)
+    }
+
+    @Test
+    fun convertsSpecialFloatingPointValuesLikeJsonStringify() {
+        val json = Json { allowSpecialFloatingPointValues = true }
+        val value = SocketIOSerialization.fromJsonElement(json.encodeToJsonElement(listOf(Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY)))
+        assertTrue(value.array!!.all { it.double?.isNaN() == true || it.double?.isInfinite() == true })
+        assertEquals("[null,null,null]", SocketIOJson.stringify(value))
     }
 
     @Test

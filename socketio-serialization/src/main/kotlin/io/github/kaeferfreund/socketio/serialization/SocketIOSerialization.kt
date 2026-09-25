@@ -50,8 +50,18 @@ public object SocketIOSerialization {
     private fun primitive(element: JsonPrimitive): SocketIOValue =
         when {
             element.isString -> SocketIOValue.Text(element.content)
+
             element.content == "true" -> SocketIOValue.TRUE
+
             element.content == "false" -> SocketIOValue.FALSE
+
+            // Json { allowSpecialFloatingPointValues = true } writes these; JSON.stringify turns them into null.
+            element.content == "NaN" -> SocketIOValue.Number.of(Double.NaN)
+
+            element.content == "Infinity" -> SocketIOValue.Number.of(Double.POSITIVE_INFINITY)
+
+            element.content == "-Infinity" -> SocketIOValue.Number.of(Double.NEGATIVE_INFINITY)
+
             else -> SocketIOJson.parse(element.content)
         }
 
@@ -161,14 +171,18 @@ public suspend inline fun <reified T, reified R> SocketEmitter.emitSerializableW
     event: String,
     value: T,
     json: Json = SocketIOSerialization.DefaultJson,
-): R = emitWithAck(event, value.encodeToSocketIOValue(json)).first().decodeAs(json)
+): R = (emitWithAck(event, value.encodeToSocketIOValue(json)).firstOrNull() ?: SocketIOValue.Null).decodeAs(json)
 
-/** Emits [event] with [value] and decodes the first acknowledgement argument as [R]. */
+/**
+ * Emits [event] with [value] and decodes the first acknowledgement argument as
+ * [R]; an acknowledgement without arguments decodes `null`, as JavaScript's
+ * `emitWithAck` resolves with `undefined`.
+ */
 public suspend inline fun <reified T, reified R> Socket.emitSerializableWithAck(
     event: String,
     value: T,
     json: Json = SocketIOSerialization.DefaultJson,
-): R = emitWithAck(event, value.encodeToSocketIOValue(json)).first().decodeAs(json)
+): R = (emitWithAck(event, value.encodeToSocketIOValue(json)).firstOrNull() ?: SocketIOValue.Null).decodeAs(json)
 
 /**
  * Calls [listener] with the first argument of every [event], decoded as [T].
@@ -198,4 +212,4 @@ public inline fun <reified T> Socket.onSerializable(
 public inline fun <reified T> serializableAck(
     json: Json = SocketIOSerialization.DefaultJson,
     crossinline callback: (Result<T>) -> Unit,
-): AckCallback = AckCallback { result -> callback(result.mapCatching { args -> args.first().decodeAs<T>(json) }) }
+): AckCallback = AckCallback { result -> callback(result.mapCatching { args -> (args.firstOrNull() ?: SocketIOValue.Null).decodeAs<T>(json) }) }
