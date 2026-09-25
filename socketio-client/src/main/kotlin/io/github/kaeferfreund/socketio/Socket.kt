@@ -8,6 +8,7 @@ import io.github.kaeferfreund.socketio.parser.SocketIOPacket
 import io.github.kaeferfreund.socketio.parser.SocketIOPacketType
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -242,7 +243,10 @@ public class Socket internal constructor(
                 try {
                     Result.success(provider.provide(attempt))
                 } catch (e: kotlinx.coroutines.CancellationException) {
-                    throw e
+                    // Only the cancellation of this attempt stops here; the provider's own timeout
+                    // (withTimeout inside it) is a failure of the provider like any other.
+                    ensureActive()
+                    Result.failure(e)
                 } catch (
                     @Suppress("TooGenericExceptionCaught") e: Exception,
                 ) {

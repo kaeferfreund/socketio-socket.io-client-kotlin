@@ -3,9 +3,12 @@ package io.github.kaeferfreund.socketio
 import io.github.kaeferfreund.socketio.parser.SocketIOPacketType
 import io.github.kaeferfreund.socketio.testing.FakeSocketIOServer
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withTimeout
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -44,6 +47,24 @@ class SocketAuthProviderTest {
             val tokens = h.server.received.filter { it.type == SocketIOPacketType.CONNECT }.map { it.data?.obj?.get("token")?.string }
             assertEquals(listOf("first", "second"), tokens)
             assertEquals(listOf(0, 1), attempts)
+            h.close()
+        }
+
+    @Test
+    fun aProviderThatTimesOutFailsTheAttemptWithConnectError() =
+        runClientTest {
+            val h = clientHarness()
+            val errors = ArrayList<Throwable>()
+            val socket =
+                h.manager().socket(options = SocketOptions { authProvider = AuthProvider { withTimeout(1.seconds) { awaitCancellation() } } }) {
+                    onConnectError { errors += it }
+                }
+            h.settle()
+            advanceTimeBy(2.seconds)
+            h.settle()
+            assertTrue(!socket.connected)
+            val error = errors.single() as AuthProviderException
+            assertTrue(error.cause is TimeoutCancellationException)
             h.close()
         }
 

@@ -104,6 +104,9 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
 - A binary packet header no longer reserves memory for the attachment count
   it declares; with `maxAttachments` raised, a huge count ended in
   `OutOfMemoryError` instead of waiting for (or rejecting) the attachments.
+- An `AuthProvider` whose own `withTimeout` expires now fails the attempt
+  with an `AuthProviderException` `connect_error`; the timeout used to be taken
+  for a cancellation, leaving the socket connecting forever.
 
 ### Validation
 
