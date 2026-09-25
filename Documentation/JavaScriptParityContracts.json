@@ -3779,7 +3779,7 @@
       "id": "KT-TLS",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "HTTPS and WSS against a private CA connect only with that CA trusted; the system trust store, an expired certificate and a host name mismatch are rejected; public-key pins accept a matching key and reject others; a client certificate is presented for mutual TLS, and adding one keeps the system trust store; invalid policies are rejected when built.",
+      "assertions": "HTTPS and WSS against a private CA connect only with that CA trusted; the system trust store, an expired certificate and a host name mismatch are rejected; public-key pins accept a matching key and reject others; a client certificate is presented for mutual TLS, and adding one keeps the system trust store; invalid policies are rejected when built. Adding pins to a pinned host keeps the existing ones, so a backup pin does not drop the live key.",
       "tests": [
         {
           "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
@@ -3832,6 +3832,10 @@
         {
           "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.aClientCertificateAloneKeepsTheSystemTrust"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.withPinsAddsBackupPinsToAHost"
         }
       ]
     },

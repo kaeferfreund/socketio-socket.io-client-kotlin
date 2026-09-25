@@ -43,11 +43,15 @@ public class TlsPolicy private constructor(
         }
     }
 
-    /** A copy that pins [hostPattern] (`example.com`, `*.example.com` or `**.example.com`) to [pins]. */
+    /**
+     * A copy that adds [pins] for [hostPattern] (`example.com`, `*.example.com` or
+     * `**.example.com`). Pins already set for the pattern are kept, so a backup pin
+     * can be added to a primary one, as `CertificatePinner.Builder.add` does.
+     */
     public fun withPins(
         hostPattern: String,
         vararg pins: String,
-    ): TlsPolicy = TlsPolicy(trustAnchors, this.pins + (hostPattern to pins.toList()), clientKeyManager)
+    ): TlsPolicy = TlsPolicy(trustAnchors, this.pins + (hostPattern to (this.pins[hostPattern].orEmpty() + pins).distinct()), clientKeyManager)
 
     /** A copy that pins [hostPattern] to the public keys of [certificates] (leaf or any chain certificate). */
     public fun withPinnedCertificates(

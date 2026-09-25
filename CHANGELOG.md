@@ -99,6 +99,8 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   to keep polling, creating a server session per request. Closing a WebSocket
   that is still connecting aborts it instead of queueing a close frame behind a
   handshake that may never complete.
+- `TlsPolicy.withPins`/`withPinnedCertificates` add to the pins of a host
+  pattern instead of replacing them, so a backup pin no longer drops the primary.
 
 ### Validation
 

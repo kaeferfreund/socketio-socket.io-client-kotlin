@@ -111,6 +111,17 @@ class TlsPolicyTest {
     }
 
     @Test
+    fun withPinsAddsBackupPinsToAHost() {
+        val policy = TlsPolicy.pinned("api.example.com", "sha256/PRIMARY").withPins("api.example.com", "sha256/BACKUP", "sha256/PRIMARY")
+        assertEquals(listOf("sha256/PRIMARY", "sha256/BACKUP"), policy.pins["api.example.com"])
+        startHttps()
+        val trust = TlsPolicy.customTrust(listOf(ca.certificate))
+        // The live key first, then a backup for a later rotation: the live key must still be accepted.
+        val withBackup = trust.withPinnedCertificates("localhost", listOf(leaf.certificate)).withPins("localhost", CertificatePinner.pin(otherCa.certificate))
+        assertEquals("ok", call(withBackup).getOrThrow().body)
+    }
+
+    @Test
     fun validatesItsArguments() {
         assertThrows<IllegalArgumentException> { TlsPolicy.customTrust(emptyList()) }
         assertThrows<IllegalArgumentException> { TlsPolicy.pinned("example.com") }
