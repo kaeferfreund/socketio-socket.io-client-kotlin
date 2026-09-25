@@ -27,6 +27,8 @@ internal fun e2e(
         val scope = E2EScope(server)
         try {
             runBlocking { withTimeout(timeout) { scope.block() } }
+            // An assertion inside a listener only reaches the listener error handler; fail on it here.
+            if (scope.listenerErrors.isNotEmpty()) throw AssertionError("a listener threw", scope.listenerErrors.first())
         } catch (e: Throwable) {
             throw AssertionError("E2E failure; server log:\n${server.log}", e)
         } finally {
@@ -40,13 +42,24 @@ internal class E2EScope(
 ) {
     val managers = ArrayList<SocketManager>()
 
+    /** Exceptions thrown by listeners of every manager created here; [e2e] fails on any. */
+    val listenerErrors: MutableList<Throwable> = java.util.concurrent.CopyOnWriteArrayList()
+
     val url: String get() = server.url
 
     fun manager(
         uri: String = url,
         setup: (SocketManager.() -> Unit)? = null,
         block: SocketManagerOptions.Builder.() -> Unit = {},
-    ): SocketManager = SocketManager(uri, SocketManagerOptions(block), setup).also { managers.add(it) }
+    ): SocketManager =
+        SocketManager(
+            uri,
+            SocketManagerOptions {
+                listenerErrorHandler = { listenerErrors += it }
+                block()
+            },
+            setup,
+        ).also { managers.add(it) }
 
     /** `io(BASE_URL + path, { forceNew: true, … })`. */
     fun io(
@@ -60,6 +73,7 @@ internal class E2EScope(
                 url + path,
                 SocketManagerOptions {
                     forceNew = true
+                    listenerErrorHandler = { listenerErrors += it }
                     block()
                 },
                 socketOptions,

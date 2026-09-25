@@ -312,6 +312,8 @@ class SocketE2ETest {
                         manager.onNetworkLost()
                     }
                 }) { reconnectionDelay = 10.milliseconds }
+            eventually { count.get() >= 1 }
+            // Upstream's window: no second connect_error follows.
             delay(300.milliseconds)
             assertEquals(1, count.get())
             socket.disconnect()
@@ -328,6 +330,8 @@ class SocketE2ETest {
                     onConnect { if (first.getAndSet(false)) disconnect().connect() }
                     onDisconnect { _, _ -> count.incrementAndGet() }
                 }) { transports = listOf(Transport.WEBSOCKET) }
+            eventually { count.get() == 1 && socket.connected }
+            // Upstream's window: no further disconnection follows.
             delay(300.milliseconds)
             assertEquals(1, count.get())
             assertTrue(socket.connected)
