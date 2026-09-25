@@ -1,0 +1,63 @@
+{
+  "upstream_sha": "aaf2af36ec8ad05910f357a788e0e358bad32738",
+  "checked_against_upstream_source": true,
+  "members": 105,
+  "totals": {
+    "implemented": 76,
+    "adapted": 23,
+    "not-applicable": 5,
+    "not-implemented": 1
+  },
+  "available": 99,
+  "applicable": 100,
+  "surfaces": {
+    "io() entry point": {
+      "implemented": 4,
+      "adapted": 2,
+      "not-applicable": 0,
+      "not-implemented": 0
+    },
+    "Socket": {
+      "implemented": 23,
+      "adapted": 4,
+      "not-applicable": 0,
+      "not-implemented": 0
+    },
+    "Socket (inherited Emitter)": {
+      "implemented": 7,
+      "adapted": 1,
+      "not-applicable": 0,
+      "not-implemented": 0
+    },
+    "Manager": {
+      "implemented": 9,
+      "adapted": 2,
+      "not-applicable": 0,
+      "not-implemented": 0
+    },
+    "Manager (inherited Emitter)": {
+      "implemented": 5,
+      "adapted": 2,
+      "not-applicable": 1,
+      "not-implemented": 0
+    },
+    "ManagerOptions": {
+      "implemented": 10,
+      "adapted": 0,
+      "not-applicable": 0,
+      "not-implemented": 1
+    },
+    "SocketOptions": {
+      "implemented": 3,
+      "adapted": 0,
+      "not-applicable": 0,
+      "not-implemented": 0
+    },
+    "Engine options": {
+      "implemented": 15,
+      "adapted": 12,
+      "not-applicable": 4,
+      "not-implemented": 0
+    }
+  }
+}

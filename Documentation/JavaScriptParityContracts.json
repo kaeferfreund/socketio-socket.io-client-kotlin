@@ -3755,7 +3755,7 @@
       "id": "KT-TLS",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "HTTPS and WSS against a private CA connect only with that CA trusted; the system trust store, an expired certificate and a host name mismatch are rejected; public-key pins accept a matching key and reject others; a client certificate is presented for mutual TLS; invalid policies are rejected when built.",
+      "assertions": "HTTPS and WSS against a private CA connect only with that CA trusted; the system trust store, an expired certificate and a host name mismatch are rejected; public-key pins accept a matching key and reject others; a client certificate is presented for mutual TLS, and adding one keeps the system trust store; invalid policies are rejected when built.",
       "tests": [
         {
           "path": "e2e-tests/src/test/kotlin/io/github/kaeferfreund/socketio/e2e/TlsE2ETest.kt",
@@ -3804,6 +3804,10 @@
         {
           "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.validatesItsArguments"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/TlsPolicyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.TlsPolicyTest.aClientCertificateAloneKeepsTheSystemTrust"
         }
       ]
     },
@@ -3811,7 +3815,7 @@
       "id": "KT-OKHTTP",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "The OkHttp stack sends headers and bodies, reports error statuses, bounds response bodies while reading, applies the request timeout but no read timeout (long polls wait), never follows an HTTPS-to-HTTP redirect, exchanges WebSocket frames and reports the close and a failed handshake's status, offers permessage-deflate only when compression is enabled, is discovered through ServiceLoader, and reports a dropped connection as a failure.",
+      "assertions": "The OkHttp stack sends headers and bodies, reports error statuses, bounds response bodies while reading, applies the request timeout but no read timeout (long polls wait), never follows an HTTPS-to-HTTP redirect, exchanges WebSocket frames and reports the close and a failed handshake's status, offers permessage-deflate only when compression is enabled, is discovered through ServiceLoader, and reports a dropped connection as a failure; the `okHttp { }` builder applies the base client and every `configure` block.",
       "tests": [
         {
           "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
@@ -3856,6 +3860,10 @@
         {
           "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.aConnectionDroppedBeforeTheResponseIsAFailure"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.theOkHttpBuilderAppliesTheBaseClientAndItsCustomizations"
         }
       ]
     },
@@ -3952,6 +3960,18 @@
         {
           "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.anUndecodableWebSocketFrameClosesWithTransportError"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.aWrongProbeAnswerRejectsTheUpgradeAndKeepsPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.withoutAWebSocketClientTheEngineStaysOnPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.webSocketOnlyWithoutAWebSocketClientIsAnErrorEvent"
         }
       ]
     },
@@ -4000,6 +4020,10 @@
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.enforcesTheOptionalTextAndDepthLimits"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserTest.theTextLimitCountsUtf8BytesOfSurrogatePairs"
         },
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserTest.kt",
@@ -4100,6 +4124,10 @@
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.convertsKotlinAndJavaValues"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOValueTest.convertsPrimitiveArraysAndNonStringKeys"
         },
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOValueTest.kt",
@@ -4466,12 +4494,24 @@
           "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.integrationsStoreTypedValuesInTheOptions"
         },
         {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.managerListenersCanRunOnceBeInspectedAndBeRemoved"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.invalidOptionsAreRejectedWhenBuilt"
+        },
+        {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.aServerDisconnectEndsTheSessionWithoutReconnecting"
         },
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.aTextConnectErrorIsTheMessageAndANullOneIsAParseError"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.aFailedPollReportsItsHttpStatusInTheDisconnectDetails"
         },
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
@@ -4515,7 +4555,7 @@
       "id": "KT-ANDROID",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Android integration under Robolectric: losing the network closes at once and its return reconnects without backoff; a new default network moves the connection; the background policy pauses and resumes, and coming back before the delay keeps the connection; the logger is gated by `Log.isLoggable`; the clock is `elapsedRealtime` and keeps counting in sleep; org.json values convert both ways and large, deep JSON streams with JsonReader; the configuration saves and restores; trim-memory releases idle connections; the Android options configure the manager; the KeyChain key manager serves only its alias.",
+      "assertions": "Android integration under Robolectric: losing the network closes at once and its return reconnects without backoff; a new default network moves the connection; the background policy pauses and resumes, and coming back before the delay keeps the connection; the logger is gated by `Log.isLoggable`; the clock is `elapsedRealtime` and keeps counting in sleep; org.json values convert both ways and large, deep JSON streams with JsonReader; the configuration saves and restores; trim-memory releases idle connections; the Android options configure the manager; the KeyChain key manager serves only its alias. Starting without a network spends no reconnection attempts until one arrives; capability changes of the current network update `metered`/`validated`; the Android OkHttp stack (network-bound sockets and DNS, traffic tag, `configureOkHttp`) carries real requests; long trace section names never reach Trace; the streaming reader keeps every JSON type.",
       "tests": [
         {
           "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
@@ -4564,6 +4604,26 @@
         {
           "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.theKeyChainKeyManagerOnlyServesItsAlias"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidPlatformTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidPlatformTest.startingOfflineWaitsForANetworkInsteadOfSpendingAttempts"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidPlatformTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidPlatformTest.capabilityChangesOfTheCurrentNetworkUpdateTheStatus"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidPlatformTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidPlatformTest.theAndroidStackCarriesRealRequestsWithItsCustomizations"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidPlatformTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidPlatformTest.theTracerShortensSectionNamesThatTraceWouldReject"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidPlatformTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidPlatformTest.theStreamingReaderKeepsEveryJsonType"
         }
       ]
     }

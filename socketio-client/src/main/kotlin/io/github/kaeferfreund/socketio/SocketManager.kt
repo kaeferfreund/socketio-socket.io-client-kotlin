@@ -103,7 +103,7 @@ public class SocketManager(
     /** Name of the active transport (`"polling"`, `"websocket"`) or `null` while not connected. */
     public val transportName: StateFlow<String?> = transportFlow.asStateFlow()
 
-    private val listeners = CallbackListeners<ManagerEvent>()
+    private val eventListeners = CallbackListeners<ManagerEvent>()
 
     private val pluginHandles: List<Cancellable> = options.plugins.map { it.attach(this) }
 
@@ -177,7 +177,27 @@ public class SocketManager(
     public fun <T : ManagerEvent> on(
         type: Class<T>,
         listener: (T) -> Unit,
-    ): Subscription = listeners.add(type, false, listener)
+    ): Subscription = eventListeners.add(type, false, listener)
+
+    /** Like [on], but removed after the first event (`manager.once()`). */
+    public inline fun <reified T : ManagerEvent> once(noinline listener: (T) -> Unit): Subscription = once(T::class.java, listener)
+
+    /** Calls [listener] for the next event of [type] only. */
+    public fun <T : ManagerEvent> once(
+        type: Class<T>,
+        listener: (T) -> Unit,
+    ): Subscription = eventListeners.add(type, true, listener)
+
+    /** The listeners registered for exactly [type], in order (`manager.listeners()`). */
+    public fun <T : ManagerEvent> listeners(type: Class<T>): List<(T) -> Unit> = eventListeners.listeners(type)
+
+    /** Whether a listener is registered for exactly [type] (`manager.hasListeners()`). */
+    public fun hasListeners(type: Class<out ManagerEvent>): Boolean = eventListeners.listeners(type).isNotEmpty()
+
+    /** Removes the listeners of [type], or every listener when `null` (`manager.removeAllListeners()`). */
+    public fun removeAllListeners(type: Class<out ManagerEvent>? = null) {
+        eventListeners.removeAll(type)
+    }
 
     /**
      * The socket for namespace [nsp], created on first use (`manager.socket()`).
@@ -536,7 +556,7 @@ public class SocketManager(
         if (event is ManagerEvent.Error) options.logger.let { if (it.isLoggable(LogLevel.DEBUG)) it.log(LogLevel.DEBUG, "manager", "error", event.error) }
         internalEvents.emit(event)
         eventFlow.tryEmit(event)
-        listeners.dispatch(event, this)
+        eventListeners.dispatch(event, this)
     }
 
     /** Runs a user callback on the configured callback dispatcher, isolating its exceptions. */
@@ -624,4 +644,11 @@ internal class CallbackListeners<E : Any> {
     }
 
     fun clear() = entries.clear()
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T : E> listeners(type: Class<T>): List<(T) -> Unit> = entries.filter { it.type == type }.map { it.listener as (T) -> Unit }
+
+    fun removeAll(type: Class<out E>?) {
+        if (type == null) entries.clear() else entries.removeAll { it.type == type }
+    }
 }

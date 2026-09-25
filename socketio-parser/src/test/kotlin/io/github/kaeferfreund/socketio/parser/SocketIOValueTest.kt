@@ -13,6 +13,24 @@ import java.util.Date
 class SocketIOValueTest {
     private enum class Color { RED }
 
+    // Documented conversions: every primitive array becomes a JSON array (like Array.from on a
+    // typed array), a CharArray an array of one-character strings, and map keys use toString().
+    @Test
+    fun convertsPrimitiveArraysAndNonStringKeys() {
+        assertEquals(SocketIOValue.of(listOf(1, 2)), SocketIOValue.of(intArrayOf(1, 2)))
+        assertEquals(SocketIOValue.of(listOf(3L, Long.MAX_VALUE)), SocketIOValue.of(longArrayOf(3, Long.MAX_VALUE)))
+        assertEquals(SocketIOValue.of(listOf(4, -5)), SocketIOValue.of(shortArrayOf(4, -5)))
+        assertEquals(SocketIOValue.of(listOf(0.5, 1.25)), SocketIOValue.of(doubleArrayOf(0.5, 1.25)))
+        // A Float is sent as the decimal it was written as (0.1f -> 0.1), not as its widened
+        // binary value 0.10000000149011612, in arrays as for single values.
+        assertEquals("[0.1,2.5]", SocketIOJson.stringify(SocketIOValue.of(floatArrayOf(0.1f, 2.5f))))
+        assertEquals(SocketIOValue.of(listOf(true, false)), SocketIOValue.of(booleanArrayOf(true, false)))
+        assertEquals(SocketIOValue.of(listOf("h", "i")), SocketIOValue.of(charArrayOf('h', 'i')))
+        // A ByteArray is binary, not an array of numbers.
+        assertTrue(SocketIOValue.of(byteArrayOf(1)) is SocketIOValue.Binary)
+        assertEquals("{\"1\":\"a\",\"true\":\"b\"}", SocketIOJson.stringify(SocketIOValue.of(mapOf(1 to "a", true to "b"))))
+    }
+
     @Test
     fun convertsKotlinAndJavaValues() {
         val value =

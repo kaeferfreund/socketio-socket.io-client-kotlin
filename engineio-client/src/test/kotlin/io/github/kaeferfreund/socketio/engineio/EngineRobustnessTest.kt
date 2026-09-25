@@ -113,6 +113,53 @@ class EngineRobustnessTest {
             assertEquals("transport error", h.all<EngineEvent.Close>().single().reason)
             h.close()
         }
+
+    // JavaScript rejects an upgrade whose probe is not answered with "3probe" and keeps polling.
+    @Test
+    fun aWrongProbeAnswerRejectsTheUpgradeAndKeepsPolling() =
+        runTest {
+            val h = engineHarness()
+            h.server.probeAnswer = "not the probe"
+            val engine = h.engine()
+            h.settle()
+            val error = h.all<EngineEvent.UpgradeError>().single()
+            assertEquals("probe error", error.error.message)
+            assertEquals("websocket", error.transportName)
+            assertEquals("polling", engine.transport!!.name)
+            h.executor.execute { engine.send("still polling") }
+            h.settle()
+            assertEquals(listOf("hi", "still polling"), h.messages)
+            h.close()
+        }
+
+    // A custom HTTP stack without WebSocket support: polling works, the upgrade is skipped with an error.
+    @Test
+    fun withoutAWebSocketClientTheEngineStaysOnPolling() =
+        runTest {
+            val h = engineHarness()
+            val engine = EngineSocket("http://localhost", EngineOptions(clients = EngineClients(h.server, null)), h.executor)
+            engine.events.on(EngineEvent::class.java) { h.events.add(it) }
+            h.executor.execute { engine.open() }
+            h.settle()
+            assertTrue(h.all<EngineEvent.Open>().isNotEmpty())
+            assertEquals("polling", engine.transport!!.name)
+            assertTrue(h.all<EngineEvent.UpgradeError>().single().error.message!!.contains("needs an EngineWebSocketClient"))
+            h.close()
+        }
+
+    @Test
+    fun webSocketOnlyWithoutAWebSocketClientIsAnErrorEvent() =
+        runTest {
+            val h = engineHarness()
+            val options = EngineOptions(transports = listOf("websocket"), clients = EngineClients(h.server, null))
+            val engine = EngineSocket("http://localhost", options, h.executor)
+            engine.events.on(EngineEvent::class.java) { h.events.add(it) }
+            h.executor.execute { engine.open() }
+            h.settle()
+            assertTrue(h.all<EngineEvent.Error>().single().error.message!!.contains("needs an EngineWebSocketClient"))
+            assertTrue(h.all<EngineEvent.Open>().isEmpty())
+            h.close()
+        }
 }
 
 /** Answers every request with [body], like a broken or hostile server. */

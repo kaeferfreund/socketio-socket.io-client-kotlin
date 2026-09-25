@@ -61,7 +61,8 @@ checked-in `api/*.api` files list every public signature and are verified by
 
 [PARITY.md](../PARITY.md) defines the supported scope. The
 [contract manifest](JavaScriptParityContracts.json) and
-[test inventory](JavaScriptTestInventory.csv) are validator inputs, not review
+[test inventory](JavaScriptTestInventory.csv) are validator inputs, and so is the
+[API mapping](JavaScriptApiMapping.json) of every public JavaScript member; none of them are review
 notes: CI rejects a contract whose tests did not pass in the same run. The
 [evidence index](ReviewEvidence/README.md) explains the recorded parser
 comparison. Numbers in these files describe the commit they were recorded on;

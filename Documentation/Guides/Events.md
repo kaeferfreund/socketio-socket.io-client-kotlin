@@ -80,7 +80,7 @@ Each argument is converted with `SocketIOValue.of` **on the calling thread**:
 | `null`, `Unit` | `null` |
 | `SocketIOValue` | itself |
 | `Boolean` | boolean |
-| `Byte`, `Short`, `Int`, `Long`, `Float`, `Double`, `BigInteger`, `BigDecimal`, other `Number` | number |
+| `Byte`, `Short`, `Int`, `Long`, `Float`, `Double`, `BigInteger`, `BigDecimal`, other `Number` | number; a `Float` keeps the decimal it was written as (`0.1f` → `0.1`) |
 | `CharSequence`, `Char`, `Enum` (its `name`) | string |
 | `ByteArray`, `ByteBuffer` (the remaining bytes) | binary attachment |
 | `Iterable`, `Array`, primitive arrays, `Sequence` | array |

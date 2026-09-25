@@ -102,6 +102,27 @@ modes) and fails when the committed inventory differs from a fresh scan. It test
 the reference implementation, not Kotlin; it proves that the inventoried tests are
 the ones that exist and pass upstream.
 
+## Public API
+
+[JavaScriptApiMapping.json](Documentation/JavaScriptApiMapping.json) maps every
+public member of the pinned `socket.io-client` API (the `io()` entry point,
+`Socket`, `Manager`, the Emitter methods both inherit, `ManagerOptions`,
+`SocketOptions` and the Engine.IO options) to Kotlin. `scripts/check-api-parity.py`
+verifies each Kotlin symbol against the `api/*.api` dumps and, in CI, that the
+mapped members are exactly those declared in the pinned TypeScript source. Its
+summary is recorded in
+[ApiParitySummary.json](Documentation/ReviewEvidence/ApiParitySummary.json):
+
+| Status | Members |
+| --- | ---: |
+| `implemented` (same name and meaning) | 76 |
+| `adapted` (same capability, Kotlin form; each has a note) | 23 |
+| `not-applicable` (`autoUnref`, `useNativeTimers`, `closeOnBeforeunload`, `rejectUnauthorized`, the manager's internal `emit`) | 5 |
+| `not-implemented` (`parser`: a custom parser cannot be plugged in) | 1 |
+| **Total** | **105** |
+
+99 of the 100 applicable members are available.
+
 ## Deliberate differences
 
 These are documented in the [compatibility guide](Documentation/Guides/Compatibility.md)

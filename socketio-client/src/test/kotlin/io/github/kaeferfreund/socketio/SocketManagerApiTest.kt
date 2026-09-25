@@ -337,6 +337,57 @@ class SocketManagerApiTest {
             h.close()
         }
 
+    // The Manager's inherited Emitter methods: once, listeners, hasListeners, removeAllListeners.
+    @Test
+    fun managerListenersCanRunOnceBeInspectedAndBeRemoved() =
+        runClientTest {
+            val h = clientHarness()
+            val opens = ArrayList<String>()
+            val manager = h.manager { autoConnect = false }
+            assertFalse(manager.hasListeners(ManagerEvent.Open::class.java))
+            manager.once<ManagerEvent.Open> { opens += "once" }
+            val always: (ManagerEvent.Open) -> Unit = { opens += "always" }
+            manager.on(ManagerEvent.Open::class.java, always)
+            manager.on<ManagerEvent.Close> { opens += "close" }
+            assertTrue(manager.hasListeners(ManagerEvent.Open::class.java))
+            assertEquals(2, manager.listeners(ManagerEvent.Open::class.java).size)
+            val socket = manager.socket("/")
+            socket.connect()
+            h.settle()
+            socket.disconnect()
+            h.settle()
+            socket.connect()
+            h.settle()
+            assertEquals(listOf("once", "always", "close", "always"), opens)
+            assertEquals(listOf(always), manager.listeners(ManagerEvent.Open::class.java))
+            manager.removeAllListeners(ManagerEvent.Open::class.java)
+            assertFalse(manager.hasListeners(ManagerEvent.Open::class.java))
+            assertTrue(manager.hasListeners(ManagerEvent.Close::class.java))
+            manager.removeAllListeners()
+            assertFalse(manager.hasListeners(ManagerEvent.Close::class.java))
+            socket.disconnect()
+            h.settle()
+            assertEquals(listOf("once", "always", "close", "always"), opens)
+            h.close()
+        }
+
+    // Misconfiguration fails when the options are built, not later inside a reconnect loop.
+    @Test
+    fun invalidOptionsAreRejectedWhenBuilt() {
+        assertThrows<IllegalArgumentException> { SocketManagerOptions { reconnectionAttempts = -1 } }
+        assertThrows<IllegalArgumentException> { SocketManagerOptions { reconnectionDelay = (-1).seconds } }
+        assertThrows<IllegalArgumentException> { SocketManagerOptions { reconnectionDelayMax = (-1).seconds } }
+        assertThrows<IllegalArgumentException> { SocketManagerOptions { randomizationFactor = -0.1 } }
+        assertThrows<IllegalArgumentException> { SocketManagerOptions { timeout = (-1).seconds } }
+        assertThrows<IllegalArgumentException> { SocketManagerOptions { eventFlowCapacity = 0 } }
+        SocketManagerOptions {
+            reconnectionAttempts = 0
+            reconnectionDelay = kotlin.time.Duration.ZERO
+            randomizationFactor = 1.0
+            timeout = null
+        }
+    }
+
     @Test
     fun integrationsStoreTypedValuesInTheOptions() {
         val key = SocketManagerOptions.Key<String>("demo")

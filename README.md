@@ -16,6 +16,9 @@
   <a href="gradle/libs.versions.toml"><img src="https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&amp;logoColor=white" alt="Kotlin 2.4"></a>
   <a href="#requirements"><img src="https://img.shields.io/badge/Android-API%2026%2B-3DDC84?logo=android&amp;logoColor=white" alt="Android API 26+"></a>
   <a href="#requirements"><img src="https://img.shields.io/badge/JVM-17%2B-E76F00?logo=openjdk&amp;logoColor=white" alt="JVM 17+"></a>
+  <a href="#coverage"><img src="https://img.shields.io/badge/line%20coverage-97.3%25-2EA44F" alt="Line coverage 97.3 %"></a>
+  <a href="#coverage"><img src="https://img.shields.io/badge/JS%20tests-252%2F252%20supported-2EA44F" alt="252 of 252 supported JavaScript tests ported"></a>
+  <a href="#coverage"><img src="https://img.shields.io/badge/JS%20API-99%2F100-2EA44F" alt="99 of 100 applicable JavaScript API members"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0969DA" alt="MIT License"></a>
 </p>
 
@@ -197,6 +200,31 @@ for the exact revision you plan to use. [PARITY.md](PARITY.md) separates support
 behaviour from API/platform differences and unsupported features, with numbers
 produced by the validator. Passing tests do **not** establish universal JavaScript
 parity, and emulator runs do not replace field tests on physical devices.
+
+### Coverage
+
+Numbers from the validators and coverage reports, recorded in
+[Documentation/ReviewEvidence](Documentation/ReviewEvidence/README.md); CI
+regenerates them on every run.
+
+**Code coverage** (Kover):
+
+| Scope | Lines | Branches | Methods |
+| --- | ---: | ---: | ---: |
+| JVM modules, every JVM suite including end-to-end | 97.3&nbsp;% (3 005/3 087) | 83.5&nbsp;% (2 034/2 437) | 92.6&nbsp;% (738/797) |
+| `socketio-android` under Robolectric | 91.1&nbsp;% (256/281) | 67.8&nbsp;% (103/152) | 84.7&nbsp;% (72/85) |
+
+The Android numbers leave out the emulator tests, which Kover cannot measure. Most
+uncovered branches are defensive: nullable fallbacks, copy-builder defaults and
+cases the parser already rules out.
+
+**JavaScript coverage:**
+
+| What | Covered | Evidence |
+| --- | --- | --- |
+| Upstream runtime tests (`socket.io-client`, `engine.io-client`, both parsers) | **252 of 297** ported with passing Kotlin tests; the other 45 are browser/Node-only (33), WebTransport (11) or a JavaScript-only API (1) | [PARITY.md](PARITY.md), [ParitySummary.json](Documentation/ReviewEvidence/ParitySummary.json) |
+| Public JavaScript API (`io()`, `Socket`, `Manager`, Emitter methods, all options) | **99 of 100** applicable members: 76 with the same name, 23 in a Kotlin form; missing: a custom `parser`. 5 members are Node/browser-only or deliberately left out (`rejectUnauthorized`) | [JavaScriptApiMapping.json](Documentation/JavaScriptApiMapping.json), [ApiParitySummary.json](Documentation/ReviewEvidence/ApiParitySummary.json) |
+| Parser behaviour | 0 differences to the pinned JavaScript parser over 5,000 valid, 29 malformed and 2 × 1,000 encoded packets | [DecoderDifferential.json](Documentation/ReviewEvidence/DecoderDifferential.json) |
 
 ## Important boundaries
 

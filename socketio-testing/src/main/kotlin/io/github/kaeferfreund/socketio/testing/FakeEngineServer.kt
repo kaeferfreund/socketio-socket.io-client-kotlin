@@ -91,6 +91,9 @@ public class FakeEngineServer(
     /** Answer the pending long poll with a `noop` when a probe arrives, as engine.io does. */
     public var releasePollOnProbe: Boolean = true
 
+    /** The data of the pong that answers the `2probe` ping; anything but `"probe"` makes the client reject the upgrade. */
+    public var probeAnswer: String = "probe"
+
     /** Holds requests matching the predicate forever (for timeout tests). */
     public var stall: (RecordedRequest) -> Boolean = { false }
 
@@ -478,7 +481,7 @@ public class FakeEngineServer(
                 if (probing) {
                     when {
                         packet.type == EngineIOPacketType.PING && packet.text == "probe" -> {
-                            deliverPacket(EngineIOPacket(EngineIOPacketType.PONG, "probe"))
+                            deliverPacket(EngineIOPacket(EngineIOPacketType.PONG, probeAnswer))
                             // Release the pending long poll so the client can pause polling.
                             if (releasePollOnProbe) session.sendPacket(EngineIOPacket(EngineIOPacketType.NOOP))
                         }

@@ -224,6 +224,18 @@ class SocketIOParserTest {
         assertTrue(error.message!!.contains("maxNestingDepth"))
     }
 
+    // The limit counts UTF-8 bytes like Node's Buffer.byteLength: a surrogate pair is 4 bytes,
+    // a lone surrogate 3 (its replacement character), so an emoji cannot slip past as 2 chars.
+    @Test
+    fun theTextLimitCountsUtf8BytesOfSurrogatePairs() {
+        val emoji = "2[\"\uD83D\uDE00\"]"
+        assertEquals(socketIOArray("\uD83D\uDE00"), SocketIODecoder(SocketParserOptions(maxTextPacketBytes = 9)).add(emoji)?.data)
+        assertThrows<SocketIOParseException> { SocketIODecoder(SocketParserOptions(maxTextPacketBytes = 8)).add(emoji) }
+        val lone = "2[\"\uD83D\"]"
+        SocketIODecoder(SocketParserOptions(maxTextPacketBytes = 8)).add(lone)
+        assertThrows<SocketIOParseException> { SocketIODecoder(SocketParserOptions(maxTextPacketBytes = 7)).add(lone) }
+    }
+
     @Test
     fun rejectsInvalidParserOptions() {
         assertThrows<IllegalArgumentException> { SocketParserOptions(maxAttachments = 0) }

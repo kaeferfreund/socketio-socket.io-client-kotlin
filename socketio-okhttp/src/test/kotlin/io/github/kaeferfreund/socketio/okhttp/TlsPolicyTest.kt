@@ -100,6 +100,16 @@ class TlsPolicyTest {
         assertEquals("ok", call(trust.withClientCertificate(keyManager)).getOrThrow().body)
     }
 
+    // Adding a client certificate must not replace the trust store: without customTrust the
+    // system store still decides, so a server from a private CA stays untrusted.
+    @Test
+    fun aClientCertificateAloneKeepsTheSystemTrust() {
+        startHttps()
+        val client = HeldCertificate.Builder().signedBy(ca).commonName("client").build()
+        val keyManager = HandshakeCertificates.Builder().heldCertificate(client, ca.certificate).build().keyManager
+        assertTrue(call(TlsPolicy.systemDefault().withClientCertificate(keyManager)).exceptionOrNull() is SSLException)
+    }
+
     @Test
     fun validatesItsArguments() {
         assertThrows<IllegalArgumentException> { TlsPolicy.customTrust(emptyList()) }

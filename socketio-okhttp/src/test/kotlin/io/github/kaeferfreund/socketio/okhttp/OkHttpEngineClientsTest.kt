@@ -309,6 +309,48 @@ class OkHttpEngineClientsTest {
         server.enqueue(MockResponse.Builder().onResponseStart(SocketEffect.ShutdownConnection).build())
         assertTrue(execute(OkHttpEngineClients(), get()).isFailure)
     }
+
+    // The documented way to add a proxy, cookie jar or interceptor on the JVM: the base client
+    // and every configure block apply to the transports' requests.
+    @Test
+    fun theOkHttpBuilderAppliesTheBaseClientAndItsCustomizations() {
+        val seen = java.util.Collections.synchronizedList(ArrayList<String>())
+        val base =
+            okhttp3.OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    seen += "base"
+                    chain.proceed(chain.request())
+                }.build()
+        val options =
+            io.github.kaeferfreund.socketio.SocketManagerOptions {
+                okHttp {
+                    client = base
+                    configure {
+                        addInterceptor { chain ->
+                            seen += "configured"
+                            chain.proceed(chain.request().newBuilder().header("X-Configured", "yes").build())
+                        }
+                    }
+                }
+            }
+        server.enqueue(MockResponse.Builder().body("ok").build())
+        val future = CompletableFuture<Result<EngineHttpResponse>>()
+        options.engine.clients!!.http!!.execute(
+            get(),
+            object : EngineHttpCallback {
+                override fun onResponse(response: EngineHttpResponse) {
+                    future.complete(Result.success(response))
+                }
+
+                override fun onFailure(error: Throwable) {
+                    future.complete(Result.failure(error))
+                }
+            },
+        )
+        assertEquals("ok", future.get(10, TimeUnit.SECONDS).getOrThrow().body)
+        assertEquals(listOf("base", "configured"), seen)
+        assertEquals("yes", server.takeRequest().headers["X-Configured"])
+    }
 }
 
 /** JS-217, JS-218: the Node `agent` option's counterpart is a caller-supplied OkHttp client. */

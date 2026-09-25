@@ -33,6 +33,10 @@ jobs:
         run: python3 scripts/test-review-regressions.py
       - name: Check parity contracts against the test sources
         run: python3 scripts/check-parity-contracts.py --strict
+      - name: Test the API mapping checker
+        run: python3 scripts/test-api-parity.py
+      - name: Every mapped JavaScript API member resolves to a Kotlin symbol
+        run: python3 scripts/check-api-parity.py
       - name: Shell syntax
         run: for f in scripts/*.sh; do bash -n "$f"; done
       - name: No generated or secret files are tracked
@@ -62,7 +66,8 @@ jobs:
       - name: Compile, test, lint, detekt, Android lint and API check
         run: ./gradlew check -x :e2e-tests:test --continue
       - name: Coverage report
-        run: ./gradlew koverXmlReport
+        # Per-module reports; the merged one (with end-to-end) is produced by the e2e job.
+        run: ./gradlew koverXmlReport -x :koverXmlReport -x :e2e-tests:test
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:
@@ -132,10 +137,16 @@ jobs:
           python3 scripts/check-parity-contracts.py --strict \
             --junit 'results/**/*.xml' --summary "$RUNNER_TEMP/parity-summary.json"
           cat "$RUNNER_TEMP/parity-summary.json"
+      - name: Coverage of this run (JVM across all suites; Android under Robolectric)
+        run: |
+          python3 scripts/coverage-summary.py --jvm results/e2e/build/reports/kover/report.xml \
+            --android results/jvm/socketio-android/build/reports/kover/report.xml --out "$RUNNER_TEMP/coverage-summary.json"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: parity-summary
-          path: ${{ runner.temp }}/parity-summary.json
+          path: |
+            ${{ runner.temp }}/parity-summary.json
+            ${{ runner.temp }}/coverage-summary.json
           retention-days: 30
 
   parser-parity:
@@ -195,6 +206,11 @@ jobs:
           node-version: 24
       - name: Original Node suites (browser and WebTransport runners excluded)
         run: bash scripts/test-upstream-clients.sh "$GITHUB_WORKSPACE/upstream-reference" "$RUNNER_TEMP/upstream-client-results"
+      - name: The API mapping covers exactly the pinned upstream API
+        run: |
+          python3 scripts/check-api-parity.py --upstream "$GITHUB_WORKSPACE/upstream-reference" \
+            --summary "$RUNNER_TEMP/upstream-client-results/api-parity-summary.json"
+          cat "$RUNNER_TEMP/upstream-client-results/api-parity-summary.json"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:

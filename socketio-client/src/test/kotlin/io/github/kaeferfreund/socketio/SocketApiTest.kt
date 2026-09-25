@@ -258,4 +258,27 @@ class SocketApiTest {
             SocketIO.closeAll()
         }
     }
+
+    // The troubleshooting guide tells users to read the HTTP status of a failed poll (for
+    // example a proxy's 502 or an expired session's 400) from the disconnect details.
+    @Test
+    fun aFailedPollReportsItsHttpStatusInTheDisconnectDetails() =
+        runClientTest {
+            val h = clientHarness()
+            val details = ArrayList<Pair<DisconnectReason, DisconnectDetails?>>()
+            val manager =
+                h.manager {
+                    transports = listOf(Transport.POLLING)
+                    reconnection = false
+                }
+            manager.socket("/") { onDisconnect { reason, detail -> details += reason to detail } }
+            h.settle()
+            h.server.engine.sessions.values.single().failPendingPoll(502, "bad gateway")
+            h.settle()
+            val (reason, detail) = details.single()
+            assertEquals(DisconnectReason.TRANSPORT_ERROR, reason)
+            assertEquals(502, detail!!.statusCode)
+            assertEquals("xhr poll error", detail.description)
+            h.close()
+        }
 }

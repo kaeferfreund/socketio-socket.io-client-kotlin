@@ -347,13 +347,18 @@ public final class io/github/kaeferfreund/socketio/SocketManager : java/lang/Aut
 	public final fun getTimeout-FghU774 ()Lkotlin/time/Duration;
 	public final fun getTransportName ()Lkotlinx/coroutines/flow/StateFlow;
 	public final fun getUri ()Ljava/lang/String;
+	public final fun hasListeners (Ljava/lang/Class;)Z
 	public final fun isPaused ()Z
+	public final fun listeners (Ljava/lang/Class;)Ljava/util/List;
 	public final fun on (Ljava/lang/Class;Lkotlin/jvm/functions/Function1;)Lio/github/kaeferfreund/socketio/Subscription;
 	public final fun onNetworkLost ()V
+	public final fun once (Ljava/lang/Class;Lkotlin/jvm/functions/Function1;)Lio/github/kaeferfreund/socketio/Subscription;
 	public final fun open ()Lio/github/kaeferfreund/socketio/SocketManager;
 	public final fun open (Lkotlin/jvm/functions/Function1;)Lio/github/kaeferfreund/socketio/SocketManager;
 	public final fun pause ()V
 	public final fun reconnectNow ()V
+	public final fun removeAllListeners (Ljava/lang/Class;)V
+	public static synthetic fun removeAllListeners$default (Lio/github/kaeferfreund/socketio/SocketManager;Ljava/lang/Class;ILjava/lang/Object;)V
 	public final fun resume ()V
 	public final fun setNetworkAvailable (Z)V
 	public final fun setRandomizationFactor (D)V

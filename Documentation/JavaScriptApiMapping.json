@@ -1,0 +1,725 @@
+{
+  "upstream_sha": "aaf2af36ec8ad05910f357a788e0e358bad32738",
+  "scope": "The public API of socket.io-client at the pinned commit (the io() entry point, Socket, Manager, their inherited Emitter methods, and the options), mapped to Kotlin symbols that scripts/check-api-parity.py verifies against the api/*.api dumps.",
+  "statuses": {
+    "implemented": "Same name and meaning",
+    "adapted": "Same capability under a Kotlin or Android form; the note says which",
+    "not-applicable": "Browser or Node concept without a JVM/Android counterpart, or deliberately left out; the reason says why",
+    "not-implemented": "A JavaScript capability this client does not offer"
+  },
+  "surfaces": [
+    {
+      "name": "io() entry point",
+      "source": "packages/socket.io-client/lib/index.ts",
+      "kind": "exports",
+      "members": {
+        "lookup": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketIO#io"
+          ],
+          "note": "`SocketIO.io(uri, options, socketOptions)`; JavaScript's single options object is split into manager and socket options."
+        },
+        "io": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketIO#io"
+          ]
+        },
+        "connect": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketIO#connect"
+          ]
+        },
+        "Manager": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager"
+          ],
+          "note": "`SocketManager`."
+        },
+        "Socket": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket"
+          ]
+        },
+        "protocol": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketIO#PROTOCOL"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Socket",
+      "source": "packages/socket.io-client/lib/socket.ts",
+      "kind": "class",
+      "declaration": "Socket",
+      "members": {
+        "active": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#getActive"
+          ]
+        },
+        "auth": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketOptions$Builder#setAuth",
+            "io/github/kaeferfreund/socketio/SocketOptions$Builder#setAuthProvider"
+          ],
+          "note": "Set once in `SocketOptions.auth`, or as a suspending `AuthProvider` that runs before every attempt (the JavaScript pattern of updating `socket.auth` before reconnecting)."
+        },
+        "close": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#close"
+          ]
+        },
+        "compress": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#compress"
+          ]
+        },
+        "connect": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#connect"
+          ]
+        },
+        "connected": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#getConnected"
+          ]
+        },
+        "disconnect": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#disconnect"
+          ]
+        },
+        "disconnected": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#getDisconnected"
+          ]
+        },
+        "emit": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#emit"
+          ]
+        },
+        "emitWithAck": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#emitWithAck"
+          ]
+        },
+        "id": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#getId"
+          ]
+        },
+        "io": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#getManager"
+          ],
+          "note": "`socket.manager`."
+        },
+        "listenersAny": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#listenersAny"
+          ]
+        },
+        "listenersAnyOutgoing": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#listenersAnyOutgoing"
+          ]
+        },
+        "offAny": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#offAny"
+          ]
+        },
+        "offAnyOutgoing": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#offAnyOutgoing"
+          ]
+        },
+        "onAny": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#onAny"
+          ]
+        },
+        "onAnyOutgoing": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#onAnyOutgoing"
+          ]
+        },
+        "open": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#open"
+          ]
+        },
+        "prependAny": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#prependAny"
+          ]
+        },
+        "prependAnyOutgoing": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#prependAnyOutgoing"
+          ]
+        },
+        "receiveBuffer": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#receiveBufferSnapshot"
+          ],
+          "note": "`receiveBufferSnapshot()`: a copy read on the protocol executor, since the buffer lives there."
+        },
+        "recovered": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#getRecovered"
+          ]
+        },
+        "send": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#send"
+          ]
+        },
+        "sendBuffer": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#sendBufferSnapshot"
+          ],
+          "note": "`sendBufferSnapshot()`, as `receiveBuffer`."
+        },
+        "timeout": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#timeout"
+          ]
+        },
+        "volatile": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#getVolatile"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Socket (inherited Emitter)",
+      "source": "packages/socket.io-component-emitter/lib/esm/index.d.ts",
+      "kind": "class",
+      "declaration": "Emitter",
+      "members": {
+        "emit": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#emit"
+          ]
+        },
+        "hasListeners": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#hasListeners"
+          ]
+        },
+        "listeners": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#listeners"
+          ]
+        },
+        "off": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#off"
+          ]
+        },
+        "on": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#on"
+          ]
+        },
+        "once": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#once"
+          ]
+        },
+        "removeAllListeners": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#removeAllListeners"
+          ]
+        },
+        "removeListener": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/Socket#off"
+          ],
+          "note": "`off(event, listener)`, its JavaScript alias."
+        }
+      }
+    },
+    {
+      "name": "Manager",
+      "source": "packages/socket.io-client/lib/manager.ts",
+      "kind": "class",
+      "declaration": "Manager",
+      "members": {
+        "connect": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#connect"
+          ]
+        },
+        "engine": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getTransportName",
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setPacketObserver"
+          ],
+          "note": "The Engine.IO socket is internal; `transportName`, `events` and `packetObserver` expose what applications read from it."
+        },
+        "open": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#open"
+          ]
+        },
+        "opts": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getOptions"
+          ],
+          "note": "`manager.options`."
+        },
+        "randomizationFactor": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getRandomizationFactor",
+            "io/github/kaeferfreund/socketio/SocketManager#setRandomizationFactor"
+          ]
+        },
+        "reconnection": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getReconnection",
+            "io/github/kaeferfreund/socketio/SocketManager#setReconnection"
+          ]
+        },
+        "reconnectionAttempts": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getReconnectionAttempts",
+            "io/github/kaeferfreund/socketio/SocketManager#setReconnectionAttempts"
+          ]
+        },
+        "reconnectionDelay": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getReconnectionDelay",
+            "io/github/kaeferfreund/socketio/SocketManager#setReconnectionDelay"
+          ]
+        },
+        "reconnectionDelayMax": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getReconnectionDelayMax",
+            "io/github/kaeferfreund/socketio/SocketManager#setReconnectionDelayMax"
+          ]
+        },
+        "socket": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#socket"
+          ]
+        },
+        "timeout": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#getTimeout",
+            "io/github/kaeferfreund/socketio/SocketManager#setTimeout"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Manager (inherited Emitter)",
+      "source": "packages/socket.io-component-emitter/lib/esm/index.d.ts",
+      "kind": "class",
+      "declaration": "Emitter",
+      "members": {
+        "on": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#on"
+          ]
+        },
+        "off": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/engineio/Cancellable#cancel"
+          ],
+          "note": "`on` returns a `Subscription`; `cancel()` removes the listener."
+        },
+        "emit": {
+          "status": "not-applicable",
+          "reason": "Manager events are emitted by the client itself; JavaScript applications do not emit them either."
+        },
+        "once": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#once"
+          ]
+        },
+        "listeners": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#listeners"
+          ]
+        },
+        "hasListeners": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#hasListeners"
+          ]
+        },
+        "removeListener": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/engineio/Cancellable#cancel"
+          ],
+          "note": "`Subscription.cancel()`."
+        },
+        "removeAllListeners": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManager#removeAllListeners"
+          ]
+        }
+      }
+    },
+    {
+      "name": "ManagerOptions",
+      "source": "packages/socket.io-client/lib/manager.ts",
+      "kind": "interface",
+      "declaration": "ManagerOptions",
+      "members": {
+        "autoConnect": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setAutoConnect"
+          ]
+        },
+        "forceNew": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setForceNew"
+          ]
+        },
+        "multiplex": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setMultiplex"
+          ]
+        },
+        "parser": {
+          "status": "not-implemented",
+          "reason": "A custom parser cannot be plugged in; `parserOptions` bounds the built-in one."
+        },
+        "path": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setPath"
+          ]
+        },
+        "randomizationFactor": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setRandomizationFactor"
+          ]
+        },
+        "reconnection": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setReconnection"
+          ]
+        },
+        "reconnectionAttempts": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setReconnectionAttempts"
+          ]
+        },
+        "reconnectionDelay": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setReconnectionDelay"
+          ]
+        },
+        "reconnectionDelayMax": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setReconnectionDelayMax"
+          ]
+        },
+        "timeout": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setTimeout"
+          ]
+        }
+      }
+    },
+    {
+      "name": "SocketOptions",
+      "source": "packages/socket.io-client/lib/socket.ts",
+      "kind": "interface",
+      "declaration": "SocketOptions",
+      "members": {
+        "ackTimeout": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketOptions$Builder#setAckTimeout"
+          ]
+        },
+        "auth": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketOptions$Builder#setAuth",
+            "io/github/kaeferfreund/socketio/SocketOptions$Builder#setAuthProvider"
+          ]
+        },
+        "retries": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketOptions$Builder#setRetries"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Engine options",
+      "source": "packages/engine.io-client/lib/socket.ts",
+      "kind": "interface",
+      "declaration": "SocketOptions",
+      "members": {
+        "addTrailingSlash": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setAddTrailingSlash"
+          ]
+        },
+        "agent": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/okhttp/OkHttpClientsBuilder#setClient"
+          ],
+          "note": "A caller-supplied OkHttp client: `okHttp { client = … }`."
+        },
+        "autoUnref": {
+          "status": "not-applicable",
+          "reason": "Node's event-loop reference counting; closing the manager releases its resources."
+        },
+        "ca": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/okhttp/TlsPolicy#customTrust"
+          ],
+          "note": "`TlsPolicy.customTrust(anchors)`."
+        },
+        "cert": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/okhttp/TlsPolicy#withClientCertificate"
+          ],
+          "note": "`TlsPolicy.withClientCertificate(keyManager)`."
+        },
+        "ciphers": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/okhttp/OkHttpClientsBuilder#configure"
+          ],
+          "note": "OkHttp `ConnectionSpec` through `okHttp { configure { connectionSpecs(…) } }`."
+        },
+        "closeOnBeforeunload": {
+          "status": "not-applicable",
+          "reason": "Browser `beforeunload`; on Android the background policy decides when to disconnect."
+        },
+        "extraHeaders": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setExtraHeaders"
+          ]
+        },
+        "forceBase64": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setForceBase64"
+          ]
+        },
+        "host": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/engineio/EngineOptions#getHost"
+          ],
+          "note": "On `EngineOptions`; with a manager the URL sets it, as in JavaScript."
+        },
+        "hostname": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/engineio/EngineOptions#getHost"
+          ],
+          "note": "From the URL, as in JavaScript's manager."
+        },
+        "key": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/okhttp/TlsPolicy#withClientCertificate"
+          ],
+          "note": "Part of the client certificate: `withClientCertificate(keyManager)` or a PKCS#12 file."
+        },
+        "passphrase": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/okhttp/TlsPolicy#withClientCertificate"
+          ],
+          "note": "`withClientCertificate(pkcs12, password)`."
+        },
+        "path": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setPath"
+          ]
+        },
+        "perMessageDeflate": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setPerMessageDeflateThreshold"
+          ],
+          "note": "`perMessageDeflateThreshold`; `null` offers no compression. OkHttp compresses by size, not per message."
+        },
+        "pfx": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/okhttp/TlsPolicy#withClientCertificate"
+          ],
+          "note": "`withClientCertificate(pkcs12, password)`."
+        },
+        "port": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/engineio/EngineOptions#getPort"
+          ],
+          "note": "On `EngineOptions`; with a manager the URL sets it, as in JavaScript."
+        },
+        "protocols": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setProtocols"
+          ]
+        },
+        "query": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setQuery"
+          ]
+        },
+        "rejectUnauthorized": {
+          "status": "not-applicable",
+          "reason": "Deliberately not offered: there is no way to turn certificate checks off. Trust a private CA with `customTrust` instead."
+        },
+        "rememberUpgrade": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setRememberUpgrade"
+          ]
+        },
+        "requestTimeout": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setRequestTimeout"
+          ]
+        },
+        "secure": {
+          "status": "adapted",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/engineio/EngineOptions#getSecure"
+          ],
+          "note": "On `EngineOptions`; with a manager the URL scheme sets it, as in JavaScript."
+        },
+        "timestampParam": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setTimestampParam"
+          ]
+        },
+        "timestampRequests": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setTimestampRequests"
+          ]
+        },
+        "transportOptions": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setTransportOptions"
+          ]
+        },
+        "transports": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setTransports"
+          ]
+        },
+        "tryAllTransports": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setTryAllTransports"
+          ]
+        },
+        "upgrade": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setUpgrade"
+          ]
+        },
+        "useNativeTimers": {
+          "status": "not-applicable",
+          "reason": "Node/browser timer selection; timers always run on the configured dispatcher."
+        },
+        "withCredentials": {
+          "status": "implemented",
+          "kotlin": [
+            "io/github/kaeferfreund/socketio/SocketManagerOptions$Builder#setWithCredentials"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -12,6 +12,7 @@ public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer : io
 	public final fun getOnConnection ()Lkotlin/jvm/functions/Function1;
 	public final fun getPingInterval-UwyO8pc ()J
 	public final fun getPingTimeout-UwyO8pc ()J
+	public final fun getProbeAnswer ()Ljava/lang/String;
 	public final fun getReleasePollOnProbe ()Z
 	public final fun getRequests ()Ljava/util/List;
 	public final fun getSessions ()Ljava/util/Map;
@@ -21,6 +22,7 @@ public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer : io
 	public final fun setHandshakeHeaders (Ljava/util/List;)V
 	public final fun setLatency-LRDsOJo (J)V
 	public final fun setOnConnection (Lkotlin/jvm/functions/Function1;)V
+	public final fun setProbeAnswer (Ljava/lang/String;)V
 	public final fun setReleasePollOnProbe (Z)V
 	public final fun setStall (Lkotlin/jvm/functions/Function1;)V
 }
