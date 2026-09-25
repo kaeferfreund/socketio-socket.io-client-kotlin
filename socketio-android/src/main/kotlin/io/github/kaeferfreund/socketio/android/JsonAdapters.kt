@@ -86,12 +86,16 @@ public fun fromJson(value: Any?): SocketIOValue = SocketIOValue.of(value)
 /**
  * Streams a JSON document from [reader] with `android.util.JsonReader`,
  * without first materializing it as a string — for large payloads.
- * Nesting is handled iteratively.
+ * Nesting is handled iteratively. The document must hold exactly one value;
+ * anything after it fails like other malformed input.
  */
 public fun readSocketIOValue(reader: Reader): SocketIOValue {
     JsonReader(reader).use { json ->
         json.isLenient = false
-        return readValue(json)
+        val value = readValue(json)
+        // In strict mode, peek() throws for data after the value and reports END_DOCUMENT otherwise.
+        check(json.peek() == JsonToken.END_DOCUMENT) { "unexpected data after the JSON value" }
+        return value
     }
 }
 

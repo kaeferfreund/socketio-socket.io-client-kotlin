@@ -20,14 +20,17 @@ import javax.net.SocketFactory
  */
 internal class NetworkBinding(
     private val trafficStatsTag: Int?,
+    /** DNS while no network is bound, and the fallback for a failed bound lookup (the base client's). */
     private val systemDns: Dns = Dns.SYSTEM,
+    /** The socket factory while no network is bound (the base client's). */
+    private val defaultSocketFactory: SocketFactory = SocketFactory.getDefault(),
     private val lookupOnNetwork: (Network, String) -> List<InetAddress> = { network, host -> network.getAllByName(host).toList() },
 ) {
     @Volatile var network: Network? = null
 
     val socketFactory: SocketFactory =
         object : SocketFactory() {
-            private fun delegate(): SocketFactory = network?.socketFactory ?: getDefault()
+            private fun delegate(): SocketFactory = network?.socketFactory ?: defaultSocketFactory
 
             private fun tagged(socket: Socket): Socket {
                 val tag = trafficStatsTag ?: return socket

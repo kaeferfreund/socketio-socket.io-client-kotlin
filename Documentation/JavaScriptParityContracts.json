@@ -4711,7 +4711,7 @@
       "id": "KT-ANDROID",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Android integration under Robolectric: losing the network closes at once and its return reconnects without backoff; a new default network moves the connection; the background policy pauses and resumes, and coming back before the delay keeps the connection; the logger is gated by `Log.isLoggable`; the clock is `elapsedRealtime` and keeps counting in sleep; org.json values convert both ways and large, deep JSON streams with JsonReader; the configuration saves and restores; trim-memory releases idle connections; the Android options configure the manager; the KeyChain key manager serves only its alias. Starting without a network spends no reconnection attempts until one arrives; capability changes of the current network update `metered`/`validated`; the Android OkHttp stack (network-bound sockets and DNS, traffic tag, `configureOkHttp`) carries real requests; long trace section names never reach Trace; the streaming reader keeps every JSON type; a VPN default network is left unbound and a failed bound lookup falls back to the system resolver (issue #1). Deep payloads convert to and from org.json without recursion.",
+      "assertions": "Android integration under Robolectric: losing the network closes at once and its return reconnects without backoff; a new default network moves the connection; the background policy pauses and resumes, and coming back before the delay keeps the connection; the logger is gated by `Log.isLoggable`; the clock is `elapsedRealtime` and keeps counting in sleep; org.json values convert both ways and large, deep JSON streams with JsonReader; the configuration saves and restores; trim-memory releases idle connections; the Android options configure the manager; the KeyChain key manager serves only its alias. Starting without a network spends no reconnection attempts until one arrives; capability changes of the current network update `metered`/`validated`; the Android OkHttp stack (network-bound sockets and DNS, traffic tag, `configureOkHttp`) carries real requests; long trace section names never reach Trace; the streaming reader keeps every JSON type; a VPN default network is left unbound and a failed bound lookup falls back to the system resolver (issue #1). Deep payloads convert to and from org.json without recursion. configureOkHttp applies on top of the network binding and an unbound manager keeps the base client's DNS; the background policy applies to a manager created in the background, an infinite delay never pauses, closing before the queued registration leaves no observer; a KeyChain failure yields no certificate instead of an exception; the JSON reader rejects data after the value.",
       "tests": [
         {
           "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
@@ -4804,6 +4804,30 @@
         {
           "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.convertsDeepPayloadsToAndFromOrgJsonWithoutRecursion"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidPlatformTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidPlatformTest.configureOkHttpIsAppliedOnTopOfTheNetworkBinding"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidPlatformTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidPlatformTest.readingJsonRejectsDataAfterTheValue"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.aKeyChainFailureEndsTheHandshakeWithoutACertificateInsteadOfThrowing"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.theBackgroundPolicyAppliesToAManagerCreatedInTheBackground"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.anInfiniteBackgroundDelayNeverPauses"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.closingBeforeTheQueuedRegistrationRunsLeavesNoObserver"
         }
       ]
     }

@@ -10,7 +10,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.test.core.app.ApplicationProvider
 import io.github.kaeferfreund.socketio.DisconnectReason
-import io.github.kaeferfreund.socketio.ManagerEvent
 import io.github.kaeferfreund.socketio.SocketManager
 import io.github.kaeferfreund.socketio.SocketManagerOptions
 import io.github.kaeferfreund.socketio.engineio.LogLevel
@@ -39,8 +38,6 @@ import org.robolectric.shadows.ShadowNetwork
 import org.robolectric.shadows.ShadowSystemClock
 import java.io.StringReader
 import java.time.Duration
-import java.util.concurrent.TimeUnit
-import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 /** The Android integration under Robolectric: network callbacks, lifecycle, logging and adapters. */
@@ -320,8 +317,91 @@ class AndroidIntegrationTest {
         assertNull(keyManager.getCertificateChain("other"))
         assertNull(keyManager.getPrivateKey("other"))
         assertNull(keyManager.getServerAliases("RSA", null))
-        TimeUnit.MILLISECONDS.hashCode()
-        ManagerEvent.Open.hashCode()
-        1.milliseconds.hashCode()
+    }
+
+    @Test
+    fun aKeyChainFailureEndsTheHandshakeWithoutACertificateInsteadOfThrowing() {
+        val keyManager =
+            KeyChainKeyManager(
+                context,
+                "client",
+                readChain = { _, _ -> throw android.security.KeyChainException("key invalidated") },
+                readKey = { _, _ -> throw InterruptedException() },
+            )
+        assertNull(keyManager.getCertificateChain("client"))
+        assertNull(keyManager.getPrivateKey("client"))
+        assertTrue(Thread.interrupted())
+    }
+
+    @Test
+    fun theBackgroundPolicyAppliesToAManagerCreatedInTheBackground() =
+        guarded {
+            val server = FakeSocketIOServer(backgroundScope)
+            val lifecycle = TestLifecycleOwner(Lifecycle.State.CREATED)
+            val manager =
+                SocketManager(
+                    "http://fake.test",
+                    SocketManagerOptions {
+                        clients = server.clients
+                        dispatcher = StandardTestDispatcher(testScheduler)
+                        timeSource = testScheduler.timeSource
+                        plugins += BackgroundPolicyPlugin(BackgroundPolicy.DisconnectImmediately) { lifecycle }
+                    },
+                ).also { managers += it }
+            val socket = manager.socket("/")
+            shadowOf(Looper.getMainLooper()).idle()
+            runCurrent()
+            assertTrue(manager.isPaused)
+            assertFalse(socket.connected)
+            lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+            runCurrent()
+            assertTrue(socket.connected)
+            manager.close()
+            runCurrent()
+        }
+
+    @Test
+    fun anInfiniteBackgroundDelayNeverPauses() =
+        guarded {
+            val server = FakeSocketIOServer(backgroundScope)
+            val lifecycle = TestLifecycleOwner(Lifecycle.State.RESUMED)
+            val manager =
+                SocketManager(
+                    "http://fake.test",
+                    SocketManagerOptions {
+                        clients = server.clients
+                        dispatcher = StandardTestDispatcher(testScheduler)
+                        timeSource = testScheduler.timeSource
+                        plugins += BackgroundPolicyPlugin(BackgroundPolicy.DisconnectAfter(kotlin.time.Duration.INFINITE)) { lifecycle }
+                    },
+                ).also { managers += it }
+            val socket = manager.socket("/")
+            runCurrent()
+            shadowOf(Looper.getMainLooper()).idle()
+            lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+            shadowOf(Looper.getMainLooper()).idleFor(Duration.ofDays(1))
+            runCurrent()
+            assertFalse(manager.isPaused)
+            assertTrue(socket.connected)
+            manager.close()
+            runCurrent()
+        }
+
+    @Test
+    fun closingBeforeTheQueuedRegistrationRunsLeavesNoObserver() {
+        val lifecycle = TestLifecycleOwner(Lifecycle.State.RESUMED)
+        val manager = SocketManager("http://unused.test", SocketManagerOptions { autoConnect = false })
+        try {
+            var handle: io.github.kaeferfreund.socketio.engineio.Cancellable? = null
+            // Attached off the main thread, the registration is posted to the main looper.
+            val attach = Thread { handle = BackgroundPolicyPlugin(BackgroundPolicy.DisconnectImmediately) { lifecycle }.attach(manager) }
+            attach.start()
+            attach.join()
+            handle!!.cancel()
+            shadowOf(Looper.getMainLooper()).idle()
+            assertEquals(0, lifecycle.lifecycle.observerCount)
+        } finally {
+            manager.close()
+        }
     }
 }

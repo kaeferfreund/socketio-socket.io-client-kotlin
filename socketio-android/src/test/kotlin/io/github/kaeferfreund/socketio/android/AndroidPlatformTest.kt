@@ -10,6 +10,7 @@ import io.github.kaeferfreund.socketio.SocketManagerOptions
 import io.github.kaeferfreund.socketio.engineio.EngineHttpCallback
 import io.github.kaeferfreund.socketio.engineio.EngineHttpRequest
 import io.github.kaeferfreund.socketio.engineio.EngineHttpResponse
+import io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClients
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import io.github.kaeferfreund.socketio.testing.FakeSocketIOServer
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -18,8 +19,11 @@ import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
+import okhttp3.Dns
+import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -28,9 +32,12 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowNetworkCapabilities
 import org.robolectric.shadows.ShadowTrace
+import java.io.IOException
 import java.io.StringReader
+import java.net.InetAddress
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
+import javax.net.SocketFactory
 import kotlin.time.Duration.Companion.seconds
 
 /** The Android stack beyond the lifecycle: starting offline, network quality, the real OkHttp path, tracing and JSON streaming. */
@@ -120,6 +127,30 @@ class AndroidPlatformTest {
                 manager.close()
             }
         }
+
+    @Test
+    fun configureOkHttpIsAppliedOnTopOfTheNetworkBinding() {
+        val custom = Dns { listOf(InetAddress.getLoopbackAddress()) }
+        val bound = SocketManagerOptions { android(context) { configureOkHttp { dns(custom) } } }
+        assertSame(custom, (bound.engine.clients!!.http as OkHttpEngineClients).client.dns)
+        val unbound =
+            SocketManagerOptions {
+                android(context) {
+                    bindToActiveNetwork = false
+                    okHttpClient = OkHttpClient.Builder().dns(custom).build()
+                }
+            }
+        val client = (unbound.engine.clients!!.http as OkHttpEngineClients).client
+        assertSame(custom, client.dns)
+        assertSame(SocketFactory.getDefault(), client.socketFactory)
+    }
+
+    @Test
+    fun readingJsonRejectsDataAfterTheValue() {
+        assertThrows(IOException::class.java) { readSocketIOValue(StringReader("{\"a\":1} garbage")) }
+        assertThrows(IOException::class.java) { readSocketIOValue(StringReader("[1][2]")) }
+        assertEquals(SocketIOValue.arrayOf(1), readSocketIOValue(StringReader(" [1] ")))
+    }
 
     // The whole Android OkHttp stack: network-bound socket factory and DNS, traffic tag, and
     // configureOkHttp on top, against a real local HTTP server.

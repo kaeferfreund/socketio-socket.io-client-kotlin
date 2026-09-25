@@ -20,7 +20,10 @@ public sealed class BackgroundPolicy {
     /** Pause the connection as soon as the app goes to the background. */
     public object DisconnectImmediately : BackgroundPolicy()
 
-    /** Pause after the app stayed in the background for [delay]; coming back earlier cancels it. */
+    /**
+     * Pause after the app stayed in the background for [delay]; coming back earlier
+     * cancels it. `Duration.INFINITE` never pauses.
+     */
     public class DisconnectAfter(
         public val delay: Duration,
     ) : BackgroundPolicy() {
@@ -118,12 +121,14 @@ public fun SocketManagerOptions.Builder.android(
 ) {
     val settings = AndroidSocketOptions().apply(block)
     val appContext = context.applicationContext ?: context
-    val binding = NetworkBinding(settings.trafficStatsTag)
-    val builder = (settings.okHttpClient ?: OkHttpEngineClients.defaultClient).newBuilder()
+    val base = settings.okHttpClient ?: OkHttpEngineClients.defaultClient
+    val binding = NetworkBinding(settings.trafficStatsTag, systemDns = base.dns, defaultSocketFactory = base.socketFactory)
+    val builder = base.newBuilder()
     settings.tlsPolicy.applyTo(builder)
+    if (settings.bindToActiveNetwork || settings.trafficStatsTag != null) builder.socketFactory(binding.socketFactory)
+    if (settings.bindToActiveNetwork) builder.dns(binding.dns)
+    // Applied on top of the network binding: a DNS or socket factory set here wins.
     settings.okHttpCustomizations.forEach { builder.it() }
-    builder.socketFactory(binding.socketFactory)
-    builder.dns(binding.dns)
     val clients = OkHttpEngineClients(builder.build())
     this.clients = clients.clients
     timeSource = ElapsedRealtimeTimeSource

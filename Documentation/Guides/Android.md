@@ -99,7 +99,10 @@ of the process is started.
 | --- | --- |
 | `KeepAlive` | Stay connected (default). The system may still freeze the process |
 | `DisconnectImmediately` | Pause as soon as the app goes to the background |
-| `DisconnectAfter(delay)` | Pause after `delay` in the background; returning earlier cancels it |
+| `DisconnectAfter(delay)` | Pause after `delay` in the background; returning earlier cancels it. `Duration.INFINITE` never pauses |
+
+A manager created while the app is already in the background (the process was
+started for a push message or a job) follows the policy from the start.
 
 Pausing calls `manager.pause()`: the connection closes (sockets see
 `DisconnectReason.FORCED_CLOSE`) but every socket stays *active*. When the app
@@ -195,9 +198,10 @@ val manager = SocketManager(
 
 `chooseKeyChainAlias` returns `null` when the user cancels. The grant survives app
 restarts; store only the alias. `KeyChainKeyManager` reads the key during the TLS
-handshake on OkHttp's connection thread. If the user removes the certificate, the
-handshake fails and `connect_error` reports a `TransportException` with the TLS
-error as `cause`; ask for a new alias.
+handshake on OkHttp's connection thread. If the user removes the certificate, or
+the KeyChain cannot provide the key (for example after a lock-screen change
+invalidated it), the handshake fails and `connect_error` reports a
+`TransportException` with the TLS error as `cause`; ask for a new alias.
 
 ## Network Security Config
 

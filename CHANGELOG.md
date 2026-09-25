@@ -132,6 +132,15 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   merged with the option winning, under a comment that claimed JavaScript parity.
 - `EngineIOFrameDecoder` fails a frame longer than an array can hold with a
   parser error instead of a `NegativeArraySizeException`.
+- Android: `configureOkHttp` now applies on top of the network binding, as
+  documented, so a custom DNS or socket factory is kept; without
+  `bindToActiveNetwork` the base client's DNS stays. The background policy also
+  applies to a manager created while the app is in the background,
+  `DisconnectAfter(Duration.INFINITE)` no longer pauses at once, closing a manager
+  right after creating it off the main thread no longer leaves a lifecycle
+  observer behind, and a KeyChain failure during the TLS handshake is a
+  `connect_error` instead of an exception on OkHttp's thread.
+  `readSocketIOValue` rejects data after the JSON value.
 
 ### Validation
 

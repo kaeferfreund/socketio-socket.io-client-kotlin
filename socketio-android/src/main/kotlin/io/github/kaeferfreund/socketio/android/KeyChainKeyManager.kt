@@ -3,6 +3,7 @@ package io.github.kaeferfreund.socketio.android
 import android.app.Activity
 import android.content.Context
 import android.security.KeyChain
+import android.security.KeyChainException
 import io.github.kaeferfreund.socketio.okhttp.TlsPolicy
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.net.Socket
@@ -21,10 +22,14 @@ import kotlin.coroutines.resume
  * KeyChain calls block, so they happen on OkHttp's connection thread during
  * the TLS handshake, never on the main thread.
  */
-public class KeyChainKeyManager(
+public class KeyChainKeyManager internal constructor(
     context: Context,
     private val alias: String,
+    private val readChain: (Context, String) -> Array<X509Certificate>?,
+    private val readKey: (Context, String) -> PrivateKey?,
 ) : X509ExtendedKeyManager() {
+    public constructor(context: Context, alias: String) : this(context, alias, KeyChain::getCertificateChain, KeyChain::getPrivateKey)
+
     private val context = context.applicationContext ?: context
 
     override fun chooseClientAlias(
@@ -39,9 +44,24 @@ public class KeyChainKeyManager(
         engine: SSLEngine?,
     ): String = alias
 
-    override fun getCertificateChain(alias: String?): Array<X509Certificate>? = if (alias == this.alias) KeyChain.getCertificateChain(context, alias) else null
+    override fun getCertificateChain(alias: String?): Array<X509Certificate>? = if (alias == this.alias) fromKeyChain { readChain(context, alias) } else null
 
-    override fun getPrivateKey(alias: String?): PrivateKey? = if (alias == this.alias) KeyChain.getPrivateKey(context, alias) else null
+    override fun getPrivateKey(alias: String?): PrivateKey? = if (alias == this.alias) fromKeyChain { readKey(context, alias) } else null
+
+    /**
+     * A KeyChain failure (an invalidated key, an unavailable KeyChain service) ends the
+     * handshake without a client certificate, which the server reports as a TLS error:
+     * a `connect_error`. Thrown out of the key manager, it would kill OkHttp's thread.
+     */
+    private inline fun <T> fromKeyChain(read: () -> T?): T? =
+        try {
+            read()
+        } catch (e: KeyChainException) {
+            null
+        } catch (e: InterruptedException) {
+            Thread.currentThread().interrupt()
+            null
+        }
 
     override fun getClientAliases(
         keyType: String?,
