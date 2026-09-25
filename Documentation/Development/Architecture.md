@@ -55,7 +55,9 @@ parallelism 1. All state of the engine, its transports, the manager and every
 socket is read and written only there; it is the counterpart of the JavaScript
 event loop. Public methods (`emit`, `connect`, `on`, …) are safe from any thread:
 they run inline when already on the executor, which keeps JavaScript's ordering
-for a listener that emits, and are queued in FIFO order otherwise. Timers
+for a listener that emits, and are queued in FIFO order otherwise. A packet
+decoded from a transport event is handled right after that event, before other
+queued work (`ProtocolExecutor.nextTick`, JavaScript's microtask `nextTick`). Timers
 (reconnect delay, heartbeat, acknowledgement timeouts) are coroutines on the same
 executor, so a test dispatcher drives them on virtual time.
 

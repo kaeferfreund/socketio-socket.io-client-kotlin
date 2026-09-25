@@ -107,6 +107,10 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
 - An `AuthProvider` whose own `withTimeout` expires now fails the attempt
   with an `AuthProviderException` `connect_error`; the timeout used to be taken
   for a cancellation, leaving the socket connecting forever.
+- Decoded packets are handled in a microtask right after the transport event
+  that carried them, like JavaScript's `nextTick`. They used to be queued behind
+  transport events already waiting, so a CONNECT followed at once by a close
+  connected a socket of a closed manager.
 
 ### Validation
 

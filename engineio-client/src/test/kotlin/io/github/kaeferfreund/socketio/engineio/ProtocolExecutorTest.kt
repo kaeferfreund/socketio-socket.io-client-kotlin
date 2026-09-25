@@ -3,12 +3,16 @@ package io.github.kaeferfreund.socketio.engineio
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.seconds
 
 /** What counts as running on the executor, which decides between running inline and queueing. */
 class ProtocolExecutorTest {
@@ -33,6 +37,27 @@ class ProtocolExecutorTest {
             other.shutdown()
         }
     }
+
+    @Test
+    fun nextTickRunsBeforeWorkQueuedEarlierLikeAMicrotask() =
+        runTest {
+            val executor = ProtocolExecutor(StandardTestDispatcher(testScheduler), testScheduler.timeSource)
+            val order = ArrayList<String>()
+            executor.post {
+                order += "a"
+                executor.nextTick { order += "a: tick 1" }
+                executor.nextTick { order += "a: tick 2" }
+            }
+            executor.post { order += "b" }
+            executor.schedule(1.seconds) {
+                order += "timer"
+                executor.nextTick { order += "timer: tick" }
+            }
+            executor.post { order += "c" }
+            advanceUntilIdle()
+            assertEquals(listOf("a", "a: tick 1", "a: tick 2", "b", "c", "timer", "timer: tick"), order)
+            executor.shutdown()
+        }
 
     @Test
     fun withContextToAnotherDispatcherLeavesTheExecutorAndComesBack() {

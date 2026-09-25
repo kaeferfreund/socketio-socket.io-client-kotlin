@@ -4291,7 +4291,7 @@
       "id": "KT-CONCURRENCY",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Lincheck proves the protocol executor and the listener registry linearizable; many threads emitting with acknowledgements lose and duplicate nothing; concurrent connect and disconnect end in a consistent state. A coroutine on another dispatcher, such as a listener callback on the callback dispatcher or a provider's withContext, is not on the executor, so what it calls is queued there instead of running inline.",
+      "assertions": "Lincheck proves the protocol executor and the listener registry linearizable; many threads emitting with acknowledgements lose and duplicate nothing; concurrent connect and disconnect end in a consistent state. A coroutine on another dispatcher, such as a listener callback on the callback dispatcher or a provider's withContext, is not on the executor, so what it calls is queued there instead of running inline. nextTick runs right after the current task, before work queued earlier, like a JavaScript microtask.",
       "tests": [
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/ConcurrencyTest.kt",
@@ -4320,6 +4320,10 @@
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/ConcurrencyTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.ConcurrencyTest.aListenerOnTheCallbackDispatcherQueuesItsCallsOnTheExecutor"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/ProtocolExecutorTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.ProtocolExecutorTest.nextTickRunsBeforeWorkQueuedEarlierLikeAMicrotask"
         }
       ]
     },
@@ -4327,7 +4331,7 @@
       "id": "KT-CLIENT-API",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Kotlin API contracts: `emitWithAck` returns every argument and cancelling it withdraws the acknowledgement, the buffered packet and the retry entry; timed-out buffered emits leave the buffer; server acknowledgement requests are answered once and unknown ack ids ignored; reserved names and unsupported arguments fail synchronously; the auth provider runs before every connect, a throwing provider fails the attempt, late results are dropped and a slow provider delays only its namespace; buffer limits reject new emits and an overfull receive buffer or an incomplete binary packet past its deadline closes the connection; once/off/any listeners, lifecycle events, flows and outgoing interceptors behave as documented; the retry queue reads acknowledgements err-first and volatile emits bypass it; recovery replays missed events, takes offsets only from plain events and merges user auth after pid and offset; the manager caps backoff (and keeps it at the maximum where JavaScript's degenerates to 0 ms after about 1,024 attempts), emits one close, defers reconnection while offline, honours `reconnectNow`, isolates listener exceptions, shares one connection and closes it with the last socket; setup blocks run once; a missing HTTP stack is a connect error. The JavaScript Manager API: runtime reconnection setters take effect on the next attempt and validate their input, switching reconnection off stops a pending attempt, the connect timeout ends a handshake that never completes, `open(callback)` reports once without reconnecting; `pause`/`resume`, `onNetworkLost`, balanced tracer sections, the callback dispatcher, logged listener exceptions. A server-side disconnect ends the session without reconnecting; CONNECT_ERROR payloads follow socket.io-parser (text is the message, null is a parse error); byte limits of the receive buffer and retry queue; incoming acknowledgements answer once; `send`, `open`, `removeAllListeners`, emitter flag chaining, partial interceptors and `SocketIO.connect`. A provider that times out on its own (withTimeout) fails the attempt with connect_error.",
+      "assertions": "Kotlin API contracts: `emitWithAck` returns every argument and cancelling it withdraws the acknowledgement, the buffered packet and the retry entry; timed-out buffered emits leave the buffer; server acknowledgement requests are answered once and unknown ack ids ignored; reserved names and unsupported arguments fail synchronously; the auth provider runs before every connect, a throwing provider fails the attempt, late results are dropped and a slow provider delays only its namespace; buffer limits reject new emits and an overfull receive buffer or an incomplete binary packet past its deadline closes the connection; once/off/any listeners, lifecycle events, flows and outgoing interceptors behave as documented; the retry queue reads acknowledgements err-first and volatile emits bypass it; recovery replays missed events, takes offsets only from plain events and merges user auth after pid and offset; the manager caps backoff (and keeps it at the maximum where JavaScript's degenerates to 0 ms after about 1,024 attempts), emits one close, defers reconnection while offline, honours `reconnectNow`, isolates listener exceptions, shares one connection and closes it with the last socket; setup blocks run once; a missing HTTP stack is a connect error. The JavaScript Manager API: runtime reconnection setters take effect on the next attempt and validate their input, switching reconnection off stops a pending attempt, the connect timeout ends a handshake that never completes, `open(callback)` reports once without reconnecting; `pause`/`resume`, `onNetworkLost`, balanced tracer sections, the callback dispatcher, logged listener exceptions. A server-side disconnect ends the session without reconnecting; CONNECT_ERROR payloads follow socket.io-parser (text is the message, null is a parse error); byte limits of the receive buffer and retry queue; incoming acknowledgements answer once; `send`, `open`, `removeAllListeners`, emitter flag chaining, partial interceptors and `SocketIO.connect`. A provider that times out on its own (withTimeout) fails the attempt with connect_error. A packet decoded before a close that was already queued is handled before the close.",
       "tests": [
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
@@ -4640,6 +4644,10 @@
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAuthProviderTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.SocketAuthProviderTest.aProviderThatTimesOutFailsTheAttemptWithConnectError"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketRobustnessTest.aPacketDecodedBeforeACloseIsHandledBeforeTheClose"
         }
       ]
     },

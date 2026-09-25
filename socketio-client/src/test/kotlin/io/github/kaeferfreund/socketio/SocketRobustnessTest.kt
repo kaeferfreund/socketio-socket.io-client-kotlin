@@ -1,9 +1,16 @@
 package io.github.kaeferfreund.socketio
 
 import io.github.kaeferfreund.socketio.engineio.EngineClients
+import io.github.kaeferfreund.socketio.engineio.EngineWebSocketClient
+import io.github.kaeferfreund.socketio.engineio.EngineWebSocketConnection
+import io.github.kaeferfreund.socketio.engineio.EngineWebSocketListener
+import io.github.kaeferfreund.socketio.engineio.EngineWebSocketRequest
 import io.github.kaeferfreund.socketio.parser.SocketIOPacketType
 import kotlinx.coroutines.async
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.runCurrent
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -11,6 +18,79 @@ import kotlin.time.Duration.Companion.seconds
 
 /** Regressions for review findings: cancellation, recovery reset, isolation and misconfiguration. */
 class SocketRobustnessTest {
+    /**
+     * JavaScript handles a decoded packet in a microtask (`nextTick`), before the
+     * next transport event. A CONNECT answer followed at once by the close of the
+     * connection must therefore connect and then disconnect, not connect a socket
+     * of a closed manager.
+     */
+    @Test
+    fun aPacketDecodedBeforeACloseIsHandledBeforeTheClose() =
+        runTest {
+            var captured: EngineWebSocketListener? = null
+            val webSocket =
+                object : EngineWebSocketClient {
+                    override fun connect(
+                        request: EngineWebSocketRequest,
+                        listener: EngineWebSocketListener,
+                    ): EngineWebSocketConnection {
+                        captured = listener
+                        return SilentConnection
+                    }
+                }
+            val manager =
+                SocketManager(
+                    "http://fake.test",
+                    SocketManagerOptions {
+                        dispatcher = StandardTestDispatcher(testScheduler)
+                        timeSource = testScheduler.timeSource
+                        transports = listOf(Transport.WEBSOCKET)
+                        reconnection = false
+                        clients = EngineClients(null, webSocket)
+                    },
+                )
+            val events = ArrayList<String>()
+            val socket =
+                manager.socket("/") {
+                    onConnect { events += "connect" }
+                    onDisconnect { reason, _ -> events += "disconnect ${reason.wireValue}" }
+                }
+            runCurrent()
+            val listener = captured!!
+            listener.onOpen(emptyList())
+            listener.onMessage("0{\"sid\":\"e\",\"upgrades\":[],\"pingInterval\":25000,\"pingTimeout\":20000}")
+            runCurrent()
+            // Two transport events queued back to back, as OkHttp delivers them.
+            listener.onMessage("40{\"sid\":\"s\"}")
+            listener.onClosed(1000, "")
+            runCurrent()
+            assertEquals(listOf("connect", "disconnect transport close"), events)
+            assertTrue(!socket.connected)
+            manager.close()
+            runCurrent()
+        }
+
+    private object SilentConnection : EngineWebSocketConnection {
+        override fun send(
+            text: String,
+            compress: Boolean,
+        ) = true
+
+        override fun send(
+            bytes: ByteArray,
+            compress: Boolean,
+        ) = true
+
+        override val queuedBytes: Long get() = 0
+
+        override fun close(
+            code: Int,
+            reason: String?,
+        ) = Unit
+
+        override fun cancel() = Unit
+    }
+
     @Test
     fun cancellingEmitWithAckRemovesTheEmitFromTheRetryQueue() =
         runClientTest {

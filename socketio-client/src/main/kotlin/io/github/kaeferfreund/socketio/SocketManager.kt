@@ -432,8 +432,9 @@ public class SocketManager(
     }
 
     private fun ondecoded(packet: SocketIOPacket) {
-        // nextTick, as in JavaScript: the packet is handled after the current transport callback.
-        executor.post { emit(ManagerEvent.Packet(packet)) }
+        // nextTick, as in JavaScript: the packet is handled right after the current transport
+        // callback, before a close event that was already queued behind it.
+        executor.nextTick { emit(ManagerEvent.Packet(packet)) }
     }
 
     /** The current reconnection attempt number, `0` outside reconnection. */

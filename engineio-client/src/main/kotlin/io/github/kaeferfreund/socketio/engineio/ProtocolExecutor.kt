@@ -47,14 +47,48 @@ public class ProtocolExecutor(
     /** `true` when the calling thread is currently running work of this executor. */
     public val isCurrent: Boolean get() = CURRENT.get() === this
 
+    /** Microtasks of the running task (JavaScript's `nextTick` queue). Executor only. */
+    private val microtasks = ArrayDeque<() -> Unit>()
+    private var inTask = false
+
     /** Runs [block] now if already on this executor, otherwise queues it. */
     public fun execute(block: () -> Unit) {
         if (isCurrent) block() else post(block)
     }
 
-    /** Always queues [block], even from this executor (JavaScript `nextTick`). */
+    /** Always queues [block] behind the work already queued, even from this executor (JavaScript `setTimeout(…, 0)`). */
     public fun post(block: () -> Unit) {
-        scope.launch { block() }
+        scope.launch { runTask(block) }
+    }
+
+    /**
+     * Runs [block] right after the task that is running now, before any other
+     * queued work: JavaScript's `nextTick`, a microtask. A packet decoded from a
+     * transport event is therefore handled before a close event that was already
+     * queued behind it, as in JavaScript. Off the executor it is the same as [post].
+     */
+    @InternalSocketIOApi
+    public fun nextTick(block: () -> Unit) {
+        if (!isCurrent) {
+            post(block)
+            return
+        }
+        microtasks.addLast(block)
+        if (!inTask) post { }
+    }
+
+    /** Runs one task, then its microtasks. */
+    private fun runTask(block: () -> Unit) {
+        inTask = true
+        try {
+            block()
+        } finally {
+            try {
+                while (true) (microtasks.removeFirstOrNull() ?: break)()
+            } finally {
+                inTask = false
+            }
+        }
     }
 
     /**
@@ -68,7 +102,7 @@ public class ProtocolExecutor(
         val job: Job =
             scope.launch {
                 delay(delay)
-                block()
+                runTask(block)
             }
         return Cancellable { job.cancel() }
     }
