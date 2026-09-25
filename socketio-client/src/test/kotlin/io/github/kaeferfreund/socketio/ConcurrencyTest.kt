@@ -1,10 +1,12 @@
 package io.github.kaeferfreund.socketio
 
+import io.github.kaeferfreund.socketio.engineio.EngineClients
 import io.github.kaeferfreund.socketio.engineio.ProtocolExecutor
 import io.github.kaeferfreund.socketio.testing.FakeSocketIOServer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
 import org.jetbrains.lincheck.datastructures.ModelCheckingOptions
 import org.jetbrains.lincheck.datastructures.Operation
@@ -12,9 +14,11 @@ import org.jetbrains.lincheck.datastructures.StressOptions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.CyclicBarrier
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
@@ -87,6 +91,35 @@ class ConcurrencyTest {
     @Test
     fun theListenerRegistryIsLinearizable() {
         ModelCheckingOptions().iterations(20).invocationsPerIteration(500).threads(2).actorsPerThread(2).check(ListenerRegistry::class)
+    }
+
+    @Test
+    fun aListenerOnTheCallbackDispatcherQueuesItsCallsOnTheExecutor() {
+        val callbacks = Executors.newSingleThreadExecutor { runnable -> Thread(runnable, "callbacks") }
+        val manager =
+            SocketManager(
+                "http://unused.test",
+                SocketManagerOptions {
+                    autoConnect = false
+                    reconnection = false
+                    callbackDispatcher = callbacks.asCoroutineDispatcher()
+                    // No HTTP stack: opening fails with a connection error, which reaches the listener.
+                    clients = EngineClients(null, null)
+                },
+            )
+        try {
+            val observed = CompletableFuture<String>()
+            manager.on<ManagerEvent.Error> {
+                var ranOn: Thread? = null
+                manager.executor.execute { ranOn = Thread.currentThread() }
+                observed.complete("isCurrent=${manager.executor.isCurrent} ranOnCallbackThread=${ranOn === Thread.currentThread()}")
+            }
+            manager.open()
+            assertEquals("isCurrent=false ranOnCallbackThread=false", observed.get(10, TimeUnit.SECONDS))
+        } finally {
+            manager.close()
+            callbacks.shutdown()
+        }
     }
 
     @Test

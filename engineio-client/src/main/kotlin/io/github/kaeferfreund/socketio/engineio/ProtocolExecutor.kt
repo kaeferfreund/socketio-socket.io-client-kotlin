@@ -11,6 +11,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.coroutines.AbstractCoroutineContextElement
+import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.Duration
 import kotlin.time.TimeSource
@@ -85,7 +86,9 @@ public class ProtocolExecutor(
 
         override fun updateThreadContext(context: CoroutineContext): ProtocolExecutor? {
             val previous = CURRENT.get()
-            CURRENT.set(owner)
+            // A child launched on another dispatcher (a listener callback, a provider's
+            // withContext) inherits this element but does not run on the executor.
+            CURRENT.set(if (context[ContinuationInterceptor] === owner.serial) owner else null)
             return previous
         }
 

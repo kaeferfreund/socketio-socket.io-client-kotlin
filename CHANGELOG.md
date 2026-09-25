@@ -79,6 +79,13 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   unbound traffic through the VPN anyway; network changes are still followed.
 - A lookup that fails on the bound network is retried with the system resolver.
 
+### Fixes from a full code review
+
+- Listener callbacks on a `callbackDispatcher` (the Android default: main
+  thread) no longer count as running on the protocol executor: an `emit` from a
+  listener used to run the protocol inline on that thread, concurrently with the
+  executor.
+
 ### Validation
 
 - Every supported runtime test declaration of the pinned upstream

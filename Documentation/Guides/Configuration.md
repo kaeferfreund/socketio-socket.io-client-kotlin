@@ -243,7 +243,9 @@ thread; they hand work to the executor and return immediately.
 
 With `callbackDispatcher = null`, listeners run directly on the executor, which
 keeps the exact JavaScript ordering. A listener that blocks then stalls the
-connection, heartbeats included. With a dispatcher, callbacks are posted there.
+connection, heartbeats included. With a dispatcher, callbacks are posted there,
+and what a listener calls from there (`emit`, `ack.send`, `disconnect`, …) is
+queued on the executor like a call from any other thread.
 In both cases: **never block in a listener** — no network or disk I/O, no
 `runBlocking`, no waiting on an acknowledgement. Launch a coroutine instead.
 
