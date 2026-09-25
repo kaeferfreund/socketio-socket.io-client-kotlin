@@ -30,35 +30,94 @@ public object SocketIOSerialization {
     /** The instance used when none is given: lenient about unknown keys, as servers evolve. */
     public val DefaultJson: Json = Json { ignoreUnknownKeys = true }
 
-    /** Converts a JSON tree to a Socket.IO value. */
+    /** Converts a JSON tree to a Socket.IO value, without recursion. */
     public fun fromJsonElement(element: JsonElement): SocketIOValue =
-        when (element) {
-            is JsonNull -> SocketIOValue.Null
-
-            is JsonPrimitive ->
-                when {
-                    element.isString -> SocketIOValue.Text(element.content)
-                    element.content == "true" -> SocketIOValue.TRUE
-                    element.content == "false" -> SocketIOValue.FALSE
-                    else -> SocketIOJson.parse(element.content)
+        convertTree<JsonElement, SocketIOValue>(
+            element,
+            leaf = { node ->
+                when (node) {
+                    is JsonNull -> SocketIOValue.Null
+                    is JsonPrimitive -> primitive(node)
+                    else -> null
                 }
+            },
+            children = { node -> if (node is JsonObject) node.entries.map { it.key to it.value } else (node as JsonArray).map { null to it } },
+            build = { node, keys, values ->
+                if (node is JsonObject) SocketIOValue.Object(keys.zip(values).toMap(LinkedHashMap())) else SocketIOValue.Array(values)
+            },
+        )
 
-            is JsonArray -> SocketIOValue.Array(element.map(::fromJsonElement))
-
-            is JsonObject -> SocketIOValue.Object(element.mapValues { fromJsonElement(it.value) })
+    private fun primitive(element: JsonPrimitive): SocketIOValue =
+        when {
+            element.isString -> SocketIOValue.Text(element.content)
+            element.content == "true" -> SocketIOValue.TRUE
+            element.content == "false" -> SocketIOValue.FALSE
+            else -> SocketIOJson.parse(element.content)
         }
 
-    /** Converts a Socket.IO value to a JSON tree; binary data is rejected. */
+    /**
+     * Converts a Socket.IO value to a JSON tree, without recursion, so a deeply
+     * nested payload received from a server cannot overflow the stack; binary
+     * data is rejected.
+     */
     public fun toJsonElement(value: SocketIOValue): JsonElement =
-        when (value) {
-            is SocketIOValue.Null -> JsonNull
-            is SocketIOValue.Bool -> JsonPrimitive(value.value)
-            is SocketIOValue.Number -> JsonPrimitive(value.value)
-            is SocketIOValue.Text -> JsonPrimitive(value.value)
-            is SocketIOValue.Binary -> throw IllegalArgumentException("binary data cannot be decoded with kotlinx.serialization")
-            is SocketIOValue.Array -> JsonArray(value.items.map(::toJsonElement))
-            is SocketIOValue.Object -> JsonObject(value.fields.mapValues { toJsonElement(it.value) })
+        convertTree<SocketIOValue, JsonElement>(
+            value,
+            leaf = { node ->
+                when (node) {
+                    is SocketIOValue.Null -> JsonNull
+                    is SocketIOValue.Bool -> JsonPrimitive(node.value)
+                    is SocketIOValue.Number -> JsonPrimitive(node.value)
+                    is SocketIOValue.Text -> JsonPrimitive(node.value)
+                    is SocketIOValue.Binary -> throw IllegalArgumentException("binary data cannot be decoded with kotlinx.serialization")
+                    is SocketIOValue.Array, is SocketIOValue.Object -> null
+                }
+            },
+            children = { node ->
+                if (node is SocketIOValue.Object) node.fields.entries.map { it.key to it.value } else (node as SocketIOValue.Array).items.map { null to it }
+            },
+            build = { node, keys, values ->
+                if (node is SocketIOValue.Object) JsonObject(keys.zip(values).toMap(LinkedHashMap())) else JsonArray(values)
+            },
+        )
+
+    /**
+     * Rebuilds a tree bottom-up on an explicit stack. [leaf] converts a scalar or
+     * returns `null` for a container, whose [children] (key or `null`, value) are
+     * converted in order and handed to [build].
+     */
+    private fun <S : Any, T : Any> convertTree(
+        root: S,
+        leaf: (S) -> T?,
+        children: (S) -> List<Pair<String?, S>>,
+        build: (S, List<String>, List<T>) -> T,
+    ): T {
+        leaf(root)?.let { return it }
+
+        class Frame(
+            val node: S,
+        ) {
+            val entries = children(node)
+            val built = ArrayList<T>(entries.size)
         }
+        val stack = ArrayDeque<Frame>()
+        stack.addLast(Frame(root))
+        var result: T? = null
+        while (stack.isNotEmpty()) {
+            val frame = stack.last()
+            if (frame.built.size < frame.entries.size) {
+                val child = frame.entries[frame.built.size].second
+                val converted = leaf(child)
+                if (converted != null) frame.built.add(converted) else stack.addLast(Frame(child))
+                continue
+            }
+            stack.removeLast()
+            val built = build(frame.node, frame.entries.mapNotNull { it.first }, frame.built)
+            val parent = stack.lastOrNull()
+            if (parent == null) result = built else parent.built.add(built)
+        }
+        return result!!
+    }
 
     /** Encodes [value] with [serializer]. */
     public fun <T> encode(

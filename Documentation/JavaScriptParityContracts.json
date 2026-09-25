@@ -4019,7 +4019,7 @@
       "id": "KT-PARSER-SAFETY",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Hostile peer input: 20,000 seeded malformed inputs and random text only ever fail with parse errors; known malformed headers are rejected; random values round-trip through encoder and decoder and encoder output is always decodable; ack ids outside the safe-integer range, excessive text, depth and attachment counts are rejected; a throwing reviver makes the payload invalid; attachments are numbered in JavaScript traversal order; the Engine.IO codec stops at the first error packet, decodes Base64 as leniently as Node, copies binary defensively and survives arbitrary chunk boundaries.",
+      "assertions": "Hostile peer input: 20,000 seeded malformed inputs and random text only ever fail with parse errors; known malformed headers are rejected; random values round-trip through encoder and decoder and encoder output is always decodable; ack ids outside the safe-integer range, excessive text, depth and attachment counts are rejected; a throwing reviver makes the payload invalid; attachments are numbered in JavaScript traversal order; the Engine.IO codec stops at the first error packet, decodes Base64 as leniently as Node, copies binary defensively and survives arbitrary chunk boundaries. Deeply nested payloads, which the iterative parser accepts, convert to kotlinx.serialization trees and back without recursion.",
       "tests": [
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
@@ -4108,6 +4108,10 @@
         {
           "path": "engineio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/parser/EngineIOFrameCodecTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.engineio.parser.EngineIOFrameCodecTest.staysFailedAfterAFramingError"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketIOSerializationTest.convertsDeeplyNestedPayloadsWithoutRecursion"
         }
       ]
     },
@@ -4619,7 +4623,7 @@
       "id": "KT-ANDROID",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Android integration under Robolectric: losing the network closes at once and its return reconnects without backoff; a new default network moves the connection; the background policy pauses and resumes, and coming back before the delay keeps the connection; the logger is gated by `Log.isLoggable`; the clock is `elapsedRealtime` and keeps counting in sleep; org.json values convert both ways and large, deep JSON streams with JsonReader; the configuration saves and restores; trim-memory releases idle connections; the Android options configure the manager; the KeyChain key manager serves only its alias. Starting without a network spends no reconnection attempts until one arrives; capability changes of the current network update `metered`/`validated`; the Android OkHttp stack (network-bound sockets and DNS, traffic tag, `configureOkHttp`) carries real requests; long trace section names never reach Trace; the streaming reader keeps every JSON type; a VPN default network is left unbound and a failed bound lookup falls back to the system resolver (issue #1).",
+      "assertions": "Android integration under Robolectric: losing the network closes at once and its return reconnects without backoff; a new default network moves the connection; the background policy pauses and resumes, and coming back before the delay keeps the connection; the logger is gated by `Log.isLoggable`; the clock is `elapsedRealtime` and keeps counting in sleep; org.json values convert both ways and large, deep JSON streams with JsonReader; the configuration saves and restores; trim-memory releases idle connections; the Android options configure the manager; the KeyChain key manager serves only its alias. Starting without a network spends no reconnection attempts until one arrives; capability changes of the current network update `metered`/`validated`; the Android OkHttp stack (network-bound sockets and DNS, traffic tag, `configureOkHttp`) carries real requests; long trace section names never reach Trace; the streaming reader keeps every JSON type; a VPN default network is left unbound and a failed bound lookup falls back to the system resolver (issue #1). Deep payloads convert to and from org.json without recursion.",
       "tests": [
         {
           "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
@@ -4708,6 +4712,10 @@
         {
           "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/NetworkBindingTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.android.NetworkBindingTest.aHostUnknownEverywhereStillFails"
+        },
+        {
+          "path": "socketio-android/src/test/kotlin/io/github/kaeferfreund/socketio/android/AndroidIntegrationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.android.AndroidIntegrationTest.convertsDeepPayloadsToAndFromOrgJsonWithoutRecursion"
         }
       ]
     }

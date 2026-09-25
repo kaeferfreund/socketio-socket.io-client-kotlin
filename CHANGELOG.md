@@ -89,6 +89,9 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   malformed URL) fails with a transport error instead of an uncaught exception
   that crashed Android apps or left the engine without requests; the cookie jar
   ignores cookies that are not printable ASCII.
+- Converting received values to `JsonElement` (`decodeAs`, `onSerializable`) or
+  to `org.json` (`toJson`) is iterative: a deeply nested payload no longer
+  overflows the stack.
 
 ### Validation
 

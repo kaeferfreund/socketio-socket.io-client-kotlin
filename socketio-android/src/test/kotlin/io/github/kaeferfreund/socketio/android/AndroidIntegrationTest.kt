@@ -14,6 +14,7 @@ import io.github.kaeferfreund.socketio.ManagerEvent
 import io.github.kaeferfreund.socketio.SocketManager
 import io.github.kaeferfreund.socketio.SocketManagerOptions
 import io.github.kaeferfreund.socketio.engineio.LogLevel
+import io.github.kaeferfreund.socketio.parser.SocketIOJson
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import io.github.kaeferfreund.socketio.testing.FakeSocketIOServer
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -230,6 +231,21 @@ class AndroidIntegrationTest {
         assertEquals(SocketIOValue.of(mapOf("a" to 1, "b" to listOf(true, null, "x", 2.5), "c" to mapOf("d" to "e"))), value)
         assertEquals(json.toString(), value.toJSONObject().toString())
         assertEquals(SocketIOValue.arrayOf(1, "two"), JSONArray("[1,\"two\"]").toSocketIOValue())
+    }
+
+    @Test
+    fun convertsDeepPayloadsToAndFromOrgJsonWithoutRecursion() {
+        val depth = 50_000
+        val value = SocketIOValue.Array(listOf(SocketIOJson.parse("[".repeat(depth) + "{\"k\":1}" + "]".repeat(depth))))
+        var node = value.toJson()
+        var levels = 0
+        while (node is JSONArray) {
+            node = node.get(0)
+            levels++
+        }
+        assertEquals(depth + 1, levels)
+        assertEquals(1, (node as JSONObject).getInt("k"))
+        assertEquals(value, fromJson(value.toJson()))
     }
 
     @Test

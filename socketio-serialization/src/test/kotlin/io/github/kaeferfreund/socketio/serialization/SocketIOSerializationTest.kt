@@ -1,10 +1,15 @@
 package io.github.kaeferfreund.socketio.serialization
 
+import io.github.kaeferfreund.socketio.parser.SocketIOJson
 import io.github.kaeferfreund.socketio.parser.SocketIOValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -30,6 +35,29 @@ class SocketIOSerializationTest {
     fun ignoresUnknownKeysByDefault() {
         val value = SocketIOValue.of(mapOf("id" to 1, "label" to "x", "at" to 2, "extra" to true))
         assertEquals(Stamp(1, "x", 2.0), value.decodeAs<Stamp>())
+    }
+
+    @Test
+    fun convertsDeeplyNestedPayloadsWithoutRecursion() {
+        // The parser accepts any depth by default, so the converters must too.
+        val depth = 100_000
+        val value = SocketIOJson.parse("[".repeat(depth) + "{\"k\":" + "[".repeat(depth) + "]".repeat(depth) + "}" + "]".repeat(depth))
+        val element = SocketIOSerialization.toJsonElement(value)
+        var node: JsonElement = element
+        var levels = 0
+        while (true) {
+            node =
+                when (node) {
+                    is JsonArray -> node.firstOrNull() ?: break
+                    is JsonObject -> node.getValue("k")
+                    else -> break
+                }
+            levels++
+        }
+        assertEquals(2 * depth, levels)
+        assertEquals(value, SocketIOSerialization.fromJsonElement(element))
+        // JsonElement's own equals is recursive; the decoded tree is checked by type only.
+        assertTrue(value.decodeAs<JsonElement>() is JsonArray)
     }
 
     @Test
