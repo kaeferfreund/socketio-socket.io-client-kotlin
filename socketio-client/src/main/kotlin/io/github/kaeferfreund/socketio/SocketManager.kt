@@ -4,17 +4,21 @@ import io.github.kaeferfreund.socketio.engineio.Cancellable
 import io.github.kaeferfreund.socketio.engineio.EngineEvent
 import io.github.kaeferfreund.socketio.engineio.EngineIOException
 import io.github.kaeferfreund.socketio.engineio.EngineSocket
+import io.github.kaeferfreund.socketio.engineio.EngineState
 import io.github.kaeferfreund.socketio.engineio.EventEmitter
 import io.github.kaeferfreund.socketio.engineio.InternalSocketIOApi
 import io.github.kaeferfreund.socketio.engineio.LogLevel
 import io.github.kaeferfreund.socketio.engineio.ProtocolExecutor
 import io.github.kaeferfreund.socketio.engineio.on
+import io.github.kaeferfreund.socketio.engineio.once
 import io.github.kaeferfreund.socketio.engineio.parser.EngineIOData
 import io.github.kaeferfreund.socketio.engineio.parser.EngineIOPacketOptions
 import io.github.kaeferfreund.socketio.parser.SocketIODecoder
 import io.github.kaeferfreund.socketio.parser.SocketIOEncoder
 import io.github.kaeferfreund.socketio.parser.SocketIOPacket
 import io.github.kaeferfreund.socketio.parser.SocketIOParseException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -24,6 +28,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * One connection to a Socket.IO server, shared by any number of namespace
@@ -104,6 +109,18 @@ public class SocketManager(
     public val transportName: StateFlow<String?> = transportFlow.asStateFlow()
 
     private val eventListeners = CallbackListeners<ManagerEvent>()
+
+    /**
+     * Where callbacks run when a [SocketManagerOptions.callbackDispatcher] is set. It is
+     * not a child of the executor's scope, so callbacks queued while [close] runs still
+     * arrive after the executor stopped.
+     */
+    private val callbackScope: CoroutineScope? = options.callbackDispatcher?.let { CoroutineScope(SupervisorJob() + it) }
+
+    @Volatile private var closed = false
+
+    /** Whether [close] was called. */
+    internal val isClosed: Boolean get() = closed
 
     private val pluginHandles: List<Cancellable> = options.plugins.map { it.attach(this) }
 
@@ -246,7 +263,10 @@ public class SocketManager(
      * attempt, as with `manager.open(callback)` in JavaScript.
      */
     public fun open(callback: (Throwable?) -> Unit): SocketManager {
-        executor.execute { openOnExecutor { error -> deliver { callback(error) } } }
+        executor.execute(
+            { openOnExecutor { error -> deliver { callback(error) } } },
+            onRejected = { deliver { callback(IllegalStateException("the manager is closed")) } },
+        )
         return this
     }
 
@@ -295,13 +315,46 @@ public class SocketManager(
             pausedView = value
         }
 
-    /** Disconnects and releases the executor; the manager cannot be used afterwards. */
+    /**
+     * Disconnects and releases the executor; the manager cannot be used afterwards.
+     *
+     * Unlike [disconnect], this is final: acknowledgements that can no longer
+     * arrive fail with [SocketDisconnectedException] (plain callbacks without a
+     * timeout are not called, as on any disconnection) and buffered emits are
+     * dropped. The executor stops once the connection has sent its last packets,
+     * after 10 seconds at the latest. Later calls that would need it fail instead
+     * of waiting.
+     */
     override fun close() {
+        closed = true
+        SocketIO.forget(this)
         pluginHandles.forEach(Cancellable::cancel)
         executor.execute {
             for (socket in nsps.values) socket.disconnectOnExecutor()
             closeOnExecutor()
+            for (socket in nsps.values) socket.failPendingOnClose()
+            shutdownWhenEngineClosed()
+        }
+    }
+
+    /** Stops the executor once the engine has flushed its last packets (the DISCONNECTs), at most after [CLOSE_GRACE]. */
+    private fun shutdownWhenEngineClosed() {
+        val closing = engine?.takeIf { it.readyState == EngineState.CLOSING }
+        if (closing == null) {
             executor.post { executor.shutdown() }
+            return
+        }
+        var done = false
+        val finish = {
+            if (!done) {
+                done = true
+                executor.post { executor.shutdown() }
+            }
+        }
+        closing.events.once<EngineEvent.Close, EngineEvent> { finish() }
+        executor.schedule(CLOSE_GRACE) {
+            closing.forceClose()
+            finish()
         }
     }
 
@@ -333,7 +386,10 @@ public class SocketManager(
 
     internal fun openOnExecutor(fn: ((Throwable?) -> Unit)?) {
         if (readyState == ManagerState.OPENING || readyState == ManagerState.OPEN) return
-        if (paused) return
+        if (paused) {
+            fn?.invoke(IllegalStateException("the manager is paused"))
+            return
+        }
         val socket = EngineSocket(uri, options.engine, executor)
         engine = socket
         readyState = ManagerState.OPENING
@@ -562,11 +618,11 @@ public class SocketManager(
 
     /** Runs a user callback on the configured callback dispatcher, isolating its exceptions. */
     internal fun deliver(block: () -> Unit) {
-        val dispatcher = options.callbackDispatcher
-        if (dispatcher == null) {
+        val scope = callbackScope
+        if (scope == null) {
             guarded(block)
         } else {
-            executor.scope.launch(dispatcher) { guarded(block) }
+            scope.launch { guarded(block) }
         }
     }
 
@@ -598,6 +654,9 @@ public class SocketManager(
     internal companion object {
         const val TRACE_CONNECT = "socket.io connect"
         const val TRACE_UPGRADE = "socket.io upgrade"
+
+        /** How long [close] waits for the connection to send its last packets. */
+        val CLOSE_GRACE: Duration = 10.seconds
     }
 }
 

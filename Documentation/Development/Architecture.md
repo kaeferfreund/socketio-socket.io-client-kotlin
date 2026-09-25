@@ -84,7 +84,8 @@ caches hashes, so deep or large payloads cannot overflow the stack.
 ## Ownership
 
 Keep the `SocketManager` for as long as its sockets are needed and call
-`close()` when done; it cancels the executor's timers. A `Socket` belongs to one
+`close()` when done; it fails what still waits for an acknowledgement, lets the
+connection send its last packets and then stops the executor. A `Socket` belongs to one
 manager and one namespace; `manager.socket(nsp)` returns the existing instance.
 `SocketIO.io()` caches managers like the JavaScript `io()`; managers created
 directly are never cached.

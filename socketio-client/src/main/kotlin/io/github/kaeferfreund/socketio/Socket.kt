@@ -80,6 +80,7 @@ public class Socket internal constructor(
         val args: List<SocketIOValue>,
         val flags: EmitFlags,
         val bytes: Long,
+        val ack: ((Throwable?, List<SocketIOValue>) -> Unit)?,
     ) {
         var tryCount = 0
         var pending = false
@@ -321,6 +322,32 @@ public class Socket internal constructor(
         for (entry in failed) entry.callback(SocketDisconnectedException(), emptyList())
     }
 
+    /**
+     * The manager was closed for good: acknowledgements that can no longer arrive
+     * fail (err-first ones, as on a disconnection), and buffered or queued emits
+     * are dropped.
+     */
+    internal fun failPendingOnClose() {
+        val error = SocketDisconnectedException()
+        val queued = ArrayList(queue)
+        for (packet in queued) packet.callback = { _, _ -> }
+        queue.clear()
+        queueBytes = 0
+        inFlightAckIds.clear()
+        val buffered = ArrayList(sendBuffer)
+        sendBuffer.clear()
+        sendBufferBytes = 0
+        val pending = ArrayList(acks.values)
+        acks.clear()
+        updatePending()
+        for (item in buffered) intercept { it.onDropped(item.event, error) }
+        for (entry in pending) {
+            entry.timer?.cancel()
+            if (entry.withError) entry.callback(error, emptyList())
+        }
+        for (packet in queued) packet.ack?.invoke(error, emptyList())
+    }
+
     private fun onpacket(packet: SocketIOPacket) {
         if (packet.nsp != namespace) return
         when (packet.type) {
@@ -534,7 +561,10 @@ public class Socket internal constructor(
 
     private suspend fun <T> onExecutor(block: () -> T): T =
         suspendCancellableCoroutine { continuation ->
-            executor.execute { continuation.resume(block()) }
+            executor.execute(
+                { continuation.resume(block()) },
+                onRejected = { continuation.resumeWithException(IllegalStateException("the manager is closed")) },
+            )
         }
 
     internal fun emitFromEmitter(
@@ -545,10 +575,14 @@ public class Socket internal constructor(
         withError: Boolean,
         handle: AckHandle?,
     ) {
-        executor.execute {
-            if (handle?.cancelled == true) return@execute
-            emitOnExecutor(name, args, flags, ack, withError, handle)
-        }
+        executor.execute(
+            {
+                if (handle?.cancelled == true) return@execute
+                emitOnExecutor(name, args, flags, ack, withError, handle)
+            },
+            // The manager was closed: nothing can be sent or acknowledged any more.
+            onRejected = { if (ack != null && withError) ack(SocketDisconnectedException(), emptyList()) },
+        )
     }
 
     /** `Socket.emit` after argument validation. */
@@ -710,7 +744,7 @@ public class Socket internal constructor(
             ack?.invoke(error, emptyList())
             return
         }
-        val packet = QueuedPacket(queueSeq++, name, args, flags.copy(fromQueue = true), bytes)
+        val packet = QueuedPacket(queueSeq++, name, args, flags.copy(fromQueue = true), bytes, ack)
         packet.callback = { err, responseArgs ->
             inFlightAckIds.remove(packet.id)
             if (queue.firstOrNull() === packet) {

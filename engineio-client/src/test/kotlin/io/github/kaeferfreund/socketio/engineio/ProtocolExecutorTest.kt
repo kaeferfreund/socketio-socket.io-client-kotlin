@@ -8,6 +8,7 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
@@ -58,6 +59,16 @@ class ProtocolExecutorTest {
             assertEquals(listOf("a", "a: tick 1", "a: tick 2", "b", "c", "timer", "timer: tick"), order)
             executor.shutdown()
         }
+
+    @Test
+    fun workRejectedByAStoppedExecutorIsReported() {
+        val executor = ProtocolExecutor(Dispatchers.Default)
+        executor.shutdown()
+        assertTrue(executor.isShutdown)
+        val rejected = CompletableFuture<Boolean>()
+        executor.execute({ rejected.complete(false) }, onRejected = { rejected.complete(true) })
+        assertTrue(rejected.get(10, TimeUnit.SECONDS))
+    }
 
     @Test
     fun withContextToAnotherDispatcherLeavesTheExecutorAndComesBack() {

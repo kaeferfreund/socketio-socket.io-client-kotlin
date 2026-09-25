@@ -372,6 +372,15 @@ public class EngineSocket(
     }
 
     /**
+     * Closes at once with `"forced close"`, without waiting for buffered packets
+     * or a running upgrade. For an owner that is about to stop the executor.
+     */
+    @InternalSocketIOApi
+    public fun forceClose() {
+        onClose(EngineCloseReason.FORCED_CLOSE, null)
+    }
+
+    /**
      * Closes immediately with `"transport close"`, the reaction of the
      * browser client to the `offline` event. The Android module calls it
      * when the bound network is lost.

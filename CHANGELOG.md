@@ -111,6 +111,13 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   that carried them, like JavaScript's `nextTick`. They used to be queued behind
   transport events already waiting, so a CONNECT followed at once by a close
   connected a socket of a closed manager.
+- `SocketManager.close()` no longer leaves callers hanging: acknowledgements
+  that can no longer arrive fail with `SocketDisconnectedException`, buffered and
+  queued emits are dropped, and calls made after `close()` fail instead of
+  waiting. Callbacks queued while closing still reach a `callbackDispatcher`,
+  the executor stops only after the connection sent its last packets (at most
+  10 s), and `SocketIO.io()` never hands out a closed manager again.
+  `open(callback)` on a paused manager reports an error.
 
 ### Validation
 

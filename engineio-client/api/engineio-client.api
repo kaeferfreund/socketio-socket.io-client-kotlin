@@ -409,6 +409,7 @@ public final class io/github/kaeferfreund/socketio/engineio/ProtocolExecutor {
 	public final fun execute (Lkotlin/jvm/functions/Function0;)V
 	public final fun getTimeSource ()Lkotlin/time/TimeSource$WithComparableMarks;
 	public final fun isCurrent ()Z
+	public final fun isShutdown ()Z
 	public final fun post (Lkotlin/jvm/functions/Function0;)V
 	public final fun schedule-VtjQ1oo (JLkotlin/jvm/functions/Function0;)Lio/github/kaeferfreund/socketio/engineio/Cancellable;
 	public final fun shutdown ()V

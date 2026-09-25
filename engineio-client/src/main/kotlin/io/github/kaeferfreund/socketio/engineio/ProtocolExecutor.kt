@@ -9,7 +9,9 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.ThreadContextElement
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.AbstractCoroutineContextElement
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
@@ -47,6 +49,9 @@ public class ProtocolExecutor(
     /** `true` when the calling thread is currently running work of this executor. */
     public val isCurrent: Boolean get() = CURRENT.get() === this
 
+    /** `true` after [shutdown]: queued work is dropped. */
+    public val isShutdown: Boolean get() = !scope.isActive
+
     /** Microtasks of the running task (JavaScript's `nextTick` queue). Executor only. */
     private val microtasks = ArrayDeque<() -> Unit>()
     private var inTask = false
@@ -54,6 +59,28 @@ public class ProtocolExecutor(
     /** Runs [block] now if already on this executor, otherwise queues it. */
     public fun execute(block: () -> Unit) {
         if (isCurrent) block() else post(block)
+    }
+
+    /**
+     * Like [execute], but calls [onRejected] (on any thread) instead of [block]
+     * when the executor is shut down before [block] could run, so a caller
+     * waiting for the result is never left hanging.
+     */
+    @InternalSocketIOApi
+    public fun execute(
+        block: () -> Unit,
+        onRejected: () -> Unit,
+    ) {
+        if (isCurrent) {
+            block()
+            return
+        }
+        val started = AtomicBoolean(false)
+        scope
+            .launch {
+                started.set(true)
+                runTask(block)
+            }.invokeOnCompletion { if (!started.get()) onRejected() }
     }
 
     /** Always queues [block] behind the work already queued, even from this executor (JavaScript `setTimeout(…, 0)`). */

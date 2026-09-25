@@ -41,7 +41,7 @@ public object SocketIO {
         setup: (Socket.() -> Unit)? = null,
     ): Socket {
         val parsed = url(uri, options.engine.path)
-        val cached = cache[parsed.id]
+        val cached = cache[parsed.id]?.takeUnless { it.isClosed }
         val sameNamespace = cached != null && parsed.path in cached.sockets
         val newConnection = options.forceNew || !options.multiplex || sameNamespace
         var effective = options
@@ -52,7 +52,10 @@ public object SocketIO {
             if (newConnection) {
                 SocketManager(parsed.source, effective)
             } else {
-                cache.computeIfAbsent(parsed.id) { SocketManager(parsed.source, effective) }
+                // A manager closed by the application is replaced, never handed out again.
+                cache.compute(parsed.id) { _, existing ->
+                    if (existing == null || existing.isClosed) SocketManager(parsed.source, effective) else existing
+                }!!
             }
         return manager.socket(parsed.path, socketOptions, setup)
     }
@@ -66,6 +69,11 @@ public object SocketIO {
         socketOptions: SocketOptions = SocketOptions.DEFAULT,
         setup: (Socket.() -> Unit)? = null,
     ): Socket = io(uri, options, socketOptions, setup)
+
+    /** Drops [manager] from the cache; called when it is closed. */
+    internal fun forget(manager: SocketManager) {
+        cache.values.remove(manager)
+    }
 
     /** Closes and forgets every cached manager. */
     @JvmStatic

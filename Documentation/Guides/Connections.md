@@ -41,8 +41,9 @@ val admin = SocketIO.io("https://example.com/admin") // same connection
 ```
 
 A new connection is opened instead when `forceNew = true`, when `multiplex = false`,
-or when the cached manager already has that namespace. `SocketIO.closeAll()` closes
-every cached manager. Explicit managers are the recommended style when an app needs
+or when the cached manager already has that namespace. A manager closed with
+`close()` leaves the cache; the next lookup creates a new one. `SocketIO.closeAll()`
+closes every cached manager. Explicit managers are the recommended style when an app needs
 control over the connection's lifetime.
 
 ## Authentication
@@ -189,7 +190,10 @@ as a `SharedFlow<ManagerEvent>`.
 Call `socket.connect()` to rejoin; the same applies after a server-side disconnect
 or a refusal. `manager.disconnect()` disconnects every socket in the same way (reason
 `io client disconnect`).
-`manager.close()` is final.
+`manager.close()` is final: acknowledgements that can no longer arrive fail with
+`SocketDisconnectedException` (plain callbacks without a timeout are not called, as
+on any disconnection), buffered emits are dropped, and later calls fail instead of
+waiting. It lets the connection send its last packets first, for up to 10 seconds.
 
 ## Connection state recovery
 

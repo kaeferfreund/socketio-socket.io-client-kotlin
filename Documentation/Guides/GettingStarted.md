@@ -185,7 +185,9 @@ sockets. Treat it like an OkHttp client or a database:
   sockets. Creating a manager per screen or per request opens a new connection each
   time.
 - **`manager.close()`** disconnects every socket, stops reconnecting and releases
-  the manager's executor. The manager cannot be used afterwards; create a new one.
+  the manager's executor. Pending `emitWithAck` calls fail with
+  `SocketDisconnectedException`. The manager cannot be used afterwards; create a
+  new one.
 - **`manager.disconnect()`** or `socket.disconnect()` disconnect without releasing
   anything; call `socket.connect()` to connect again.
 
