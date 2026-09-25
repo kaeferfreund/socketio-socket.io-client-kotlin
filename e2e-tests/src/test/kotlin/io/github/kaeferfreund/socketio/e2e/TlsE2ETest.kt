@@ -37,8 +37,13 @@ class TlsE2ETest {
         pki = Files.createTempDirectory("socketio-tls").toFile()
         FixtureServer.ensureNodeModules(fixturesDir)
         val process = ProcessBuilder("node", "generate-native-tls.mjs", pki.absolutePath).directory(fixturesDir).redirectErrorStream(true).start()
-        val log = process.inputStream.bufferedReader().readText()
-        check(process.waitFor(60, TimeUnit.SECONDS) && process.exitValue() == 0) { "PKI generation failed:\n$log" }
+        // Drained on another thread, so the timeout holds even if the generator stalls.
+        val log = StringBuffer()
+        val reader = Thread { process.inputStream.bufferedReader().forEachLine { log.appendLine(it) } }.apply { start() }
+        val finished = process.waitFor(60, TimeUnit.SECONDS)
+        if (!finished) process.destroyForcibly()
+        reader.join(1_000)
+        check(finished && process.exitValue() == 0) { "PKI generation failed:\n$log" }
     }
 
     @AfterAll

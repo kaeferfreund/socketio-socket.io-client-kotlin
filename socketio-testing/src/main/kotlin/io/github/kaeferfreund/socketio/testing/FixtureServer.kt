@@ -40,6 +40,8 @@ public class FixtureServer private constructor(
         method: String = "POST",
         body: String? = null,
     ): Pair<Int, String> {
+        // The admin client does not trust the per-run test certificates; TLS fixtures have no admin routes.
+        check(scheme == "http") { "admin routes are available on plain HTTP fixtures only" }
         val connection = URI("http://127.0.0.1:$port$path").toURL().openConnection() as HttpURLConnection
         connection.requestMethod = method
         connection.connectTimeout = 5_000
@@ -125,10 +127,32 @@ public class FixtureServer private constructor(
                         .directory(fixturesDir)
                         .redirectErrorStream(true)
                         .start()
-                val log = process.inputStream.bufferedReader().readText()
-                check(process.waitFor(180, TimeUnit.SECONDS) && process.exitValue() == 0) { "npm ci failed:\n$log" }
+                val (finished, log) = awaitProcess(process, 180.seconds)
+                check(finished && process.exitValue() == 0) { "npm ci failed${if (finished) "" else " (no result after 180 s)"}:\n$log" }
                 marker.writeText(digest)
             }
+        }
+
+        /**
+         * Waits up to [timeout] for [process] while its output is drained on another thread,
+         * so a stalled process cannot block the caller past the timeout. Returns whether it
+         * finished, and its output. A process still running afterwards is killed.
+         */
+        internal fun awaitProcess(
+            process: Process,
+            timeout: Duration,
+        ): Pair<Boolean, String> {
+            val output = StringBuffer()
+            val reader =
+                Thread({ process.inputStream.bufferedReader().forEachLine { output.appendLine(it) } }, "fixture-process-output")
+                    .apply {
+                        isDaemon = true
+                        start()
+                    }
+            val finished = process.waitFor(timeout.inWholeMilliseconds, TimeUnit.MILLISECONDS)
+            if (!finished) process.destroyForcibly()
+            reader.join(1_000)
+            return finished to output.toString()
         }
 
         private val READY = Regex("READY port=(\\d+) secret=(\\S+)")
