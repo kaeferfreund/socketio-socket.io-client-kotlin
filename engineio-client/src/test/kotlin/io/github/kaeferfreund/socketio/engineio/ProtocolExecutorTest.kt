@@ -70,6 +70,20 @@ class ProtocolExecutorTest {
         assertTrue(rejected.get(10, TimeUnit.SECONDS))
     }
 
+    // What runs inline inside an executor task is on the executor, whatever its dispatcher:
+    // JavaScript's synchronous order (emit, then disconnect) depends on it.
+    @Test
+    fun anUnconfinedChildRunningInsideATaskStaysOnTheExecutor() {
+        val executor = ProtocolExecutor(Dispatchers.Default)
+        try {
+            val seen = CompletableFuture<Boolean>()
+            executor.execute { executor.scope.launch(Dispatchers.Unconfined) { seen.complete(executor.isCurrent) } }
+            assertTrue(seen.get(10, TimeUnit.SECONDS))
+        } finally {
+            executor.shutdown()
+        }
+    }
+
     @Test
     fun withContextToAnotherDispatcherLeavesTheExecutorAndComesBack() {
         val executor = ProtocolExecutor(Dispatchers.Default)

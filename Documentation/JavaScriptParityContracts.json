@@ -4327,7 +4327,7 @@
       "id": "KT-CONCURRENCY",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Lincheck proves the protocol executor and the listener registry linearizable; many threads emitting with acknowledgements lose and duplicate nothing; concurrent connect and disconnect end in a consistent state. A coroutine on another dispatcher, such as a listener callback on the callback dispatcher or a provider's withContext, is not on the executor, so what it calls is queued there instead of running inline. nextTick runs right after the current task, before work queued earlier, like a JavaScript microtask. Work a stopped executor can no longer run is reported to the caller instead of being dropped silently.",
+      "assertions": "Lincheck proves the protocol executor and the listener registry linearizable; many threads emitting with acknowledgements lose and duplicate nothing; concurrent connect and disconnect end in a consistent state. A coroutine on another dispatcher, such as a listener callback on the callback dispatcher or a provider's withContext, is not on the executor, so what it calls is queued there instead of running inline. nextTick runs right after the current task, before work queued earlier, like a JavaScript microtask. Work a stopped executor can no longer run is reported to the caller instead of being dropped silently. Code running inline inside an executor task, such as an unconfined child, stays on the executor.",
       "tests": [
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/ConcurrencyTest.kt",
@@ -4364,6 +4364,10 @@
         {
           "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/ProtocolExecutorTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.engineio.ProtocolExecutorTest.workRejectedByAStoppedExecutorIsReported"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/ProtocolExecutorTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.ProtocolExecutorTest.anUnconfinedChildRunningInsideATaskStaysOnTheExecutor"
         }
       ]
     },

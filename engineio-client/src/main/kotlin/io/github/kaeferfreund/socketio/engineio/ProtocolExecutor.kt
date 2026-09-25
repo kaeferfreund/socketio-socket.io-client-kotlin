@@ -147,9 +147,11 @@ public class ProtocolExecutor(
 
         override fun updateThreadContext(context: CoroutineContext): ProtocolExecutor? {
             val previous = CURRENT.get()
-            // A child launched on another dispatcher (a listener callback, a provider's
-            // withContext) inherits this element but does not run on the executor.
-            CURRENT.set(if (context[ContinuationInterceptor] === owner.serial) owner else null)
+            // Only the executor's own dispatcher claims the thread. A child launched on another
+            // dispatcher (a listener callback, a provider's withContext) inherits this element
+            // but leaves the thread as it is: a callback thread stays off the executor, while
+            // Dispatchers.Unconfined running inline inside an executor task stays on it.
+            if (context[ContinuationInterceptor] === owner.serial) CURRENT.set(owner)
             return previous
         }
 
