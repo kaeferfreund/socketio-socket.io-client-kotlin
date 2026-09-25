@@ -194,6 +194,11 @@ public class EngineIOFrameDecoder(
                 }
 
                 State.PAYLOAD -> {
+                    // A frame beyond the largest array cannot be held; JavaScript cannot allocate it either.
+                    if (expectedLength > Int.MAX_VALUE) {
+                        output.add(fail())
+                        break
+                    }
                     if (available < expectedLength) break
                     val data = take(expectedLength.toInt())
                     output.add(

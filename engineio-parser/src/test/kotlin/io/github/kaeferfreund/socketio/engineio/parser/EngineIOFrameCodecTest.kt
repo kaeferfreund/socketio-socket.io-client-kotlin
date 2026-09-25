@@ -106,6 +106,15 @@ class EngineIOFrameCodecTest {
         assertArrayEquals(payload, (packets.single().data as EngineIOData.Binary).bytes)
     }
 
+    @Test
+    fun aFrameLongerThanAnArrayCanHoldFailsTheStream() {
+        // 3,000,000,000 bytes announced, allowed by maxPayload but beyond Int.MAX_VALUE.
+        val decoder = EngineIOFrameDecoder(10_000_000_000)
+        val header = bytes(255, 0, 0, 0, 0, 0xb2, 0xd0, 0x5e, 0x00)
+        assertEquals(listOf(EngineIOPacket.PARSER_ERROR), decoder.push(header))
+        assertEquals(emptyList<EngineIOPacket>(), decoder.push(ByteArray(10)))
+    }
+
     // JS-298
     @Test
     fun decodesABigBinaryPacket() {

@@ -130,6 +130,8 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
 - A query string in the manager URL replaces the `query` option, as
   `engine.io-client` does (`opts.query = parsedUri.query`); the two used to be
   merged with the option winning, under a comment that claimed JavaScript parity.
+- `EngineIOFrameDecoder` fails a frame longer than an array can hold with a
+  parser error instead of a `NegativeArraySizeException`.
 
 ### Validation
 
