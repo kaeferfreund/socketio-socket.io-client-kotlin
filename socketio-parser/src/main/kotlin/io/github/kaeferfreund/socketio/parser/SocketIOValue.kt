@@ -429,7 +429,7 @@ internal object ValueConverter {
             val frame = stack.last()
             if (frame.iterator.hasNext()) {
                 val next = frame.iterator.next()
-                val key = frame.keys?.next()?.let { keyString(it) }
+                val key = if (frame.keys != null) keyString(frame.keys.next()) else null
                 val leaf = leafOrNull(next)
                 if (leaf != null) {
                     if (frame.fields != null) frame.fields[key!!] = leaf else frame.items!!.add(leaf)

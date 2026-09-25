@@ -38,9 +38,10 @@ public object SocketIOJson {
     }
 
     /**
-     * Serializes [value] like `JSON.stringify`. Binary values cannot be
-     * represented in JSON and are rejected; the Socket.IO encoder replaces
-     * them with attachment placeholders first.
+     * Serializes [value] like `JSON.stringify`. Binary values have no JSON form;
+     * they are written as the text `"<binary N bytes>"`, for logs and
+     * `toString()`. The Socket.IO encoder replaces them with attachment
+     * placeholders instead.
      */
     @JvmStatic
     public fun stringify(value: SocketIOValue): String = stringify(value, binaryAsPlaceholderText = true)
@@ -173,19 +174,23 @@ public object SocketIOJson {
         if (value == 0.0) return "0"
         val negative = value < 0
         val magnitude = kotlin.math.abs(value)
-        // Shortest decimal that reads back as the same double, closest first.
+        // Number::toString: the fewest digits k that read back as the same double; among the
+        // k-digit candidates (at most the neighbours below and above), the closest, then the even.
         val exact = BigDecimal(magnitude)
         var digits = ""
         var exponent = 0
         for (precision in 1..17) {
-            val rounded = exact.round(MathContext(precision, RoundingMode.HALF_EVEN))
-            if (rounded.toDouble() == magnitude) {
-                val unscaled = rounded.unscaledValue().toString().trimEnd('0')
-                digits = unscaled.ifEmpty { "0" }
-                // value = 0.d1d2... * 10^n  ⇔  n = digitsBeforeScale - scale
-                exponent = rounded.precision() - rounded.scale()
-                break
-            }
+            val below = exact.round(MathContext(precision, RoundingMode.FLOOR))
+            val above = exact.round(MathContext(precision, RoundingMode.CEILING))
+            val chosen =
+                listOf(below, above)
+                    .filter { it.toDouble() == magnitude }
+                    .minWithOrNull(compareBy<BigDecimal> { it.subtract(exact).abs() }.thenBy { it.unscaledValue().testBit(0) })
+                    ?: continue
+            digits = chosen.unscaledValue().toString().trimEnd('0').ifEmpty { "0" }
+            // value = 0.d1d2... * 10^n  ⇔  n = digitsBeforeScale - scale
+            exponent = chosen.precision() - chosen.scale()
+            break
         }
         val k = digits.length
         val n = exponent
@@ -227,7 +232,7 @@ public object SocketIOJson {
             if (radix != 0) {
                 var result = 0.0
                 for (i in 2 until s.length) {
-                    val d = Character.digit(s[i], radix)
+                    val d = asciiDigit(s[i], radix)
                     if (d < 0) return Double.NaN
                     result = result * radix + d
                 }
@@ -240,6 +245,21 @@ public object SocketIOJson {
         if (!DECIMAL_LITERAL.matches(unsigned)) return Double.NaN
         val parsed = unsigned.toDouble()
         return if (negative) -parsed else parsed
+    }
+
+    /** The value of an ASCII digit or letter in [radix], else -1; `Character.digit` would accept any Unicode digit. */
+    internal fun asciiDigit(
+        c: Char,
+        radix: Int,
+    ): Int {
+        val value =
+            when (c) {
+                in '0'..'9' -> c - '0'
+                in 'a'..'z' -> c - 'a' + 10
+                in 'A'..'Z' -> c - 'A' + 10
+                else -> return -1
+            }
+        return if (value < radix) value else -1
     }
 
     private val DECIMAL_LITERAL = Regex("(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?")
@@ -504,7 +524,7 @@ private class JsonReader(
                             if (pos + 4 > text.length) fail("bad unicode escape")
                             var code = 0
                             for (i in 0 until 4) {
-                                val d = Character.digit(text[pos + i], 16)
+                                val d = SocketIOJson.asciiDigit(text[pos + i], 16)
                                 if (d < 0) fail("bad unicode escape")
                                 code = code * 16 + d
                             }

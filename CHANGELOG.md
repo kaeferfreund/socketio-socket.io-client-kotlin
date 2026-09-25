@@ -141,6 +141,11 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   observer behind, and a KeyChain failure during the TLS handshake is a
   `connect_error` instead of an exception on OkHttp's thread.
   `readSocketIOValue` rejects data after the JSON value.
+- Numbers print like JavaScript also at powers of two (`2^89` is
+  `6.189700196426902e+26`, not 17 digits); checked against Node for 280,140
+  values. The JSON reader and `javaScriptNumber` accept only ASCII digits, as
+  `JSON.parse` and `Number()` do; a `null` map key converts to `"null"`
+  instead of throwing.
 
 ### Validation
 

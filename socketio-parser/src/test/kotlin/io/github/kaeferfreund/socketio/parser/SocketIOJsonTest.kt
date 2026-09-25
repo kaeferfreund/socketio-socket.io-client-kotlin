@@ -8,6 +8,29 @@ import org.junit.jupiter.api.assertThrows
 
 /** `JSON.parse`/`JSON.stringify` semantics of the value codec. Expected strings were produced by Node 24. */
 class SocketIOJsonTest {
+    // Number::toString picks the k-digit decimal that round-trips, not only the nearest one:
+    // at a power of two the rounding interval is asymmetric (checked against Node for 280,140 values).
+    @Test
+    fun formatsPowersOfTwoWithTheShortestDigitsLikeJavaScript() {
+        assertEquals("6.189700196426902e+26", SocketIOJson.formatDouble(Math.pow(2.0, 89.0)))
+        assertEquals("5.758609657015292e+163", SocketIOJson.formatDouble(Math.pow(2.0, 544.0)))
+        assertEquals("9007199254740992", SocketIOJson.formatDouble(Math.pow(2.0, 53.0)))
+    }
+
+    @Test
+    fun acceptsOnlyAsciiDigitsLikeJavaScript() {
+        // Fullwidth digits after \u and in 0x literals: JSON.parse and Number() reject them.
+        assertThrows<SocketIOJsonException> { SocketIOJson.parse("\"\\u\uFF10\uFF10\uFF14\uFF11\"") }
+        assertTrue(SocketIOJson.javaScriptNumber("0x\uFF11").isNaN())
+        assertEquals("A", SocketIOJson.parse("\"\\u0041\"").string)
+        assertEquals(26.0, SocketIOJson.javaScriptNumber("0x1A"))
+    }
+
+    @Test
+    fun writesBinaryAsPlaceholderTextAsDocumented() {
+        assertEquals("{\"k\":\"<binary 1 bytes>\"}", SocketIOJson.stringify(socketIOObject("k" to byteArrayOf(1))))
+    }
+
     @Test
     fun formatsNumbersLikeJavaScript() {
         val cases =

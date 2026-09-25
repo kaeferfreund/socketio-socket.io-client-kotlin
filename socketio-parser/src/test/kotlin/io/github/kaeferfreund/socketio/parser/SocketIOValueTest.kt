@@ -16,6 +16,12 @@ class SocketIOValueTest {
     // Documented conversions: every primitive array becomes a JSON array (like Array.from on a
     // typed array), a CharArray an array of one-character strings, and map keys use toString().
     @Test
+    fun aNullMapKeyBecomesTheStringNullLikeToString() {
+        assertEquals(socketIOObject("null" to 1), SocketIOValue.of(mapOf(null to 1)))
+        assertEquals(socketIOObject("x" to socketIOObject("null" to true)), SocketIOValue.of(mapOf("x" to mapOf(null to true))))
+    }
+
+    @Test
     fun convertsPrimitiveArraysAndNonStringKeys() {
         assertEquals(SocketIOValue.of(listOf(1, 2)), SocketIOValue.of(intArrayOf(1, 2)))
         assertEquals(SocketIOValue.of(listOf(3L, Long.MAX_VALUE)), SocketIOValue.of(longArrayOf(3, Long.MAX_VALUE)))
