@@ -280,7 +280,13 @@ public class FakeSocketIOServer(
         val auth = packet.data as? SocketIOValue.Object
         val handshake = Handshake(packet.nsp, auth, query)
         namespace.middleware(handshake)?.let { refusal ->
-            val payload = SocketIOValue.objectOf("message" to refusal.message, "data" to refusal.data)
+            // JSON.stringify drops an undefined `data`, so a refusal without data has no such member.
+            val payload =
+                if (refusal.data == null) {
+                    SocketIOValue.objectOf("message" to refusal.message)
+                } else {
+                    SocketIOValue.objectOf("message" to refusal.message, "data" to refusal.data)
+                }
             writeTo(SocketIOPacket(SocketIOPacketType.CONNECT_ERROR, packet.nsp, payload))
             return
         }

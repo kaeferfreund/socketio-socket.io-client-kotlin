@@ -150,6 +150,12 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   without arguments as `null` (JavaScript resolves `undefined`) instead of
   throwing `NoSuchElementException`; `NaN` and infinities from
   `Json { allowSpecialFloatingPointValues = true }` convert instead of failing.
+- `socketio-testing`: the in-memory server delivers what it sent before a close
+  (a server-side `disconnect(true)` now arrives as `io server disconnect` over
+  WebSocket), answers the next poll with its close packet like engine.io, and
+  sends a refusal without `data` like socket.io. `FixtureServer` bounds its
+  `npm ci` wait even when the process stalls and refuses admin calls on TLS
+  fixtures.
 
 ### Validation
 

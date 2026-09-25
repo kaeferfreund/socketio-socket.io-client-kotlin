@@ -141,7 +141,8 @@ public class FakeEngineServer(
 
         /** Sends any packet over the current transport. */
         public fun sendPacket(packet: EngineIOPacket) {
-            if (!isOpen) return
+            // Like engine.io, nothing is sent once a close has been requested.
+            if (!isOpen || closeAfterPoll != null) return
             val ws = webSocket
             if (ws != null) {
                 ws.deliverPacket(packet)
@@ -226,7 +227,11 @@ public class FakeEngineServer(
             val body = EngineIOParser.encodePayload(outbox.toList())
             outbox.clear()
             respond(callback, EngineHttpResponse(200, body))
+            closeAfterPoll?.let { finishClose(it, sendClosePacket = true) }
         }
+
+        /** Set while a polling session waits for the next poll to carry its close packet. */
+        private var closeAfterPoll: String? = null
 
         internal fun close(
             reason: String,
@@ -239,9 +244,27 @@ public class FakeEngineServer(
                     ws.deliverPacket(EngineIOPacket(EngineIOPacketType.CLOSE))
                 } else {
                     outbox.add(EngineIOPacket(EngineIOPacketType.CLOSE))
+                    if (pendingPoll == null) {
+                        // engine.io (`shouldClose`) answers the next poll with the queued packets and the
+                        // close packet, and only then closes: nothing written before the close is lost.
+                        if (closeAfterPoll == null) {
+                            closeAfterPoll = reason
+                            heartbeatJob?.cancel()
+                            pongDeadline?.cancel()
+                        }
+                        return
+                    }
                     flushPoll()
                 }
             }
+            finishClose(reason, sendClosePacket)
+        }
+
+        private fun finishClose(
+            reason: String,
+            sendClosePacket: Boolean,
+        ) {
+            closeAfterPoll = null
             isOpen = false
             heartbeatJob?.cancel()
             pongDeadline?.cancel()
@@ -403,7 +426,12 @@ public class FakeEngineServer(
         internal var session: Session? = null
         internal var probing = false
         private var open = false
+
+        /** No more frames are accepted in either direction. */
         private var closed = false
+
+        /** The client closed or the connection failed: frames still in flight are lost. */
+        private var dropInFlight = false
 
         /** Frames the client sent, in order. */
         public val frames: MutableList<EngineIOData> = ArrayList()
@@ -418,15 +446,17 @@ public class FakeEngineServer(
             status: Int?,
         ) {
             closed = true
+            dropInFlight = true
             listener.onFailure(error, status)
         }
 
+        // A frame sent before the server closes still arrives before the close, as over TCP.
         internal fun deliverPacket(packet: EngineIOPacket) {
             if (closed) return
             val data = EngineIOParser.encodePacket(packet, supportsBinary = true)
             scope.launch {
                 if (latency.isPositive()) delay(latency)
-                if (closed) return@launch
+                if (dropInFlight) return@launch
                 when (data) {
                     is EngineIOData.Text -> listener.onMessage(data.value)
                     is EngineIOData.Binary -> listener.onMessage(data.bytes)
@@ -438,7 +468,7 @@ public class FakeEngineServer(
             if (closed) return
             scope.launch {
                 if (latency.isPositive()) delay(latency)
-                if (!closed) listener.onMessage(text)
+                if (!dropInFlight) listener.onMessage(text)
             }
         }
 
@@ -530,6 +560,7 @@ public class FakeEngineServer(
         ) {
             if (closed) return
             closed = true
+            dropInFlight = true
             val session = session
             scope.launch {
                 if (latency.isPositive()) delay(latency)
@@ -541,6 +572,7 @@ public class FakeEngineServer(
         override fun cancel() {
             if (closed) return
             closed = true
+            dropInFlight = true
             val session = session
             if (session != null && session.webSocket === this) session.close("transport close", sendClosePacket = false)
         }
