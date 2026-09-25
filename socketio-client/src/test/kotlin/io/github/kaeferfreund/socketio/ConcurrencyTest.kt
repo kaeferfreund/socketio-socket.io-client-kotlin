@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import org.jetbrains.lincheck.datastructures.ModelCheckingOptions
 import org.jetbrains.lincheck.datastructures.Operation
 import org.jetbrains.lincheck.datastructures.StressOptions
@@ -59,6 +60,13 @@ class ConcurrencyTest {
             latch.await()
             return result
         }
+    }
+
+    /** Waits until [post] ran a marker, i.e. everything queued before it ran. */
+    private fun awaitIdle(post: (() -> Unit) -> Unit) {
+        val done = CountDownLatch(1)
+        post { done.countDown() }
+        assertTrue(done.await(10, TimeUnit.SECONDS))
     }
 
     @Test
@@ -189,14 +197,12 @@ class ConcurrencyTest {
                 }
             workers.forEach { it.join() }
             socket.disconnect()
-            // Let the executor drain.
-            val drained = CountDownLatch(1)
-            manager.executor.post { drained.countDown() }
-            assertTrue(drained.await(10, TimeUnit.SECONDS))
-            Thread.sleep(200)
-            val finalDrain = CountDownLatch(1)
-            manager.executor.post { finalDrain.countDown() }
-            assertTrue(finalDrain.await(10, TimeUnit.SECONDS))
+            // Drain both sides until every request and answer in flight has been handled: each
+            // round runs what the other side queued in the round before.
+            repeat(20) {
+                awaitIdle { block -> scope.launch { block() } }
+                awaitIdle(manager.executor::post)
+            }
             assertTrue(!socket.connected)
             // Every disconnect event pairs with an earlier connect event.
             assertEquals(connects.get(), disconnects.get())
