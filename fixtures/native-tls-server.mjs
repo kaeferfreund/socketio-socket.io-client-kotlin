@@ -21,7 +21,9 @@ io.on('connection', socket => {
   socket.on('echo', (value, ack) => ack(value));
   socket.on('echoTwo', (first, second, ack) => ack(first, second));
 });
-server.listen(0, '127.0.0.1', () => {
+// Every interface: the certificate names localhost, which a client may reach over ::1
+// or 127.0.0.1 (OkHttp tries IPv6 first), and a single loopback address would fail one.
+server.listen(0, () => {
   console.log(`READY port=${server.address().port} secret=0123456789abcdef`);
 });
 process.on('SIGTERM', () => io.close(() => process.exit(0)));

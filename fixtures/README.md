@@ -11,7 +11,9 @@ pinned by `package-lock.json` (`socket.io` 4.8.3) and installed with
 | `engine-server.mjs` | Port of `packages/engine.io-client/test/support/hooks.js` at the pinned reference | The server of the original engine suite |
 | `auth-server.mjs` | Kotlin-specific | Token revocation and renewal across reconnects (KT contracts) |
 
-Every server listens on an ephemeral `127.0.0.1` port and prints
+Every server listens on an ephemeral `127.0.0.1` port (`native-tls-server.mjs` on
+every interface, since its certificate names `localhost`, which resolves to `::1`
+or `127.0.0.1`; it runs only during the TLS suite, with throwaway keys) and prints
 `READY port=<port> secret=<secret>` once it accepts connections. Admin routes
 require the `X-Admin-Secret` header. TLS material is generated per test run in
 a temporary directory and never committed.
