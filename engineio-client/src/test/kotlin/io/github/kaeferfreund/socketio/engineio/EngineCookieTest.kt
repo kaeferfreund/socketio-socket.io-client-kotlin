@@ -48,6 +48,16 @@ class EngineCookieTest {
     }
 
     @Test
+    fun aMaxAgeOutsideTheDateRangeNeverExpires() {
+        for (maxAge in listOf("99999999999999999", "9223372036854775807", "-99999999999999999")) {
+            assertEquals(EngineCookie("a", "b"), EngineCookie.parse("a=b; Max-Age=$maxAge"))
+        }
+        val jar = EngineCookieJar()
+        jar.parseCookies(listOf("a=b; Max-Age=9223372036854775807"))
+        assertEquals("a=b", jar.cookieHeader())
+    }
+
+    @Test
     fun ignoresCookiesThatCannotBeSentBackInAHeader() {
         val jar = EngineCookieJar()
         jar.parseCookies(listOf("a=café", "b=x\u0001y", "cé=1", "ok=1"))

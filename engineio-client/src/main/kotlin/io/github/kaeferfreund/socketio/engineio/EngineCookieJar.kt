@@ -51,11 +51,24 @@ public class EngineCookie(
                 val attribute = sub[1].trim()
                 when (sub[0].trim()) {
                     "Expires" -> expires = parseExpires(attribute)
-                    "Max-Age" -> expires = attribute.toLongOrNull()?.let { now.plusSeconds(it) }
+                    "Max-Age" -> expires = attribute.toLongOrNull()?.let { maxAge -> plusSecondsOrNull(now, maxAge) }
                 }
             }
             return EngineCookie(name, value, expires)
         }
+
+        /** `setUTCSeconds` beyond the date range gives an Invalid Date in JavaScript, which never expires. */
+        private fun plusSecondsOrNull(
+            now: Instant,
+            seconds: Long,
+        ): Instant? =
+            try {
+                now.plusSeconds(seconds)
+            } catch (e: java.time.DateTimeException) {
+                null
+            } catch (e: ArithmeticException) {
+                null
+            }
 
         private fun parseExpires(text: String): Instant? {
             for (format in EXPIRES_FORMATS) {

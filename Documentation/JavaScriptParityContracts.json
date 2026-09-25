@@ -3899,7 +3899,7 @@
       "id": "KT-ENGINE",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Engine behaviour beyond the upstream titles: pings are answered and missing pings close with `ping timeout`, a server ping resets the deadline, an invalid handshake is rejected, default path and query follow JavaScript, closing polling sends the close packet, the network-lost hook closes with `transport close`; the upgrade buffers packets and waits for a pending POST, a failed probe keeps polling and reports `upgradeError`, `upgrade: false` stays on polling; invalid cookies are ignored; POST bodies are UTF-8; query components are encoded like `encodeURIComponent`. Hostile handshakes (not JSON, wrong types, missing or negative values, values above the configured limits) end in a `transport error` close; an unknown transport name, a transport factory that throws and a throwing packet observer end in events, never in escaping exceptions; an undecodable frame is a `server error` with code `parser error`, as in JavaScript. A request the HTTP stack cannot start, before or after the handshake, is a transport error and never an exception; the cookie jar ignores cookies that are not printable ASCII.",
+      "assertions": "Engine behaviour beyond the upstream titles: pings are answered and missing pings close with `ping timeout`, a server ping resets the deadline, an invalid handshake is rejected, default path and query follow JavaScript, closing polling sends the close packet, the network-lost hook closes with `transport close`; the upgrade buffers packets and waits for a pending POST, a failed probe keeps polling and reports `upgradeError`, `upgrade: false` stays on polling; invalid cookies are ignored; POST bodies are UTF-8; query components are encoded like `encodeURIComponent`. Hostile handshakes (not JSON, wrong types, missing or negative values, values above the configured limits) end in a `transport error` close; an unknown transport name, a transport factory that throws and a throwing packet observer end in events, never in escaping exceptions; an undecodable frame is a `server error` with code `parser error`, as in JavaScript. A request the HTTP stack cannot start, before or after the handshake, is a transport error and never an exception; the cookie jar ignores cookies that are not printable ASCII. A Max-Age beyond the date range never expires instead of failing.",
       "tests": [
         {
           "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
@@ -4012,6 +4012,10 @@
         {
           "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.ignoresCookiesThatCannotBeSentBackInAHeader"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineCookieTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineCookieTest.aMaxAgeOutsideTheDateRangeNeverExpires"
         }
       ]
     },

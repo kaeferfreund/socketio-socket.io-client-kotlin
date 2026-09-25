@@ -92,6 +92,8 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
 - Converting received values to `JsonElement` (`decodeAs`, `onSerializable`) or
   to `org.json` (`toJson`) is iterative: a deeply nested payload no longer
   overflows the stack.
+- A `Set-Cookie` `Max-Age` beyond the date range no longer throws inside the
+  protocol executor; like JavaScript's Invalid Date, such a cookie never expires.
 
 ### Validation
 
