@@ -145,6 +145,9 @@ and do not change a certified assertion:
   one is tried; JavaScript only drops its listeners. Unlike JavaScript, this client
   rejects invalid handshakes, which can arrive on an already open polling
   transport that would otherwise keep polling.
+- Polling follows redirects only within the same origin, and the WebSocket
+  handshake none: extra headers, cookies and a POST body are never forwarded to
+  another host. Node's polling client follows every redirect with the same headers.
 - Payloads are `SocketIOValue` trees. Values are converted explicitly
   (`SocketIOValue.of`, kotlinx.serialization); there is no `toJSON()` hook.
 - Optional limits (text length, nesting depth, buffered packets, polling body

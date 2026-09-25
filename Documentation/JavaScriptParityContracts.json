@@ -3843,7 +3843,7 @@
       "id": "KT-OKHTTP",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "The OkHttp stack sends headers and bodies, reports error statuses, bounds response bodies while reading, applies the request timeout but no read timeout (long polls wait), never follows an HTTPS-to-HTTP redirect, exchanges WebSocket frames and reports the close and a failed handshake's status, offers permessage-deflate only when compression is enabled, is discovered through ServiceLoader, and reports a dropped connection as a failure; the `okHttp { }` builder applies the base client and every `configure` block. A request or WebSocket OkHttp cannot build (a header value or URL it refuses) fails through the callback instead of throwing.",
+      "assertions": "The OkHttp stack sends headers and bodies, reports error statuses, bounds response bodies while reading, applies the request timeout but no read timeout (long polls wait), never follows an HTTPS-to-HTTP redirect, exchanges WebSocket frames and reports the close and a failed handshake's status, offers permessage-deflate only when compression is enabled, is discovered through ServiceLoader, and reports a dropped connection as a failure; the `okHttp { }` builder applies the base client and every `configure` block. A request or WebSocket OkHttp cannot build (a header value or URL it refuses) fails through the callback instead of throwing. Polling follows a redirect only within its origin and refuses one to another origin without sending anything there; the WebSocket handshake follows no redirect.",
       "tests": [
         {
           "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
@@ -3896,6 +3896,14 @@
         {
           "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.aRequestOkHttpCannotBuildFailsInsteadOfThrowing"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.followsRedirectsOnlyWithinTheOrigin"
+        },
+        {
+          "path": "socketio-okhttp/src/test/kotlin/io/github/kaeferfreund/socketio/okhttp/OkHttpEngineClientsTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.okhttp.OkHttpEngineClientsTest.theWebSocketHandshakeFollowsNoRedirect"
         }
       ]
     },

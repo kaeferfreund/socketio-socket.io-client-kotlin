@@ -186,8 +186,11 @@ val options = SocketManagerOptions {
 ```
 
 The library derives its own client from yours: read timeout disabled,
-HTTPS→HTTP redirects not followed (`followSslRedirects = false`), and at least 64
-concurrent requests per host. Interceptors, proxy, DNS, cookie jar,
+HTTPS→HTTP redirects not followed (`followSslRedirects = false`), polling redirects
+followed only within the same origin (scheme, host and port) so extra headers,
+cookies and request bodies never reach another host, no redirects for the
+WebSocket handshake (as in browsers and Node's `ws`), and at least 64 concurrent
+requests per host. Interceptors, proxy, DNS, cookie jar,
 `connectionSpecs` and call timeouts are kept.
 
 On Android, set `okHttpClient` and `tlsPolicy` inside `android(context) { }`

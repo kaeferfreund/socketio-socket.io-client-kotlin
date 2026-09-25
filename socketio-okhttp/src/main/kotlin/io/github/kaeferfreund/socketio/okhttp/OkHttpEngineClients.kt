@@ -13,6 +13,9 @@ import io.github.kaeferfreund.socketio.engineio.EngineWebSocketRequest
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Dispatcher
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -24,6 +27,7 @@ import okio.Buffer
 import okio.ByteString
 import okio.ByteString.Companion.toByteString
 import java.io.IOException
+import java.net.ProtocolException
 import java.util.concurrent.TimeUnit
 
 /** A polling response exceeded [EngineHttpRequest.maxResponseBytes]. */
@@ -34,12 +38,16 @@ public class ResponseTooLargeException(
 /**
  * [EngineClients] backed by OkHttp: long-polling requests and WebSockets.
  *
- * The [client] is used as given, with three adjustments the protocol needs
+ * The [client] is used as given, with these adjustments the protocol needs
  * (applied to a derived client that shares the connection pool):
  * - no read timeout, since a long poll legitimately waits a heartbeat
  *   interval and the engine's heartbeat detects dead connections;
  * - redirects between HTTPS and HTTP are never followed (`followSslRedirects
  *   = false`), so a redirect cannot downgrade the connection, over any hop;
+ * - a polling request follows a redirect only within its origin (scheme, host
+ *   and port): OkHttp would otherwise send the extra headers, cookies and a
+ *   POST body on to another host. The WebSocket handshake follows no redirect,
+ *   like browsers and Node's `ws`;
  * - at least 64 concurrent requests per host, so several managers polling
  *   the same server cannot starve each other's POSTs.
  *
@@ -55,6 +63,7 @@ public class OkHttpEngineClients(
             .newBuilder()
             .readTimeout(0, TimeUnit.MILLISECONDS)
             .followSslRedirects(false)
+            .addNetworkInterceptor(SameOriginRedirects)
             .dispatcher(
                 client.dispatcher.takeIf { it.maxRequestsPerHost >= 64 }
                     ?: Dispatcher(client.dispatcher.executorService).apply {
@@ -72,7 +81,8 @@ public class OkHttpEngineClients(
     ): Cancellable {
         val okRequest =
             try {
-                val builder = Request.Builder().url(request.url)
+                val url = request.url.toHttpUrl()
+                val builder = Request.Builder().url(url).tag(Origin::class.java, Origin.of(url))
                 for ((name, value) in request.headers) builder.addHeader(name, value)
                 if (request.method == "POST") {
                     builder.post((request.body ?: "").toRequestBody(TEXT_PLAIN))
@@ -142,7 +152,7 @@ public class OkHttpEngineClients(
             failLater { listener.onFailure(IOException("invalid request: ${e.message}", e), null) }
             return ClosedConnection
         }
-        val wsBuilder = client.newBuilder()
+        val wsBuilder = client.newBuilder().followRedirects(false)
         val threshold = request.compressionThreshold
         if (threshold != null) {
             wsBuilder.minWebSocketMessageToCompress(threshold.toLong())
@@ -202,6 +212,31 @@ public class OkHttpEngineClients(
                 },
             )
         return OkHttpWebSocketConnection(socket)
+    }
+
+    /** Scheme, host and port of the URL a request was made for. */
+    private class Origin private constructor(
+        val scheme: String,
+        val host: String,
+        val port: Int,
+    ) {
+        fun matches(url: HttpUrl): Boolean = url.scheme == scheme && url.host == host && url.port == port
+
+        companion object {
+            fun of(url: HttpUrl): Origin = Origin(url.scheme, url.host, url.port)
+        }
+    }
+
+    /** Fails a redirect to another origin; network interceptors see every hop of a call. */
+    private object SameOriginRedirects : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val request = chain.request()
+            val origin = request.tag(Origin::class.java)
+            if (origin != null && !origin.matches(request.url)) {
+                throw ProtocolException("redirect to another origin refused: ${request.url.redact()}")
+            }
+            return chain.proceed(request)
+        }
     }
 
     /** Runs [report] on OkHttp's dispatcher threads, never inside the caller's stack. */

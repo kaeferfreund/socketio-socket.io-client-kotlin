@@ -124,6 +124,9 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   in the manager's `setup` block are no longer lost, a rejected emit (buffer
   limit) no longer appears as `connect_error` on every socket, and an auth
   provider still running for an attempt that ended is cancelled.
+- Polling requests follow redirects only within the same origin, and the
+  WebSocket handshake follows none: a redirect to another host used to receive
+  the extra headers (API keys), cookies and the POST body with the auth payload.
 
 ### Validation
 

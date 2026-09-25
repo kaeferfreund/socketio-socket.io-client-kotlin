@@ -162,6 +162,68 @@ class OkHttpEngineClientsTest {
     }
 
     @Test
+    fun followsRedirectsOnlyWithinTheOrigin() {
+        val other = MockWebServer()
+        other.start()
+        try {
+            val clients = OkHttpEngineClients()
+            server.enqueue(MockResponse.Builder().code(307).addHeader("Location", server.url("/socket.io/?moved=1").toString()).build())
+            server.enqueue(MockResponse.Builder().body("same origin").build())
+            assertEquals("same origin", execute(clients, get()).getOrThrow().body)
+
+            server.enqueue(MockResponse.Builder().code(307).addHeader("Location", other.url("/collect").toString()).build())
+            val post =
+                EngineHttpRequest(
+                    "POST",
+                    server.url("/socket.io/?EIO=4&sid=a").toString(),
+                    listOf("X-Api-Key" to "secret", "cookie" to "session=1"),
+                    "40{\"token\":\"secret\"}",
+                    null,
+                )
+            assertTrue(execute(clients, post).exceptionOrNull() is java.net.ProtocolException)
+            assertEquals(0, other.requestCount, "the credentials reached another origin")
+        } finally {
+            other.close()
+        }
+    }
+
+    @Test
+    fun theWebSocketHandshakeFollowsNoRedirect() {
+        val other = MockWebServer()
+        other.start()
+        try {
+            server.enqueue(MockResponse.Builder().code(302).addHeader("Location", other.url("/socket.io/").toString()).build())
+            val failure = CompletableFuture<Int?>()
+            OkHttpEngineClients().connect(
+                EngineWebSocketRequest(server.url("/socket.io/").toString().replace("http", "ws"), listOf("X-Api-Key" to "secret"), emptyList(), null),
+                object : EngineWebSocketListener {
+                    override fun onOpen(responseHeaders: List<Pair<String, String>>) = Unit
+
+                    override fun onMessage(text: String) = Unit
+
+                    override fun onMessage(bytes: ByteArray) = Unit
+
+                    override fun onClosed(
+                        code: Int,
+                        reason: String,
+                    ) = Unit
+
+                    override fun onFailure(
+                        error: Throwable,
+                        httpStatus: Int?,
+                    ) {
+                        failure.complete(httpStatus)
+                    }
+                },
+            )
+            assertEquals(302, failure.get(5, TimeUnit.SECONDS))
+            assertEquals(0, other.requestCount)
+        } finally {
+            other.close()
+        }
+    }
+
+    @Test
     fun neverFollowsARedirectFromHttpsToHttp() {
         val localhost = HeldCertificate.Builder().addSubjectAlternativeName("localhost").build()
         val serverCerts = HandshakeCertificates.Builder().heldCertificate(localhost).build()
