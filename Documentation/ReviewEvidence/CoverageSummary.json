@@ -2,9 +2,9 @@
   "jvm_all_suites": {
     "total": {
       "line": {
-        "covered": 3005,
+        "covered": 3006,
         "total": 3087,
-        "percent": 97.3
+        "percent": 97.4
       },
       "branch": {
         "covered": 2034,
@@ -76,9 +76,9 @@
           "percent": 98.3
         },
         "branch": {
-          "covered": 629,
+          "covered": 628,
           "total": 785,
-          "percent": 80.1
+          "percent": 80.0
         },
         "method": {
           "covered": 279,
@@ -105,14 +105,14 @@
       },
       "io.github.kaeferfreund.socketio.engineio": {
         "line": {
-          "covered": 827,
+          "covered": 828,
           "total": 854,
-          "percent": 96.8
+          "percent": 97.0
         },
         "branch": {
-          "covered": 429,
+          "covered": 430,
           "total": 534,
-          "percent": 80.3
+          "percent": 80.5
         },
         "method": {
           "covered": 212,
