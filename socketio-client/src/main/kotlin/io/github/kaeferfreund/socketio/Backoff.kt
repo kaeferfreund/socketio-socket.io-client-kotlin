@@ -34,6 +34,10 @@ internal class Backoff(
             val deviation = floor(rand * jitter * ms)
             ms = if ((floor(rand * 10).toInt() and 1) == 0) ms - deviation else ms + deviation
         }
+        // Deliberate deviation: once `min * 2^attempts` is infinite (about 1,024 attempts), the
+        // jitter makes it NaN and JavaScript's `Math.min(NaN, max) | 0` returns 0, which turns a
+        // long outage into reconnection attempts without delay. The maximum applies instead.
+        if (ms.isNaN()) ms = max.inWholeMilliseconds.toDouble()
         // `Math.min(ms, max) | 0` truncates toward zero to a 32-bit integer.
         val capped = min(ms, max.inWholeMilliseconds.toDouble())
         return if (capped >= Int.MAX_VALUE) Int.MAX_VALUE.milliseconds else capped.toLong().milliseconds

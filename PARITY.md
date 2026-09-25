@@ -132,6 +132,10 @@ and do not change a certified assertion:
 - OkHttp compresses WebSocket messages by size (`perMessageDeflateThreshold`); the
   per-message `compress` flag reaches the transport but cannot switch a single
   frame's compression off.
+- The reconnection delay stays at `reconnectionDelayMax` after about 1,024 failed
+  attempts in a row. JavaScript's backoff turns into `NaN` there (the jitter meets
+  an infinite `min × 2^attempts`), and `Math.min(NaN, max) | 0` yields 0 ms, so a
+  long outage ends in attempts without delay. Every earlier delay is unchanged.
 - Payloads are `SocketIOValue` trees. Values are converted explicitly
   (`SocketIOValue.of`, kotlinx.serialization); there is no `toJSON()` hook.
 - Optional limits (text length, nesting depth, buffered packets, polling body

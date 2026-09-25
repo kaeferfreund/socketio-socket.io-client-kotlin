@@ -127,7 +127,7 @@ Rohdaten, Skripte und Ereignisprotokolle liegen außerhalb des Repositories in
    (`OkHttpEngineClientsTest.hasNoReadTimeoutSoLongPollsCanWait`), und der
    Heartbeat erkennt tote Verbindungen wie in JavaScript.
 
-## Offene Entscheidungen
+## Entscheidungen
 
 1. **Backoff nach sehr vielen Versuchen.** Bei der Nachprüfung von
    [#107](https://github.com/socketio/socket.io-client-java/issues/107)
@@ -138,10 +138,17 @@ Rohdaten, Skripte und Ereignisprotokolle liegen außerhalb des Repositories in
    `reconnectionDelayMax = 5 s` passiert das nach etwa 85 Minuten
    ununterbrochener Fehlversuche; danach folgen viele Versuche ohne Pause. In
    JavaScript und in Kotlin nachgestellt (gleiche Folge von 0- und 5000-ms-Werten).
-   Ein Fix (z. B. auf `reconnectionDelayMax` begrenzen) wäre eine Abweichung vom
-   JS-Client, wenn auch eine harmlose. Nicht geändert.
-2. **Eigener Parser (#333, #334).** Innerhalb des JS-Standards möglich; nicht
-   umgesetzt, weil es eine neue öffentliche Erweiterungsschnittstelle bedeutet.
+   **Entschieden am 25.09.2026:** bewusste Abweichung. Die Wartezeit bleibt dort
+   bei `reconnectionDelayMax` (`Backoff.duration`,
+   `SocketManagerTest.theBackoffStaysAtTheMaximumAfterThousandsOfAttempts`); alle
+   früheren Werte sind unverändert. Dokumentiert in [PARITY.md](../PARITY.md) und
+   im [Compatibility-Guide](Guides/Compatibility.md). Der iOS-Client verhält sich
+   bereits so (`reconnectInterval` begrenzt den Exponenten auf 60 und fällt bei
+   nicht endlichen Werten auf das Maximum zurück).
+2. **Eigener Parser (#333, #334).** Innerhalb des JS-Standards möglich.
+   **Entschieden am 25.09.2026:** nicht umgesetzt, weil der iOS-Client
+   (kaeferfreund/socket.io-client-swift) ebenfalls keinen austauschbaren Parser
+   anbietet (dort offen als Upstream-Issue #1150); beide Clients bleiben gleich.
 
 ## Methode und Grenzen
 

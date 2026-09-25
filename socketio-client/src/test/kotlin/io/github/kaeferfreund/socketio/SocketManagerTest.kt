@@ -54,6 +54,21 @@ class SocketManagerTest {
         assertEquals(1000L, backoff.duration().inWholeMilliseconds)
     }
 
+    // Deliberate deviation from backo2.ts: after about 1,024 attempts `min * 2^attempts` is
+    // infinite, the jitter turns it into NaN, and JavaScript's `Math.min(NaN, max) | 0` yields
+    // 0 ms, so a long outage ends in reconnection attempts without any delay. The delay stays at
+    // the maximum instead (found while reviewing socket.io-client-java#107).
+    @Test
+    fun theBackoffStaysAtTheMaximumAfterThousandsOfAttempts() {
+        val backoff = Backoff(1.seconds, 5.seconds, 0.5, kotlin.random.Random(7))
+        val delays = List(3000) { backoff.duration().inWholeMilliseconds }
+        assertTrue(delays.none { it <= 0 }, "zero delays at attempts ${delays.indices.filter { delays[it] <= 0 }.take(5)}")
+        assertEquals(List(1000) { 5000L }, delays.takeLast(1000))
+        // Without jitter the value was never NaN; it keeps its behaviour.
+        val plain = Backoff(1.seconds, 5.seconds, 0.0, kotlin.random.Random(7))
+        assertEquals(5000L, List(2000) { plain.duration().inWholeMilliseconds }.last())
+    }
+
     // JS-034: timers run on the configured dispatcher, so a test clock drives the reconnect delay.
     @Test
     fun reconnectTimersFollowTheConfiguredClock() =

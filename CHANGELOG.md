@@ -66,6 +66,9 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   (#289); end-to-end tests wait for events instead of fixed delays.
 - `SECURITY.md` and Dependabot (#785); the JVM process-exit behaviour of OkHttp's
   dispatcher threads is documented (#324).
+- The reconnection delay stays at `reconnectionDelayMax` after about 1,024 failed
+  attempts in a row, where JavaScript's backoff degenerates to 0 ms (a deliberate
+  deviation, documented in PARITY.md).
 - See [the triage report](Documentation/UpstreamIssueTriage-2026-09-25.md).
 
 ### Validation
