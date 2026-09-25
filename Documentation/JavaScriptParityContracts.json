@@ -4035,7 +4035,7 @@
       "id": "KT-PARSER-SAFETY",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Hostile peer input: 20,000 seeded malformed inputs and random text only ever fail with parse errors; known malformed headers are rejected; random values round-trip through encoder and decoder and encoder output is always decodable; ack ids outside the safe-integer range, excessive text, depth and attachment counts are rejected; a throwing reviver makes the payload invalid; attachments are numbered in JavaScript traversal order; the Engine.IO codec stops at the first error packet, decodes Base64 as leniently as Node, copies binary defensively and survives arbitrary chunk boundaries. Deeply nested payloads, which the iterative parser accepts, convert to kotlinx.serialization trees and back without recursion.",
+      "assertions": "Hostile peer input: 20,000 seeded malformed inputs and random text only ever fail with parse errors; known malformed headers are rejected; random values round-trip through encoder and decoder and encoder output is always decodable; ack ids outside the safe-integer range, excessive text, depth and attachment counts are rejected; a throwing reviver makes the payload invalid; attachments are numbered in JavaScript traversal order; the Engine.IO codec stops at the first error packet, decodes Base64 as leniently as Node, copies binary defensively and survives arbitrary chunk boundaries. Deeply nested payloads, which the iterative parser accepts, convert to kotlinx.serialization trees and back without recursion. A declared attachment count reserves no memory up front.",
       "tests": [
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
@@ -4128,6 +4128,10 @@
         {
           "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.serialization.SocketIOSerializationTest.convertsDeeplyNestedPayloadsWithoutRecursion"
+        },
+        {
+          "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOParserSafetyTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.parser.SocketIOParserSafetyTest.aHugeDeclaredAttachmentCountIsNotAllocatedUpFront"
         }
       ]
     },

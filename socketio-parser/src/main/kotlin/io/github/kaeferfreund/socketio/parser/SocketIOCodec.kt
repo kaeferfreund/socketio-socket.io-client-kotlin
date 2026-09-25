@@ -124,7 +124,8 @@ public class SocketIODecoder(
         val data: SocketIOValue?,
         val attachments: Int,
     ) {
-        val buffers = ArrayList<SocketIOValue.Binary>(attachments)
+        // Not pre-sized: the count comes from the peer; memory grows with what actually arrives.
+        val buffers = ArrayList<SocketIOValue.Binary>()
         var bytes = 0L
     }
 

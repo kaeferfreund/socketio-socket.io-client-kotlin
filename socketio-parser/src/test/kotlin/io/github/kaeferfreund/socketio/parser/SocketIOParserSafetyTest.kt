@@ -81,6 +81,16 @@ class SocketIOParserSafetyTest {
     }
 
     @Test
+    fun aHugeDeclaredAttachmentCountIsNotAllocatedUpFront() {
+        // With the limit raised to "unlimited", the declared count alone must not reserve memory.
+        val decoder = SocketIODecoder(SocketParserOptions(maxAttachments = Int.MAX_VALUE))
+        assertEquals(null, decoder.add("52147483647-[\"x\",{\"_placeholder\":true,\"num\":0}]"))
+        assertEquals(Int.MAX_VALUE, decoder.missingAttachments)
+        assertEquals(null, decoder.add(byteArrayOf(1)))
+        assertEquals(Int.MAX_VALUE - 1, decoder.missingAttachments)
+    }
+
+    @Test
     fun aBinaryHeaderWithoutPayloadWaitsLikeJavaScriptAndYieldsAnEmptyEvent() {
         val decoder = SocketIODecoder()
         assertEquals(null, decoder.add("51-"))

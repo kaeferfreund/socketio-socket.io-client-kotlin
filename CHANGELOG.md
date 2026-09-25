@@ -101,6 +101,9 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   handshake that may never complete.
 - `TlsPolicy.withPins`/`withPinnedCertificates` add to the pins of a host
   pattern instead of replacing them, so a backup pin no longer drops the primary.
+- A binary packet header no longer reserves memory for the attachment count
+  it declares; with `maxAttachments` raised, a huge count ended in
+  `OutOfMemoryError` instead of waiting for (or rejecting) the attachments.
 
 ### Validation
 
