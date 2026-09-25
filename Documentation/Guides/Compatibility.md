@@ -53,7 +53,7 @@ Durations are `Duration` instead of milliseconds.
 | Redirects | Polling follows redirects within the same origin only (Node's client follows any, browsers apply CORS); the WebSocket handshake follows none, as browsers and Node's `ws` |
 | `protocols` | Same name |
 | Reconnection backoff | Same formula and jitter; after about 1,024 failed attempts in a row the delay stays at `reconnectionDelayMax`, where JavaScript's computation degenerates to 0 ms |
-| WebSocket message size | Unlimited in browsers and Node; OkHttp sends at most 16 MiB per message. Bursts are paced below OkHttp's queue limit |
+| WebSocket message size | Unlimited in browsers and Node; OkHttp sends at most 16 MiB per message. Bursts are paced below OkHttp's queue limit. Incoming messages are buffered whole by OkHttp, without a size limit (Node's `ws` defaults to 100 MiB) |
 | `perMessageDeflate` | `perMessageDeflateThreshold` (`null` = no compression offered); the per-message `compress` flag reaches the transport, but OkHttp compresses by size only |
 | `transportOptions` | Same name, `TransportOverrides` (`query`, `extraHeaders`, `requestTimeout`, `timestampRequests`, `forceBase64`, `path`) |
 | `parser` | Not available; `parserOptions` bounds the default parser |

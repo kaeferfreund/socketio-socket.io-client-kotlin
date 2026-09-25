@@ -161,9 +161,7 @@ val options = SocketManagerOptions {
 A new transport subclasses `EngineTransport` and implements `name`, `doOpen`,
 `doClose`, `write` and `uri`. All methods run on the protocol executor; hop to
 `TransportOptions.executor` before calling the protected `on…` methods from I/O
-callbacks. The server must implement the same transport. `uri()` is annotated
-`@InternalSocketIOApi`, so an implementation currently needs
-`@OptIn(InternalSocketIOApi::class)`.
+callbacks. The server must implement the same transport.
 
 ## OkHttp client
 
@@ -316,7 +314,10 @@ exist for apps that process untrusted or unusually large input.
 | `reviver` | `null` (`JSON.parse` reviver) |
 
 A packet over a parser limit closes the connection with `"parse error"`; the
-manager reconnects.
+manager reconnects. On WebSocket, OkHttp reads each incoming message completely
+before the client sees it and has no size limit of its own, so these limits bound
+what is processed, not that buffer. For a server you do not trust, prefer polling
+with `maxPollingResponseBytes`, which is enforced while reading.
 
 `SocketBufferLimits` (`bufferLimits`) bounds what is kept across packets:
 `maxSendBufferPackets`/`Bytes`, `maxRetryQueuePackets`/`Bytes`,
