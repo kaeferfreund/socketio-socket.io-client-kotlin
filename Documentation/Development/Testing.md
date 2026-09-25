@@ -45,7 +45,9 @@ unit tests run on SDK 34 there and on SDK 34 and 36 elsewhere.
 | Consumer | `scripts/test-consumer.sh` | The README quick start compiles against the published artifacts with the Kotlin that AGP bundles |
 
 Tests never sleep to prove something: they wait for an event with a deadline or
-drive virtual time. A skipped test fails the parity gate.
+drive virtual time. A skipped test fails the parity gate. Name parameterized tests
+`@ParameterizedTest(name = "{displayName} [{index}] {0}")`: the gate matches JUnit
+reports to contracts by method name, and JUnit's default name is only the index.
 
 ## Parity evidence
 

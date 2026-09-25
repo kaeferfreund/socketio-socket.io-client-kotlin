@@ -63,6 +63,7 @@ public final class io/github/kaeferfreund/socketio/testing/FakeEngineServer$Sess
 	public final fun send (Ljava/lang/String;)V
 	public final fun send ([B)V
 	public final fun sendPacket (Lio/github/kaeferfreund/socketio/engineio/parser/EngineIOPacket;)V
+	public final fun sendRawFrame (Ljava/lang/String;)V
 	public final fun setOnClose (Lkotlin/jvm/functions/Function1;)V
 	public final fun setOnMessage (Lkotlin/jvm/functions/Function1;)V
 }

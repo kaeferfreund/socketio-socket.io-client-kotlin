@@ -64,6 +64,15 @@ class ParityValidatorTest(unittest.TestCase):
         junit = PASSED.replace('</testsuite>', '<testcase classname="pkg.Other" name="later()"><skipped/></testcase></testsuite>')
         self.assertIn('JUnit reports a failed or skipped test: pkg.Other.later', self.validate(self.checkout(junit=junit)))
 
+    def test_parameterized_executions_count_when_named_after_the_method(self):
+        junit = ('<testsuite name="x"><testcase classname="pkg.demo.DemoTest" name="works(String) [1] a"/>'
+                 '<testcase classname="pkg.demo.DemoTest" name="works(String) [2] b"/></testsuite>')
+        self.assertEqual([], self.validate(self.checkout(junit=junit)))
+
+    def test_a_parameterized_execution_named_only_by_its_index_is_not_evidence(self):
+        junit = '<testsuite name="x"><testcase classname="pkg.demo.DemoTest" name="[1] a"/></testsuite>'
+        self.assertIn('JS-001: JUnit did not report a PASS for ' + SYMBOL, self.validate(self.checkout(junit=junit)))
+
     def test_missing_reports_fail(self):
         root = self.checkout()
         errors = parity.validate(root=root, junit=[str(root / 'none/*.xml')], strict=True)

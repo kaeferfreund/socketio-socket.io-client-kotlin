@@ -148,6 +148,15 @@ public class FakeEngineServer(
             }
         }
 
+        /**
+         * Sends [text] as one WebSocket frame without encoding it, for hostile-input tests
+         * (for example a frame that is not an Engine.IO packet). Requires the WebSocket transport.
+         */
+        public fun sendRawFrame(text: String) {
+            val ws = checkNotNull(webSocket) { "sendRawFrame needs the WebSocket transport" }
+            ws.deliverRaw(text)
+        }
+
         /** Answers the outstanding long poll with an HTTP error, as a failing proxy or server would. */
         public fun failPendingPoll(
             status: Int,
@@ -419,6 +428,14 @@ public class FakeEngineServer(
                     is EngineIOData.Text -> listener.onMessage(data.value)
                     is EngineIOData.Binary -> listener.onMessage(data.bytes)
                 }
+            }
+        }
+
+        internal fun deliverRaw(text: String) {
+            if (closed) return
+            scope.launch {
+                if (latency.isPositive()) delay(latency)
+                if (!closed) listener.onMessage(text)
             }
         }
 

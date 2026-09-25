@@ -77,11 +77,11 @@ without a certifying contract.
 | `KT-TRANSPORT-LIMITS` | Stalled and trickling handshakes and POSTs time out, messages near `maxPayload`, idle heartbeats, a smoke test over every transport mode |
 | `KT-TLS` | Private CA, system trust, expired certificate, host name mismatch, public-key pins, mutual TLS |
 | `KT-OKHTTP` | Timeouts, body limits, redirects, WebSocket close and handshake errors, compression offer, service discovery |
-| `KT-ENGINE` | Heartbeat, handshake validation, upgrade buffering and failure, cookies, URI encoding |
+| `KT-ENGINE` | Heartbeat, hostile handshakes, undecodable frames, broken transports and observers, upgrade buffering and failure, cookies, URI encoding |
 | `KT-PARSER-SAFETY` | 20,000 seeded malformed inputs, property-based round trips, limits, lenient Base64, chunked frames |
-| `KT-JSON-MODEL` | JavaScript number formatting and coercion, key order, escaping, deep nesting without recursion, conversions, kotlinx.serialization |
+| `KT-JSON-MODEL` | JavaScript number formatting and coercion, key order, escaping, deep nesting without recursion, conversions, kotlinx.serialization including the emit, listener and acknowledgement helpers |
 | `KT-CONCURRENCY` | Lincheck linearizability of the executor and listener registry, multi-threaded emits, concurrent connect/disconnect |
-| `KT-CLIENT-API` | Cancellation of `emitWithAck`, auth providers, buffer limits, listeners and flows, retries, recovery, manager lifecycle |
+| `KT-CLIENT-API` | Cancellation of `emitWithAck`, auth providers, buffer limits, listeners and flows, retries, recovery, the Manager API (runtime setters, `open(callback)`, pause/resume, tracing), server-side disconnects |
 | `KT-ANDROID` | Network loss and change, background policy, logging, elapsed-realtime clock, org.json, saved configuration, trim-memory, KeyChain |
 
 ## Parser differential

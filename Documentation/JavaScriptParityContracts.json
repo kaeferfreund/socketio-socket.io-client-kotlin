@@ -3863,7 +3863,7 @@
       "id": "KT-ENGINE",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Engine behaviour beyond the upstream titles: pings are answered and missing pings close with `ping timeout`, a server ping resets the deadline, an invalid handshake is rejected, default path and query follow JavaScript, closing polling sends the close packet, the network-lost hook closes with `transport close`; the upgrade buffers packets and waits for a pending POST, a failed probe keeps polling and reports `upgradeError`, `upgrade: false` stays on polling; invalid cookies are ignored; POST bodies are UTF-8; query components are encoded like `encodeURIComponent`.",
+      "assertions": "Engine behaviour beyond the upstream titles: pings are answered and missing pings close with `ping timeout`, a server ping resets the deadline, an invalid handshake is rejected, default path and query follow JavaScript, closing polling sends the close packet, the network-lost hook closes with `transport close`; the upgrade buffers packets and waits for a pending POST, a failed probe keeps polling and reports `upgradeError`, `upgrade: false` stays on polling; invalid cookies are ignored; POST bodies are UTF-8; query components are encoded like `encodeURIComponent`. Hostile handshakes (not JSON, wrong types, missing or negative values, values above the configured limits) end in a `transport error` close; an unknown transport name, a transport factory that throws and a throwing packet observer end in events, never in escaping exceptions; an undecodable frame is a `server error` with code `parser error`, as in JavaScript.",
       "tests": [
         {
           "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineSocketTest.kt",
@@ -3932,6 +3932,26 @@
         {
           "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/TransportUriTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.engineio.TransportUriTest.randomStringIsUrlSafe"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.aHostileHandshakeIsRejected"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.anUnknownTransportNameIsAnErrorEventNotAnException"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.aThrowingPacketObserverDoesNotBreakTheConnection"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.aProbeTransportThatCannotBeCreatedReportsUpgradeErrorAndKeepsPolling"
+        },
+        {
+          "path": "engineio-client/src/test/kotlin/io/github/kaeferfreund/socketio/engineio/EngineRobustnessTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.engineio.EngineRobustnessTest.anUndecodableWebSocketFrameClosesWithTransportError"
         }
       ]
     },
@@ -4031,7 +4051,7 @@
       "id": "KT-JSON-MODEL",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "The value model behaves like JavaScript JSON: numbers print like `Number.prototype.toString`, integers stay exact, strings escape like `JSON.stringify`, parsing accepts and rejects what `JSON.parse` does, object keys order like JavaScript (duplicate keys keep the first position and the last value), deep nesting parses and prints without recursion, revivers run bottom-up, `Number()` coercion matches; Kotlin and Java values (including dates as ISO strings) convert both ways, unsupported types are rejected, values are immutable; kotlinx.serialization classes round-trip.",
+      "assertions": "The value model behaves like JavaScript JSON: numbers print like `Number.prototype.toString`, integers stay exact, strings escape like `JSON.stringify`, parsing accepts and rejects what `JSON.parse` does, object keys order like JavaScript (duplicate keys keep the first position and the last value), deep nesting parses and prints without recursion, revivers run bottom-up, `Number()` coercion matches; Kotlin and Java values (including dates as ISO strings) convert both ways, unsupported types are rejected, values are immutable; kotlinx.serialization classes round-trip; the emit, listener and acknowledgement helpers send encoded objects with the given `Json`, decode acknowledgements and events, keep emitter flags (timeouts), route undecodable payloads to `onError` or the listener error handler without stopping later events, and report decode failures and timeouts through `serializableAck`.",
       "tests": [
         {
           "path": "socketio-parser/src/test/kotlin/io/github/kaeferfreund/socketio/parser/SocketIOJsonTest.kt",
@@ -4124,6 +4144,46 @@
         {
           "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketIOSerializationTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.serialization.SocketIOSerializationTest.rejectsBinaryAndMismatchedPayloads"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.emitSerializableSendsTheEncodedObject"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.theGivenJsonInstanceIsUsed"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.emitSerializableWithAckDecodesTheFirstAcknowledgementArgument"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.anUndecodableAcknowledgementFailsTheCall"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.theEmitterVariantsKeepTheirFlags"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.onSerializableDecodesTheFirstArgumentAndPassesTheEvent"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.anUndecodablePayloadGoesToOnErrorAndLaterEventsStillArrive"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.theDefaultOnErrorReachesTheListenerErrorHandler"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.theSubscriptionRemovesTheListener"
+        },
+        {
+          "path": "socketio-serialization/src/test/kotlin/io/github/kaeferfreund/socketio/serialization/SocketSerializationTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.serialization.SocketSerializationTest.serializableAckDeliversSuccessDecodeFailureAndTimeout"
         }
       ]
     },
@@ -4155,7 +4215,7 @@
       "id": "KT-CLIENT-API",
       "kind": "kotlin-extension",
       "upstream_ids": [],
-      "assertions": "Kotlin API contracts: `emitWithAck` returns every argument and cancelling it withdraws the acknowledgement, the buffered packet and the retry entry; timed-out buffered emits leave the buffer; server acknowledgement requests are answered once and unknown ack ids ignored; reserved names and unsupported arguments fail synchronously; the auth provider runs before every connect, a throwing provider fails the attempt, late results are dropped and a slow provider delays only its namespace; buffer limits reject new emits and an overfull receive buffer or an incomplete binary packet past its deadline closes the connection; once/off/any listeners, lifecycle events, flows and outgoing interceptors behave as documented; the retry queue reads acknowledgements err-first and volatile emits bypass it; recovery replays missed events, takes offsets only from plain events and merges user auth after pid and offset; the manager caps backoff, emits one close, defers reconnection while offline, honours `reconnectNow`, isolates listener exceptions, shares one connection and closes it with the last socket; setup blocks run once; a missing HTTP stack is a connect error.",
+      "assertions": "Kotlin API contracts: `emitWithAck` returns every argument and cancelling it withdraws the acknowledgement, the buffered packet and the retry entry; timed-out buffered emits leave the buffer; server acknowledgement requests are answered once and unknown ack ids ignored; reserved names and unsupported arguments fail synchronously; the auth provider runs before every connect, a throwing provider fails the attempt, late results are dropped and a slow provider delays only its namespace; buffer limits reject new emits and an overfull receive buffer or an incomplete binary packet past its deadline closes the connection; once/off/any listeners, lifecycle events, flows and outgoing interceptors behave as documented; the retry queue reads acknowledgements err-first and volatile emits bypass it; recovery replays missed events, takes offsets only from plain events and merges user auth after pid and offset; the manager caps backoff, emits one close, defers reconnection while offline, honours `reconnectNow`, isolates listener exceptions, shares one connection and closes it with the last socket; setup blocks run once; a missing HTTP stack is a connect error. The JavaScript Manager API: runtime reconnection setters take effect on the next attempt and validate their input, switching reconnection off stops a pending attempt, the connect timeout ends a handshake that never completes, `open(callback)` reports once without reconnecting; `pause`/`resume`, `onNetworkLost`, balanced tracer sections, the callback dispatcher, logged listener exceptions. A server-side disconnect ends the session without reconnecting; CONNECT_ERROR payloads follow socket.io-parser (text is the message, null is a parse error); byte limits of the receive buffer and retry queue; incoming acknowledgements answer once; `send`, `open`, `removeAllListeners`, emitter flag chaining, partial interceptors and `SocketIO.connect`.",
       "tests": [
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketAckTest.kt",
@@ -4348,6 +4408,106 @@
         {
           "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketIOUrlTest.kt",
           "symbol": "io.github.kaeferfreund.socketio.SocketIOUrlTest.defaultsToHttpsWithoutALocation"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.runtimeReconnectionSettersApplyToTheNextAttempts"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.switchingReconnectionOffStopsAPendingAttempt"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.theTimeoutEndsAnAttemptWhoseServerNeverCompletesTheHandshake"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.openWithACallbackReportsTheOutcomeOnceAndDoesNotReconnect"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.pauseClosesTheConnectionAndResumeReconnectsTheActiveSockets"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.pauseDuringReconnectionStopsTheLoop"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.resumeWithoutActiveSocketsStaysClosed"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.onNetworkLostClosesWithTransportCloseAndReconnects"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.theTracerSeesBalancedConnectUpgradeAndAcknowledgementSections"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.listenerCallbacksRunOnTheCallbackDispatcher"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.aListenerExceptionWithoutHandlerIsLoggedAndTheConnectionSurvives"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.withoutLoggerAListenerExceptionGoesToStandardError"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.aBoundedEventFlowKeepsTheNewestEvents"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketManagerApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketManagerApiTest.integrationsStoreTypedValuesInTheOptions"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.aServerDisconnectEndsTheSessionWithoutReconnecting"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.aTextConnectErrorIsTheMessageAndANullOneIsAParseError"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.theReceiveBufferByteLimitClosesTheConnection"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.theRetryQueueByteLimitRejectsTheNewEmit"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.anIncomingAcknowledgementReportsWhetherItWasSent"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.sendIsAMessageEventAndOpenIsConnect"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.removingAllListenersSilencesEveryEvent"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.theReceiveBufferSnapshotShowsEventsWaitingForConnect"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.emitterFlagsCombine"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.anInterceptorMayImplementOnlyWhatItNeeds"
+        },
+        {
+          "path": "socketio-client/src/test/kotlin/io/github/kaeferfreund/socketio/SocketApiTest.kt",
+          "symbol": "io.github.kaeferfreund.socketio.SocketApiTest.connectIsAnAliasOfIo"
         }
       ]
     },
