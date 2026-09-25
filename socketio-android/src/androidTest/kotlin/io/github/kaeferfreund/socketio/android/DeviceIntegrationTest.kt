@@ -95,13 +95,14 @@ class DeviceIntegrationTest {
 
     @Test
     fun theElapsedRealtimeClockFollowsSystemClock() {
+        // The system clock brackets the measurement, so a slow emulator cannot make it flaky.
+        val outerStart = SystemClock.elapsedRealtimeNanos()
         val mark = ElapsedRealtimeTimeSource.markNow()
-        val before = SystemClock.elapsedRealtimeNanos()
         SystemClock.sleep(50)
-        val elapsed = mark.elapsedNow()
-        val actual = (SystemClock.elapsedRealtimeNanos() - before) / 1_000_000
-        assertTrue("elapsed $elapsed", elapsed >= 50.milliseconds)
-        assertTrue("elapsed $elapsed, system $actual ms", elapsed.inWholeMilliseconds <= actual + 5)
+        val elapsed = mark.elapsedNow().inWholeNanoseconds
+        val outer = SystemClock.elapsedRealtimeNanos() - outerStart
+        assertTrue("elapsed $elapsed ns", elapsed >= 50.milliseconds.inWholeNanoseconds)
+        assertTrue("elapsed $elapsed ns, bracket $outer ns", elapsed <= outer)
     }
 
     @Test
