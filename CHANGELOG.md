@@ -85,6 +85,10 @@ official JavaScript client at `socketio/socket.io@aaf2af36`.
   thread) no longer count as running on the protocol executor: an `emit` from a
   listener used to run the protocol inline on that thread, concurrently with the
   executor.
+- A request the HTTP stack refuses to build (a non-ASCII header value, a
+  malformed URL) fails with a transport error instead of an uncaught exception
+  that crashed Android apps or left the engine without requests; the cookie jar
+  ignores cookies that are not printable ASCII.
 
 ### Validation
 

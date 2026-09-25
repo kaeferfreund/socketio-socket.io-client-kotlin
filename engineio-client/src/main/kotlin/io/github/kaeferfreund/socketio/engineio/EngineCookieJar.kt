@@ -82,13 +82,21 @@ public class EngineCookieJar(
 ) {
     private val cookies = LinkedHashMap<String, EngineCookie>()
 
-    /** Stores every parseable cookie; a later cookie replaces one with the same name. */
+    /**
+     * Stores every parseable cookie; a later cookie replaces one with the same name.
+     * A cookie whose name or value holds anything but printable ASCII is ignored:
+     * RFC 6265 cookie octets are ASCII, and such a value could not be sent back in
+     * a request header (Node's HTTP client fails the request instead).
+     */
     public fun parseCookies(setCookieHeaders: List<String>) {
         for (header in setCookieHeaders) {
             val cookie = EngineCookie.parse(header, clock()) ?: continue
+            if (!cookie.name.isPrintableAscii() || !cookie.value.isPrintableAscii()) continue
             cookies[cookie.name] = cookie
         }
     }
+
+    private fun String.isPrintableAscii(): Boolean = all { it in ' '..'~' }
 
     /** The unexpired cookies, dropping expired ones. */
     public val current: List<EngineCookie>

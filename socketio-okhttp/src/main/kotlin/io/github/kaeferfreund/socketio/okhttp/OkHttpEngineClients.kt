@@ -70,14 +70,23 @@ public class OkHttpEngineClients(
         request: EngineHttpRequest,
         callback: EngineHttpCallback,
     ): Cancellable {
-        val builder = Request.Builder().url(request.url)
-        for ((name, value) in request.headers) builder.addHeader(name, value)
-        if (request.method == "POST") {
-            builder.post((request.body ?: "").toRequestBody(TEXT_PLAIN))
-        } else {
-            builder.get()
-        }
-        val call = client.newCall(builder.build())
+        val okRequest =
+            try {
+                val builder = Request.Builder().url(request.url)
+                for ((name, value) in request.headers) builder.addHeader(name, value)
+                if (request.method == "POST") {
+                    builder.post((request.body ?: "").toRequestBody(TEXT_PLAIN))
+                } else {
+                    builder.get()
+                }
+                builder.build()
+            } catch (e: IllegalArgumentException) {
+                // A URL or header value OkHttp rejects (for example a non-ASCII character) fails
+                // this request like a network error, on another thread as the contract requires.
+                failLater { callback.onFailure(IOException("invalid request: ${e.message}", e)) }
+                return Cancellable.NONE
+            }
+        val call = client.newCall(okRequest)
         request.timeout?.let { call.timeout().timeout(it.inWholeMilliseconds, TimeUnit.MILLISECONDS) }
         call.enqueue(
             object : Callback {
@@ -124,9 +133,15 @@ public class OkHttpEngineClients(
         request: EngineWebSocketRequest,
         listener: EngineWebSocketListener,
     ): EngineWebSocketConnection {
-        val builder = Request.Builder().url(request.url)
-        for ((name, value) in request.headers) builder.addHeader(name, value)
-        if (request.protocols.isNotEmpty()) builder.header("Sec-WebSocket-Protocol", request.protocols.joinToString(", "))
+        val builder = Request.Builder()
+        try {
+            builder.url(request.url)
+            for ((name, value) in request.headers) builder.addHeader(name, value)
+            if (request.protocols.isNotEmpty()) builder.header("Sec-WebSocket-Protocol", request.protocols.joinToString(", "))
+        } catch (e: IllegalArgumentException) {
+            failLater { listener.onFailure(IOException("invalid request: ${e.message}", e), null) }
+            return ClosedConnection
+        }
         val wsBuilder = client.newBuilder()
         val threshold = request.compressionThreshold
         if (threshold != null) {
@@ -187,6 +202,38 @@ public class OkHttpEngineClients(
                 },
             )
         return OkHttpWebSocketConnection(socket)
+    }
+
+    /** Runs [report] on OkHttp's dispatcher threads, never inside the caller's stack. */
+    private fun failLater(report: () -> Unit) {
+        try {
+            client.dispatcher.executorService.execute(report)
+        } catch (e: java.util.concurrent.RejectedExecutionException) {
+            // The application shut the dispatcher down; nothing else will run on it.
+            Thread(report, "socket.io request failure").start()
+        }
+    }
+
+    /** The connection handed out when a WebSocket request could not be built. */
+    private object ClosedConnection : EngineWebSocketConnection {
+        override fun send(
+            text: String,
+            compress: Boolean,
+        ): Boolean = false
+
+        override fun send(
+            bytes: ByteArray,
+            compress: Boolean,
+        ): Boolean = false
+
+        override val queuedBytes: Long get() = 0
+
+        override fun close(
+            code: Int,
+            reason: String?,
+        ) = Unit
+
+        override fun cancel() = Unit
     }
 
     private class OkHttpWebSocketConnection(

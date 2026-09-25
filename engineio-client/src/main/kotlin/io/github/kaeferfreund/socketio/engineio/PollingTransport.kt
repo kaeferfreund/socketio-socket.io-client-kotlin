@@ -178,8 +178,7 @@ public class PollingTransport(
                 maxResponseBytes = options.maxPollingResponseBytes,
             )
         val jar = options.cookieJar
-        return http.execute(
-            request,
+        val callback =
             object : EngineHttpCallback {
                 override fun onResponse(response: EngineHttpResponse) {
                     executor.execute {
@@ -196,8 +195,17 @@ public class PollingTransport(
                 override fun onFailure(error: Throwable) {
                     executor.execute { onResult(Result.failure(error)) }
                 }
-            },
-        )
+            }
+        return try {
+            http.execute(request, callback)
+        } catch (
+            @Suppress("TooGenericExceptionCaught") e: RuntimeException,
+        ) {
+            // A request that cannot even be started (a header or URL the HTTP stack rejects) is a
+            // request error, reported on the next tick like `Request._create` does in JavaScript.
+            executor.post { onResult(Result.failure(e)) }
+            Cancellable.NONE
+        }
     }
 
     public companion object {

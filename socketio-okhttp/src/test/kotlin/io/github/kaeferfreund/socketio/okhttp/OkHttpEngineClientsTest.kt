@@ -92,6 +92,41 @@ class OkHttpEngineClientsTest {
     }
 
     @Test
+    fun aRequestOkHttpCannotBuildFailsInsteadOfThrowing() {
+        val clients = OkHttpEngineClients()
+        val badHeader = EngineHttpRequest("GET", server.url("/socket.io/?EIO=4").toString(), listOf("X-Token" to "tést"), null, null)
+        assertTrue(execute(clients, badHeader).exceptionOrNull() is java.io.IOException)
+        val badUrl = EngineHttpRequest("GET", "http://exa mple.com/socket.io/", emptyList(), null, null)
+        assertTrue(execute(clients, badUrl).exceptionOrNull() is java.io.IOException)
+        assertEquals(0, server.requestCount)
+
+        val failure = CompletableFuture<Throwable>()
+        clients.connect(
+            EngineWebSocketRequest(server.url("/socket.io/").toString().replace("http", "ws"), listOf("X-Token" to "tést"), emptyList(), null),
+            object : EngineWebSocketListener {
+                override fun onOpen(responseHeaders: List<Pair<String, String>>) = Unit
+
+                override fun onMessage(text: String) = Unit
+
+                override fun onMessage(bytes: ByteArray) = Unit
+
+                override fun onClosed(
+                    code: Int,
+                    reason: String,
+                ) = Unit
+
+                override fun onFailure(
+                    error: Throwable,
+                    httpStatus: Int?,
+                ) {
+                    failure.complete(error)
+                }
+            },
+        )
+        assertTrue(failure.get(5, TimeUnit.SECONDS) is java.io.IOException)
+    }
+
+    @Test
     fun reportsErrorStatusesAsResponses() {
         server.enqueue(MockResponse.Builder().code(400).body("{\"code\":1,\"message\":\"Session ID unknown\"}").build())
         val response = execute(OkHttpEngineClients(), get()).getOrThrow()

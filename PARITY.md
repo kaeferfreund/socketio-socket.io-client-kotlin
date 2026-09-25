@@ -136,6 +136,11 @@ and do not change a certified assertion:
   attempts in a row. JavaScript's backoff turns into `NaN` there (the jitter meets
   an infinite `min × 2^attempts`), and `Math.min(NaN, max) | 0` yields 0 ms, so a
   long outage ends in attempts without delay. Every earlier delay is unchanged.
+- A request the HTTP stack refuses to build (a header value OkHttp rejects, a
+  malformed URL) fails with `"xhr poll error"`/`"xhr post error"`/`"websocket
+  error"`, reported on the next tick like `Request._create` does. JavaScript's
+  polling transport skips an invalid extra header instead. The cookie jar ignores
+  cookies that are not printable ASCII, since they could not be sent back.
 - Payloads are `SocketIOValue` trees. Values are converted explicitly
   (`SocketIOValue.of`, kotlinx.serialization); there is no `toJSON()` hook.
 - Optional limits (text length, nesting depth, buffered packets, polling body

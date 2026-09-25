@@ -93,8 +93,13 @@ Notes:
 - `withCredentials` uses a cookie jar per Engine.IO connection; it starts empty on
   every reconnect. For cookies that must survive reconnects (for example sticky
   sessions), set an OkHttp `CookieJar` with `okHttp { configure { cookieJar(…) } }`.
-  The application's `CookieManager` is never used implicitly.
+  The application's `CookieManager` is never used implicitly. A cookie whose name
+  or value is not printable ASCII is ignored: it could not be sent back in a
+  request header.
 - `extraHeaders` holds one value per name. Join repeated values with `", "`.
+  Header names and values must be ASCII; a request with a value OkHttp refuses
+  (or a malformed URL) fails with a transport error (`"xhr poll error"`,
+  `"websocket error"`) and `connect_error`, never with an exception.
 - **Compression:** OkHttp negotiates `permessage-deflate` and compresses messages
   by size only (`perMessageDeflateThreshold`). The per-message flag of
   `socket.compress(false)` is carried to the transport, but OkHttp offers no way to

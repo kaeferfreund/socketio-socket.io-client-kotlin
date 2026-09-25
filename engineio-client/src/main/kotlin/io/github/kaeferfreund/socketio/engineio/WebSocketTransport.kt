@@ -76,7 +76,8 @@ public class WebSocketTransport(
             } catch (
                 @Suppress("TooGenericExceptionCaught") e: RuntimeException,
             ) {
-                onError("websocket error", cause = e)
+                // Deferred: the engine subscribes to this transport only after open() returns.
+                executor.post { if (current == generation) onError("websocket error", cause = e) }
                 null
             }
     }

@@ -44,6 +44,56 @@ class EngineRobustnessTest {
         }
 
     @Test
+    fun aRequestTheHttpStackCannotStartIsATransportError() =
+        runTest {
+            val h = engineHarness()
+            val refusing =
+                object : EngineHttpClient {
+                    override fun execute(
+                        request: EngineHttpRequest,
+                        callback: EngineHttpCallback,
+                    ): Cancellable = throw IllegalArgumentException("Unexpected char 0xe9 in header value")
+                }
+            val engine = EngineSocket("http://localhost", EngineOptions(clients = EngineClients(refusing, null)), h.executor)
+            engine.events.on(EngineEvent::class.java) { h.events.add(it) }
+            h.executor.execute { engine.open() }
+            h.settle()
+            assertEquals("xhr poll error", h.all<EngineEvent.Error>().single().error.message)
+            assertEquals(listOf("transport error"), h.all<EngineEvent.Close>().map { it.reason })
+            h.close()
+        }
+
+    @Test
+    fun aRequestThatCannotStartAfterTheHandshakeClosesTheConnection() =
+        runTest {
+            val h = engineHarness()
+            var requests = 0
+            val handshakeThenRefuse =
+                object : EngineHttpClient {
+                    override fun execute(
+                        request: EngineHttpRequest,
+                        callback: EngineHttpCallback,
+                    ): Cancellable {
+                        if (requests++ > 0) throw IllegalArgumentException("Unexpected char 0xe9 in cookie value")
+                        backgroundScope.launch {
+                            callback.onResponse(
+                                EngineHttpResponse(200, "0{\"sid\":\"s\",\"upgrades\":[],\"pingInterval\":25000,\"pingTimeout\":20000}"),
+                            )
+                        }
+                        return Cancellable.NONE
+                    }
+                }
+            val engine = EngineSocket("http://localhost", EngineOptions(clients = EngineClients(handshakeThenRefuse, null)), h.executor)
+            engine.events.on(EngineEvent::class.java) { h.events.add(it) }
+            h.executor.execute { engine.open() }
+            h.settle()
+            assertEquals(1, h.all<EngineEvent.Open>().size)
+            assertEquals(listOf("transport error"), h.all<EngineEvent.Close>().map { it.reason })
+            assertEquals(EngineState.CLOSED, engine.readyState)
+            h.close()
+        }
+
+    @Test
     fun anUnknownTransportNameIsAnErrorEventNotAnException() =
         runTest {
             val h = engineHarness()

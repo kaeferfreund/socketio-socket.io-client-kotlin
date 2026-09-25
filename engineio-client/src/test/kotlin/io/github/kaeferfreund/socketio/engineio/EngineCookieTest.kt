@@ -47,6 +47,13 @@ class EngineCookieTest {
         assertEquals("2=2", jar.cookieHeader())
     }
 
+    @Test
+    fun ignoresCookiesThatCannotBeSentBackInAHeader() {
+        val jar = EngineCookieJar()
+        jar.parseCookies(listOf("a=café", "b=x\u0001y", "cé=1", "ok=1"))
+        assertEquals("ok=1", jar.cookieHeader())
+    }
+
     // JS-178 (unit counterpart; the E2E suite repeats it against Node)
     @Test
     fun sendsCookiesWithWithCredentials() =

@@ -48,7 +48,8 @@ Durations are `Duration` instead of milliseconds.
 | `upgrade`, `rememberUpgrade`, `tryAllTransports` | Same name |
 | `forceBase64`, `timestampParam`, `timestampRequests` | Same name |
 | `requestTimeout` | Same name (polling only) |
-| `withCredentials` | Same name; per-connection cookie jar, as the Node client |
+| `withCredentials` | Same name; per-connection cookie jar, as the Node client. Cookies that are not printable ASCII are ignored instead of failing every later request |
+| Invalid header values | A value OkHttp refuses fails the request with a transport error; JavaScript's polling transport skips such a header silently |
 | `protocols` | Same name |
 | Reconnection backoff | Same formula and jitter; after about 1,024 failed attempts in a row the delay stays at `reconnectionDelayMax`, where JavaScript's computation degenerates to 0 ms |
 | WebSocket message size | Unlimited in browsers and Node; OkHttp sends at most 16 MiB per message. Bursts are paced below OkHttp's queue limit |

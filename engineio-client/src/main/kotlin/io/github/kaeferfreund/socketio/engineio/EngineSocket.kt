@@ -117,15 +117,14 @@ public class EngineSocket(
         readyState = EngineState.OPENING
         val transport =
             try {
-                createTransport(name)
+                createTransport(name).also { it.open() }
             } catch (
                 @Suppress("TooGenericExceptionCaught") e: RuntimeException,
             ) {
-                // A missing HTTP stack or a failing custom factory is a connection error, never a crash.
-                executor.post { onError(EngineIOException(e.message ?: "cannot create transport \"$name\"", e)) }
+                // A missing HTTP stack or a failing custom transport is a connection error, never a crash.
+                executor.post { onError(EngineIOException(e.message ?: "cannot open transport \"$name\"", e)) }
                 return
             }
-        transport.open()
         setTransport(transport)
     }
 
@@ -485,7 +484,13 @@ public class EngineSocket(
                     if (current != null && event.transport.name != current.name) freezeTransport()
                 },
             )
-        probeTransport.open()
+        try {
+            probeTransport.open()
+        } catch (
+            @Suppress("TooGenericExceptionCaught") e: RuntimeException,
+        ) {
+            onError(e.message.orEmpty())
+        }
     }
 
     private fun parseHandshake(text: String?): Handshake? {
