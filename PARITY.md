@@ -11,8 +11,8 @@ for the commit that added it. CI regenerates the summary on every run; inspect
 the run for the commit you plan to ship.
 
 **All 252 supported runtime declarations of the four upstream client packages
-have an assertion contract whose Kotlin tests passed in the recorded run (606
-passed test executions, 0 failed or skipped; CI run 36218283761, which runs the
+have an assertion contract whose Kotlin tests passed in the recorded run (607
+passed test executions, 0 failed or skipped; CI run 36219029130, which runs the
 Robolectric suite on SDK 34, 36 and 37). The remaining 45 runtime declarations
 are reviewed scope boundaries, listed with reasons below. This is test parity for
 a defined scope, not proof of every possible JavaScript behaviour.**

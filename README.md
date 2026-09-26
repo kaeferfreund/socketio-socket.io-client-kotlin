@@ -208,7 +208,7 @@ parity, and emulator runs do not replace field tests on physical devices.
 ### Coverage
 
 Numbers from the validators and coverage reports of CI run
-[36218283761](https://github.com/kaeferfreund/socket.io-client-kotlin/actions/runs/36218283761),
+[36219029130](https://github.com/kaeferfreund/socket.io-client-kotlin/actions/runs/36219029130),
 recorded in [Documentation/ReviewEvidence](Documentation/ReviewEvidence/README.md);
 CI regenerates them on every run.
 
