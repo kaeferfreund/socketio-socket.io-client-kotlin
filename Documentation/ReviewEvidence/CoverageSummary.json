@@ -12,9 +12,9 @@
         "percent": 83.1
       },
       "method": {
-        "covered": 778,
+        "covered": 777,
         "total": 841,
-        "percent": 92.5
+        "percent": 92.4
       }
     },
     "packages": {
@@ -115,9 +115,9 @@
           "percent": 79.3
         },
         "method": {
-          "covered": 224,
+          "covered": 223,
           "total": 244,
-          "percent": 91.8
+          "percent": 91.4
         }
       }
     }
