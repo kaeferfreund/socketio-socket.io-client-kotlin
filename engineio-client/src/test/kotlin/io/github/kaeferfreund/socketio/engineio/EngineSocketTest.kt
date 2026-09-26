@@ -437,6 +437,35 @@ class EngineSocketTest {
             h.close()
         }
 
+    // engine.io-client-java#124, #125, #126: the Java client copied the query into a HashMap and
+    // sent the parameters in hash order. JavaScript keeps the insertion order: the caller's
+    // parameters as given, then EIO and transport, then what the transport adds (t, sid).
+    @Test
+    fun keepsTheOrderOfTheQueryParameters() =
+        runTest {
+            fun keys(url: String) = url.substringAfter('?').split('&').map { it.substringBefore('=') }
+            val h = engineHarness()
+            val engine = h.engine(uri = "http://localhost:3000/?z=1&a=2&m=3")
+            h.settle()
+            assertEquals("websocket", engine.transport!!.name)
+            val requests = h.server.requests.toList()
+            assertEquals(listOf("z", "a", "m", "EIO", "transport", "t"), keys(requests.first().url))
+            // The handshake adds sid behind t, as `this.transport.query.sid = data.sid` does.
+            val polls = requests.drop(1).filter { it.method != "UPGRADE" }
+            assertTrue(polls.isNotEmpty())
+            polls.forEach { assertEquals(listOf("z", "a", "m", "EIO", "transport", "t", "sid"), keys(it.url), it.url) }
+            val upgrade = requests.single { it.method == "UPGRADE" }
+            assertTrue(upgrade.url.startsWith("ws://localhost:3000/engine.io/?z=1&a=2&m=3&EIO=4&transport=websocket&sid="), upgrade.url)
+            assertEquals(listOf("z", "a", "m", "EIO", "transport", "sid"), keys(upgrade.url))
+            h.close()
+
+            val option = engineHarness()
+            option.engine(EngineOptions(transports = listOf("websocket"), query = mapOf("z" to "1", "a" to "2", "m" to "3")))
+            option.settle()
+            assertEquals("ws://localhost:3000/engine.io/?z=1&a=2&m=3&EIO=4&transport=websocket", option.server.requests.single().url)
+            option.close()
+        }
+
     @Test
     fun sendsTheClosePacketWhenClosingPolling() =
         runTest {
