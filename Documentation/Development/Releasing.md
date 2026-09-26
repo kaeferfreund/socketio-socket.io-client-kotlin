@@ -30,8 +30,8 @@ a new major version. `./gradlew apiCheck` fails on any unreviewed change.
 ## Publishing
 
 ```sh
-git tag -a v1.0.0 -m "1.0.0"
-git push origin v1.0.0
+git tag -a v17.0.0 -m "17.0.0"
+git push origin v17.0.0
 GITHUB_ACTOR=<user> GITHUB_TOKEN=<token with write:packages> ./gradlew publish
 ```
 

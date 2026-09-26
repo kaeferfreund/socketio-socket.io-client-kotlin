@@ -4,10 +4,13 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [semantic versioning](https://semver.org/).
 
-## Unreleased — 1.0.0
+## 17.0.0 — 2026-09-26
 
 First release: a Socket.IO 4 client for Kotlin and Android, ported from the
-official JavaScript client at `socketio/socket.io@aaf2af36`.
+official JavaScript client at `socketio/socket.io@aaf2af36`. The version shares
+its major number with the Swift client
+[kaeferfreund/socket.io-client-swift](https://github.com/kaeferfreund/socket.io-client-swift)
+17; there are no earlier Kotlin releases.
 
 ### Client
 

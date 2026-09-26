@@ -97,7 +97,7 @@ dependencyResolutionManagement {
 
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.kaeferfreund.socketio:socketio-android:1.0.0")
+    implementation("io.github.kaeferfreund.socketio:socketio-android:17.0.0")
 }
 ```
 
@@ -114,12 +114,14 @@ dependencies {
 
 </details>
 
-**1.0.0 is not published yet**; the [changelog](CHANGELOG.md) lists what it will
-contain. Until then, publish a local build with `./gradlew publishToMavenLocal`,
-add `mavenLocal()` to the repositories and depend on `1.0.0-SNAPSHOT`. Once
-released, GitHub Packages requires a token with `read:packages` even for public
-packages; Maven Central publication is planned for 1.1. A version requirement
-installs a **published release**, not the development branch you are viewing.
+Releases are published to GitHub Packages, which requires a token with
+`read:packages` even for public packages; Maven Central publication is planned.
+The major version matches the Swift client
+[kaeferfreund/socket.io-client-swift](https://github.com/kaeferfreund/socket.io-client-swift)
+(17). A version requirement installs a **published release**, not the development
+branch you are viewing; to try that, run `./gradlew publishToMavenLocal`, add
+`mavenLocal()` to the repositories and depend on the `VERSION_NAME` in
+`gradle.properties`.
 
 ## Quick start
 
