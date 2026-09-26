@@ -231,15 +231,18 @@ cases the parser already rules out.
 
 ## Important boundaries
 
-Recovery requires a Socket.IO 4.6+ server with `connectionStateRecovery` enabled
-and is not guaranteed. Retries can deliver an event more than once, so deduplicate
-non-idempotent operations on the server. OkHttp compresses WebSocket messages by
-size only; the per-message `compress(false)` flag is carried to the transport but
-cannot switch compression off for a single frame. OkHttp buffers every incoming
-WebSocket message whole, without a size limit; for a server you do not trust,
-prefer polling with `maxPollingResponseBytes`. WebTransport and the browser- or
-Node-only options are not available. See [PARITY.md](PARITY.md) for the supported
-scope and every explicit exclusion.
+[Connection state recovery](Documentation/Guides/Connections.md#connection-state-recovery)
+(same socket id and rooms, missed events replayed) is a server feature: the client
+supports it without configuration, but only a Socket.IO 4.6+ server with
+`connectionStateRecovery` enabled offers it, and even then it is not guaranteed.
+Otherwise a socket reconnects with a fresh session. Retries can deliver an event
+more than once, so deduplicate non-idempotent operations on the server. OkHttp
+compresses WebSocket messages by size only; the per-message `compress(false)` flag
+is carried to the transport but cannot switch compression off for a single frame.
+OkHttp buffers every incoming WebSocket message whole, without a size limit; for a
+server you do not trust, prefer polling with `maxPollingResponseBytes`.
+WebTransport and the browser- or Node-only options are not available. See
+[PARITY.md](PARITY.md) for the supported scope and every explicit exclusion.
 
 ## Contributing
 
