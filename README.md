@@ -86,18 +86,12 @@ The library is split into small modules. Android apps need one dependency:
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        maven("https://maven.pkg.github.com/kaeferfreund/socket.io-client-kotlin") {
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull
-                password = providers.gradleProperty("gpr.key").orNull
-            }
-        }
     }
 }
 
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.kaeferfreund.socketio:socketio-android:17.0.0")
+    implementation("io.github.kaeferfreund.socketio:socketio-android:17.0.1")
 }
 ```
 
@@ -114,8 +108,8 @@ dependencies {
 
 </details>
 
-Releases are published to GitHub Packages, which requires a token with
-`read:packages` even for public packages; Maven Central publication is planned.
+Releases are published to Maven Central; GitHub Packages carries the same
+versions. 17.0.0 is only on GitHub Packages.
 The major version matches the Swift client
 [kaeferfreund/socket.io-client-swift](https://github.com/kaeferfreund/socket.io-client-swift)
 (17). A version requirement installs a **published release**, not the development

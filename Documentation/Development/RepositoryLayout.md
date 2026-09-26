@@ -21,7 +21,7 @@
 | `Documentation/JavaScriptTestInventory.csv`, `Documentation/JavaScriptParityContracts.json` | Parity inputs of `scripts/check-parity-contracts.py`; paths are stable |
 | `Documentation/ReviewEvidence/` | Recorded outputs ([index](../ReviewEvidence/README.md)) |
 | `.github/workflows/ci.yml` | All CI jobs |
-| `.github/workflows/release.yml` | Publishes a version tag to Maven Central and GitHub Packages |
+| `.github/workflows/release.yml` | Publishes a version tag to Maven Central, GitHub Packages and a GitHub release |
 | `.github/dependabot.yml`, `SECURITY.md` | Dependency updates and the vulnerability reporting policy |
 
 Test file paths, class and method names are referenced by the parity contracts.

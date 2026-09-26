@@ -1,5 +1,10 @@
 name: Release
 
+# A version tag publishes that version everywhere, in this order: Maven Central,
+# GitHub Packages, a check that both serve it, then the GitHub release. Each job
+# runs only when the one before it passed, so a GitHub release always means the
+# artifacts are available. After a failure, "Re-run failed jobs" continues where
+# it stopped; Maven Central cannot accept the same version twice.
 on:
   push:
     tags: ['v*']
@@ -12,19 +17,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  publish:
-    name: Publish to Maven Central and GitHub Packages
+  prepare:
+    name: Check the tag and write the release notes
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 5
     permissions:
       actions: read
       contents: read
-      packages: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
       - name: The tag names the version in gradle.properties
+        id: version
         run: |
           version="$(sed -n 's/^VERSION_NAME=//p' gradle.properties)"
           if [ "v$version" != "$GITHUB_REF_NAME" ]; then
@@ -32,15 +39,40 @@ jobs:
             exit 1
           fi
           case "$version" in *-SNAPSHOT) echo "::error::$version is a snapshot"; exit 1 ;; esac
-      - name: CI passed on the tagged commit
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Evidence of the CI run that passed on the tagged commit
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          passed="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$GITHUB_SHA&status=success" --jq '.total_count')"
-          if [ "$passed" = "0" ]; then
+          run="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$GITHUB_SHA&status=success" --jq '.workflow_runs[0].id // empty')"
+          if [ -z "$run" ]; then
             echo "::error::No successful CI run for $GITHUB_SHA; wait for CI to pass before tagging"
             exit 1
           fi
+          echo "CI_RUN=$run" >> "$GITHUB_ENV"
+          gh run view "$run" -R "$GITHUB_REPOSITORY" --json jobs --jq '[.jobs[] | {name, conclusion}]' > "$RUNNER_TEMP/jobs.json"
+          gh run download "$run" -R "$GITHUB_REPOSITORY" -n parity-summary -D "$RUNNER_TEMP/evidence"
+      - name: Release notes from CHANGELOG.md and the CI evidence
+        run: |
+          python3 scripts/release-notes.py --version "${{ steps.version.outputs.version }}" \
+            --commit "$GITHUB_SHA" --ci-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$CI_RUN" \
+            --jobs "$RUNNER_TEMP/jobs.json" --parity "$RUNNER_TEMP/evidence/parity-summary.json" \
+            --coverage "$RUNNER_TEMP/evidence/coverage-summary.json" --out "$RUNNER_TEMP/release-notes.md"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: release-notes
+          path: ${{ runner.temp }}/release-notes.md
+          retention-days: 30
+
+  maven-central:
+    name: Publish to Maven Central
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
           distribution: temurin
@@ -50,21 +82,107 @@ jobs:
       - uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
         with:
           cache-read-only: true
-      # Maven Central first: it validates the deployment (signatures, POM,
-      # javadoc and sources) and cannot be changed afterwards. GitHub Packages
-      # only receives a version that Central accepted.
-      # Without the configuration cache the signing key and tokens are never
-      # serialized to disk.
-      - name: Publish and release to Maven Central
+      # The task waits until Central has validated the deployment (signatures,
+      # POM, javadoc and sources) and releases it; the verify job waits for the
+      # download. Without the configuration cache the signing key and token are
+      # never written to disk.
+      - name: Upload, validate and release
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
-      - name: Publish to GitHub Packages
+
+  github-packages:
+    name: Publish to GitHub Packages
+    needs: maven-central
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: |
+            21
+            17
+      - uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        with:
+          cache-read-only: true
+      - name: Publish the signed artifacts
         env:
           GITHUB_TOKEN: ${{ github.token }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-configuration-cache
+
+  verify:
+    name: Both repositories serve the release
+    needs: [prepare, github-packages]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: read
+    env:
+      VERSION: ${{ needs.prepare.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Every module's POM downloads from both repositories
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          modules="$(grep -lE 'socketio\.(kotlin-library|android-library|kotlin-serialization)' */build.gradle.kts | cut -d/ -f1)"
+          group_path="io/github/kaeferfreund/socketio"
+          for module in $modules; do
+            pom="$group_path/$module/$VERSION/$module-$VERSION.pom"
+            # A released deployment takes 10 to 30 minutes to reach the CDN.
+            for attempt in $(seq 1 45); do
+              curl -sfLo /dev/null "https://repo1.maven.org/maven2/$pom" && break
+              [ "$attempt" = 45 ] && { echo "::error::$module $VERSION is not on Maven Central"; exit 1; }
+              sleep 60
+            done
+            curl -sfLo /dev/null -u "$GITHUB_ACTOR:$GITHUB_TOKEN" "https://maven.pkg.github.com/$GITHUB_REPOSITORY/$pom" \
+              || { echo "::error::$module $VERSION is not on GitHub Packages"; exit 1; }
+            echo "$module $VERSION: Maven Central and GitHub Packages"
+          done
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: |
+            21
+            17
+      - uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        with:
+          cache-read-only: true
+      - name: The README quick start compiles against Maven Central
+        run: bash scripts/test-consumer.sh --maven-central
+
+  github-release:
+    name: Create the GitHub release
+    needs: [prepare, verify]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-notes
+          path: ${{ runner.temp }}
+      - name: Release with the notes written from CHANGELOG.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --verify-tag --latest \
+            --title "$VERSION — Socket.IO 4 client for Kotlin and Android" \
+            --notes-file "$RUNNER_TEMP/release-notes.md"

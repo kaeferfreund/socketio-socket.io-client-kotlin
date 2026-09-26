@@ -4,13 +4,25 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [semantic versioning](https://semver.org/).
 
-## Unreleased
+## 17.0.1 — 2026-09-26
+
+Maven Central, GitHub Packages and the GitHub releases are now in sync: one
+workflow publishes each version from its tag to all three, and the GitHub release
+only appears once both repositories serve it. The library code is the same as in
+17.0.0; only documentation changed.
 
 ### Distribution
 
-- Releases are published to Maven Central, signed with GPG and with Dokka
-  javadoc jars, by a workflow on the version tag. GitHub Packages keeps
-  receiving every release.
+- Published to Maven Central: `mavenCentral()` is the only repository an app
+  needs, without a GitHub token. 17.0.0 stays on GitHub Packages only.
+- Every module comes with sources and Dokka javadoc, all signed with GPG
+  (key `6FAF6DA67E403DBD07B86B774A40A9D27353D6AD` on `keyserver.ubuntu.com`).
+
+### Documentation
+
+- `SocketTracer` no longer links to a parameter that KDoc cannot resolve.
+- `PARITY.md` says what its test count counts: distinct tests, a parameterized
+  test once, a Robolectric test once per SDK.
 
 ## 17.0.0 — 2026-09-26
 

@@ -37,6 +37,8 @@ jobs:
         run: python3 scripts/test-api-parity.py
       - name: Every mapped JavaScript API member resolves to a Kotlin symbol
         run: python3 scripts/check-api-parity.py
+      - name: Test the release notes writer
+        run: python3 scripts/test-release-notes.py
       - name: Shell syntax
         run: for f in scripts/*.sh; do bash -n "$f"; done
       - name: No generated or secret files are tracked

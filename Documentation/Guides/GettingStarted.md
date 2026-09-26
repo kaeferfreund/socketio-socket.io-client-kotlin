@@ -41,20 +41,14 @@ module brings the modules it builds on.
 | `socketio-serialization` | Optional: `@Serializable` classes in and out of events |
 | `socketio-testing` | Tests: an in-memory Socket.IO server and a Node fixture launcher |
 
-The artifacts are published to GitHub Packages, which requires a token with
-`read:packages` even for public packages:
+The artifacts are published to Maven Central, which new Gradle projects already
+list:
 
 ```kotlin
 // settings.gradle.kts
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        maven("https://maven.pkg.github.com/kaeferfreund/socket.io-client-kotlin") {
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull
-                password = providers.gradleProperty("gpr.key").orNull
-            }
-        }
     }
 }
 ```
@@ -62,14 +56,14 @@ dependencyResolutionManagement {
 ```kotlin
 // app/build.gradle.kts (Android)
 dependencies {
-    implementation("io.github.kaeferfreund.socketio:socketio-android:17.0.0")
+    implementation("io.github.kaeferfreund.socketio:socketio-android:17.0.1")
 }
 ```
 
 ```kotlin
 // build.gradle.kts (JVM)
 dependencies {
-    implementation("io.github.kaeferfreund.socketio:socketio-okhttp:17.0.0")
+    implementation("io.github.kaeferfreund.socketio:socketio-okhttp:17.0.1")
 }
 ```
 

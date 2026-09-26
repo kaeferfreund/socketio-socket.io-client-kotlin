@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
-# Publishes every library to mavenLocal and compiles the README quick start in an
-# independent Gradle build (consumer/) that sees only the published artifacts.
+# Compiles the README quick start in an independent Gradle build (consumer/) that
+# sees only published artifacts. By default it first publishes every library to
+# mavenLocal; with --maven-central it resolves VERSION_NAME from Maven Central.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 VERSION="$(sed -n 's/^VERSION_NAME=//p' "$ROOT/gradle.properties")"
-"$ROOT/gradlew" -p "$ROOT" --quiet publishToMavenLocal
+SOURCE="mavenLocal"
+CONSUMER_ARGS=()
+if [ "${1:-}" = "--maven-central" ]; then
+  SOURCE="Maven Central"
+  CONSUMER_ARGS+=(-PsocketioFromMavenCentral --refresh-dependencies)
+elif [ $# -gt 0 ]; then
+  echo "usage: $0 [--maven-central]" >&2
+  exit 2
+else
+  "$ROOT/gradlew" -p "$ROOT" --quiet publishToMavenLocal
+fi
 mkdir -p "$ROOT/consumer/src/main/kotlin"
 python3 - "$ROOT/README.md" "$ROOT/consumer/src/main/kotlin/QuickStart.kt" <<'PY'
 import re, sys
@@ -17,5 +28,5 @@ PY
 if [ ! -f "$ROOT/consumer/local.properties" ] && [ -f "$ROOT/local.properties" ]; then
   cp "$ROOT/local.properties" "$ROOT/consumer/local.properties"
 fi
-"$ROOT/gradlew" -p "$ROOT/consumer" --quiet -PsocketioVersion="$VERSION" assembleRelease
-echo "PASS: the README quick start compiles against the published $VERSION artifacts."
+"$ROOT/gradlew" -p "$ROOT/consumer" --quiet -PsocketioVersion="$VERSION" ${CONSUMER_ARGS[@]+"${CONSUMER_ARGS[@]}"} assembleRelease
+echo "PASS: the README quick start compiles against the $VERSION artifacts from $SOURCE."
