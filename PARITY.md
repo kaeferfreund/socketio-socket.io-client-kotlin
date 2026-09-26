@@ -11,8 +11,8 @@ for the commit that added it. CI regenerates the summary on every run; inspect
 the run for the commit you plan to ship.
 
 **All 252 supported runtime declarations of the four upstream client packages
-have an assertion contract whose Kotlin tests passed in the recorded run (504
-passed test executions, 0 failed or skipped; CI run 36104646560, which runs the
+have an assertion contract whose Kotlin tests passed in the recorded run (577
+passed test executions, 0 failed or skipped; CI run 36216823486, which runs the
 Robolectric suite on SDK 34 and 36). The remaining 45 runtime declarations are
 reviewed scope boundaries, listed with reasons below. This is test parity for a
 defined scope, not proof of every possible JavaScript behaviour.**
@@ -52,7 +52,7 @@ those reports. A mapping without a passing run is not evidence.
 | `native-assertion-equivalent` | 76 | The same assertions with an adapted setup or observation point: a server-side transport kill instead of calling a private JavaScript method, the engine packet observer instead of `packetCreate`, virtual time instead of fake timers, `ByteArray` instead of `Blob`/`ArrayBuffer`. Each contract says what was adapted |
 | `kotlin-extension` | 10 | Kotlin-only guarantees without an upstream row (below) |
 
-The 486 distinct test methods named by contracts run as unit tests on virtual time
+The 548 distinct test methods named by contracts run as unit tests on virtual time
 (in-memory servers from `socketio-testing`), as end-to-end tests against the Node
 fixtures in [`fixtures/`](fixtures/README.md) (HTTP, HTTPS, WS and WSS), and as
 Robolectric tests for Android.
