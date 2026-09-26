@@ -53,7 +53,7 @@ like our web client, and that uses the platform instead of working around it.
 | **[socketio/socket.io-client-java](https://github.com/socketio/socket.io-client-java)**<br>Maintenance has slowed to fixes; the engine is older still. | The latest release is 2.1.2; its [engine.io-client-java](https://github.com/socketio/engine.io-client-java) dependency is still 2.1.0. This library ports the current JavaScript client (4.8.x) line by line and pairs every fix with a regression test. |
 | **Features the Java client does not have** | Connection state recovery, a dynamic `AuthProvider` evaluated for every connect, the ordered `retries` queue with `ackTimeout`, cancellable `suspend` acknowledgements, `tryAllTransports`, volatile emits and configurable buffer and parser limits. |
 | **Callbacks and `org.json` instead of Kotlin** | `suspend fun emitWithAck`, `StateFlow`/`SharedFlow` for state and events, `kotlin.time.Duration` everywhere and an immutable `SocketIOValue` model. `org.json` adapters remain available for migration. |
-| **Mobile networks are not a data center** | The Android module follows `ConnectivityManager`: it drops connections on the lost network at once, reconnects the moment a network returns, binds sockets to the active network, pauses in the background and measures heartbeats with `elapsedRealtime` so Doze is detected. |
+| **Mobile networks are not a data center** | The Android module follows `ConnectivityManager`: it drops connections on the lost network at once, reconnects the moment a network returns, binds sockets to the active network, can pause in the background (a configurable policy) and measures heartbeats with `elapsedRealtime` so Doze is detected. |
 | **Web and native clients should agree** | Supported behaviour is checked against the pinned JavaScript reference: its test declarations are mapped to Kotlin tests that must pass in CI, and the parser is compared byte-for-byte with the real JavaScript decoder. |
 
 Maintenance snapshot, checked **2026-09-24**: the latest default-branch commits are
@@ -69,7 +69,7 @@ The [migration guide](Documentation/Guides/Migration.md) maps the Java API to th
 
 | Component | Minimum / supported range |
 | --- | --- |
-| Language | Built with Kotlin 2.4 (explicit API mode); apps on Kotlin 2.2 or newer can use it. JVM bytecode 17 |
+| Language | Built with Kotlin 2.4 (explicit API mode); apps on Kotlin 2.2 or newer can use it (`socketio-serialization`: 2.3.20, as kotlinx.serialization 1.11 requires). JVM bytecode 17 |
 | Android | `minSdk` 26 (Android 8.0), compiled against API 37 |
 | JVM | Java 17 or newer (server-side Kotlin, tests, tools) |
 | Server | Socket.IO 4.x, Engine.IO 4 |
@@ -114,10 +114,12 @@ dependencies {
 
 </details>
 
-GitHub Packages requires a token with `read:packages` even for public packages;
-Maven Central publication is planned for 1.1. A version requirement installs a
-**published release**, not the development branch you are viewing; the
-[changelog](CHANGELOG.md) lists what each release contains.
+**1.0.0 is not published yet**; the [changelog](CHANGELOG.md) lists what it will
+contain. Until then, publish a local build with `./gradlew publishToMavenLocal`,
+add `mavenLocal()` to the repositories and depend on `1.0.0-SNAPSHOT`. Once
+released, GitHub Packages requires a token with `read:packages` even for public
+packages; Maven Central publication is planned for 1.1. A version requirement
+installs a **published release**, not the development branch you are viewing.
 
 ## Quick start
 
@@ -233,7 +235,9 @@ Recovery requires a Socket.IO 4.6+ server with `connectionStateRecovery` enabled
 and is not guaranteed. Retries can deliver an event more than once, so deduplicate
 non-idempotent operations on the server. OkHttp compresses WebSocket messages by
 size only; the per-message `compress(false)` flag is carried to the transport but
-cannot switch compression off for a single frame. WebTransport and the browser- or
+cannot switch compression off for a single frame. OkHttp buffers every incoming
+WebSocket message whole, without a size limit; for a server you do not trust,
+prefer polling with `maxPollingResponseBytes`. WebTransport and the browser- or
 Node-only options are not available. See [PARITY.md](PARITY.md) for the supported
 scope and every explicit exclusion.
 
