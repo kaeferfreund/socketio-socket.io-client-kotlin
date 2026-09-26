@@ -30,14 +30,34 @@ a new major version. `./gradlew apiCheck` fails on any unreviewed change.
 ## Publishing
 
 ```sh
-git tag -a v17.0.0 -m "17.0.0"
-git push origin v17.0.0
-GITHUB_ACTOR=<user> GITHUB_TOKEN=<token with write:packages> ./gradlew publish
+git tag -a v17.0.1 -m "17.0.1"
+git push origin v17.0.1
 ```
 
-`publish` uploads every library module (sources included) to GitHub Packages
-under `io.github.kaeferfreund.socketio`. The token needs `write:packages`; never
-commit it. Afterwards set `VERSION_NAME` to the next `-SNAPSHOT`.
+The tag starts `.github/workflows/release.yml`. It stops unless the tag matches
+`VERSION_NAME`, the version is not a snapshot and CI passed on the tagged commit.
+It then uploads every library module (JAR or AAR, sources, Dokka javadoc, POM and
+Gradle module metadata, all GPG-signed) to Maven Central and releases the
+deployment once Central has validated it, and afterwards publishes the same
+version to GitHub Packages under `io.github.kaeferfreund.socketio`. Maven Central
+cannot delete or replace a version: a mistake needs a new version. Allow 10 to
+30 minutes until a release can be downloaded. Afterwards set `VERSION_NAME` to
+the next `-SNAPSHOT`.
+
+The workflow needs these repository secrets:
+
+| Secret | Content |
+| --- | --- |
+| `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD` | A user token of the [Central Portal](https://central.sonatype.com) account that owns the namespace `io.github.kaeferfreund`, not the login |
+| `SIGNING_KEY` | The ASCII-armored private GPG key (`gpg --export-secret-keys --armor <key id>`) |
+| `SIGNING_KEY_PASSWORD` | Its passphrase |
+
+The public key must be on `keyserver.ubuntu.com` (`gpg --keyserver
+keyserver.ubuntu.com --send-keys <key id>`), where Central looks it up.
+
+To check the artifacts without publishing, run `./gradlew publishToMavenLocal`.
+Without a key the build skips signing; to sign locally, pass the key as the
+Gradle properties `signingInMemoryKey` and `signingInMemoryKeyPassword`.
 
 ## After publishing
 

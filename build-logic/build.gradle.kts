@@ -11,4 +11,6 @@ dependencies {
     implementation(libs.kotlin.compose.plugin)
     implementation(libs.bcv.library)
     implementation(libs.detekt.gradle.plugin)
+    implementation(libs.maven.publish.gradle.plugin)
+    implementation(libs.dokka.gradle.plugin)
 }

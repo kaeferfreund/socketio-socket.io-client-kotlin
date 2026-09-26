@@ -21,7 +21,3 @@ kotlin {
 kotlin {
     explicitApi()
 }
-
-java {
-    withSourcesJar()
-}

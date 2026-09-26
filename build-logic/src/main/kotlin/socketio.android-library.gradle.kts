@@ -43,9 +43,6 @@ android {
         warningsAsErrors = true
         checkDependencies = false
     }
-    publishing {
-        singleVariant("release") { withSourcesJar() }
-    }
 }
 
 // Consumers compile against this metadata: an app on the Kotlin version that

@@ -18,6 +18,8 @@ kover = "0.9.9"
 bcv = "0.18.2"
 kotlinter = "5.7.0"
 detekt = "2.0.0-alpha.6"
+maven-publish = "0.37.0"
+dokka = "2.2.0"
 compose-bom = "2026.09.00"
 activity-compose = "1.13.0"
 
@@ -31,6 +33,8 @@ detekt-gradle-plugin = { module = "dev.detekt:detekt-gradle-plugin", version.ref
 bcv-library = { module = "org.jetbrains.kotlinx:binary-compatibility-validator", version.ref = "bcv" }
 kotlin-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlin-compose-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+maven-publish-gradle-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "maven-publish" }
+dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }

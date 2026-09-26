@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [semantic versioning](https://semver.org/).
 
+## Unreleased
+
+### Distribution
+
+- Releases are published to Maven Central, signed with GPG and with Dokka
+  javadoc jars, by a workflow on the version tag. GitHub Packages keeps
+  receiving every release.
+
 ## 17.0.0 — 2026-09-26
 
 First release: a Socket.IO 4 client for Kotlin and Android, ported from the

@@ -15,7 +15,7 @@ public fun interface SocketManagerPlugin {
 /**
  * Receives timing sections for tracing tools such as Android's Perfetto
  * (`androidx.tracing`). Sections are asynchronous: they begin and end in
- * different callbacks, matched by [cookie].
+ * different callbacks, matched by `cookie`.
  *
  * Section names: `socket.io connect` (engine open attempt), `socket.io
  * upgrade` (WebSocket probe to switch) and `socket.io ack <event>` (emit to
