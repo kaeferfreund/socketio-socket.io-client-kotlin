@@ -27,7 +27,7 @@ installs the fixture dependencies on first use and starts one Node process per
 server; the processes end with the JVM even when a run is killed.
 
 On Linux/aarch64 Robolectric has no native runtime for SDK 35+, so the Android
-unit tests run on SDK 34 there and on SDK 34 and 36 elsewhere.
+unit tests run on SDK 34 there and on SDK 34, 36 and 37 elsewhere.
 
 ## Suites
 
@@ -105,7 +105,7 @@ bash scripts/test-consumer.sh
 | Job | Evidence |
 | --- | --- |
 | `hygiene` | Documentation links and anchors, validator regression tests, static contract consistency, the JavaScript API mapping against `api/*.api`, shell syntax, no tracked build output or key material |
-| `jvm-tests` (JDK 17 and 21) | Build, unit, property, concurrency and Robolectric tests, ktlint, detekt, Android lint, API check, coverage |
+| `jvm-tests` (JDK 17, 21 and 25) | Build, unit, property, concurrency and Robolectric tests, ktlint, detekt, Android lint, API check, coverage |
 | `e2e` | Fixture protocol proofs and the end-to-end suites |
 | `parity-gate` | Strict contracts with passed executions from `jvm-tests` (JDK 17) and `e2e` of the same run; uploads the parity and coverage summaries |
 | `parser-parity` | Decoder and encoder differential against the pinned JavaScript parser |
