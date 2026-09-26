@@ -107,7 +107,7 @@ bash scripts/test-consumer.sh
 | `hygiene` | Documentation links and anchors, validator regression tests, static contract consistency, the JavaScript API mapping against `api/*.api`, shell syntax, no tracked build output or key material |
 | `jvm-tests` (JDK 17, 21 and 25) | Build, unit, property, concurrency and Robolectric tests, ktlint, detekt, Android lint, API check, coverage |
 | `e2e` | Fixture protocol proofs and the end-to-end suites |
-| `parity-gate` | Strict contracts with passed executions from `jvm-tests` (JDK 17) and `e2e` of the same run; uploads the parity and coverage summaries |
+| `parity-gate` | Strict contracts with passing tests from `jvm-tests` (JDK 17) and `e2e` of the same run; uploads the parity and coverage summaries |
 | `parser-parity` | Decoder and encoder differential against the pinned JavaScript parser |
 | `upstream-clients` | Upstream Node suites, a fresh declaration inventory, and the API mapping against the pinned TypeScript declarations |
 | `consumer` | README quick start against the published artifacts |
