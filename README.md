@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/kaeferfreund/socketio-socket.io-client-kotlin/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://github.com/kaeferfreund/socketio-socket.io-client-kotlin/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI on main"></a>
+  <a href="https://github.com/kaeferfreund/socket.io-client-kotlin/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://github.com/kaeferfreund/socket.io-client-kotlin/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI on main"></a>
   <a href="gradle/libs.versions.toml"><img src="https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&amp;logoColor=white" alt="Kotlin 2.4"></a>
   <a href="#requirements"><img src="https://img.shields.io/badge/Android-API%2026%2B-3DDC84?logo=android&amp;logoColor=white" alt="Android API 26+"></a>
   <a href="#requirements"><img src="https://img.shields.io/badge/JVM-17%2B-E76F00?logo=openjdk&amp;logoColor=white" alt="JVM 17+"></a>
@@ -86,7 +86,7 @@ The library is split into small modules. Android apps need one dependency:
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        maven("https://maven.pkg.github.com/kaeferfreund/socketio-socket.io-client-kotlin") {
+        maven("https://maven.pkg.github.com/kaeferfreund/socket.io-client-kotlin") {
             credentials {
                 username = providers.gradleProperty("gpr.user").orNull
                 password = providers.gradleProperty("gpr.key").orNull
@@ -197,7 +197,7 @@ above. The parity gate accepts a mapped JavaScript test only when every Kotlin t
 named for it **passed** in that run.
 
 The badge above reports **`main`**, not whichever branch or release you are
-reading. Check [Actions](https://github.com/kaeferfreund/socketio-socket.io-client-kotlin/actions)
+reading. Check [Actions](https://github.com/kaeferfreund/socket.io-client-kotlin/actions)
 for the exact revision you plan to use. [PARITY.md](PARITY.md) separates supported
 behaviour from API/platform differences and unsupported features, with numbers
 produced by the validator. Passing tests do **not** establish universal JavaScript
@@ -206,7 +206,7 @@ parity, and emulator runs do not replace field tests on physical devices.
 ### Coverage
 
 Numbers from the validators and coverage reports of CI run
-[36216823486](https://github.com/kaeferfreund/socketio-socket.io-client-kotlin/actions/runs/36216823486),
+[36216823486](https://github.com/kaeferfreund/socket.io-client-kotlin/actions/runs/36216823486),
 recorded in [Documentation/ReviewEvidence](Documentation/ReviewEvidence/README.md);
 CI regenerates them on every run.
 
@@ -246,7 +246,7 @@ scope and every explicit exclusion.
 Bug reports, focused fixes and documentation improvements are welcome. Start with
 [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow and
 [the testing guide](Documentation/Development/Testing.md) for reproducible checks.
-Please report issues in [this repository](https://github.com/kaeferfreund/socketio-socket.io-client-kotlin/issues).
+Please report issues in [this repository](https://github.com/kaeferfreund/socket.io-client-kotlin/issues).
 
 ## Credits
 

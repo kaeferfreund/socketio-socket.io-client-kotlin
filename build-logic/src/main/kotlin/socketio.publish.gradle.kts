@@ -17,7 +17,7 @@ publishing {
             pom {
                 name.set(project.name)
                 description.set(provider { project.description ?: "Socket.IO 4 client for Kotlin and Android" })
-                url.set("https://github.com/kaeferfreund/socketio-socket.io-client-kotlin")
+                url.set("https://github.com/kaeferfreund/socket.io-client-kotlin")
                 licenses {
                     license {
                         name.set("MIT")
@@ -25,8 +25,8 @@ publishing {
                     }
                 }
                 scm {
-                    url.set("https://github.com/kaeferfreund/socketio-socket.io-client-kotlin")
-                    connection.set("scm:git:https://github.com/kaeferfreund/socketio-socket.io-client-kotlin.git")
+                    url.set("https://github.com/kaeferfreund/socket.io-client-kotlin")
+                    connection.set("scm:git:https://github.com/kaeferfreund/socket.io-client-kotlin.git")
                 }
                 developers {
                     developer {
@@ -40,7 +40,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/kaeferfreund/socketio-socket.io-client-kotlin")
+            url = uri("https://maven.pkg.github.com/kaeferfreund/socket.io-client-kotlin")
             credentials {
                 username = providers.environmentVariable("GITHUB_ACTOR").orNull
                 password = providers.environmentVariable("GITHUB_TOKEN").orNull

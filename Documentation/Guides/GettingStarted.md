@@ -49,7 +49,7 @@ The artifacts are published to GitHub Packages, which requires a token with
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        maven("https://maven.pkg.github.com/kaeferfreund/socketio-socket.io-client-kotlin") {
+        maven("https://maven.pkg.github.com/kaeferfreund/socket.io-client-kotlin") {
             credentials {
                 username = providers.gradleProperty("gpr.user").orNull
                 password = providers.gradleProperty("gpr.key").orNull

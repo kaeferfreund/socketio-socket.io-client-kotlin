@@ -7,7 +7,7 @@ Security fixes go into the latest release. Upgrade to it before reporting.
 ## Reporting a vulnerability
 
 Please report vulnerabilities privately through
-[GitHub security advisories](https://github.com/kaeferfreund/socketio-socket.io-client-kotlin/security/advisories/new),
+[GitHub security advisories](https://github.com/kaeferfreund/socket.io-client-kotlin/security/advisories/new),
 not in public issues. Include the library version or commit, the affected module,
 a minimal reproducer and the impact you expect. You will get an answer within a
 week; fixes are released as soon as they are verified, and the advisory credits
